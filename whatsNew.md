@@ -1,0 +1,4 @@
+- FTP can now parse variables of type joints pose and cartesian pose
+- Fix Telnet "Unsimulate" command return result
+- Add constructors to position classes
+- Allow to get task status via FTP
