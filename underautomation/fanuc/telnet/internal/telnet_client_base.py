@@ -11,6 +11,11 @@ from underautomation.fanuc.telnet.simulate_result import SimulateResult
 from underautomation.fanuc.telnet.unsimulate_all_result import UnsimulateAllResult
 from underautomation.fanuc.telnet.unsimulate_result import UnsimulateResult
 from underautomation.fanuc.telnet.task_information_result import TaskInformationResult
+from underautomation.fanuc.telnet.add_breakpoint_result import AddBreakpointResult
+from underautomation.fanuc.telnet.remove_breakpoint_result import RemoveBreakpointResult
+from underautomation.fanuc.telnet.breakpoints_result import BreakpointsResult
+from underautomation.fanuc.telnet.step_on_result import StepOnResult
+from underautomation.fanuc.telnet.step_off_result import StepOffResult
 from underautomation.fanuc.telnet.raw_data_received_event_args import RawDataReceivedEventArgs
 from underautomation.fanuc.telnet.tp_coordinates_received_event_args import TpCoordinatesReceivedEventArgs
 from underautomation.fanuc.telnet.message_received_event_args import MessageReceivedEventArgs
@@ -96,6 +101,18 @@ class TelnetClientBase:
 		return UnsimulateResult(self._instance.Unsimulate(port._instance, index))
 	def get_task_information(self, prog_name: str) -> TaskInformationResult:
 		return TaskInformationResult(self._instance.GetTaskInformation(prog_name))
+	def add_breakpoint(self, taskName: str, line: int) -> AddBreakpointResult:
+		return AddBreakpointResult(self._instance.AddBreakpoint(taskName, line))
+	def remove_breakpoint(self, taskName: str, line: int) -> RemoveBreakpointResult:
+		return RemoveBreakpointResult(self._instance.RemoveBreakpoint(taskName, line))
+	def remove_all_breakpoints(self, taskName: str) -> RemoveBreakpointResult:
+		return RemoveBreakpointResult(self._instance.RemoveAllBreakpoints(taskName))
+	def get_breakpoints(self, taskName: str) -> BreakpointsResult:
+		return BreakpointsResult(self._instance.GetBreakpoints(taskName))
+	def step_on(self, taskName: str) -> StepOnResult:
+		return StepOnResult(self._instance.StepOn(taskName))
+	def step_off(self) -> StepOffResult:
+		return StepOffResult(self._instance.StepOff())
 	@property
 	def ip(self) -> str:
 		return self._instance.IP
