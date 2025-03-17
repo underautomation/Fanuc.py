@@ -13,8 +13,12 @@ class FtpDirectFileHandling:
 			self._instance = _internal
 	def upload_file_to_controller(self, localPath: str, remotePath: str, createRemoteDir: bool=False, progress: typing.Any=None) -> bool:
 		return self._instance.UploadFileToController(localPath, remotePath, createRemoteDir, progress)
+	def upload_files_to_controller(self, localPaths: typing.List[str], remoteDir: str) -> typing.List[str]:
+		return self._instance.UploadFilesToController(localPaths, remoteDir)
 	def download_file_from_controller(self, localPath: str, remotePath: str, progress: typing.Any=None) -> bool:
 		return self._instance.DownloadFileFromController(localPath, remotePath, progress)
+	def download_files_from_controller(self, localDir: str, remotePaths: typing.List[str]) -> typing.List[str]:
+		return self._instance.DownloadFilesFromController(localDir, remotePaths)
 	def file_exists(self, path: str) -> bool:
 		return self._instance.FileExists(path)
 	def directory_exists(self, path: str) -> bool:
