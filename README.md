@@ -147,7 +147,7 @@ git clone https://github.com/underautomation/Fanuc.py.git
 Install required Python packages if any (see `requirements.txt` if available):
 
 ```bash
-pip install -r requirements.txt
+pip install pythonnet==3.0.3
 ```
 
 ### 3️⃣ Connect to Your Robot
