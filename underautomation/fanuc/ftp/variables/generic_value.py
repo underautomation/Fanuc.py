@@ -1,7 +1,5 @@
 import typing
 from underautomation.fanuc.ftp.variables.value_kind import ValueKind
-# Circular dependencies  : GenericField
-from underautomation.fanuc.ftp.variables.generic_field import GenericField
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -21,9 +19,6 @@ class GenericValue:
 	@property
 	def kind(self) -> ValueKind:
 		return ValueKind(self._instance.Kind)
-	@property
-	def fields(self) -> typing.List[GenericField]:
-		return [GenericField(x) for x in self._instance.Fields]
 	@property
 	def name(self) -> str:
 		return self._instance.Name

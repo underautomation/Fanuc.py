@@ -13,8 +13,5 @@ class PosregFile(GenericVariableFile):
 		else:
 			self._instance = _internal
 	@property
-	def posreg(self) -> typing.List[CartesianPositionVariable]:
-		return [CartesianPositionVariable[0...,0...](x) for x in self._instance.Posreg]
-	@property
 	def maxpregnum(self) -> int:
 		return self._instance.Maxpregnum
