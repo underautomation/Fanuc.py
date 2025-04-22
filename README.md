@@ -153,10 +153,11 @@ pip install pythonnet==3.0.3
 ### 3️⃣ Connect to Your Robot
 
 ```python
-from fanuc import FanucRobot, ConnectParameters
+from underautomation.fanuc.fanuc_robot import FanucRobot
+from underautomation.fanuc.connection_parameters import ConnectionParameters
 
 robot = FanucRobot()
-robot.connect(ConnectParameters("192.168.0.1"))
+robot.connect(ConnectionParameters("192.168.0.1"))
 ```
 
 ---
