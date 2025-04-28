@@ -1,1 +1,1 @@
-- Report progress when uploading or downloading multiple files
+- Fix issue when writting long variable name by telnet, like $REMOTE_CFG.$REMOTE_TYPE
