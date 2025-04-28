@@ -1,1 +1,1 @@
-- Report progress when uploading or downloading multiple files
+- Update Telnet error message when the run command failed because $REMOTE_CFG.$REMOTE_TYPE is not set to 1
