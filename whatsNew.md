@@ -1,1 +1,1 @@
-- Report progress when uploading or downloading multiple files
+- Implements reading and writing of REAL variables by SNPX
