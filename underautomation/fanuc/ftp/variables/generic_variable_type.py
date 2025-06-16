@@ -1,5 +1,6 @@
 import typing
 from underautomation.fanuc.ftp.variables.generic_field import GenericField
+from underautomation.fanuc.ftp.variables.i_generic_variable_type import IGenericVariableType
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -19,3 +20,6 @@ class GenericVariableType:
 	@property
 	def fanuc_internal_type_name(self) -> str:
 		return self._instance.FanucInternalTypeName
+	@property
+	def parent(self) -> IGenericVariableType:
+		return IGenericVariableType(self._instance.Parent)

@@ -75,7 +75,7 @@ class TelnetClientBase:
 		return ProgramCommandResult(self._instance.ClearProgram(program))
 	def clear_vars(self, program: str="None") -> ProgramCommandResult:
 		return ProgramCommandResult(self._instance.ClearVars(program))
-	def continue_(self, program: str="None") -> ProgramCommandResult:
+	def continue(self, program: str="None") -> ProgramCommandResult:
 		return ProgramCommandResult(self._instance.Continue(program))
 	def hold(self, program: str="None") -> ProgramCommandResult:
 		return ProgramCommandResult(self._instance.Hold(program))

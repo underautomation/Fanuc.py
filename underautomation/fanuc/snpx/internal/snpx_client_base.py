@@ -3,6 +3,7 @@ from underautomation.fanuc.snpx.internal.numeric_registers import NumericRegiste
 from underautomation.fanuc.snpx.internal.position_registers import PositionRegisters
 from underautomation.fanuc.snpx.internal.string_registers import StringRegisters
 from underautomation.fanuc.snpx.internal.integer_system_variables import IntegerSystemVariables
+from underautomation.fanuc.snpx.internal.real_system_variables import RealSystemVariables
 from underautomation.fanuc.snpx.internal.position_system_variables import PositionSystemVariables
 from underautomation.fanuc.snpx.internal.string_system_variables import StringSystemVariables
 from underautomation.fanuc.snpx.internal.digital_signals import DigitalSignals
@@ -43,6 +44,9 @@ class SnpxClientBase:
 	@property
 	def integer_system_variables(self) -> IntegerSystemVariables:
 		return IntegerSystemVariables(self._instance.IntegerSystemVariables)
+	@property
+	def real_system_variables(self) -> RealSystemVariables:
+		return RealSystemVariables(self._instance.RealSystemVariables)
 	@property
 	def position_system_variables(self) -> PositionSystemVariables:
 		return PositionSystemVariables(self._instance.PositionSystemVariables)

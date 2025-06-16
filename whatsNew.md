@@ -1,1 +1,1 @@
-- Report progress when uploading or downloading multiple files
+- Implements reading of Fanuc Features and Order No by FTP
