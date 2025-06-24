@@ -28,7 +28,7 @@ class FanucFileReaders:
 	def read_file(fileStream: typing.Any, fileName: str) -> IFanucContent:
 		return IFanucContent(fanuc_file_readers.ReadFile(fileStream, fileName))
 	@property
-	def readers(self) -> typing.List[IFileReader`1]:
+	def readers(self) -> typing.List[IFileReader1]:
 		return [IFileReader1(x) for x in self._instance.Readers]
 	@property
 	def variable_reader(self) -> VariableReader:

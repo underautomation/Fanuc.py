@@ -2,6 +2,7 @@ import typing
 from underautomation.fanuc.ftp.diagnosis.current_position import CurrentPosition
 from underautomation.fanuc.ftp.diagnosis.safety_status import SafetyStatus
 from underautomation.fanuc.ftp.diagnosis.io_state import IOState
+from underautomation.fanuc.ftp.diagnosis.features import Features
 from underautomation.fanuc.ftp.diagnosis.program_states import ProgramStates
 import clr
 import os
@@ -26,6 +27,9 @@ class SummaryDiagnosis:
 	@property
 	def i_os(self) -> IOState:
 		return IOState(self._instance.IOs)
+	@property
+	def features(self) -> Features:
+		return Features(self._instance.Features)
 	@property
 	def program_states(self) -> ProgramStates:
 		return ProgramStates(self._instance.ProgramStates)
