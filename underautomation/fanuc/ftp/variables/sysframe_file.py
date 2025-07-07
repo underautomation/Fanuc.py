@@ -20,14 +20,8 @@ class SysframeFile(GenericVariableFile):
 	def cell_grp(self) -> typing.List[CellGrpVariableType]:
 		return [CellGrpVariableType(x) for x in self._instance.CellGrp]
 	@property
-	def mnuframe(self) -> typing.List[CartesianPositionVariable]:
-		return [CartesianPositionVariable[0...,0...](x) for x in self._instance.Mnuframe]
-	@property
 	def mnuframenum(self) -> typing.List[int]:
 		return self._instance.Mnuframenum
-	@property
-	def mnutool(self) -> typing.List[CartesianPositionVariable]:
-		return [CartesianPositionVariable[0...,0...](x) for x in self._instance.Mnutool]
 	@property
 	def mnutoolnum(self) -> typing.List[int]:
 		return self._instance.Mnutoolnum

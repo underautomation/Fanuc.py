@@ -158,9 +158,6 @@ class SynosaveFile(GenericVariableFile):
 	def txram(self) -> TxramVariableType:
 		return TxramVariableType(self._instance.Txram)
 	@property
-	def ui_curscrn(self) -> typing.List[TpCurscrnVariableType]:
-		return [TpCurscrnVariableType[0...,0...](x) for x in self._instance.UiCurscrn]
-	@property
 	def ui_fctnfav(self) -> typing.List[UiFctnfavVariableType]:
 		return [UiFctnfavVariableType(x) for x in self._instance.UiFctnfav]
 	@property
