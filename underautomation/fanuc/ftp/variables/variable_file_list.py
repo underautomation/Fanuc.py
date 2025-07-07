@@ -1,5 +1,4 @@
 import typing
-from underautomation.fanuc.ftp.variables.i_generic_variable_type import IGenericVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 import clr
 import os
@@ -18,9 +17,4 @@ class VariableFileList:
 	@name.setter
 	def name(self, value: str):
 		self._instance.Name = value
-	@property
-	def parent(self) -> IGenericVariableType:
-		return IGenericVariableType(self._instance.Parent)
-	@parent.setter
-	def parent(self, value: IGenericVariableType):
-		self._instance.Parent = value
+
