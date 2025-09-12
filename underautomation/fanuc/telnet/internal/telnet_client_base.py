@@ -10,6 +10,7 @@ from underautomation.fanuc.telnet.get_variable_result import GetVariableResult
 from underautomation.fanuc.telnet.simulate_result import SimulateResult
 from underautomation.fanuc.telnet.unsimulate_all_result import UnsimulateAllResult
 from underautomation.fanuc.telnet.unsimulate_result import UnsimulateResult
+from underautomation.fanuc.telnet.custom_command_result import CustomCommandResult
 from underautomation.fanuc.telnet.task_information_result import TaskInformationResult
 from underautomation.fanuc.telnet.add_breakpoint_result import AddBreakpointResult
 from underautomation.fanuc.telnet.remove_breakpoint_result import RemoveBreakpointResult
@@ -75,7 +76,7 @@ class TelnetClientBase:
 		return ProgramCommandResult(self._instance.ClearProgram(program))
 	def clear_vars(self, program: str="None") -> ProgramCommandResult:
 		return ProgramCommandResult(self._instance.ClearVars(program))
-	def continue_(self, program: str="None") -> ProgramCommandResult:
+	def continue(self, program: str="None") -> ProgramCommandResult:
 		return ProgramCommandResult(self._instance.Continue(program))
 	def hold(self, program: str="None") -> ProgramCommandResult:
 		return ProgramCommandResult(self._instance.Hold(program))
@@ -99,6 +100,8 @@ class TelnetClientBase:
 		return UnsimulateAllResult(self._instance.UnsimulateAll())
 	def unsimulate(self, port: KCLPorts, index: int) -> UnsimulateResult:
 		return UnsimulateResult(self._instance.Unsimulate(port._instance, index))
+	def send_custom_command(self, command: str) -> T:
+		return self._instance.SendCustomCommand(command)
 	def get_task_information(self, prog_name: str) -> TaskInformationResult:
 		return TaskInformationResult(self._instance.GetTaskInformation(prog_name))
 	def add_breakpoint(self, taskName: str, line: int) -> AddBreakpointResult:

@@ -1,4 +1,5 @@
 import typing
+from underautomation.fanuc.ftp.variables.i_generic_variable_type import IGenericVariableType
 from underautomation.fanuc.ftp.variables.generic_field import GenericField
 import clr
 import os
@@ -17,4 +18,6 @@ class GenericVariable(GenericField):
 	@property
 	def storage(self) -> str:
 		return self._instance.Storage
-
+	@property
+	def parent(self) -> IGenericVariableType:
+		return IGenericVariableType(self._instance.Parent)

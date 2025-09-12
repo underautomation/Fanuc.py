@@ -1370,6 +1370,9 @@ class SystemFile(GenericVariableFile):
 	def pgtracectl(self) -> typing.List[TracectlVariableType]:
 		return [TracectlVariableType(x) for x in self._instance.Pgtracectl]
 	@property
+	def pgtracedt(self) -> typing.List[TracedtVariableType]:
+		return [TracedtVariableType[0...,0...](x) for x in self._instance.Pgtracedt]
+	@property
 	def pgtracelen(self) -> int:
 		return self._instance.Pgtracelen
 	@property

@@ -9,6 +9,7 @@ from underautomation.fanuc.snpx.internal.string_system_variables import StringSy
 from underautomation.fanuc.snpx.internal.digital_signals import DigitalSignals
 from underautomation.fanuc.snpx.internal.numeric_io import NumericIO
 from underautomation.fanuc.snpx.internal.current_position import CurrentPosition
+from underautomation.fanuc.snpx.internal.alarm_access import AlarmAccess
 from underautomation.fanuc.snpx.internal.assignment import Assignment
 import clr
 import os
@@ -116,6 +117,12 @@ class SnpxClientBase:
 	@property
 	def current_position(self) -> CurrentPosition:
 		return CurrentPosition(self._instance.CurrentPosition)
+	@property
+	def active_alarm(self) -> AlarmAccess:
+		return AlarmAccess(self._instance.ActiveAlarm)
+	@property
+	def alarm_history(self) -> AlarmAccess:
+		return AlarmAccess(self._instance.AlarmHistory)
 	@property
 	def connected(self) -> bool:
 		return self._instance.Connected
