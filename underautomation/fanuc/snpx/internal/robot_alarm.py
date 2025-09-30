@@ -1,5 +1,5 @@
 import typing
-from underautomation.fanuc.snpx.internal.alarm_category import AlarmCategory
+from underautomation.fanuc.snpx.internal.alarm_id import AlarmId
 from underautomation.fanuc.snpx.internal.alarm_severity import AlarmSeverity
 import clr
 import os
@@ -20,11 +20,11 @@ class RobotAlarm:
 	def __repr__(self):
 		return self._instance.ToString()
 	@property
-	def category(self) -> AlarmCategory:
-		return AlarmCategory(self._instance.Category)
-	@category.setter
-	def category(self, value: AlarmCategory):
-		self._instance.Category = value
+	def id(self) -> AlarmId:
+		return AlarmId(self._instance.Id)
+	@id.setter
+	def id(self, value: AlarmId):
+		self._instance.Id = value
 	@property
 	def number(self) -> int:
 		return self._instance.Number
@@ -32,11 +32,11 @@ class RobotAlarm:
 	def number(self, value: int):
 		self._instance.Number = value
 	@property
-	def cause_category(self) -> AlarmCategory:
-		return AlarmCategory(self._instance.CauseCategory)
-	@cause_category.setter
-	def cause_category(self, value: AlarmCategory):
-		self._instance.CauseCategory = value
+	def cause_id(self) -> AlarmId:
+		return AlarmId(self._instance.CauseId)
+	@cause_id.setter
+	def cause_id(self, value: AlarmId):
+		self._instance.CauseId = value
 	@property
 	def cause_number(self) -> int:
 		return self._instance.CauseNumber
@@ -55,3 +55,21 @@ class RobotAlarm:
 	@time.setter
 	def time(self, value: typing.Any):
 		self._instance.Time = value
+	@property
+	def message(self) -> str:
+		return self._instance.Message
+	@message.setter
+	def message(self, value: str):
+		self._instance.Message = value
+	@property
+	def cause_message(self) -> str:
+		return self._instance.CauseMessage
+	@cause_message.setter
+	def cause_message(self, value: str):
+		self._instance.CauseMessage = value
+	@property
+	def severity_message(self) -> str:
+		return self._instance.SeverityMessage
+	@severity_message.setter
+	def severity_message(self, value: str):
+		self._instance.SeverityMessage = value
