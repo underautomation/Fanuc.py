@@ -28,6 +28,7 @@ import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Telnet.Internal import TelnetClientBase as telnet_client_base
 
+T = typing.TypeVar('T')
 class TelnetClientBase:
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
@@ -100,7 +101,7 @@ class TelnetClientBase:
 		return UnsimulateAllResult(self._instance.UnsimulateAll())
 	def unsimulate(self, port: KCLPorts, index: int) -> UnsimulateResult:
 		return UnsimulateResult(self._instance.Unsimulate(port._instance, index))
-	def send_custom_command(self, command: str):
+	def send_custom_command(self, command: str) -> T:
 		return self._instance.SendCustomCommand(command)
 	def get_task_information(self, prog_name: str) -> TaskInformationResult:
 		return TaskInformationResult(self._instance.GetTaskInformation(prog_name))

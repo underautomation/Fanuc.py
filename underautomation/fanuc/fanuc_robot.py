@@ -2,7 +2,8 @@ import typing
 from underautomation.fanuc.connection_parameters import ConnectionParameters
 from underautomation.fanuc.telnet.internal.telnet_client_internal import TelnetClientInternal
 from underautomation.fanuc.ftp.internal.ftp_client_internal import FtpClientInternal
-from underautomation.fanuc.ftp.internal.snpx_client_internal import SnpxClientInternal
+from underautomation.fanuc.snpx.internal.snpx_client_internal import SnpxClientInternal
+from underautomation.fanuc.rmi.internal.rmi_client_internal import RmiClientInternal
 from underautomation.fanuc.license.license_info import LicenseInfo
 import clr
 import os
@@ -37,6 +38,9 @@ class FanucRobot:
 	@property
 	def snpx(self) -> SnpxClientInternal:
 		return SnpxClientInternal(self._instance.Snpx)
+	@property
+	def rmi(self) -> RmiClientInternal:
+		return RmiClientInternal(self._instance.Rmi)
 	@property
 	def license_info(self) -> LicenseInfo:
 		return LicenseInfo(None, None, self._instance.LicenseInfo)

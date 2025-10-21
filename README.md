@@ -117,16 +117,19 @@ print(f"X={position.cartesian.x}, Y={position.cartesian.y}, Z={position.cartesia
 ## 🔧 Robot Configuration
 
 ### ✅ Enable Telnet KCL
+
 - Go to `SETUP > Host Comm`
 - Select `TELNET` → `[DETAIL]`
 - Set a password and reboot
 
 ### ✅ Enable FTP
+
 - Go to `SETUP > Host Comm > FTP`
 - Set username/password
 - Perform a cold start
 
 ### ✅ Enable SNPX
+
 - For **FANUC America (R650 FRA)**: Enable option R553 “HMI Device SNPX”
 - For **FANUC Ltd. (R651 FRL)**: No additional options required
 
@@ -136,21 +139,15 @@ print(f"X={position.cartesian.x}, Y={position.cartesian.y}, Z={position.cartesia
 
 ### 1️⃣ Clone or Download
 
-This SDK is not on PyPI (yet). Clone this repository or download the ZIP.
+This SDK is not on PyPI (yet). Clone this repository and install dependencies :
 
 ```bash
 git clone https://github.com/underautomation/Fanuc.py.git
+cd Fanuc.py
+pip install -e .
 ```
 
-### 2️⃣ Install Dependencies
-
-Install required Python packages if any (see `requirements.txt` if available):
-
-```bash
-pip install pythonnet==3.0.3
-```
-
-### 3️⃣ Connect to Your Robot
+### 2️⃣ Connect to Your Robot
 
 ```python
 from underautomation.fanuc.fanuc_robot import FanucRobot
@@ -172,7 +169,8 @@ robot.connect(ConnectionParameters("192.168.0.1"))
 
 ## 📢 Contributing
 
-We welcome your feedback and contributions!  
+We welcome your feedback and contributions!
+
 - Report issues via [GitHub Issues](https://github.com/underautomation/Fanuc.py/issues)
 - Submit pull requests with enhancements
 - Suggest features and improvements
@@ -186,5 +184,5 @@ We welcome your feedback and contributions!
 
 ## 📬 Need Help?
 
-- 📖 **Documentation**: [https://underautomation.com/fanuc/documentation](https://underautomation.com/fanuc/documentation)  
+- 📖 **Documentation**: [https://underautomation.com/fanuc/documentation](https://underautomation.com/fanuc/documentation)
 - 📩 **Contact Us**: [https://underautomation.com/contact](https://underautomation.com/contact)

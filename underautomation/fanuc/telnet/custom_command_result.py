@@ -11,6 +11,8 @@ class CustomCommandResult(Result):
 			self._instance = custom_command_result()
 		else:
 			self._instance = _internal
+	def __repr__(self):
+		return self._instance.ToString()
 	@property
 	def data(self) -> str:
 		return self._instance.Data

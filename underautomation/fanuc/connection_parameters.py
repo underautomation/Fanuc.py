@@ -2,6 +2,7 @@ import typing
 from underautomation.fanuc.common.telnet_connect_parameters import TelnetConnectParameters
 from underautomation.fanuc.common.ftp_connect_parameters import FtpConnectParameters
 from underautomation.fanuc.common.snpx_connect_parameters import SnpxConnectParameters
+from underautomation.fanuc.common.rmi_connect_parameters import RmiConnectParameters
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__),  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -43,3 +44,9 @@ class ConnectionParameters:
 	@snpx.setter
 	def snpx(self, value: SnpxConnectParameters):
 		self._instance.Snpx = value
+	@property
+	def rmi(self) -> RmiConnectParameters:
+		return RmiConnectParameters(self._instance.Rmi)
+	@rmi.setter
+	def rmi(self, value: RmiConnectParameters):
+		self._instance.Rmi = value

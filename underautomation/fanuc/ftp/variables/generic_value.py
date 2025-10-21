@@ -21,7 +21,7 @@ class GenericValue:
 	def kind(self) -> ValueKind:
 		return ValueKind(self._instance.Kind)
 	@property
-	def fields(self):
+	def fields(self) -> typing.Any:
 		from underautomation.fanuc.ftp.variables.generic_field import GenericField
 		return [GenericField(x) for x in self._instance.Fields]
 	@property
