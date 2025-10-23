@@ -1,4 +1,5 @@
 import typing
+from underautomation.fanuc.ftp.internal.i_fanuc_content import IFanucContent
 from underautomation.fanuc.ftp.diagnosis.current_position import CurrentPosition
 from underautomation.fanuc.ftp.diagnosis.safety_status import SafetyStatus
 from underautomation.fanuc.ftp.diagnosis.io_state import IOState
@@ -9,7 +10,7 @@ import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Diagnosis import SummaryDiagnosis as summary_diagnosis
 
-class SummaryDiagnosis:
+class SummaryDiagnosis(IFanucContent):
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = summary_diagnosis()

@@ -1,10 +1,11 @@
 import typing
+from underautomation.fanuc.ftp.internal.i_fanuc_content import IFanucContent
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Diagnosis import SafetyStatus as safety_status
 
-class SafetyStatus:
+class SafetyStatus(IFanucContent):
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = safety_status()

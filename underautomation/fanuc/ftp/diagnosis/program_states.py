@@ -1,11 +1,12 @@
 import typing
+from underautomation.fanuc.ftp.internal.i_fanuc_content import IFanucContent
 from underautomation.fanuc.ftp.diagnosis.task_state import TaskState
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Diagnosis import ProgramStates as program_states
 
-class ProgramStates:
+class ProgramStates(IFanucContent):
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = program_states()
