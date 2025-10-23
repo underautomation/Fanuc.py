@@ -28,6 +28,7 @@ import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Telnet.Internal import TelnetClientBase as telnet_client_base
 
+씰 = typing.TypeVar('씰')
 T = typing.TypeVar('T')
 class TelnetClientBase:
 	def __init__(self, _internal = 0):

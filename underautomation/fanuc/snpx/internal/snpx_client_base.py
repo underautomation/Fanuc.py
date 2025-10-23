@@ -26,6 +26,8 @@ class SnpxClientBase:
 		self._instance.Disconnect()
 	def clear_alarms(self) -> None:
 		self._instance.ClearAlarms()
+	def set_variable(self, name: str, value: float) -> None:
+		self._instance.SetVariable(name, value)
 	def clear_assignments(self) -> None:
 		self._instance.ClearAssignments()
 	def get_assignments(self) -> typing.List[Assignment]:

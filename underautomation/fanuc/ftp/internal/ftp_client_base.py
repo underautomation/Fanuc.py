@@ -15,7 +15,7 @@ import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Internal import FtpClientBase as ftp_client_base
 
-T = typing.TypeVar('T')
+씰 = typing.TypeVar('씰')
 class FtpClientBase:
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
