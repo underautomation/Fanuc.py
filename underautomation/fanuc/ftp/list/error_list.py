@@ -12,6 +12,8 @@ class ErrorList(IFanucContent):
 			self._instance = error_list()
 		else:
 			self._instance = _internal
+	def filter_active_alarms(self) -> typing.List[ErrallSectionItem]:
+		return [ErrallSectionItem(x) for x in self._instance.FilterActiveAlarms()]
 	@property
 	def name(self) -> str:
 		return self._instance.Name

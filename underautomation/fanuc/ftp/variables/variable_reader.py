@@ -43,7 +43,7 @@ import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Variables import VariableReader as variable_reader
 
-뼁 = typing.TypeVar('뼁')
+렫 = typing.TypeVar('렫')
 class VariableReader(FileReader1[GenericVariableFile]):
 	def __init__(self, _internal = 0):
 		if(_internal == 0):

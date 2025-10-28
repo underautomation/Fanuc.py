@@ -13,17 +13,20 @@ class ErrallSectionItem:
 	def __repr__(self):
 		return self._instance.ToString()
 	@property
-	def is_reset(self) -> bool:
-		return self._instance.IsReset
-	@property
 	def id(self) -> int:
 		return self._instance.Id
-	@id.setter
-	def id(self, value: int):
-		self._instance.Id = value
 	@property
 	def text(self) -> str:
 		return self._instance.Text
-	@text.setter
-	def text(self, value: str):
-		self._instance.Text = value
+	@property
+	def error_code(self) -> str:
+		return self._instance.ErrorCode
+	@property
+	def message(self) -> str:
+		return self._instance.Message
+	@property
+	def occurring_time(self) -> typing.Any:
+		return self._instance.OccurringTime
+	@property
+	def is_reset(self) -> bool:
+		return self._instance.IsReset
