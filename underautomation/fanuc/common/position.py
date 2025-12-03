@@ -32,7 +32,7 @@ class Position:
 		self._instance.JointsPosition = value
 	@property
 	def cartesian_position(self) -> ExtendedCartesianPosition:
-		return ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, None, None, None, self._instance.CartesianPosition)
+		return ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, self._instance.CartesianPosition)
 	@cartesian_position.setter
 	def cartesian_position(self, value: ExtendedCartesianPosition):
 		self._instance.CartesianPosition = value

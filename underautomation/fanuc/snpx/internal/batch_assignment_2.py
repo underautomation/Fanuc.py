@@ -13,8 +13,8 @@ class BatchAssignment2(typing.Generic[TValue, TIndex]):
 			self._instance = batch_assignment_2()
 		else:
 			self._instance = _internal
-	def read(self) -> typing.Any:
-		return self._instance.Read()
+	def read(self) -> typing.List[TValue]:
+		return list(self._instance.Read())
 	@property
 	def assignments(self) -> typing.List[Assignment1]:
 		return [Assignment1(x) for x in self._instance.Assignments]

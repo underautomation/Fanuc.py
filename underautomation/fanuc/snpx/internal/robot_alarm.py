@@ -16,7 +16,7 @@ class RobotAlarm:
 	def from_bytes(bytes: typing.List[int], start: int=0) -> 'RobotAlarm':
 		return RobotAlarm(robot_alarm.FromBytes(bytes, start))
 	def equals(self, other: 'RobotAlarm') -> bool:
-		return self._instance.Equals(other._instance)
+		return self._instance.Equals(other._instance if other else None)
 	def __repr__(self):
 		return self._instance.ToString()
 	@property

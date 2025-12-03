@@ -48,15 +48,15 @@ class RmiClientBase:
 	def read_u_frame(self, number: int) -> IndexedFrame:
 		return IndexedFrame(self._instance.ReadUFrame(number))
 	def write_u_frame(self, number: int, frame: Frame) -> None:
-		self._instance.WriteUFrame(number, frame._instance)
+		self._instance.WriteUFrame(number, frame._instance if frame else None)
 	def read_u_tool(self, number: int) -> IndexedFrame:
 		return IndexedFrame(self._instance.ReadUTool(number))
 	def write_u_tool(self, number: int, frame: Frame) -> None:
-		self._instance.WriteUTool(number, frame._instance)
+		self._instance.WriteUTool(number, frame._instance if frame else None)
 	def read_din(self, portNumber: int) -> DigitalInputValue:
 		return DigitalInputValue(self._instance.ReadDIN(portNumber))
 	def write_dout(self, portNumber: int, value: OnOff) -> None:
-		self._instance.WriteDOUT(portNumber, value._instance)
+		self._instance.WriteDOUT(portNumber, value)
 	def read_cartesian_position(self) -> CartesianPosition:
 		return CartesianPosition(self._instance.ReadCartesianPosition())
 	def read_joint_angles(self) -> JointAnglesSample:
@@ -68,11 +68,11 @@ class RmiClientBase:
 	def read_position_register(self, number: int) -> PositionRegisterData:
 		return PositionRegisterData(self._instance.ReadPositionRegister(number))
 	def write_position_register(self, number: int, cfg: MotionConfiguration, frame: Frame) -> None:
-		self._instance.WritePositionRegister(number, cfg._instance, frame._instance)
+		self._instance.WritePositionRegister(number, cfg._instance if cfg else None, frame._instance if frame else None)
 	def read_tcp_speed(self) -> TcpSpeed:
 		return TcpSpeed(self._instance.ReadTcpSpeed())
 	def wait_din(self, sequenceId: int, portNumber: int, value: OnOff) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.WaitDin(sequenceId, portNumber, value._instance))
+		return RmiSequenceResponse(self._instance.WaitDin(sequenceId, portNumber, value))
 	def set_u_frame_instruction(self, sequenceId: int, frameNumber: int) -> RmiSequenceResponse:
 		return RmiSequenceResponse(self._instance.SetUFrameInstruction(sequenceId, frameNumber))
 	def set_u_tool_instruction(self, sequenceId: int, toolNumber: int) -> RmiSequenceResponse:
@@ -82,21 +82,21 @@ class RmiClientBase:
 	def set_payload(self, sequenceId: int, scheduleNumber: int) -> RmiSequenceResponse:
 		return RmiSequenceResponse(self._instance.SetPayload(sequenceId, scheduleNumber))
 	def linear_motion(self, sequenceId: int, config: MotionConfiguration, position: Frame, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, wristJoint: bool, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.LinearMotion(sequenceId, config._instance, position._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.LinearMotion(sequenceId, config._instance if config else None, position._instance if position else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def linear_relative(self, sequenceId: int, config: MotionConfiguration, delta: Frame, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, wristJoint: bool, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.LinearRelative(sequenceId, config._instance, delta._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.LinearRelative(sequenceId, config._instance if config else None, delta._instance if delta else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def joint_motion(self, sequenceId: int, config: MotionConfiguration, position: Frame, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.JointMotion(sequenceId, config._instance, position._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.JointMotion(sequenceId, config._instance if config else None, position._instance if position else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def joint_relative(self, sequenceId: int, config: MotionConfiguration, delta: Frame, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.JointRelative(sequenceId, config._instance, delta._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.JointRelative(sequenceId, config._instance if config else None, delta._instance if delta else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def circular_motion(self, sequenceId: int, config: MotionConfiguration, position: Frame, viaConfig: MotionConfiguration, viaPosition: Frame, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, wristJoint: bool, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.CircularMotion(sequenceId, config._instance, position._instance, viaConfig._instance, viaPosition._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.CircularMotion(sequenceId, config._instance if config else None, position._instance if position else None, viaConfig._instance if viaConfig else None, viaPosition._instance if viaPosition else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def circular_relative(self, sequenceId: int, config: MotionConfiguration, delta: Frame, viaConfig: MotionConfiguration, viaDelta: Frame, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, wristJoint: bool, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.CircularRelative(sequenceId, config._instance, delta._instance, viaConfig._instance, viaDelta._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.CircularRelative(sequenceId, config._instance if config else None, delta._instance if delta else None, viaConfig._instance if viaConfig else None, viaDelta._instance if viaDelta else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, wristJoint, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def joint_motion_j_rep(self, sequenceId: int, joints: JointAngles, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.JointMotionJRep(sequenceId, joints._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.JointMotionJRep(sequenceId, joints._instance if joints else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def joint_relative_j_rep(self, sequenceId: int, deltaJoints: JointAngles, speedType: SpeedType, speed: int, termType: TerminationType, termValue: int, acc: typing.Any, offsetPr: typing.Any, visionPr: typing.Any, mrot: bool, lcbType: str, lcbValue: typing.Any, portType: typing.Any, portNumber: typing.Any, portValue: typing.Any) -> RmiSequenceResponse:
-		return RmiSequenceResponse(self._instance.JointRelativeJRep(sequenceId, deltaJoints._instance, speedType._instance, speed, termType._instance, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
+		return RmiSequenceResponse(self._instance.JointRelativeJRep(sequenceId, deltaJoints._instance if deltaJoints else None, speedType, speed, termType, termValue, acc, offsetPr, visionPr, mrot, lcbType, lcbValue, portType, portNumber, portValue))
 	def dispose(self) -> None:
 		self._instance.Dispose()
 	@property

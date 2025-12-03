@@ -17,4 +17,4 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 		else:
 			self._instance = _internal
 	def write(self, variable: str, cartesianPosition: CartesianPosition) -> None:
-		self._instance.Write(variable, cartesianPosition._instance)
+		self._instance.Write(variable, cartesianPosition._instance if cartesianPosition else None)

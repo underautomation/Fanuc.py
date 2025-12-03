@@ -16,5 +16,5 @@ class SnpxWritableAssignableElements3(SnpxAssignableElements2[TValue, TIndex], t
 			self._instance = _internal
 	def write(self, index: TIndex, value: TValue) -> None:
 		self._instance.Write(index, value)
-	def create_batch_assignment(self, indexes: typing.Any) -> TAssignment:
+	def create_batch_assignment(self, indexes: typing.List[TIndex]) -> TAssignment:
 		return self._instance.CreateBatchAssignment(indexes)

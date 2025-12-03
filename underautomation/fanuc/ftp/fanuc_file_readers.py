@@ -30,24 +30,17 @@ class FanucFileReaders:
 	@property
 	def readers(self) -> typing.List[IFileReader1]:
 		return [IFileReader1(x) for x in self._instance.Readers]
-	@property
-	def variable_reader(self) -> VariableReader:
-		return VariableReader(self._instance.VariableReader)
-	@property
-	def error_list_reader(self) -> ErrorListReader:
-		return ErrorListReader(self._instance.ErrorListReader)
-	@property
-	def summary_diagnostic_reader(self) -> SummaryDiagnosisReader:
-		return SummaryDiagnosisReader(self._instance.SummaryDiagnosticReader)
-	@property
-	def current_position_reader(self) -> DiagnosisReader2[CurrentPosition, CurrentPositionReader]:
-		return DiagnosisReader2[CurrentPosition, CurrentPositionReader](self._instance.CurrentPositionReader)
-	@property
-	def io_state_reader(self) -> DiagnosisReader2[IOState, IOStateParser]:
-		return DiagnosisReader2[IOState, IOStateParser](self._instance.IOStateReader)
-	@property
-	def safety_status_reader(self) -> DiagnosisReader2[SafetyStatus, SafetyStatusParser]:
-		return DiagnosisReader2[SafetyStatus, SafetyStatusParser](self._instance.SafetyStatusReader)
-	@property
-	def program_states(self) -> DiagnosisReader2[ProgramStates, ProgramStatesParser]:
-		return DiagnosisReader2[ProgramStates, ProgramStatesParser](self._instance.ProgramStates)
+
+FanucFileReaders.variable_reader = FanucFileReaders(fanuc_file_readers.VariableReader)
+
+FanucFileReaders.error_list_reader = FanucFileReaders(fanuc_file_readers.ErrorListReader)
+
+FanucFileReaders.summary_diagnostic_reader = FanucFileReaders(fanuc_file_readers.SummaryDiagnosticReader)
+
+FanucFileReaders.current_position_reader = FanucFileReaders(fanuc_file_readers.CurrentPositionReader)
+
+FanucFileReaders.io_state_reader = FanucFileReaders(fanuc_file_readers.IOStateReader)
+
+FanucFileReaders.safety_status_reader = FanucFileReaders(fanuc_file_readers.SafetyStatusReader)
+
+FanucFileReaders.program_states = FanucFileReaders(fanuc_file_readers.ProgramStates)

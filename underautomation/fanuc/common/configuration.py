@@ -19,6 +19,9 @@ class Configuration:
 	def from_string(self, value: str) -> None:
 		self._instance.FromString(value)
 	@property
+	def is_unknown(self) -> bool:
+		return self._instance.IsUnknown
+	@property
 	def wrist_flip(self) -> WristFlip:
 		return WristFlip(self._instance.WristFlip)
 	@wrist_flip.setter
@@ -43,20 +46,20 @@ class Configuration:
 	def arm_front_back(self, value: ArmFrontBack):
 		self._instance.ArmFrontBack = value
 	@property
-	def turn_axis1(self) -> int:
-		return self._instance.TurnAxis1
-	@turn_axis1.setter
-	def turn_axis1(self, value: int):
-		self._instance.TurnAxis1 = value
+	def turn_axis4(self) -> int:
+		return self._instance.TurnAxis4
+	@turn_axis4.setter
+	def turn_axis4(self, value: int):
+		self._instance.TurnAxis4 = value
 	@property
-	def turn_axis2(self) -> int:
-		return self._instance.TurnAxis2
-	@turn_axis2.setter
-	def turn_axis2(self, value: int):
-		self._instance.TurnAxis2 = value
+	def turn_axis5(self) -> int:
+		return self._instance.TurnAxis5
+	@turn_axis5.setter
+	def turn_axis5(self, value: int):
+		self._instance.TurnAxis5 = value
 	@property
-	def turn_axis3(self) -> int:
-		return self._instance.TurnAxis3
-	@turn_axis3.setter
-	def turn_axis3(self, value: int):
-		self._instance.TurnAxis3 = value
+	def turn_axis6(self) -> int:
+		return self._instance.TurnAxis6
+	@turn_axis6.setter
+	def turn_axis6(self, value: int):
+		self._instance.TurnAxis6 = value

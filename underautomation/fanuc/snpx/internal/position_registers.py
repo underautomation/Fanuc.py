@@ -17,6 +17,6 @@ class PositionRegisters(SnpxWritableAssignableElements3[Position, int, PositionR
 		else:
 			self._instance = _internal
 	def write(self, index: int, cartesianPosition: CartesianPosition) -> None:
-		self._instance.Write(index, cartesianPosition._instance)
+		self._instance.Write(index, cartesianPosition._instance if cartesianPosition else None)
 	def create_batch_assignment(self, startIndex: int, count: int) -> PositionRegistersBatchAssignment:
 		return PositionRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))

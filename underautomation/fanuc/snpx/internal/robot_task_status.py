@@ -12,7 +12,7 @@ class RobotTaskStatus:
 		else:
 			self._instance = _internal
 	def equals(self, other: 'RobotTaskStatus') -> bool:
-		return self._instance.Equals(other._instance)
+		return self._instance.Equals(other._instance if other else None)
 	@staticmethod
 	def from_bytes(bytes: typing.List[int], start: int=0) -> 'RobotTaskStatus':
 		return RobotTaskStatus(robot_task_status.FromBytes(bytes, start))

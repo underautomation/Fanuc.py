@@ -5,13 +5,22 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Fanuc.Common import JointsPosition as joints_position
 
 class JointsPosition:
-	def __init__(self, j1: float, j2: float, j3: float, j4: float, j5: float, j6: float, j7: float, j8: float, j9: float, _internal = 0):
+	def __init__(self, j1Deg: float, j2Deg: float, j3Deg: float, j4Deg: float, j5Deg: float, j6Deg: float, j7Deg: float, j8Deg: float, j9Deg: float, _internal = 0):
 		if(_internal == 0):
-			self._instance = joints_position(j1, j2, j3, j4, j5, j6, j7, j8, j9)
+			self._instance = joints_position(j1Deg, j2Deg, j3Deg, j4Deg, j5Deg, j6Deg, j7Deg, j8Deg, j9Deg)
 		else:
 			self._instance = _internal
 	def __repr__(self):
 		return self._instance.ToString()
+	@staticmethod
+	def is_near(j1: 'JointsPosition', j2: 'JointsPosition', degreesTolerance: float) -> bool:
+		return joints_position.IsNear(j1._instance if j1 else None, j2._instance if j2 else None, degreesTolerance)
+	@property
+	def item(self) -> float:
+		return self._instance.Item
+	@item.setter
+	def item(self, value: float):
+		self._instance.Item = value
 	@property
 	def values(self) -> typing.List[float]:
 		return self._instance.Values

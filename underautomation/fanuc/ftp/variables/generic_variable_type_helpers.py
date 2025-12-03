@@ -13,7 +13,7 @@ class GenericVariableTypeHelpers:
 			self._instance = _internal
 	@staticmethod
 	def get_ancestors(element: IGenericVariableType) -> typing.List[IGenericVariableType]:
-		return [IGenericVariableType(x) for x in generic_variable_type_helpers.GetAncestors(element._instance)]
+		return [IGenericVariableType(x) for x in generic_variable_type_helpers.GetAncestors(element._instance if element else None)]
 	@staticmethod
 	def get_field(element: IGenericVariableType, name: str) -> IGenericVariableType:
-		return IGenericVariableType(generic_variable_type_helpers.GetField(element._instance, name))
+		return IGenericVariableType(generic_variable_type_helpers.GetField(element._instance if element else None, name))

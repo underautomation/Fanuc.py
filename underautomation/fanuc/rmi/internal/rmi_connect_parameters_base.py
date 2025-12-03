@@ -28,21 +28,9 @@ class RmiConnectParametersBase:
 	@write_timeout_ms.setter
 	def write_timeout_ms(self, value: int):
 		self._instance.WriteTimeoutMs = value
-	@property
-	def defaul_t__port(self) -> int:
-		return self._instance.DEFAULT_PORT
-	@defaul_t__port.setter
-	def defaul_t__port(self, value: int):
-		self._instance.DEFAULT_PORT = value
-	@property
-	def defaul_t__rea_d__timeou_t__ms(self) -> int:
-		return self._instance.DEFAULT_READ_TIMEOUT_MS
-	@defaul_t__rea_d__timeou_t__ms.setter
-	def defaul_t__rea_d__timeou_t__ms(self, value: int):
-		self._instance.DEFAULT_READ_TIMEOUT_MS = value
-	@property
-	def defaul_t__writ_e__timeou_t__ms(self) -> int:
-		return self._instance.DEFAULT_WRITE_TIMEOUT_MS
-	@defaul_t__writ_e__timeou_t__ms.setter
-	def defaul_t__writ_e__timeou_t__ms(self, value: int):
-		self._instance.DEFAULT_WRITE_TIMEOUT_MS = value
+
+RmiConnectParametersBase.defaul_t__port = RmiConnectParametersBase(rmi_connect_parameters_base.DEFAULT_PORT)
+
+RmiConnectParametersBase.defaul_t__rea_d__timeou_t__ms = RmiConnectParametersBase(rmi_connect_parameters_base.DEFAULT_READ_TIMEOUT_MS)
+
+RmiConnectParametersBase.defaul_t__writ_e__timeou_t__ms = RmiConnectParametersBase(rmi_connect_parameters_base.DEFAULT_WRITE_TIMEOUT_MS)

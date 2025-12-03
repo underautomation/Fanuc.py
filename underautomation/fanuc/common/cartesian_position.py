@@ -14,6 +14,20 @@ class CartesianPosition(XYZPosition):
 			self._instance = _internal
 	def __repr__(self):
 		return self._instance.ToString()
+	def to_homogeneous_matrix(self) -> typing.List[float]:
+		return self._instance.ToHomogeneousMatrix()
+	@staticmethod
+	def from_homogeneous_matrix(R: typing.List[float]) -> 'CartesianPosition':
+		return CartesianPosition(None, None, None, None, None, None, None, cartesian_position.FromHomogeneousMatrix(R))
+	@staticmethod
+	def normalize_angle(angle: float) -> float:
+		return cartesian_position.NormalizeAngle(angle)
+	@staticmethod
+	def normalize_angles(pose: 'CartesianPosition') -> None:
+		cartesian_position.NormalizeAngles(pose._instance if pose else None)
+	@staticmethod
+	def is_near(a: 'CartesianPosition', b: 'CartesianPosition', mmTolerance: float, degreesTolerance: float) -> bool:
+		return cartesian_position.IsNear(a._instance if a else None, b._instance if b else None, mmTolerance, degreesTolerance)
 	@property
 	def w(self) -> float:
 		return self._instance.W
