@@ -1,5 +1,6 @@
 import typing
 from underautomation.fanuc.ftp.diagnosis.summary_diagnosis import SummaryDiagnosis
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.internal.file_reader_1 import FileReader1
 import clr
 import os
@@ -12,5 +13,5 @@ class SummaryDiagnosisReader(FileReader1[SummaryDiagnosis]):
 			self._instance = summary_diagnosis_reader()
 		else:
 			self._instance = _internal
-	def read_file(self, fileStream: typing.Any, fileName: str) -> SummaryDiagnosis:
-		return SummaryDiagnosis(self._instance.ReadFile(fileStream, fileName))
+	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> SummaryDiagnosis:
+		return SummaryDiagnosis(self._instance.ReadFile(fileStream, language, fileName))

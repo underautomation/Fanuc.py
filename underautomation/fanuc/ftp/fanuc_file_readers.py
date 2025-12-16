@@ -1,5 +1,6 @@
 import typing
 from underautomation.fanuc.ftp.internal.i_fanuc_content import IFanucContent
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.internal.i_file_reader_1 import IFileReader1
 from underautomation.fanuc.ftp.variables.variable_reader import VariableReader
 from underautomation.fanuc.ftp.list.error_list_reader import ErrorListReader
@@ -25,8 +26,8 @@ class FanucFileReaders:
 		else:
 			self._instance = _internal
 	@staticmethod
-	def read_file(fileStream: typing.Any, fileName: str) -> IFanucContent:
-		return IFanucContent(fanuc_file_readers.ReadFile(fileStream, fileName))
+	def read_file(fileStream: typing.Any, fileName: str, language: Languages) -> IFanucContent:
+		return IFanucContent(fanuc_file_readers.ReadFile(fileStream, fileName, language))
 	@property
 	def readers(self) -> typing.List[IFileReader1]:
 		return [IFileReader1(x) for x in self._instance.Readers]

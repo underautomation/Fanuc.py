@@ -1,4 +1,5 @@
 import typing
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.internal.file_reader_1 import FileReader1
 import clr
 import os
@@ -12,5 +13,5 @@ class VariableReader1(FileReader1[T], typing.Generic[T]):
 			self._instance = variable_reader_1()
 		else:
 			self._instance = _internal
-	def read_file(self, fileStream: typing.Any, fileName: str) -> T:
-		return self._instance.ReadFile(fileStream, fileName)
+	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> T:
+		return self._instance.ReadFile(fileStream, language, fileName)

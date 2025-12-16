@@ -1,4 +1,5 @@
 import typing
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.common.telnet_connect_parameters import TelnetConnectParameters
 from underautomation.fanuc.common.ftp_connect_parameters import FtpConnectParameters
 from underautomation.fanuc.common.snpx_connect_parameters import SnpxConnectParameters
@@ -26,6 +27,12 @@ class ConnectionParameters:
 	@ping_before_connect.setter
 	def ping_before_connect(self, value: bool):
 		self._instance.PingBeforeConnect = value
+	@property
+	def language(self) -> Languages:
+		return Languages(self._instance.Language)
+	@language.setter
+	def language(self, value: Languages):
+		self._instance.Language = value
 	@property
 	def telnet(self) -> TelnetConnectParameters:
 		return TelnetConnectParameters(self._instance.Telnet)

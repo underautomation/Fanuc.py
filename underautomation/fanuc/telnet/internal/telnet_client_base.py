@@ -1,4 +1,5 @@
 import typing
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.telnet.tp_coordinates import TpCoordinates
 from underautomation.fanuc.telnet.program_command_result import ProgramCommandResult
 from underautomation.fanuc.telnet.run_result import RunResult
@@ -120,6 +121,12 @@ class TelnetClientBase:
 	@property
 	def ip(self) -> str:
 		return self._instance.IP
+	@property
+	def language(self) -> Languages:
+		return Languages(self._instance.Language)
+	@language.setter
+	def language(self, value: Languages):
+		self._instance.Language = value
 	@property
 	def tp_coordinates(self) -> TpCoordinates:
 		return TpCoordinates(self._instance.TpCoordinates)

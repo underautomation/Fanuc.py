@@ -1,4 +1,5 @@
 import typing
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.internal.ftp_direct_file_handling import FtpDirectFileHandling
 from underautomation.fanuc.ftp.internal.ftp_known_variable_files import FtpKnownVariableFiles
 from underautomation.fanuc.ftp.diagnosis.summary_diagnosis import SummaryDiagnosis
@@ -44,6 +45,12 @@ class FtpClientBase:
 	@property
 	def ip(self) -> str:
 		return self._instance.IP
+	@property
+	def language(self) -> Languages:
+		return Languages(self._instance.Language)
+	@language.setter
+	def language(self, value: Languages):
+		self._instance.Language = value
 	@property
 	def connected(self) -> bool:
 		return self._instance.Connected

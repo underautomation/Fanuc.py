@@ -17,5 +17,5 @@ class ProgramStatesParser(SectionParser1[ProgramStates]):
 	def after_parse(self) -> None:
 		self._instance.AfterParse()
 	@property
-	def section_start(self) -> str:
+	def section_start(self) -> typing.List[str]:
 		return self._instance.SectionStart

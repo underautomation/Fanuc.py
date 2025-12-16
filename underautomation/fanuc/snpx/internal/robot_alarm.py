@@ -1,6 +1,7 @@
 import typing
 from underautomation.fanuc.snpx.internal.alarm_id import AlarmId
 from underautomation.fanuc.snpx.internal.alarm_severity import AlarmSeverity
+from underautomation.fanuc.common.languages import Languages
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -13,8 +14,8 @@ class RobotAlarm:
 		else:
 			self._instance = _internal
 	@staticmethod
-	def from_bytes(bytes: typing.List[int], start: int=0) -> 'RobotAlarm':
-		return RobotAlarm(robot_alarm.FromBytes(bytes, start))
+	def from_bytes(bytes: typing.List[int], language: Languages, start: int=0) -> 'RobotAlarm':
+		return RobotAlarm(robot_alarm.FromBytes(bytes, language, start))
 	def equals(self, other: 'RobotAlarm') -> bool:
 		return self._instance.Equals(other._instance if other else None)
 	def __repr__(self):

@@ -17,5 +17,5 @@ class CurrentPositionReader(SectionParser1[CurrentPosition]):
 	def parse_line(self, line: str) -> None:
 		self._instance.ParseLine(line)
 	@property
-	def section_start(self) -> str:
+	def section_start(self) -> typing.List[str]:
 		return self._instance.SectionStart

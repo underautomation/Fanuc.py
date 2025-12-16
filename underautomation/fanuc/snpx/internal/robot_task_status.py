@@ -1,5 +1,6 @@
 import typing
 from underautomation.fanuc.snpx.internal.robot_task_state import RobotTaskState
+from underautomation.fanuc.common.languages import Languages
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -14,8 +15,8 @@ class RobotTaskStatus:
 	def equals(self, other: 'RobotTaskStatus') -> bool:
 		return self._instance.Equals(other._instance if other else None)
 	@staticmethod
-	def from_bytes(bytes: typing.List[int], start: int=0) -> 'RobotTaskStatus':
-		return RobotTaskStatus(robot_task_status.FromBytes(bytes, start))
+	def from_bytes(bytes: typing.List[int], language: Languages, start: int=0) -> 'RobotTaskStatus':
+		return RobotTaskStatus(robot_task_status.FromBytes(bytes, language, start))
 	@property
 	def program_name(self) -> str:
 		return self._instance.ProgramName

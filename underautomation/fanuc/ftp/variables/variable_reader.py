@@ -1,5 +1,6 @@
 import typing
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
+from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.variables.generic_variable import GenericVariable
 from underautomation.fanuc.ftp.variables.variable_reader_1 import VariableReader1
 from underautomation.fanuc.ftp.internal.file_reader_1 import FileReader1
@@ -49,14 +50,14 @@ class VariableReader(FileReader1[GenericVariableFile]):
 			self._instance = variable_reader()
 		else:
 			self._instance = _internal
-	def read_file(self, fileStream: typing.Any, fileName: str) -> GenericVariableFile:
-		return GenericVariableFile(self._instance.ReadFile(fileStream, fileName))
+	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> GenericVariableFile:
+		return GenericVariableFile(self._instance.ReadFile(fileStream, language, fileName))
 	@staticmethod
-	def read_variable_file(fileStream: typing.Any, fileName: str) -> GenericVariableFile:
-		return GenericVariableFile(variable_reader.ReadVariableFile(fileStream, fileName))
+	def read_variable_file(fileStream: typing.Any, fileName: str, language: Languages) -> GenericVariableFile:
+		return GenericVariableFile(variable_reader.ReadVariableFile(fileStream, fileName, language))
 	@staticmethod
-	def parse_variable_file(stream: typing.Any) -> typing.List[GenericVariable]:
-		return [GenericVariable(x) for x in variable_reader.ParseVariableFile(stream)]
+	def parse_variable_file(stream: typing.Any, language: Languages) -> typing.List[GenericVariable]:
+		return [GenericVariable(x) for x in variable_reader.ParseVariableFile(stream, language)]
 
 VariableReader.aavmmain_file = VariableReader(variable_reader.AavmmainFile)
 
