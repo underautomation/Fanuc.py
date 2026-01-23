@@ -23,6 +23,8 @@ class SnpxClientBase:
 			self._instance = snpx_client_base()
 		else:
 			self._instance = _internal
+	def poll_and_get_updated_connected_state(self) -> bool:
+		return self._instance.PollAndGetUpdatedConnectedState()
 	def disconnect(self) -> None:
 		self._instance.Disconnect()
 	def clear_alarms(self) -> None:

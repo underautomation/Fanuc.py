@@ -66,6 +66,8 @@ class TelnetClientBase:
 			def __init__(self, _internal):
 				self._instance = _internal
 		self._instance.CommandReceived+= lambda sender, e : handler(Wrapper(sender), Wrapper(e))
+	def poll_and_get_updated_connected_state(self) -> bool:
+		return self._instance.PollAndGetUpdatedConnectedState()
 	def disconnect(self) -> None:
 		self._instance.Disconnect()
 	def abort(self, program: str="None", force: bool=True) -> ProgramCommandResult:
