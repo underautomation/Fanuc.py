@@ -4,6 +4,7 @@ from underautomation.fanuc.common.telnet_connect_parameters import TelnetConnect
 from underautomation.fanuc.common.ftp_connect_parameters import FtpConnectParameters
 from underautomation.fanuc.common.snpx_connect_parameters import SnpxConnectParameters
 from underautomation.fanuc.common.rmi_connect_parameters import RmiConnectParameters
+from underautomation.fanuc.common.stream_motion_connect_parameters import StreamMotionConnectParameters
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__),  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -57,3 +58,9 @@ class ConnectionParameters:
 	@rmi.setter
 	def rmi(self, value: RmiConnectParameters):
 		self._instance.Rmi = value
+	@property
+	def stream_motion(self) -> StreamMotionConnectParameters:
+		return StreamMotionConnectParameters(self._instance.StreamMotion)
+	@stream_motion.setter
+	def stream_motion(self, value: StreamMotionConnectParameters):
+		self._instance.StreamMotion = value
