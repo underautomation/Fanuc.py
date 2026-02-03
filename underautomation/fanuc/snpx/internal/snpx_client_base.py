@@ -8,6 +8,7 @@ from underautomation.fanuc.snpx.internal.position_system_variables import Positi
 from underautomation.fanuc.snpx.internal.string_system_variables import StringSystemVariables
 from underautomation.fanuc.snpx.internal.digital_signals import DigitalSignals
 from underautomation.fanuc.snpx.internal.numeric_io import NumericIO
+from underautomation.fanuc.snpx.internal.flags import Flags
 from underautomation.fanuc.snpx.internal.current_position import CurrentPosition
 from underautomation.fanuc.snpx.internal.alarm_access import AlarmAccess
 from underautomation.fanuc.common.languages import Languages
@@ -119,6 +120,9 @@ class SnpxClientBase:
 	@property
 	def pm_c__d(self) -> NumericIO:
 		return NumericIO(self._instance.PMC_D)
+	@property
+	def flags(self) -> Flags:
+		return Flags(self._instance.Flags)
 	@property
 	def current_position(self) -> CurrentPosition:
 		return CurrentPosition(self._instance.CurrentPosition)
