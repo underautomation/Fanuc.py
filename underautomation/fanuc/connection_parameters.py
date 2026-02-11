@@ -9,6 +9,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__),  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc import ConnectionParameters as connection_parameters
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class ConnectionParameters:
 	def __init__(self, address: str, _internal = 0):
@@ -33,7 +34,7 @@ class ConnectionParameters:
 		return Languages(self._instance.Language)
 	@language.setter
 	def language(self, value: Languages):
-		self._instance.Language = value
+		self._instance.Language = languages(int(value))
 	@property
 	def telnet(self) -> TelnetConnectParameters:
 		return TelnetConnectParameters(self._instance.Telnet)

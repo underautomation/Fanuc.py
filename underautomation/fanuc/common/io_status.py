@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Common import IOStatus as io_status
+from UnderAutomation.Fanuc.Common import DigitalPorts as digital_ports
 
 class IOStatus:
 	def __init__(self, _internal = 0):
@@ -12,7 +13,7 @@ class IOStatus:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def port(self) -> DigitalPorts:
 		return DigitalPorts(self._instance.Port)

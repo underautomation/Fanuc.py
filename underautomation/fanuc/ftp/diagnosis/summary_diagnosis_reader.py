@@ -6,6 +6,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Diagnosis import SummaryDiagnosisReader as summary_diagnosis_reader
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class SummaryDiagnosisReader(FileReader1[SummaryDiagnosis]):
 	def __init__(self, _internal = 0):
@@ -14,4 +15,4 @@ class SummaryDiagnosisReader(FileReader1[SummaryDiagnosis]):
 		else:
 			self._instance = _internal
 	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> SummaryDiagnosis:
-		return SummaryDiagnosis(self._instance.ReadFile(fileStream, language, fileName))
+		return SummaryDiagnosis(self._instance.ReadFile(fileStream, languages(int(language)), fileName))

@@ -1,4 +1,5 @@
 import typing
+from datetime import datetime, timedelta
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -11,7 +12,7 @@ class ErrallSectionItem:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def id(self) -> int:
 		return self._instance.Id
@@ -25,8 +26,8 @@ class ErrallSectionItem:
 	def message(self) -> str:
 		return self._instance.Message
 	@property
-	def occurring_time(self) -> typing.Any:
-		return self._instance.OccurringTime
+	def occurring_time(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.OccurringTime.Ticks // 10)
 	@property
 	def is_reset(self) -> bool:
 		return self._instance.IsReset

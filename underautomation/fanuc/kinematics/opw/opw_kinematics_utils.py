@@ -15,4 +15,4 @@ class OpwKinematicsUtils:
 			self._instance = _internal
 	@staticmethod
 	def inverse_kinematics(pose: CartesianPosition, dhParameters: DhParameters) -> typing.List[JointsPosition]:
-		return [JointsPosition(x) for x in opw_kinematics_utils.InverseKinematics(pose._instance if pose else None, dhParameters._instance if dhParameters else None)]
+		return [JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in opw_kinematics_utils.InverseKinematics(pose._instance if pose else None, dhParameters._instance if dhParameters else None)]

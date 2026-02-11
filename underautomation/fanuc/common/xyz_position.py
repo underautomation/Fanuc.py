@@ -11,7 +11,7 @@ class XYZPosition:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def x(self) -> float:
 		return self._instance.X

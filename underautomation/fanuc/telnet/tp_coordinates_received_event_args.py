@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Telnet import TpCoordinatesReceivedEventArgs as tp_coordinates_received_event_args
+from UnderAutomation.Fanuc.Telnet import TpCoordinates as tp_coordinates
 
 class TpCoordinatesReceivedEventArgs:
 	def __init__(self, _internal = 0):
@@ -16,4 +17,4 @@ class TpCoordinatesReceivedEventArgs:
 		return TpCoordinates(self._instance.Coord)
 	@coord.setter
 	def coord(self, value: TpCoordinates):
-		self._instance.Coord = value
+		self._instance.Coord = tp_coordinates(int(value))

@@ -7,6 +7,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Internal import FileReader as file_reader_1
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 T = typing.TypeVar('T')
 class FileReader1(FileReader, IFileReader1[T], IFileReader, typing.Generic[T]):
@@ -16,4 +17,4 @@ class FileReader1(FileReader, IFileReader1[T], IFileReader, typing.Generic[T]):
 		else:
 			self._instance = _internal
 	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str="None") -> T:
-		return self._instance.ReadFile(fileStream, language, fileName)
+		return self._instance.ReadFile(fileStream, languages(int(language)), fileName)

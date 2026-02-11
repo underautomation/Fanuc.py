@@ -8,6 +8,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Kinematics import DhParameters as dh_parameters
+from UnderAutomation.Fanuc.Kinematics import KinematicsCategory as kinematics_category
+from UnderAutomation.Fanuc.Kinematics import ArmKinematicModels as arm_kinematic_models
 
 class DhParameters(IDhParameters):
 	def __init__(self, d4: float, d5: float, d6: float, a1: float, a2: float, a3: float, _internal = 0):
@@ -17,16 +19,16 @@ class DhParameters(IDhParameters):
 			self._instance = _internal
 	@staticmethod
 	def from_arm_kinematic_model(model: ArmKinematicModels) -> 'DhParameters':
-		return DhParameters(None, None, None, None, None, None, dh_parameters.FromArmKinematicModel(model))
+		return DhParameters(None, None, None, None, None, None, dh_parameters.FromArmKinematicModel(arm_kinematic_models(int(model))))
 	@staticmethod
 	def from_opw_parameters(a1: float, a2: float, c2: float, c3: float, c4: float) -> 'DhParameters':
 		return DhParameters(None, None, None, None, None, None, dh_parameters.FromOpwParameters(a1, a2, c2, c3, c4))
 	@staticmethod
 	def from_def_file(doc: typing.Any) -> typing.List['DhParameters']:
-		return [DhParameters(x) for x in dh_parameters.FromDefFile(doc)]
+		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromDefFile(doc)]
 	@staticmethod
 	def from_symotn_file(file: SymotnFile) -> typing.List['DhParameters']:
-		return [DhParameters(x) for x in dh_parameters.FromSymotnFile(file._instance if file else None)]
+		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromSymotnFile(file._instance if file else None)]
 	@staticmethod
 	def from_mrr_grp(mrrGrp: MrrGrpVariableType) -> 'DhParameters':
 		return DhParameters(None, None, None, None, None, None, dh_parameters.FromMrrGrp(mrrGrp._instance if mrrGrp else None))

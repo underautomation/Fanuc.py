@@ -5,6 +5,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Diagnosis import TaskState as task_state
+from UnderAutomation.Fanuc.Common import TaskStatus as task_status
 
 class TaskState:
 	def __init__(self, _internal = 0):
@@ -29,7 +30,7 @@ class TaskState:
 		return TaskStatus(self._instance.Status)
 	@status.setter
 	def status(self, value: TaskStatus):
-		self._instance.Status = value
+		self._instance.Status = task_status(int(value))
 	@property
 	def history(self) -> typing.List[TaskHistoryData]:
 		return [TaskHistoryData(x) for x in self._instance.History]

@@ -28,6 +28,9 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Telnet.Internal import TelnetClientBase as telnet_client_base
+from UnderAutomation.Fanuc.Common import Languages as languages
+from UnderAutomation.Fanuc.Telnet import TpCoordinates as tp_coordinates
+from UnderAutomation.Fanuc.Telnet import KCLPorts as kcl_ports
 
 T = typing.TypeVar('T')
 class TelnetClientBase:
@@ -91,7 +94,7 @@ class TelnetClientBase:
 	def run(self, program: str="None") -> RunResult:
 		return RunResult(self._instance.Run(program))
 	def set_port(self, port: KCLPorts, index: int, value: int) -> SetPortResult:
-		return SetPortResult(self._instance.SetPort(port, index, value))
+		return SetPortResult(self._instance.SetPort(kcl_ports(int(port)), index, value))
 	def set_variable(self, name: str, value: float, program: str="None") -> SetVariableResult:
 		return SetVariableResult(self._instance.SetVariable(name, value, program))
 	def get_current_pose(self) -> GetCurrentPoseResult:
@@ -99,11 +102,11 @@ class TelnetClientBase:
 	def get_variable(self, name: str, program: str="None") -> GetVariableResult:
 		return GetVariableResult(self._instance.GetVariable(name, program))
 	def simulate(self, port: KCLPorts, index: int, value: int) -> SimulateResult:
-		return SimulateResult(self._instance.Simulate(port, index, value))
+		return SimulateResult(self._instance.Simulate(kcl_ports(int(port)), index, value))
 	def unsimulate_all(self) -> UnsimulateAllResult:
 		return UnsimulateAllResult(self._instance.UnsimulateAll())
 	def unsimulate(self, port: KCLPorts, index: int) -> UnsimulateResult:
-		return UnsimulateResult(self._instance.Unsimulate(port, index))
+		return UnsimulateResult(self._instance.Unsimulate(kcl_ports(int(port)), index))
 	def send_custom_command(self, command: str) -> T:
 		return self._instance.SendCustomCommand(command)
 	def get_task_information(self, prog_name: str) -> TaskInformationResult:
@@ -128,7 +131,7 @@ class TelnetClientBase:
 		return Languages(self._instance.Language)
 	@language.setter
 	def language(self, value: Languages):
-		self._instance.Language = value
+		self._instance.Language = languages(int(value))
 	@property
 	def tp_coordinates(self) -> TpCoordinates:
 		return TpCoordinates(self._instance.TpCoordinates)

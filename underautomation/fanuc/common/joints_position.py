@@ -11,7 +11,7 @@ class JointsPosition:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@staticmethod
 	def is_near(j1: 'JointsPosition', j2: 'JointsPosition', degreesTolerance: float) -> bool:
 		return joints_position.IsNear(j1._instance if j1 else None, j2._instance if j2 else None, degreesTolerance)

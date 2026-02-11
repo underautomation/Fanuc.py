@@ -5,6 +5,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Snpx.Internal import RobotTaskStatus as robot_task_status
+from UnderAutomation.Fanuc.Snpx.Internal import RobotTaskState as robot_task_state
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class RobotTaskStatus:
 	def __init__(self, _internal = 0):
@@ -16,7 +18,7 @@ class RobotTaskStatus:
 		return self._instance.Equals(other._instance if other else None)
 	@staticmethod
 	def from_bytes(bytes: typing.List[int], language: Languages, start: int=0) -> 'RobotTaskStatus':
-		return RobotTaskStatus(robot_task_status.FromBytes(bytes, language, start))
+		return RobotTaskStatus(robot_task_status.FromBytes(bytes, languages(int(language)), start))
 	@property
 	def program_name(self) -> str:
 		return self._instance.ProgramName
@@ -34,7 +36,7 @@ class RobotTaskStatus:
 		return RobotTaskState(self._instance.State)
 	@state.setter
 	def state(self, value: RobotTaskState):
-		self._instance.State = value
+		self._instance.State = robot_task_state(int(value))
 	@property
 	def caller(self) -> str:
 		return self._instance.Caller

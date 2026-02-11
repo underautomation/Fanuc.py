@@ -5,6 +5,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.StreamMotion.Data import AckPacket as ack_packet
+from UnderAutomation.Fanuc.StreamMotion.Data import PacketTypeFromRobot as packet_type_from_robot
+from UnderAutomation.Fanuc.StreamMotion.Data import ThresholdType as threshold_type
 
 class AckPacket:
 	def __init__(self, _internal = 0):
@@ -13,7 +15,7 @@ class AckPacket:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def packet_type(self) -> PacketTypeFromRobot:
 		return PacketTypeFromRobot(self._instance.PacketType)

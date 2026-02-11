@@ -18,7 +18,7 @@ class KinematicsUtils:
 		return CartesianPosition(None, None, None, None, None, None, None, kinematics_utils.ForwardKinematics(jointAnglesRad, dhParameters._instance if dhParameters else None))
 	@staticmethod
 	def inverse_kinematics(position: CartesianPosition, parameters: DhParameters) -> typing.List[JointsPosition]:
-		return [JointsPosition(x) for x in kinematics_utils.InverseKinematics(position._instance if position else None, parameters._instance if parameters else None)]
+		return [JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in kinematics_utils.InverseKinematics(position._instance if position else None, parameters._instance if parameters else None)]
 	@staticmethod
 	def mul(A: typing.List[float], B: typing.List[float]) -> typing.List[float]:
 		return kinematics_utils.Mul(A, B)

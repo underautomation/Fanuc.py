@@ -1,11 +1,15 @@
 import typing
 from underautomation.fanuc.snpx.internal.alarm_id import AlarmId
 from underautomation.fanuc.snpx.internal.alarm_severity import AlarmSeverity
+from datetime import datetime, timedelta
 from underautomation.fanuc.common.languages import Languages
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Snpx.Internal import RobotAlarm as robot_alarm
+from UnderAutomation.Fanuc.Snpx.Internal import AlarmId as alarm_id
+from UnderAutomation.Fanuc.Snpx.Internal import AlarmSeverity as alarm_severity
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class RobotAlarm:
 	def __init__(self, _internal = 0):
@@ -15,17 +19,17 @@ class RobotAlarm:
 			self._instance = _internal
 	@staticmethod
 	def from_bytes(bytes: typing.List[int], language: Languages, start: int=0) -> 'RobotAlarm':
-		return RobotAlarm(robot_alarm.FromBytes(bytes, language, start))
+		return RobotAlarm(robot_alarm.FromBytes(bytes, languages(int(language)), start))
 	def equals(self, other: 'RobotAlarm') -> bool:
 		return self._instance.Equals(other._instance if other else None)
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def id(self) -> AlarmId:
 		return AlarmId(self._instance.Id)
 	@id.setter
 	def id(self, value: AlarmId):
-		self._instance.Id = value
+		self._instance.Id = alarm_id(int(value))
 	@property
 	def number(self) -> int:
 		return self._instance.Number
@@ -37,7 +41,7 @@ class RobotAlarm:
 		return AlarmId(self._instance.CauseId)
 	@cause_id.setter
 	def cause_id(self, value: AlarmId):
-		self._instance.CauseId = value
+		self._instance.CauseId = alarm_id(int(value))
 	@property
 	def cause_number(self) -> int:
 		return self._instance.CauseNumber
@@ -49,12 +53,12 @@ class RobotAlarm:
 		return AlarmSeverity(self._instance.Severity)
 	@severity.setter
 	def severity(self, value: AlarmSeverity):
-		self._instance.Severity = value
+		self._instance.Severity = alarm_severity(int(value))
 	@property
-	def time(self) -> typing.Any:
-		return self._instance.Time
+	def time(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.Time.Ticks // 10)
 	@time.setter
-	def time(self, value: typing.Any):
+	def time(self, value: datetime):
 		self._instance.Time = value
 	@property
 	def message(self) -> str:

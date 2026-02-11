@@ -6,6 +6,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Variables import GenericValue as generic_value
+from UnderAutomation.Fanuc.Ftp.Variables import ValueKind as value_kind
 
 class GenericValue(IGenericVariableType):
 	def __init__(self, _internal = 0):
@@ -14,7 +15,7 @@ class GenericValue(IGenericVariableType):
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def parent(self) -> 'GenericValue':
 		return GenericValue(self._instance.Parent)

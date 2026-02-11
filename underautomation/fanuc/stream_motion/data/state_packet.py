@@ -1,4 +1,5 @@
 import typing
+from datetime import datetime, timedelta
 from underautomation.fanuc.stream_motion.data.packet_type_from_robot import PacketTypeFromRobot
 from underautomation.fanuc.stream_motion.data.robot_status import RobotStatus
 from underautomation.fanuc.stream_motion.data.io_read_result import IOReadResult
@@ -7,6 +8,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.StreamMotion.Data import StatePacket as state_packet
+from UnderAutomation.Fanuc.StreamMotion.Data import PacketTypeFromRobot as packet_type_from_robot
 
 class StatePacket:
 	def __init__(self, _internal = 0):
@@ -15,13 +17,13 @@ class StatePacket:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def received_at_ticks(self) -> int:
 		return self._instance.ReceivedAtTicks
 	@property
-	def received_at(self) -> typing.Any:
-		return self._instance.ReceivedAt
+	def received_at(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.ReceivedAt.Ticks // 10)
 	@property
 	def packet_type(self) -> PacketTypeFromRobot:
 		return PacketTypeFromRobot(self._instance.PacketType)

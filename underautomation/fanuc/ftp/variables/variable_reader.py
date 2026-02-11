@@ -43,6 +43,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Variables import VariableReader as variable_reader
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class VariableReader(FileReader1[GenericVariableFile]):
 	def __init__(self, _internal = 0):
@@ -51,13 +52,13 @@ class VariableReader(FileReader1[GenericVariableFile]):
 		else:
 			self._instance = _internal
 	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> GenericVariableFile:
-		return GenericVariableFile(self._instance.ReadFile(fileStream, language, fileName))
+		return GenericVariableFile(self._instance.ReadFile(fileStream, languages(int(language)), fileName))
 	@staticmethod
 	def read_variable_file(fileStream: typing.Any, fileName: str, language: Languages) -> GenericVariableFile:
-		return GenericVariableFile(variable_reader.ReadVariableFile(fileStream, fileName, language))
+		return GenericVariableFile(variable_reader.ReadVariableFile(fileStream, fileName, languages(int(language))))
 	@staticmethod
 	def parse_variable_file(stream: typing.Any, language: Languages) -> typing.List[GenericVariable]:
-		return [GenericVariable(x) for x in variable_reader.ParseVariableFile(stream, language)]
+		return [GenericVariable(x) for x in variable_reader.ParseVariableFile(stream, languages(int(language)))]
 
 VariableReader.aavmmain_file = VariableReader(variable_reader.AavmmainFile)
 

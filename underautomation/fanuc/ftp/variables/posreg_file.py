@@ -1,5 +1,5 @@
 import typing
-from underautomation.fanuc.ftp.variables.cartesian_position_variable import CartesianPositionVariable
+from underautomation.fanuc.ftp.variables.position_register import PositionRegister
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 import clr
 import os
@@ -13,8 +13,8 @@ class PosregFile(GenericVariableFile):
 		else:
 			self._instance = _internal
 	@property
-	def posreg(self) -> typing.List[CartesianPositionVariable]:
-		return [CartesianPositionVariable(x) for x in self._instance.Posreg]
+	def posreg(self) -> typing.List[PositionRegister]:
+		return [PositionRegister(None, None, x) for x in self._instance.Posreg]
 	@property
 	def maxpregnum(self) -> int:
 		return self._instance.Maxpregnum

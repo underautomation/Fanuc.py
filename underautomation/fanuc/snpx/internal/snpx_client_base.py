@@ -17,6 +17,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Snpx.Internal import SnpxClientBase as snpx_client_base
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class SnpxClientBase:
 	def __init__(self, _internal = 0):
@@ -30,7 +31,7 @@ class SnpxClientBase:
 		self._instance.Disconnect()
 	def clear_alarms(self) -> None:
 		self._instance.ClearAlarms()
-	def set_variable(self, name: str, value: float) -> None:
+	def set_variable(self, name: str, value: str) -> None:
 		self._instance.SetVariable(name, value)
 	def clear_assignments(self) -> None:
 		self._instance.ClearAssignments()
@@ -137,7 +138,7 @@ class SnpxClientBase:
 		return Languages(self._instance.Language)
 	@language.setter
 	def language(self, value: Languages):
-		self._instance.Language = value
+		self._instance.Language = languages(int(value))
 	@property
 	def connected(self) -> bool:
 		return self._instance.Connected

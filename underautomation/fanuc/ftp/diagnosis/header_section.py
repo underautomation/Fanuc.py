@@ -1,4 +1,5 @@
 import typing
+from datetime import datetime, timedelta
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -20,8 +21,8 @@ class HeaderSection:
 	def version_firmware(self) -> str:
 		return self._instance.VersionFirmware
 	@property
-	def version_date(self) -> typing.Any:
-		return self._instance.VersionDate
+	def version_date(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.VersionDate.Ticks // 10)
 	@property
-	def date(self) -> typing.Any:
-		return self._instance.Date
+	def date(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.Date.Ticks // 10)

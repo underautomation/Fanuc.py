@@ -13,4 +13,4 @@ class PositionRegistersBatchAssignment(BatchAssignment2[Position, int]):
 		else:
 			self._instance = _internal
 	def read(self) -> typing.List[Position]:
-		return [Position(x) for x in self._instance.Read()]
+		return [Position(None, None, None, None, x) for x in self._instance.Read()]

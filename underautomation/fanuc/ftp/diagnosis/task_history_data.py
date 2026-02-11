@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Diagnosis import TaskHistoryData as task_history_data
+from UnderAutomation.Fanuc.Common import ProgramType as program_type
 
 class TaskHistoryData:
 	def __init__(self, _internal = 0):
@@ -40,4 +41,4 @@ class TaskHistoryData:
 		return ProgramType(self._instance.ProgramType)
 	@program_type.setter
 	def program_type(self, value: ProgramType):
-		self._instance.ProgramType = value
+		self._instance.ProgramType = program_type(int(value))

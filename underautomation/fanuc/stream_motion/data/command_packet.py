@@ -6,6 +6,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.StreamMotion.Data import CommandPacket as command_packet
+from UnderAutomation.Fanuc.StreamMotion.Data import DataStyle as data_style
+from UnderAutomation.Fanuc.StreamMotion.Data import IOType as io_type
 
 class CommandPacket:
 	def __init__(self, dataStyle: DataStyle, motionData: MotionData, _internal = 0):
@@ -24,7 +26,7 @@ class CommandPacket:
 		return IOType(self._instance.ReadIOType)
 	@read_io_type.setter
 	def read_io_type(self, value: IOType):
-		self._instance.ReadIOType = value
+		self._instance.ReadIOType = io_type(int(value))
 	@property
 	def read_io_index(self) -> int:
 		return self._instance.ReadIOIndex
@@ -42,13 +44,13 @@ class CommandPacket:
 		return DataStyle(self._instance.DataStyle)
 	@data_style.setter
 	def data_style(self, value: DataStyle):
-		self._instance.DataStyle = value
+		self._instance.DataStyle = data_style(int(value))
 	@property
 	def write_io_type(self) -> IOType:
 		return IOType(self._instance.WriteIOType)
 	@write_io_type.setter
 	def write_io_type(self, value: IOType):
-		self._instance.WriteIOType = value
+		self._instance.WriteIOType = io_type(int(value))
 	@property
 	def write_io_index(self) -> int:
 		return self._instance.WriteIOIndex

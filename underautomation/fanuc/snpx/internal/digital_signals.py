@@ -7,6 +7,9 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Snpx.Internal import DigitalSignals as digital_signals
+from UnderAutomation.Fanuc.Snpx.Internal import SegmentSelector as segment_selector
+from UnderAutomation.Fanuc.Snpx.Internal import SegmentOffset as segment_offset
+from UnderAutomation.Fanuc.Snpx.Internal import SegmentName as segment_name
 
 class DigitalSignals(SnpxElements2[bool, int]):
 	def __init__(self, _internal = 0):

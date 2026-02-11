@@ -6,6 +6,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.List import ErrorListReader as error_list_reader
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class ErrorListReader(FileReader1[ErrorList]):
 	def __init__(self, _internal = 0):
@@ -14,4 +15,4 @@ class ErrorListReader(FileReader1[ErrorList]):
 		else:
 			self._instance = _internal
 	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str="None") -> ErrorList:
-		return ErrorList(self._instance.ReadFile(fileStream, language, fileName))
+		return ErrorList(self._instance.ReadFile(fileStream, languages(int(language)), fileName))

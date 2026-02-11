@@ -6,6 +6,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Telnet import TaskInformationResult as task_information_result
+from UnderAutomation.Fanuc.Common import TaskStatus as task_status
+from UnderAutomation.Fanuc.Common import ProgramType as program_type
 
 class TaskInformationResult(Result):
 	def __init__(self, _internal = 0):
@@ -14,7 +16,7 @@ class TaskInformationResult(Result):
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def task_name(self) -> str:
 		return self._instance.TaskName

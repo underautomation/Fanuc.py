@@ -14,7 +14,7 @@ class GenericVariableFile(IGenericVariableType, IFanucContent):
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	def get_field(self, name: str) -> GenericVariable:
 		return GenericVariable(self._instance.GetField(name))
 	def generate_va(self, stream: typing.Any) -> None:

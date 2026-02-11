@@ -3,8 +3,8 @@ from underautomation.fanuc.common.joints_position import JointsPosition
 from underautomation.fanuc.common.extended_cartesian_position import ExtendedCartesianPosition
 from underautomation.fanuc.common.cartesian_position import CartesianPosition
 from underautomation.fanuc.snpx.assignment.position_registers_batch_assignment import PositionRegistersBatchAssignment
-from underautomation.fanuc.snpx.internal.snpx_writable_assignable_indexable_elements_2 import SnpxWritableAssignableIndexableElements2
 from underautomation.fanuc.common.position import Position
+from underautomation.fanuc.snpx.internal.snpx_writable_assignable_indexable_elements_2 import SnpxWritableAssignableIndexableElements2
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
@@ -20,3 +20,5 @@ class PositionRegisters(SnpxWritableAssignableIndexableElements2[Position, Posit
 		self._instance.Write(index, cartesianPosition._instance if cartesianPosition else None)
 	def create_batch_assignment(self, startIndex: int, count: int) -> PositionRegistersBatchAssignment:
 		return PositionRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+	def read(self, index: int) -> Position:
+		return Position(None, None, None, None, self._instance.Read(index))

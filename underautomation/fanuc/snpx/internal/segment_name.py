@@ -4,21 +4,27 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Fanuc.Snpx.Internal import SegmentName as segment_name
 
 class SegmentName(int):
-	SDI = segment_name.SDI
-	SDO = segment_name.SDO
-	RDI = segment_name.RDI
-	RDO = segment_name.RDO
-	UI = segment_name.UI
-	UO = segment_name.UO
-	SI = segment_name.SI
-	SO = segment_name.SO
-	WI = segment_name.WI
-	WO = segment_name.WO
-	WSI = segment_name.WSI
-	PMC_K = segment_name.PMC_K
-	PMC_R = segment_name.PMC_R
-	AI = segment_name.AI
-	AO = segment_name.AO
-	GI = segment_name.GI
-	GO = segment_name.GO
-	PMC_D = segment_name.PMC_D
+	SDI = int(segment_name.SDI)
+	SDO = int(segment_name.SDO)
+	RDI = int(segment_name.RDI)
+	RDO = int(segment_name.RDO)
+	UI = int(segment_name.UI)
+	UO = int(segment_name.UO)
+	SI = int(segment_name.SI)
+	SO = int(segment_name.SO)
+	WI = int(segment_name.WI)
+	WO = int(segment_name.WO)
+	WSI = int(segment_name.WSI)
+	PMC_K = int(segment_name.PMC_K)
+	PMC_R = int(segment_name.PMC_R)
+	AI = int(segment_name.AI)
+	AO = int(segment_name.AO)
+	GI = int(segment_name.GI)
+	GO = int(segment_name.GO)
+	PMC_D = int(segment_name.PMC_D)
+
+	def __repr__(self):
+		for name, value in vars(SegmentName).items():
+			if not name.startswith('_') and isinstance(value, int) and value == self:
+				return name
+		return str(int(self))

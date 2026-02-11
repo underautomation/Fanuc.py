@@ -12,6 +12,8 @@ class Position:
 			self._instance = position(userFrame, userTool, jointsPosition, cartesianPosition)
 		else:
 			self._instance = _internal
+	def __repr__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def user_frame(self) -> int:
 		return self._instance.UserFrame

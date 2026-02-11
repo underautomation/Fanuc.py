@@ -15,6 +15,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Internal import FtpClientBase as ftp_client_base
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class FtpClientBase:
 	def __init__(self, _internal = 0):
@@ -50,7 +51,7 @@ class FtpClientBase:
 		return Languages(self._instance.Language)
 	@language.setter
 	def language(self, value: Languages):
-		self._instance.Language = value
+		self._instance.Language = languages(int(value))
 	@property
 	def connected(self) -> bool:
 		return self._instance.Connected

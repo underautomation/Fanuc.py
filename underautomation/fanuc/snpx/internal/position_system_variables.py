@@ -2,8 +2,8 @@ import typing
 from underautomation.fanuc.common.joints_position import JointsPosition
 from underautomation.fanuc.common.extended_cartesian_position import ExtendedCartesianPosition
 from underautomation.fanuc.common.cartesian_position import CartesianPosition
-from underautomation.fanuc.snpx.internal.snpx_writable_assignable_elements_3 import SnpxWritableAssignableElements3
 from underautomation.fanuc.common.position import Position
+from underautomation.fanuc.snpx.internal.snpx_writable_assignable_elements_3 import SnpxWritableAssignableElements3
 from underautomation.fanuc.snpx.assignment.position_system_variables_batch_assignment import PositionSystemVariablesBatchAssignment
 import clr
 import os
@@ -18,3 +18,5 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 			self._instance = _internal
 	def write(self, variable: str, cartesianPosition: CartesianPosition) -> None:
 		self._instance.Write(variable, cartesianPosition._instance if cartesianPosition else None)
+	def read(self, index: str) -> Position:
+		return Position(None, None, None, None, self._instance.Read(index))

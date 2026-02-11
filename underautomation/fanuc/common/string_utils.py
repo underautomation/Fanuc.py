@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Common import StringUtils as string_utils
+from UnderAutomation.Fanuc.Common import Languages as languages
 
 class StringUtils:
 	def __init__(self, _internal = 0):
@@ -13,4 +14,4 @@ class StringUtils:
 			self._instance = _internal
 	@staticmethod
 	def get_encoding(language: Languages) -> typing.Any:
-		return string_utils.GetEncoding(language)
+		return string_utils.GetEncoding(languages(int(language)))

@@ -11,6 +11,8 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.StreamMotion.Internal import StreamMotionClientBase as stream_motion_client_base
+from UnderAutomation.Fanuc.StreamMotion.Data import IOType as io_type
+from UnderAutomation.Fanuc.StreamMotion.Data import ThresholdType as threshold_type
 
 class StreamMotionClientBase:
 	def __init__(self, _internal = 0):
@@ -37,11 +39,11 @@ class StreamMotionClientBase:
 	def send_command(self, command: CommandPacket) -> None:
 		self._instance.SendCommand(command._instance if command else None)
 	def send_joint_command(self, jointPositions: MotionData, readIOType: IOType, readIOIndex: int, readIOMask: int, isLastData: bool=False) -> None:
-		self._instance.SendJointCommand(jointPositions._instance if jointPositions else None, readIOType, readIOIndex, readIOMask, isLastData)
+		self._instance.SendJointCommand(jointPositions._instance if jointPositions else None, io_type(int(readIOType)), readIOIndex, readIOMask, isLastData)
 	def send_cartesian_command(self, cartesianPosition: MotionData, isLastData: bool=False) -> None:
 		self._instance.SendCartesianCommand(cartesianPosition._instance if cartesianPosition else None, isLastData)
 	def request_threshold(self, axisNumber: int, thresholdType: ThresholdType) -> AckPacket:
-		return AckPacket(self._instance.RequestThreshold(axisNumber, thresholdType))
+		return AckPacket(self._instance.RequestThreshold(axisNumber, threshold_type(int(thresholdType))))
 	@property
 	def ip(self) -> str:
 		return self._instance.Ip

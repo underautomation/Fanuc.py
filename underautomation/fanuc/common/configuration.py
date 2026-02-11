@@ -7,6 +7,10 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Common import Configuration as configuration
+from UnderAutomation.Fanuc.Common import WristFlip as wrist_flip
+from UnderAutomation.Fanuc.Common import ArmUpDown as arm_up_down
+from UnderAutomation.Fanuc.Common import ArmLeftRight as arm_left_right
+from UnderAutomation.Fanuc.Common import ArmFrontBack as arm_front_back
 
 class Configuration:
 	def __init__(self, wristFlip: WristFlip, armUpDown: ArmUpDown, armLeftRight: ArmLeftRight, armFrontBack: ArmFrontBack, turnAxis1: int, turnAxis2: int, turnAxis3: int, _internal = 0):
@@ -15,7 +19,7 @@ class Configuration:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	def from_string(self, value: str) -> None:
 		self._instance.FromString(value)
 	@property
@@ -26,25 +30,25 @@ class Configuration:
 		return WristFlip(self._instance.WristFlip)
 	@wrist_flip.setter
 	def wrist_flip(self, value: WristFlip):
-		self._instance.WristFlip = value
+		self._instance.WristFlip = wrist_flip(int(value))
 	@property
 	def arm_up_down(self) -> ArmUpDown:
 		return ArmUpDown(self._instance.ArmUpDown)
 	@arm_up_down.setter
 	def arm_up_down(self, value: ArmUpDown):
-		self._instance.ArmUpDown = value
+		self._instance.ArmUpDown = arm_up_down(int(value))
 	@property
 	def arm_left_right(self) -> ArmLeftRight:
 		return ArmLeftRight(self._instance.ArmLeftRight)
 	@arm_left_right.setter
 	def arm_left_right(self, value: ArmLeftRight):
-		self._instance.ArmLeftRight = value
+		self._instance.ArmLeftRight = arm_left_right(int(value))
 	@property
 	def arm_front_back(self) -> ArmFrontBack:
 		return ArmFrontBack(self._instance.ArmFrontBack)
 	@arm_front_back.setter
 	def arm_front_back(self, value: ArmFrontBack):
-		self._instance.ArmFrontBack = value
+		self._instance.ArmFrontBack = arm_front_back(int(value))
 	@property
 	def turn_axis4(self) -> int:
 		return self._instance.TurnAxis4

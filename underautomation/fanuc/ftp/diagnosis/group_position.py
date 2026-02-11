@@ -21,7 +21,7 @@ class GroupPosition:
 		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.JointsPosition)
 	@property
 	def user_frame_positions(self) -> typing.List[CartesianPositionWithUserFrame]:
-		return [CartesianPositionWithUserFrame(x) for x in self._instance.UserFramePositions]
+		return [CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, x) for x in self._instance.UserFramePositions]
 	@property
 	def world_positions(self) -> typing.List[CartesianPositionWithTool]:
-		return [CartesianPositionWithTool(x) for x in self._instance.WorldPositions]
+		return [CartesianPositionWithTool(None, None, None, None, None, None, None, x) for x in self._instance.WorldPositions]

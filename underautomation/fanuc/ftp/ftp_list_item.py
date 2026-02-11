@@ -1,9 +1,11 @@
 import typing
+from datetime import datetime, timedelta
 from underautomation.fanuc.ftp.ftp_file_system_object_type import FtpFileSystemObjectType
 import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp import FtpListItem as ftp_list_item
+from UnderAutomation.Fanuc.Ftp import FtpFileSystemObjectType as ftp_file_system_object_type
 
 class FtpListItem:
 	def __init__(self, _internal = 0):
@@ -18,8 +20,8 @@ class FtpListItem:
 	def chmod(self) -> int:
 		return self._instance.Chmod
 	@property
-	def created(self) -> typing.Any:
-		return self._instance.Created
+	def created(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.Created.Ticks // 10)
 	@property
 	def full_name(self) -> str:
 		return self._instance.FullName
@@ -27,8 +29,8 @@ class FtpListItem:
 	def name(self) -> str:
 		return self._instance.Name
 	@property
-	def modified(self) -> typing.Any:
-		return self._instance.Modified
+	def modified(self) -> datetime:
+		return datetime(1, 1, 1) + timedelta(microseconds=self._instance.Modified.Ticks // 10)
 	@property
 	def type(self) -> FtpFileSystemObjectType:
 		return FtpFileSystemObjectType(self._instance.Type)

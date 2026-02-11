@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.StreamMotion.Data import IOReadResult as io_read_result
+from UnderAutomation.Fanuc.StreamMotion.Data import IOType as io_type
 
 class IOReadResult:
 	def __init__(self, _internal = 0):
@@ -12,7 +13,7 @@ class IOReadResult:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def type(self) -> IOType:
 		return IOType(self._instance.Type)

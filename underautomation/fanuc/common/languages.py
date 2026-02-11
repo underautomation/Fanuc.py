@@ -4,6 +4,12 @@ clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", 
 from UnderAutomation.Fanuc.Common import Languages as languages
 
 class Languages(int):
-	English = languages.English
-	Japanese = languages.Japanese
-	Chinese = languages.Chinese
+	English = int(languages.English)
+	Japanese = int(languages.Japanese)
+	Chinese = int(languages.Chinese)
+
+	def __repr__(self):
+		for name, value in vars(Languages).items():
+			if not name.startswith('_') and isinstance(value, int) and value == self:
+				return name
+		return str(int(self))

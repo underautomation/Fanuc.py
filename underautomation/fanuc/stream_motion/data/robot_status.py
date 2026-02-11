@@ -4,6 +4,7 @@ import clr
 import os
 clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.StreamMotion.Data import RobotStatus as robot_status
+from UnderAutomation.Fanuc.StreamMotion.Data import RobotStatusFlags as robot_status_flags
 
 class RobotStatus:
 	def __init__(self, _internal = 0):
@@ -12,7 +13,7 @@ class RobotStatus:
 		else:
 			self._instance = _internal
 	def __repr__(self):
-		return self._instance.ToString()
+		return self._instance.ToString() if self._instance is not None else ""
 	@property
 	def raw_value(self) -> int:
 		return self._instance.RawValue
