@@ -82,6 +82,13 @@ pip install UnderAutomation.Fanuc
 
 That's it! All dependencies (including `pythonnet`) are installed automatically.
 
+On **Linux**, you should also install .NET Core and set environment variable PYTHONNET_RUNTIME to coreclr :
+
+```bash
+sudo apt-get install -y dotnet-runtime-8.0
+PYTHONNET_RUNTIME=coreclr
+```
+
 > **Alternative: install from source**
 >
 > ```bash
