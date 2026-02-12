@@ -110,7 +110,7 @@ from underautomation.fanuc.common.languages import Languages
 robot = FanucRobot()
 
 # Connect (replace with your robot's IP address)
-params = ConnectionParameters('\\\\192.168.8.129\\Users\\fg\\Documents\\My Workcells\\CRX 10iA L\\Robot_1')
+params = ConnectionParameters('192.168.0.1')
 
 # Set the controller language among English, Japanese and Chinese (optional, defaults to English)
 params.language = Languages.English
