@@ -1,15 +1,7 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Rmi.Data import TerminationType as termination_type
+from enum import IntEnum
 
-class TerminationType(int):
-	Fine = int(termination_type.Fine)
-	Cnt = int(termination_type.Cnt)
-	Cr = int(termination_type.Cr)
-
-	def __repr__(self):
-		for name, value in vars(TerminationType).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class TerminationType(IntEnum):
+	'''Termination type for motion.'''
+	Fine = 0 # FINE termination; precise stop.
+	Cnt = 1 # Continuous termination; blend motions (1-100).
+	Cr = 2 # Constant path mode (requires option).

@@ -1,15 +1,7 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Kinematics import KinematicsCategory as kinematics_category
+from enum import IntEnum
 
-class KinematicsCategory(int):
-	Invalid = int(kinematics_category.Invalid)
-	Crx = int(kinematics_category.Crx)
-	Opw = int(kinematics_category.Opw)
-
-	def __repr__(self):
-		for name, value in vars(KinematicsCategory).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class KinematicsCategory(IntEnum):
+	'''Category of kinematics model for a robot arm.'''
+	Invalid = 0 # Invalid or unsupported kinematics configuration.
+	Crx = 1 # CRX collaborative robot kinematics.
+	Opw = 2 # OPW (ortho-parallel wrist) kinematics for standard industrial robots.

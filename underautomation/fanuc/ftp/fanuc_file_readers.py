@@ -14,35 +14,58 @@ from underautomation.fanuc.ftp.diagnosis.safety_status import SafetyStatus
 from underautomation.fanuc.ftp.diagnosis.safety_status_parser import SafetyStatusParser
 from underautomation.fanuc.ftp.diagnosis.program_states import ProgramStates
 from underautomation.fanuc.ftp.diagnosis.program_states_parser import ProgramStatesParser
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp import FanucFileReaders as fanuc_file_readers
 from UnderAutomation.Fanuc.Common import Languages as languages
 
 class FanucFileReaders:
+	'''Contains static functions to decode Fanuc files (variables, diagnosis, listing, ...)'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = fanuc_file_readers()
 		else:
 			self._instance = _internal
+
 	@staticmethod
 	def read_file(fileStream: typing.Any, fileName: str, language: Languages) -> IFanucContent:
+		'''Read any file by path on disc, recognize it by name and decode it'''
 		return IFanucContent(fanuc_file_readers.ReadFile(fileStream, fileName, languages(int(language))))
+
 	@property
 	def readers(self) -> typing.List[IFileReader1]:
+		'''Get the collection of all parsers'''
 		return [IFileReader1(x) for x in self._instance.Readers]
 
-FanucFileReaders.variable_reader = FanucFileReaders(fanuc_file_readers.VariableReader)
+	def __str__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 
-FanucFileReaders.error_list_reader = FanucFileReaders(fanuc_file_readers.ErrorListReader)
+	def __repr__(self):
+		return self.__str__()
 
-FanucFileReaders.summary_diagnostic_reader = FanucFileReaders(fanuc_file_readers.SummaryDiagnosticReader)
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, FanucFileReaders):
+			NotImplemented
+		return self._instance.Equals(other._instance)
 
-FanucFileReaders.current_position_reader = FanucFileReaders(fanuc_file_readers.CurrentPositionReader)
+	def __hash__(self) -> int:
+		return self._instance.GetHashCode() if self._instance is not None else 0
 
-FanucFileReaders.io_state_reader = FanucFileReaders(fanuc_file_readers.IOStateReader)
+# Helper to read variable files *.va
+FanucFileReaders.VariableReader = VariableReader(fanuc_file_readers.VariableReader)
 
-FanucFileReaders.safety_status_reader = FanucFileReaders(fanuc_file_readers.SafetyStatusReader)
+# Helper to read error files like errall.ls
+FanucFileReaders.ErrorListReader = ErrorListReader(fanuc_file_readers.ErrorListReader)
 
-FanucFileReaders.program_states = FanucFileReaders(fanuc_file_readers.ProgramStates)
+# Helper to read summary diagnosis file summary.dg
+FanucFileReaders.SummaryDiagnosticReader = SummaryDiagnosisReader(fanuc_file_readers.SummaryDiagnosticReader)
+
+# Decode current position file curpos.dg
+FanucFileReaders.CurrentPositionReader = DiagnosisReader2[CurrentPosition, CurrentPositionReader](fanuc_file_readers.CurrentPositionReader)
+
+# Decode IO Status file iostate.dg
+FanucFileReaders.IOStateReader = DiagnosisReader2[IOState, IOStateParser](fanuc_file_readers.IOStateReader)
+
+# Decode IO Status file iostate.dg
+FanucFileReaders.SafetyStatusReader = DiagnosisReader2[SafetyStatus, SafetyStatusParser](fanuc_file_readers.SafetyStatusReader)
+
+# Decode task and program states prgstate.dg
+FanucFileReaders.ProgramStates = DiagnosisReader2[ProgramStates, ProgramStatesParser](fanuc_file_readers.ProgramStates)

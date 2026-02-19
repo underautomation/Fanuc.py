@@ -1,15 +1,7 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Rmi.Data import RmiMessageKind as rmi_message_kind
+from enum import IntEnum
 
-class RmiMessageKind(int):
-	Communication = int(rmi_message_kind.Communication)
-	Command = int(rmi_message_kind.Command)
-	Instruction = int(rmi_message_kind.Instruction)
-
-	def __repr__(self):
-		for name, value in vars(RmiMessageKind).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class RmiMessageKind(IntEnum):
+	'''Identifies the top-level message kind sent to the controller. Must be the first key according to the RMI protocol.'''
+	Communication = 0 # Communication packet (FRC_Connect / FRC_Disconnect).
+	Command = 1 # Administrative command (e.g., FRC_Initialize, FRC_Reset).
+	Instruction = 2 # Instruction that appends a new TP line to the RMI_MOVE program.

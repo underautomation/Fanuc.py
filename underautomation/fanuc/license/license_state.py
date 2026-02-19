@@ -1,18 +1,10 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.License import LicenseState as license_state
+from enum import IntEnum
 
-class LicenseState(int):
-	Invalid = int(license_state.Invalid)
-	Trial = int(license_state.Trial)
-	ExtraTrial = int(license_state.ExtraTrial)
-	Expired = int(license_state.Expired)
-	MaintenanceNeeded = int(license_state.MaintenanceNeeded)
-	Licensed = int(license_state.Licensed)
-
-	def __repr__(self):
-		for name, value in vars(LicenseState).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class LicenseState(IntEnum):
+	'''States that can take a license'''
+	Invalid = 0 # The pair License Identifier and License Key are incompatible, you cannot use the library
+	Trial = 1 # The library is in a trial period, you can use the library
+	ExtraTrial = 2 # The library is in an extra trial period, you can use the library
+	Expired = 3 # The trial period as expired, you no more can use the library
+	MaintenanceNeeded = 4 # Your license does not allow you to use such a recent release. Please buy maintenance to use this version
+	Licensed = 5 # Congratulations, the library is licensed.

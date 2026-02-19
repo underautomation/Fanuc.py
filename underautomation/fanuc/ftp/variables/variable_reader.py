@@ -39,93 +39,110 @@ from underautomation.fanuc.ftp.variables.system_file import SystemFile
 from underautomation.fanuc.ftp.variables.sysuif_file import SysuifFile
 from underautomation.fanuc.ftp.variables.tpsnap_file import TpsnapFile
 from underautomation.fanuc.ftp.variables.vcmrinit_file import VcmrinitFile
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Variables import VariableReader as variable_reader
 from UnderAutomation.Fanuc.Common import Languages as languages
 
 class VariableReader(FileReader1[GenericVariableFile]):
+	'''Reader for Fanuc variable files (*.va)'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = variable_reader()
 		else:
 			self._instance = _internal
+
 	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> GenericVariableFile:
 		return GenericVariableFile(self._instance.ReadFile(fileStream, languages(int(language)), fileName))
+
 	@staticmethod
 	def read_variable_file(fileStream: typing.Any, fileName: str, language: Languages) -> GenericVariableFile:
+		'''Reads and parses a variable file from a stream'''
 		return GenericVariableFile(variable_reader.ReadVariableFile(fileStream, fileName, languages(int(language))))
+
 	@staticmethod
 	def parse_variable_file(stream: typing.Any, language: Languages) -> typing.List[GenericVariable]:
+		'''Parses all variables from a stream'''
 		return [GenericVariable(x) for x in variable_reader.ParseVariableFile(stream, languages(int(language)))]
 
-VariableReader.aavmmain_file = VariableReader(variable_reader.AavmmainFile)
+	def __str__(self):
+		return self._instance.ToString() if self._instance is not None else ""
 
-VariableReader.bicsetup_file = VariableReader(variable_reader.BicsetupFile)
+	def __repr__(self):
+		return self.__str__()
 
-VariableReader.cbparam_file = VariableReader(variable_reader.CbparamFile)
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, VariableReader):
+			NotImplemented
+		return self._instance.Equals(other._instance)
 
-VariableReader.cellio_file = VariableReader(variable_reader.CellioFile)
+	def __hash__(self) -> int:
+		return self._instance.GetHashCode() if self._instance is not None else 0
 
-VariableReader.comset_file = VariableReader(variable_reader.ComsetFile)
+VariableReader.AavmmainFile = VariableReader1[AavmmainFile](variable_reader.AavmmainFile)
 
-VariableReader.diocfgsv_file = VariableReader(variable_reader.DiocfgsvFile)
+VariableReader.BicsetupFile = VariableReader1[BicsetupFile](variable_reader.BicsetupFile)
 
-VariableReader.gemdata_file = VariableReader(variable_reader.GemdataFile)
+VariableReader.CbparamFile = VariableReader1[CbparamFile](variable_reader.CbparamFile)
 
-VariableReader.htcolrec_file = VariableReader(variable_reader.HtcolrecFile)
+VariableReader.CellioFile = VariableReader1[CellioFile](variable_reader.CellioFile)
 
-VariableReader.httpkcl_file = VariableReader(variable_reader.HttpkclFile)
+VariableReader.ComsetFile = VariableReader1[ComsetFile](variable_reader.ComsetFile)
 
-VariableReader.irc_counter_file = VariableReader(variable_reader.IrcCounterFile)
+VariableReader.DiocfgsvFile = VariableReader1[DiocfgsvFile](variable_reader.DiocfgsvFile)
 
-VariableReader.irc_msg_file = VariableReader(variable_reader.IrcMsgFile)
+VariableReader.GemdataFile = VariableReader1[GemdataFile](variable_reader.GemdataFile)
 
-VariableReader.irc_status_file = VariableReader(variable_reader.IrcStatusFile)
+VariableReader.HtcolrecFile = VariableReader1[HtcolrecFile](variable_reader.HtcolrecFile)
 
-VariableReader.irc_stlabel_file = VariableReader(variable_reader.IrcStlabelFile)
+VariableReader.HttpkclFile = VariableReader1[HttpkclFile](variable_reader.HttpkclFile)
 
-VariableReader.klaction_file = VariableReader(variable_reader.KlactionFile)
+VariableReader.IrcCounterFile = VariableReader1[IrcCounterFile](variable_reader.IrcCounterFile)
 
-VariableReader.mixlogic_file = VariableReader(variable_reader.MixlogicFile)
+VariableReader.IrcMsgFile = VariableReader1[IrcMsgFile](variable_reader.IrcMsgFile)
 
-VariableReader.mtparam_file = VariableReader(variable_reader.MtparamFile)
+VariableReader.IrcStatusFile = VariableReader1[IrcStatusFile](variable_reader.IrcStatusFile)
 
-VariableReader.numreg_file = VariableReader(variable_reader.NumregFile)
+VariableReader.IrcStlabelFile = VariableReader1[IrcStlabelFile](variable_reader.IrcStlabelFile)
 
-VariableReader.palreg_file = VariableReader(variable_reader.PalregFile)
+VariableReader.KlactionFile = VariableReader1[KlactionFile](variable_reader.KlactionFile)
 
-VariableReader.posreg_file = VariableReader(variable_reader.PosregFile)
+VariableReader.MixlogicFile = VariableReader1[MixlogicFile](variable_reader.MixlogicFile)
 
-VariableReader.strreg_file = VariableReader(variable_reader.StrregFile)
+VariableReader.MtparamFile = VariableReader1[MtparamFile](variable_reader.MtparamFile)
 
-VariableReader.swiupdt_file = VariableReader(variable_reader.SwiupdtFile)
+VariableReader.NumregFile = VariableReader1[NumregFile](variable_reader.NumregFile)
 
-VariableReader.sycldint_file = VariableReader(variable_reader.SycldintFile)
+VariableReader.PalregFile = VariableReader1[PalregFile](variable_reader.PalregFile)
 
-VariableReader.symotn_file = VariableReader(variable_reader.SymotnFile)
+VariableReader.PosregFile = VariableReader1[PosregFile](variable_reader.PosregFile)
 
-VariableReader.synosave_file = VariableReader(variable_reader.SynosaveFile)
+VariableReader.StrregFile = VariableReader1[StrregFile](variable_reader.StrregFile)
 
-VariableReader.sysframe_file = VariableReader(variable_reader.SysframeFile)
+VariableReader.SwiupdtFile = VariableReader1[SwiupdtFile](variable_reader.SwiupdtFile)
 
-VariableReader.sysfsac_file = VariableReader(variable_reader.SysfsacFile)
+VariableReader.SycldintFile = VariableReader1[SycldintFile](variable_reader.SycldintFile)
 
-VariableReader.syshost_file = VariableReader(variable_reader.SyshostFile)
+VariableReader.SymotnFile = VariableReader1[SymotnFile](variable_reader.SymotnFile)
 
-VariableReader.sysmacro_file = VariableReader(variable_reader.SysmacroFile)
+VariableReader.SynosaveFile = VariableReader1[SynosaveFile](variable_reader.SynosaveFile)
 
-VariableReader.sysmast_file = VariableReader(variable_reader.SysmastFile)
+VariableReader.SysframeFile = VariableReader1[SysframeFile](variable_reader.SysframeFile)
 
-VariableReader.syspass_file = VariableReader(variable_reader.SyspassFile)
+VariableReader.SysfsacFile = VariableReader1[SysfsacFile](variable_reader.SysfsacFile)
 
-VariableReader.sysservo_file = VariableReader(variable_reader.SysservoFile)
+VariableReader.SyshostFile = VariableReader1[SyshostFile](variable_reader.SyshostFile)
 
-VariableReader.system_file = VariableReader(variable_reader.SystemFile)
+VariableReader.SysmacroFile = VariableReader1[SysmacroFile](variable_reader.SysmacroFile)
 
-VariableReader.sysuif_file = VariableReader(variable_reader.SysuifFile)
+VariableReader.SysmastFile = VariableReader1[SysmastFile](variable_reader.SysmastFile)
 
-VariableReader.tpsnap_file = VariableReader(variable_reader.TpsnapFile)
+VariableReader.SyspassFile = VariableReader1[SyspassFile](variable_reader.SyspassFile)
 
-VariableReader.vcmrinit_file = VariableReader(variable_reader.VcmrinitFile)
+VariableReader.SysservoFile = VariableReader1[SysservoFile](variable_reader.SysservoFile)
+
+VariableReader.SystemFile = VariableReader1[SystemFile](variable_reader.SystemFile)
+
+VariableReader.SysuifFile = VariableReader1[SysuifFile](variable_reader.SysuifFile)
+
+VariableReader.TpsnapFile = VariableReader1[TpsnapFile](variable_reader.TpsnapFile)
+
+VariableReader.VcmrinitFile = VariableReader1[VcmrinitFile](variable_reader.VcmrinitFile)

@@ -1,27 +1,19 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Rmi.Data import InstructionVerb as instruction_verb
+from enum import IntEnum
 
-class InstructionVerb(int):
-	FRC_WaitDin = int(instruction_verb.FRC_WaitDin)
-	FRC_SetUFrame = int(instruction_verb.FRC_SetUFrame)
-	FRC_SetUTool = int(instruction_verb.FRC_SetUTool)
-	FRC_Wait = int(instruction_verb.FRC_Wait)
-	FRC_PayLoad = int(instruction_verb.FRC_PayLoad)
-	FRC_LinearMotion = int(instruction_verb.FRC_LinearMotion)
-	FRC_LinearRelative = int(instruction_verb.FRC_LinearRelative)
-	FRC_JointMotion = int(instruction_verb.FRC_JointMotion)
-	FRC_JointRelative = int(instruction_verb.FRC_JointRelative)
-	FRC_CircularMotion = int(instruction_verb.FRC_CircularMotion)
-	FRC_CircularRelative = int(instruction_verb.FRC_CircularRelative)
-	FRC_JointMotionJRep = int(instruction_verb.FRC_JointMotionJRep)
-	FRC_JointRelativeJRep = int(instruction_verb.FRC_JointRelativeJRep)
-	FRC_LinearMotionJRep = int(instruction_verb.FRC_LinearMotionJRep)
-	FRC_LinearRelativeJRep = int(instruction_verb.FRC_LinearRelativeJRep)
-
-	def __repr__(self):
-		for name, value in vars(InstructionVerb).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class InstructionVerb(IntEnum):
+	'''Instruction verbs that append to the TP program.'''
+	FRC_WaitDin = 0 # WAIT DI[x] = ON/OFF.
+	FRC_SetUFrame = 1 # UFRAME_NUM = n.
+	FRC_SetUTool = 2 # UTOOL_NUM = n.
+	FRC_Wait = 3 # WAIT t (sec).
+	FRC_PayLoad = 4 # PAYLOAD[n].
+	FRC_LinearMotion = 5 # Linear motion in Cartesian representation.
+	FRC_LinearRelative = 6 # Linear incremental motion in Cartesian representation.
+	FRC_JointMotion = 7 # Joint motion in Cartesian representation.
+	FRC_JointRelative = 8 # Joint incremental motion in Cartesian representation.
+	FRC_CircularMotion = 9 # Circular motion in Cartesian representation.
+	FRC_CircularRelative = 10 # Circular incremental motion in Cartesian representation.
+	FRC_JointMotionJRep = 11 # Joint motion specified by joint angles.
+	FRC_JointRelativeJRep = 12 # Joint incremental motion specified by joint angles.
+	FRC_LinearMotionJRep = 13 # Linear motion specified by joint angles.
+	FRC_LinearRelativeJRep = 14 # Linear incremental motion specified by joint angles.

@@ -1,33 +1,25 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Snpx.Internal import SegmentSelector as segment_selector
+from enum import IntEnum
 
-class SegmentSelector(int):
-	BIT_I = int(segment_selector.BIT_I)
-	BIT_Q = int(segment_selector.BIT_Q)
-	BIT_T = int(segment_selector.BIT_T)
-	BIT_M = int(segment_selector.BIT_M)
-	BIT_SA = int(segment_selector.BIT_SA)
-	BIT_SB = int(segment_selector.BIT_SB)
-	BIT_SC = int(segment_selector.BIT_SC)
-	BIT_S = int(segment_selector.BIT_S)
-	BIT_G = int(segment_selector.BIT_G)
-	BYTE_I = int(segment_selector.BYTE_I)
-	BYTE_Q = int(segment_selector.BYTE_Q)
-	BYTE_T = int(segment_selector.BYTE_T)
-	BYTE_M = int(segment_selector.BYTE_M)
-	BYTE_SA = int(segment_selector.BYTE_SA)
-	BYTE_SB = int(segment_selector.BYTE_SB)
-	BYTE_SC = int(segment_selector.BYTE_SC)
-	BYTE_G = int(segment_selector.BYTE_G)
-	WORD_R = int(segment_selector.WORD_R)
-	WORD_AI = int(segment_selector.WORD_AI)
-	WORD_AQ = int(segment_selector.WORD_AQ)
-	INIT = int(segment_selector.INIT)
-
-	def __repr__(self):
-		for name, value in vars(SegmentSelector).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class SegmentSelector(IntEnum):
+	'''Defines segment selector codes for SNPX memory access operations.'''
+	BIT_I = 70 # Bit-level input segment.
+	BIT_Q = 72 # Bit-level output segment.
+	BIT_T = 74 # Bit-level T segment.
+	BIT_M = 76 # Bit-level M segment.
+	BIT_SA = 78 # Bit-level SA segment.
+	BIT_SB = 80 # Bit-level SB segment.
+	BIT_SC = 82 # Bit-level SC segment.
+	BIT_S = 84 # Bit-level S segment.
+	BIT_G = 86 # Bit-level G segment.
+	BYTE_I = 16 # Byte-level input segment.
+	BYTE_Q = 18 # Byte-level output segment.
+	BYTE_T = 20 # Byte-level T segment.
+	BYTE_M = 22 # Byte-level M segment.
+	BYTE_SA = 26 # Byte-level SA segment.
+	BYTE_SB = 28 # Byte-level SB segment.
+	BYTE_SC = 30 # Byte-level SC segment.
+	BYTE_G = 56 # Byte-level G segment.
+	WORD_R = 8 # Word-level R segment for register access.
+	WORD_AI = 10 # Word-level AI segment for analog input.
+	WORD_AQ = 12 # Word-level AQ segment for analog output.
+	INIT = 1 # Selector used during connection initialization.

@@ -1,16 +1,8 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.StreamMotion.Data import RobotStatusFlags as robot_status_flags
+from enum import IntEnum
 
-class RobotStatusFlags(int):
-	ReadyForCommands = int(robot_status_flags.ReadyForCommands)
-	CommandReceived = int(robot_status_flags.CommandReceived)
-	SystemReady = int(robot_status_flags.SystemReady)
-	InMotion = int(robot_status_flags.InMotion)
-
-	def __repr__(self):
-		for name, value in vars(RobotStatusFlags).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class RobotStatusFlags(IntEnum):
+	'''Robot status flags from state packet'''
+	ReadyForCommands = 1 # Robot is ready to receive command packets
+	CommandReceived = 2 # Robot has received at least one command packet
+	SystemReady = 4 # System ready (SYSRDY)
+	InMotion = 8 # Robot is in motion

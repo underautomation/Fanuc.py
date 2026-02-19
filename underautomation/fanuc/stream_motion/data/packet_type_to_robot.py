@@ -1,16 +1,8 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.StreamMotion.Data import PacketTypeToRobot as packet_type_to_robot
+from enum import IntEnum
 
-class PacketTypeToRobot(int):
-	Start = int(packet_type_to_robot.Start)
-	Command = int(packet_type_to_robot.Command)
-	Stop = int(packet_type_to_robot.Stop)
-	Request = int(packet_type_to_robot.Request)
-
-	def __repr__(self):
-		for name, value in vars(PacketTypeToRobot).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class PacketTypeToRobot(IntEnum):
+	'''Stream Motion packet types for PC to Robot communication'''
+	Start = 0 # Start streaming motion
+	Command = 1 # Motion command packet
+	Stop = 2 # Stop streaming motion
+	Request = 3 # Request threshold information

@@ -1,26 +1,18 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.StreamMotion.Data import IOType as io_type
+from enum import IntEnum
 
-class IOType(int):
-	DI = int(io_type.DI)
-	DO = int(io_type.DO)
-	RI = int(io_type.RI)
-	RO = int(io_type.RO)
-	SI = int(io_type.SI)
-	SO = int(io_type.SO)
-	WI = int(io_type.WI)
-	WO = int(io_type.WO)
-	UI = int(io_type.UI)
-	UO = int(io_type.UO)
-	WSI = int(io_type.WSI)
-	WSO = int(io_type.WSO)
-	F = int(io_type.F)
-	M = int(io_type.M)
-
-	def __repr__(self):
-		for name, value in vars(IOType).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class IOType(IntEnum):
+	'''I/O types supported by Stream Motion protocol'''
+	DI = 1 # Digital Input
+	DO = 2 # Digital Output
+	RI = 8 # Robot Input
+	RO = 9 # Robot Output
+	SI = 11 # System Input
+	SO = 12 # System Output
+	WI = 16 # Weld Input
+	WO = 17 # Weld Output
+	UI = 20 # User Input
+	UO = 21 # User Output
+	WSI = 26 # Weld System Input
+	WSO = 27 # Weld System Output
+	F = 35 # Flag
+	M = 36 # Marker

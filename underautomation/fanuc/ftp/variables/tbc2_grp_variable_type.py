@@ -1,52 +1,90 @@
 import typing
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
 from UnderAutomation.Fanuc.Ftp.Variables import Tbc2GrpVariableType as tbc2_grp_variable_type
 
 class Tbc2GrpVariableType(GenericVariableType):
+	'''Describes the Fanuc type TBC2_GRP_T'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = tbc2_grp_variable_type()
 		else:
 			self._instance = _internal
+
 	@property
 	def enb_flim(self) -> bool:
+		'''Value of variable $ENB_FLIM'''
 		return self._instance.EnbFlim
+
 	@property
 	def lim_ftm1(self) -> int:
+		'''Value of variable $LIM_FTM1'''
 		return self._instance.LimFtm1
+
 	@property
 	def lim_ftm2(self) -> int:
+		'''Value of variable $LIM_FTM2'''
 		return self._instance.LimFtm2
+
 	@property
 	def tdc_flag(self) -> bool:
+		'''Value of variable $TDC_FLAG'''
 		return self._instance.TdcFlag
+
 	@property
 	def tdc_minf(self) -> int:
+		'''Value of variable $TDC_MINF'''
 		return self._instance.TdcMinf
+
 	@property
 	def tdc_minf2(self) -> int:
+		'''Value of variable $TDC_MINF2'''
 		return self._instance.TdcMinf2
+
 	@property
 	def tdc_thdist(self) -> float:
+		'''Value of variable $TDC_THDIST'''
 		return self._instance.TdcThdist
+
 	@property
 	def tdc_thspeed(self) -> float:
+		'''Value of variable $TDC_THSPEED'''
 		return self._instance.TdcThspeed
+
 	@property
 	def tdc_throt(self) -> float:
+		'''Value of variable $TDC_THROT'''
 		return self._instance.TdcThrot
+
 	@property
 	def reserve1(self) -> int:
+		'''Value of variable $RESERVE1'''
 		return self._instance.Reserve1
+
 	@property
 	def reserve2(self) -> int:
+		'''Value of variable $RESERVE2'''
 		return self._instance.Reserve2
+
 	@property
 	def reserve3(self) -> int:
+		'''Value of variable $RESERVE3'''
 		return self._instance.Reserve3
+
 	@property
 	def fanuc_internal_type_name(self) -> str:
+		'''Type Name on the robot'''
 		return self._instance.FanucInternalTypeName
+
+	def __str__(self):
+		return self._instance.ToString() if self._instance is not None else ""
+
+	def __repr__(self):
+		return self.__str__()
+
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, Tbc2GrpVariableType):
+			NotImplemented
+		return self._instance.Equals(other._instance)
+
+	def __hash__(self) -> int:
+		return self._instance.GetHashCode() if self._instance is not None else 0

@@ -1,15 +1,7 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Common import ProgramType as program_type
+from enum import IntEnum
 
-class ProgramType(int):
-	Unknown = int(program_type.Unknown)
-	Karel = int(program_type.Karel)
-	TP = int(program_type.TP)
-
-	def __repr__(self):
-		for name, value in vars(ProgramType).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class ProgramType(IntEnum):
+	'''Represents the type of a program.'''
+	Unknown = 0 # The program type is unknown.
+	Karel = 1 # The program is a Karel program, also known as PC (Programmable Control).
+	TP = 2 # The program is a TP (Teach Pendant) program.

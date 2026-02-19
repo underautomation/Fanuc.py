@@ -1,16 +1,8 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Rmi.Data import CommunicationVerb as communication_verb
+from enum import IntEnum
 
-class CommunicationVerb(int):
-	FRC_Connect = int(communication_verb.FRC_Connect)
-	FRC_Disconnect = int(communication_verb.FRC_Disconnect)
-	FRC_Terminate = int(communication_verb.FRC_Terminate)
-	FRC_SystemFault = int(communication_verb.FRC_SystemFault)
-
-	def __repr__(self):
-		for name, value in vars(CommunicationVerb).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class CommunicationVerb(IntEnum):
+	'''RMI communication verbs.'''
+	FRC_Connect = 0 # Request permission and the working data port from the controller.
+	FRC_Disconnect = 1 # Gracefully end an RMI session on the working data port.
+	FRC_Terminate = 2 # Sent by controller on idle timeout to close the session.
+	FRC_SystemFault = 3 # Sent by controller when a system fault pauses TP program.

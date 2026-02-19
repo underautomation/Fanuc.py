@@ -1,15 +1,7 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Common import Languages as languages
+from enum import IntEnum
 
-class Languages(int):
-	English = int(languages.English)
-	Japanese = int(languages.Japanese)
-	Chinese = int(languages.Chinese)
-
-	def __repr__(self):
-		for name, value in vars(Languages).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class Languages(IntEnum):
+	'''Languages supported by the Fanuc robots'''
+	English = 0 # For robots set to English language
+	Japanese = 1 # For robots set to Japanese language
+	Chinese = 2 # For robots set to Chinese language

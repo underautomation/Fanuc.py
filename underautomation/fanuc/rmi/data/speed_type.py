@@ -1,16 +1,8 @@
-import clr
-import os
-clr.AddReference(os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..",  'lib', 'UnderAutomation.Fanuc.dll')))
-from UnderAutomation.Fanuc.Rmi.Data import SpeedType as speed_type
+from enum import IntEnum
 
-class SpeedType(int):
-	MmSec = int(speed_type.MmSec)
-	InchMin = int(speed_type.InchMin)
-	Time = int(speed_type.Time)
-	Percent = int(speed_type.Percent)
-
-	def __repr__(self):
-		for name, value in vars(SpeedType).items():
-			if not name.startswith('_') and isinstance(value, int) and value == self:
-				return name
-		return str(int(self))
+class SpeedType(IntEnum):
+	'''Speed type selector for motion commands.'''
+	MmSec = 0 # Linear speed in millimeters per second.
+	InchMin = 1 # Linear speed in inches per minute.
+	Time = 2 # Duration-based speed (0.1 seconds unit for Linear/Circular, milliseconds for Joint).
+	Percent = 3 # Joint speed as percentage of maximum.
