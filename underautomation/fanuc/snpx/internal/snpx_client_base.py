@@ -1,5 +1,7 @@
 import typing
 from underautomation.fanuc.snpx.internal.numeric_registers import NumericRegisters
+from underautomation.fanuc.snpx.internal.numeric_registers_int32 import NumericRegistersInt32
+from underautomation.fanuc.snpx.internal.numeric_registers_int16 import NumericRegistersInt16
 from underautomation.fanuc.snpx.internal.position_registers import PositionRegisters
 from underautomation.fanuc.snpx.internal.string_registers import StringRegisters
 from underautomation.fanuc.snpx.internal.integer_system_variables import IntegerSystemVariables
@@ -65,8 +67,18 @@ class SnpxClientBase:
 
 	@property
 	def numeric_registers(self) -> NumericRegisters:
-		'''Number registers'''
+		'''Number registers R[] as floating point values'''
 		return NumericRegisters(self._instance.NumericRegisters)
+
+	@property
+	def numeric_registers_int32(self) -> NumericRegistersInt32:
+		'''Number registers R[] as 32-bit integer values'''
+		return NumericRegistersInt32(self._instance.NumericRegistersInt32)
+
+	@property
+	def numeric_registers_int16(self) -> NumericRegistersInt16:
+		'''Number registers R[] as 16-bit integer values'''
+		return NumericRegistersInt16(self._instance.NumericRegistersInt16)
 
 	@property
 	def position_registers(self) -> PositionRegisters:

@@ -1,24 +1,24 @@
 import typing
-from underautomation.fanuc.snpx.assignment.numeric_registers_batch_assignment import NumericRegistersBatchAssignment
+from underautomation.fanuc.snpx.assignment.numeric_registers_int32_batch_assignment import NumericRegistersInt32BatchAssignment
 from underautomation.fanuc.snpx.internal.numeric_registers_base_2 import NumericRegistersBase2
-from UnderAutomation.Fanuc.Snpx.Internal import NumericRegisters as numeric_registers
+from UnderAutomation.Fanuc.Snpx.Internal import NumericRegistersInt32 as numeric_registers_int32
 
-class NumericRegisters(NumericRegistersBase2[float, NumericRegistersBatchAssignment]):
-	'''Provides access to numeric registers as float (R[]) on the robot via SNPX.'''
+class NumericRegistersInt32(NumericRegistersBase2[int, NumericRegistersInt32BatchAssignment]):
+	'''Provides access to numeric registers as 32 bits integer (R[]) on the robot via SNPX.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
-			self._instance = numeric_registers()
+			self._instance = numeric_registers_int32()
 		else:
 			self._instance = _internal
 
-	def create_batch_assignment(self, startIndex: int, count: int) -> NumericRegistersBatchAssignment:
+	def create_batch_assignment(self, startIndex: int, count: int) -> NumericRegistersInt32BatchAssignment:
 		'''Creates a batch assignment for reading multiple numeric registers.
 
 		:param startIndex: The starting register index.
 		:param count: The number of consecutive registers.
 		:returns: A batch assignment for the specified range.
 		'''
-		return NumericRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+		return NumericRegistersInt32BatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
@@ -27,7 +27,7 @@ class NumericRegisters(NumericRegistersBase2[float, NumericRegistersBatchAssignm
 		return self.__str__()
 
 	def __eq__(self, other) -> bool:
-		if not isinstance(other, NumericRegisters):
+		if not isinstance(other, NumericRegistersInt32):
 			NotImplemented
 		return self._instance.Equals(other._instance)
 

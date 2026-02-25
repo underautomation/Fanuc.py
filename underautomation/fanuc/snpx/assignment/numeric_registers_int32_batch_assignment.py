@@ -1,20 +1,20 @@
 import typing
 from underautomation.fanuc.snpx.internal.batch_assignment_2 import BatchAssignment2
-from UnderAutomation.Fanuc.Snpx.Assignment import NumericRegistersBatchAssignment as numeric_registers_batch_assignment
+from UnderAutomation.Fanuc.Snpx.Assignment import NumericRegistersInt32BatchAssignment as numeric_registers_int32_batch_assignment
 
-class NumericRegistersBatchAssignment(BatchAssignment2[float, int]):
-	'''Batch assignment for reading multiple numeric registers at once as float'''
+class NumericRegistersInt32BatchAssignment(BatchAssignment2[int, int]):
+	'''Batch assignment for reading multiple numeric registers at once as 32-bit integers.'''
 	def __init__(self, _internal = 0):
-		'''Initializes a new instance of the NumericRegistersBatchAssignment class.'''
+		'''Initializes a new instance of the NumericRegistersInt32BatchAssignment class.'''
 		if(_internal == 0):
-			self._instance = numeric_registers_batch_assignment()
+			self._instance = numeric_registers_int32_batch_assignment()
 		else:
 			self._instance = _internal
 
-	def read(self) -> typing.List[float]:
+	def read(self) -> typing.List[int]:
 		'''Read all numeric registers assigned in this batch assignment.
 
-		:returns: Returns an array of float values representing the numeric registers
+		:returns: Returns an array of Int32 values representing the numeric registers
 		'''
 		return self._instance.Read()
 
@@ -25,7 +25,7 @@ class NumericRegistersBatchAssignment(BatchAssignment2[float, int]):
 		return self.__str__()
 
 	def __eq__(self, other) -> bool:
-		if not isinstance(other, NumericRegistersBatchAssignment):
+		if not isinstance(other, NumericRegistersInt32BatchAssignment):
 			NotImplemented
 		return self._instance.Equals(other._instance)
 

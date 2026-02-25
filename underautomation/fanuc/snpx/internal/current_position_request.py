@@ -17,7 +17,7 @@ class CurrentPositionRequest:
 
 	@property
 	def group(self) -> int:
-		'''Gets or sets the motion group number.'''
+		'''Gets or sets the motion group number. Starts from 1.'''
 		return self._instance.Group
 
 	@group.setter
@@ -26,7 +26,7 @@ class CurrentPositionRequest:
 
 	@property
 	def user_frame(self) -> int:
-		'''Gets or sets the user frame number.'''
+		'''Gets or sets the user frame number. Use 0 for World Frame'''
 		return self._instance.UserFrame
 
 	@user_frame.setter
