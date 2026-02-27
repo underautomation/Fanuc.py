@@ -4,7 +4,7 @@ from underautomation.fanuc.snpx.internal.robot_task_status import RobotTaskStatu
 from UnderAutomation.Fanuc.Snpx.Internal import CurrentTaskStatus as current_task_status
 
 class CurrentTaskStatus(SnpxAssignableElements2[RobotTaskStatus, int]):
-	'''Provides access to the current task (program) status on the robot via SNPX.'''
+	'''Provides access to the current task (program) status on the robot via SNPX. Index starts from 1.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = current_task_status()

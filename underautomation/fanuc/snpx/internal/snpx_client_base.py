@@ -12,6 +12,7 @@ from underautomation.fanuc.snpx.internal.digital_signals import DigitalSignals
 from underautomation.fanuc.snpx.internal.numeric_io import NumericIO
 from underautomation.fanuc.snpx.internal.flags import Flags
 from underautomation.fanuc.snpx.internal.current_position import CurrentPosition
+from underautomation.fanuc.snpx.internal.current_task_status import CurrentTaskStatus
 from underautomation.fanuc.snpx.internal.alarm_access import AlarmAccess
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.snpx.internal.assignment import Assignment
@@ -219,6 +220,11 @@ class SnpxClientBase:
 	def current_position(self) -> CurrentPosition:
 		'''Current position in world or user frame'''
 		return CurrentPosition(self._instance.CurrentPosition)
+
+	@property
+	def current_task_status(self) -> CurrentTaskStatus:
+		'''Current program tasks status. Index starts from 1.'''
+		return CurrentTaskStatus(self._instance.CurrentTaskStatus)
 
 	@property
 	def active_alarm(self) -> AlarmAccess:
