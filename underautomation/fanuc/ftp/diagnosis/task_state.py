@@ -52,7 +52,7 @@ class TaskState:
 
 	@history.setter
 	def history(self, value: typing.List[TaskHistoryData]):
-		self._instance.History = value
+		self._instance.History = [x._instance if x else None for x in value]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

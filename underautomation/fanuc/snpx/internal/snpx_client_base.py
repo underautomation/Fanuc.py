@@ -4,6 +4,7 @@ from underautomation.fanuc.snpx.internal.numeric_registers_int32 import NumericR
 from underautomation.fanuc.snpx.internal.numeric_registers_int16 import NumericRegistersInt16
 from underautomation.fanuc.snpx.internal.position_registers import PositionRegisters
 from underautomation.fanuc.snpx.internal.string_registers import StringRegisters
+from underautomation.fanuc.snpx.internal.string_registers_span import StringRegistersSpan
 from underautomation.fanuc.snpx.internal.integer_system_variables import IntegerSystemVariables
 from underautomation.fanuc.snpx.internal.real_system_variables import RealSystemVariables
 from underautomation.fanuc.snpx.internal.position_system_variables import PositionSystemVariables
@@ -14,6 +15,8 @@ from underautomation.fanuc.snpx.internal.flags import Flags
 from underautomation.fanuc.snpx.internal.current_position import CurrentPosition
 from underautomation.fanuc.snpx.internal.current_task_status import CurrentTaskStatus
 from underautomation.fanuc.snpx.internal.alarm_access import AlarmAccess
+from underautomation.fanuc.snpx.internal.comments import Comments
+from underautomation.fanuc.snpx.internal.simulation_status import SimulationStatus
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.snpx.internal.assignment import Assignment
 from UnderAutomation.Fanuc.Snpx.Internal import SnpxClientBase as snpx_client_base
@@ -90,6 +93,11 @@ class SnpxClientBase:
 	def string_registers(self) -> StringRegisters:
 		'''String registers'''
 		return StringRegisters(self._instance.StringRegisters)
+
+	@property
+	def string_registers_span(self) -> StringRegistersSpan:
+		'''String registers with control over start index and length'''
+		return StringRegistersSpan(self._instance.StringRegistersSpan)
 
 	@property
 	def integer_system_variables(self) -> IntegerSystemVariables:
@@ -235,6 +243,16 @@ class SnpxClientBase:
 	def alarm_history(self) -> AlarmAccess:
 		'''Alarm history'''
 		return AlarmAccess(self._instance.AlarmHistory)
+
+	@property
+	def comments(self) -> Comments:
+		'''Comments of registers, I/O signals and other data'''
+		return Comments(self._instance.Comments)
+
+	@property
+	def simulation_status(self) -> SimulationStatus:
+		'''I/O simulation status'''
+		return SimulationStatus(self._instance.SimulationStatus)
 
 	@property
 	def language(self) -> Languages:

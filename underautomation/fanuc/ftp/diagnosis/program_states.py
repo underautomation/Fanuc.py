@@ -24,7 +24,7 @@ class ProgramStates(IFanucContent):
 
 	@task_states.setter
 	def task_states(self, value: typing.List[TaskState]):
-		self._instance.TaskStates = value
+		self._instance.TaskStates = [x._instance if x else None for x in value]
 
 	@property
 	def name(self) -> str:
