@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType
 from UnderAutomation.Fanuc.Ftp.Variables import MndspMstVariableType as mndsp_mst_variable_type
 

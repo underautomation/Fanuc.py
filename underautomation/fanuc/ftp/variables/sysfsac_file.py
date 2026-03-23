@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.fsac_lst_variable_type import FsacLstVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 from UnderAutomation.Fanuc.Ftp.Variables import SysfsacFile as sysfsac_file

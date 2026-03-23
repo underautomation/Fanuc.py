@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Rmi.Data import Frame as frame
 
 class Frame:

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Rmi.Data import JointAngles as joint_angles
 
 class JointAngles:

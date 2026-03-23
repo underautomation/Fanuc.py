@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.adj_rtrq_variable_type import AdjRtrqVariableType
 from underautomation.fanuc.ftp.variables.ctrl_cab_variable_type import CtrlCabVariableType
 from underautomation.fanuc.ftp.variables.cartesian_position_variable import CartesianPositionVariable

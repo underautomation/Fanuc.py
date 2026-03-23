@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Rmi.Internal import RmiConnectParametersBase as rmi_connect_parameters_base
 
 class RmiConnectParametersBase:

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.snpx_assignable_elements_2 import SnpxAssignableElements2
 from UnderAutomation.Fanuc.Snpx.Internal import SnpxWritableAssignableElements as snpx_writable_assignable_elements_3
 

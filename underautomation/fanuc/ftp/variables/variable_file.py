@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Ftp.Variables import VariableFile as variable_file
 
 class VariableFile:

@@ -2,7 +2,7 @@ from enum import IntEnum
 
 class AlarmSeverity(IntEnum):
 	'''Represents the severity level of a robot alarm.'''
-	NONE = 128 # No severity.
+	NONE_ = 128 # No severity.
 	WARN = 0 # Warning level alarm.
 	PAUSE_L = 2 # Local pause level alarm.
 	PAUSE_G = 34 # Global pause level alarm.

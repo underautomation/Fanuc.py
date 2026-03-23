@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.stream_motion.data.io_type import IOType
 from UnderAutomation.Fanuc.StreamMotion.Data import IOReadResult as io_read_result
 from UnderAutomation.Fanuc.StreamMotion.Data import IOType as io_type

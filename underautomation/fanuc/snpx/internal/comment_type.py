@@ -21,3 +21,4 @@ class CommentType(IntEnum):
 	GO = 16 # Group Output.
 	AI = 17 # Analog Input.
 	AO = 18 # Analog Output.
+	Flag = 19 # Flag

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.joints_position import JointsPosition
 from UnderAutomation.Fanuc.Ftp.Variables import JointPositionVariable as joint_position_variable
 

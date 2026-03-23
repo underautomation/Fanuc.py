@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.xf_variable_type import XfVariableType
 from underautomation.fanuc.common.xyz_position import XYZPosition
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType

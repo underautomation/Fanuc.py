@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.rmi.internal.rmi_client_base import RmiClientBase
 from UnderAutomation.Fanuc.Rmi import RmiClient as rmi_client
 

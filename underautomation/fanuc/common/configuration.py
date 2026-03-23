@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.wrist_flip import WristFlip
 from underautomation.fanuc.common.arm_up_down import ArmUpDown
 from underautomation.fanuc.common.arm_left_right import ArmLeftRight

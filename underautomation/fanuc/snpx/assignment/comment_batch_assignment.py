@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.batch_assignment_2 import BatchAssignment2
 from underautomation.fanuc.snpx.internal.comment_data import CommentData
 from UnderAutomation.Fanuc.Snpx.Assignment import CommentBatchAssignment as comment_batch_assignment

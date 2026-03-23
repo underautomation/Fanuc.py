@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.snpx_writable_assignable_elements_3 import SnpxWritableAssignableElements3
 from underautomation.fanuc.snpx.assignment.string_system_variables_batch_assignment import StringSystemVariablesBatchAssignment
 from UnderAutomation.Fanuc.Snpx.Internal import StringSystemVariables as string_system_variables

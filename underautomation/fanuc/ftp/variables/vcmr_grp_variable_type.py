@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.camera_variable_type import CameraVariableType
 from underautomation.fanuc.ftp.variables.vcmr_trgt_variable_type import VcmrTrgtVariableType
 from underautomation.fanuc.ftp.variables.create_prg_variable_type import CreatePrgVariableType

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.armload_variable_type import ArmloadVariableType
 from underautomation.fanuc.ftp.variables.armload_p_variable_type import ArmloadPVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType

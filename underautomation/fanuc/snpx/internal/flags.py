@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.assignment.flag_batch_assignment import FlagBatchAssignment
 from underautomation.fanuc.snpx.internal.snpx_writable_assignable_indexable_elements_2 import SnpxWritableAssignableIndexableElements2
 from UnderAutomation.Fanuc.Snpx.Internal import Flags as flags

@@ -1,9 +1,14 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.cgtp.program_sub_type import ProgramSubType
+from underautomation.fanuc.cgtp.io_port_type import IoPortType
+from underautomation.fanuc.common.cartesian_position import CartesianPosition
+from underautomation.fanuc.common.joints_position import JointsPosition
 from UnderAutomation.Fanuc.Cgtp import CgtpClientBase as cgtp_client_base
 from UnderAutomation.Fanuc.Common import Languages as languages
 from UnderAutomation.Fanuc.Cgtp import ProgramSubType as program_sub_type
+from UnderAutomation.Fanuc.Cgtp import IoPortType as io_port_type
 
 class CgtpClientBase:
 	'''Base implementation for the CGTP Web Server client.'''
@@ -17,7 +22,7 @@ class CgtpClientBase:
 		'''Disconnect from the CGTP Web Server. After calling this method, the client must be reconnected before it can be used again.'''
 		self._instance.Disconnect()
 
-	def abort_task(self, progName: str="None") -> None:
+	def abort_task(self, progName: str=None) -> None:
 		'''Abort the task specified by progName. Set to null to abort all user tasks.'''
 		self._instance.AbortTask(progName)
 
@@ -80,7 +85,7 @@ class CgtpClientBase:
 		'''Set the sub-type of program progName.'''
 		self._instance.SetProgramSubType(progName, program_sub_type(int(subType)))
 
-	def create_program(self, progName: str, owner: str="None", comment: str="None", defaultGroup: int=0, subType: ProgramSubType=ProgramSubType.None) -> None:
+	def create_program(self, progName: str, owner: str=None, comment: str=None, defaultGroup: int=0, subType: ProgramSubType=ProgramSubType.None_) -> None:
 		'''Create a new TP program on the controller.
 
 		:param progName: New program name
@@ -107,13 +112,41 @@ class CgtpClientBase:
 		'''Pause program execution on the controller.'''
 		self._instance.PauseAllPrograms()
 
-	def read_variable_as_string(self, varName: str, progName: str="None") -> str:
+	def read_variable_as_string(self, varName: str, progName: str=None) -> str:
 		'''Read the value of variable varName in program progName.'''
 		return self._instance.ReadVariableAsString(varName, progName)
 
-	def write_variable(self, varName: str, value: str, progName: str="None") -> None:
+	def write_variable(self, varName: str, value: str, progName: str=None) -> None:
 		'''Write value to variable varName in program progName.'''
 		self._instance.WriteVariable(varName, value, progName)
+
+	def read_io(self, portType: IoPortType, index: int) -> int:
+		'''Read the value of I/O port at index of type portType.'''
+		return self._instance.ReadIo(io_port_type(int(portType)), index)
+
+	def write_io(self, portType: IoPortType, index: int, value: int) -> None:
+		'''Set the value of I/O port at index of type portType.'''
+		self._instance.WriteIo(io_port_type(int(portType)), index, value)
+
+	def get_io_simulation_status(self, portType: IoPortType, index: int) -> bool:
+		'''Check whether I/O port at index of type portType is simulated.'''
+		return self._instance.GetIoSimulationStatus(io_port_type(int(portType)), index)
+
+	def simulate_io(self, portType: IoPortType, index: int) -> None:
+		'''Set I/O port at index of type portType to simulated.'''
+		self._instance.SimulateIo(io_port_type(int(portType)), index)
+
+	def unsimulate_io(self, portType: IoPortType, index: int) -> None:
+		'''Remove simulation from I/O port at index of type portType.'''
+		self._instance.UnsimulateIo(io_port_type(int(portType)), index)
+
+	def read_cartesian_position(self, groupNum: int=1) -> CartesianPosition:
+		'''Read the current Cartesian position of motion group groupNum.'''
+		return CartesianPosition(None, None, None, None, None, None, None, self._instance.ReadCartesianPosition(groupNum))
+
+	def read_joint_position(self, groupNum: int=1) -> JointsPosition:
+		'''Read the current joint angles of motion group groupNum.'''
+		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.ReadJointPosition(groupNum))
 
 	def list_files(self, pathName: str="MD:") -> typing.List[str]:
 		'''List files at the specified path on the controller.'''

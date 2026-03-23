@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Ftp.Internal import IFileReader as i_file_reader
 
 class IFileReader:

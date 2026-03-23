@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.telnet.program_command_result import ProgramCommandResult
 from UnderAutomation.Fanuc.Telnet import RunResult as run_result
 

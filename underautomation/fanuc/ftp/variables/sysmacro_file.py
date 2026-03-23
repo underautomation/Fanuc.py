@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.mn_mcr_table_variable_type import MnMcrTableVariableType
 from underautomation.fanuc.ftp.variables.mn_mcr_sop_variable_type import MnMcrSopVariableType
 from underautomation.fanuc.ftp.variables.mn_mcr_uop_variable_type import MnMcrUopVariableType

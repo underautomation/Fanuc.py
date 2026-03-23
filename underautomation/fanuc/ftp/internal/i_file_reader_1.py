@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.internal.i_file_reader import IFileReader
 from underautomation.fanuc.common.languages import Languages
 from UnderAutomation.Fanuc.Ftp.Internal import IFileReader as i_file_reader_1

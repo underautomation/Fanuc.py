@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.ui_config_variable_type import UiConfigVariableType
 from underautomation.fanuc.ftp.variables.ui_custom_variable_type import UiCustomVariableType
 from underautomation.fanuc.ftp.variables.ui_topmenu_variable_type import UiTopmenuVariableType

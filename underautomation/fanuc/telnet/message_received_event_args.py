@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Telnet import MessageReceivedEventArgs as message_received_event_args
 
 class MessageReceivedEventArgs:

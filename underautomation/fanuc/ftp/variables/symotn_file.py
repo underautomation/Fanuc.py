@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.cf_paramgp_variable_type import CfParamgpVariableType
 from underautomation.fanuc.ftp.variables.crcfg_variable_type import CrcfgVariableType
 from underautomation.fanuc.ftp.variables.enc_stat_variable_type import EncStatVariableType

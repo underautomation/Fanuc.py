@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Telnet import CommandSentEventArgs as command_sent_event_args
 
 class CommandSentEventArgs:

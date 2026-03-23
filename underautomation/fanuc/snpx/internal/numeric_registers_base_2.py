@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.snpx_writable_assignable_indexable_elements_2 import SnpxWritableAssignableIndexableElements2
 from UnderAutomation.Fanuc.Snpx.Internal import NumericRegistersBase as numeric_registers_base_2
 

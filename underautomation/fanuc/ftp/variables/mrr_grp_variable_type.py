@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.interact_variable_type import InteractVariableType
 from underautomation.fanuc.ftp.variables.intrac_n_variable_type import IntracNVariableType
 from underautomation.fanuc.ftp.variables.intrac_d_variable_type import IntracDVariableType

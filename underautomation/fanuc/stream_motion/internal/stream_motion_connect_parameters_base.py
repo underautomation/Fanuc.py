@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.StreamMotion.Internal import StreamMotionConnectParametersBase as stream_motion_connect_parameters_base
 
 class StreamMotionConnectParametersBase:

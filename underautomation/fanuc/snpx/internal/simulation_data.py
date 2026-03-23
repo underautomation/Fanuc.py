@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.simulation_type import SimulationType
 from UnderAutomation.Fanuc.Snpx.Internal import SimulationData as simulation_data
 from UnderAutomation.Fanuc.Snpx.Internal import SimulationType as simulation_type

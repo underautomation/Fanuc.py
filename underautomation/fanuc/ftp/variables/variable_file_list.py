@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.i_generic_variable_type import IGenericVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 from UnderAutomation.Fanuc.Ftp.Variables import VariableFileList as variable_file_list
@@ -50,6 +51,3 @@ class VariableFileList(IGenericVariableType):
 
 	def __len__(self) -> int:
 		return self._instance.Count
-
-	def __getitem__(self, index: int) -> T:
-		return self._instance[index]

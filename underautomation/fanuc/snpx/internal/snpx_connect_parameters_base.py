@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Snpx.Internal import SnpxConnectParametersBase as snpx_connect_parameters_base
 
 class SnpxConnectParametersBase:

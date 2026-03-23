@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.assignment.string_registers_batch_assignment import StringRegistersBatchAssignment
 from underautomation.fanuc.snpx.internal.snpx_writable_assignable_indexable_elements_2 import SnpxWritableAssignableIndexableElements2
 from UnderAutomation.Fanuc.Snpx.Internal import StringRegisters as string_registers

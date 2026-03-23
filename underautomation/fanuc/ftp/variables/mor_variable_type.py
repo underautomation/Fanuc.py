@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.amp_id_variable_type import AmpIdVariableType
 from underautomation.fanuc.ftp.variables.fltr_ovrn_variable_type import FltrOvrnVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType

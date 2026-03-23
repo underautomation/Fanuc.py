@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.diagnosis.feature import Feature
 from UnderAutomation.Fanuc.Ftp.Diagnosis import Features as features
 

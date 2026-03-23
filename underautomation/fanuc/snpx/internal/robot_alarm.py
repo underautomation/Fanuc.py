@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.alarm_id import AlarmId
 from underautomation.fanuc.snpx.internal.alarm_severity import AlarmSeverity
 from datetime import datetime, timedelta

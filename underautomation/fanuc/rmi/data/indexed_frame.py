@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.rmi.data.frame import Frame
 from underautomation.fanuc.rmi.data.rmi_response_base import RmiResponseBase
 from UnderAutomation.Fanuc.Rmi.Data import IndexedFrame as indexed_frame

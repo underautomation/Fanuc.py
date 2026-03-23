@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.license.license_info import LicenseInfo
 from UnderAutomation.Fanuc.License import InvalidLicenseException as invalid_license_exception
 

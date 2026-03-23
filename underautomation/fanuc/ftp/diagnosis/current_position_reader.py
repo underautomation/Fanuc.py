@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.internal.section_parser_1 import SectionParser1
 from underautomation.fanuc.ftp.diagnosis.current_position import CurrentPosition
 from UnderAutomation.Fanuc.Ftp.Diagnosis import CurrentPositionReader as current_position_reader

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.common.telnet_connect_parameters import TelnetConnectParameters
 from underautomation.fanuc.common.ftp_connect_parameters import FtpConnectParameters

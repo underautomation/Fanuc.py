@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.internal.i_fanuc_content import IFanucContent
 from underautomation.fanuc.ftp.diagnosis.task_state import TaskState
 from UnderAutomation.Fanuc.Ftp.Diagnosis import ProgramStates as program_states

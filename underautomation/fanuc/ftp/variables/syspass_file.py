@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.passname_variable_type import PassnameVariableType
 from underautomation.fanuc.ftp.variables.password_variable_type import PasswordVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile

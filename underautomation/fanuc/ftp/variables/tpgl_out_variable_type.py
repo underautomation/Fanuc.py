@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.tpgl_view_variable_type import TpglViewVariableType
 from underautomation.fanuc.ftp.variables.cartesian_position_variable import CartesianPositionVariable
 from underautomation.fanuc.ftp.variables.tpglmach_variable_type import TpglmachVariableType

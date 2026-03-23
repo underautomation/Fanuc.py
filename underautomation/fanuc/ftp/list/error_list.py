@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.internal.i_fanuc_content import IFanucContent
 from underautomation.fanuc.ftp.list.errall_section_item import ErrallSectionItem
 from UnderAutomation.Fanuc.Ftp.List import ErrorList as error_list

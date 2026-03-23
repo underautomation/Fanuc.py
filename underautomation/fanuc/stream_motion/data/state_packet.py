@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from datetime import datetime, timedelta
 from underautomation.fanuc.stream_motion.data.packet_type_from_robot import PacketTypeFromRobot
 from underautomation.fanuc.stream_motion.data.robot_status import RobotStatus

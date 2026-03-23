@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from datetime import datetime, timedelta
 from UnderAutomation.Fanuc.Ftp.Diagnosis import HeaderSection as header_section
 

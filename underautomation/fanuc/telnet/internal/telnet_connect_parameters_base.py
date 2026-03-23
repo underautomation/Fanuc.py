@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Telnet.Internal import TelnetConnectParametersBase as telnet_connect_parameters_base
 
 class TelnetConnectParametersBase:

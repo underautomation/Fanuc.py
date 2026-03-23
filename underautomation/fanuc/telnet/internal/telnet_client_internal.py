@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.telnet.internal.telnet_client_base import TelnetClientBase
 from UnderAutomation.Fanuc.Telnet.Internal import TelnetClientInternal as telnet_client_internal
 

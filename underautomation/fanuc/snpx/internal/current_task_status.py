@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.internal.snpx_assignable_elements_2 import SnpxAssignableElements2
 from underautomation.fanuc.snpx.internal.robot_task_status import RobotTaskStatus
 from UnderAutomation.Fanuc.Snpx.Internal import CurrentTaskStatus as current_task_status

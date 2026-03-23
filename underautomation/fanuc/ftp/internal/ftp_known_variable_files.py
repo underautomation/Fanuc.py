@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.aavmmain_file import AavmmainFile
 from underautomation.fanuc.ftp.variables.bicsetup_file import BicsetupFile
 from underautomation.fanuc.ftp.variables.cbparam_file import CbparamFile

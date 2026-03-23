@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.snpx.assignment.numeric_registers_batch_assignment import NumericRegistersBatchAssignment
 from underautomation.fanuc.snpx.internal.numeric_registers_base_2 import NumericRegistersBase2
 from UnderAutomation.Fanuc.Snpx.Internal import NumericRegisters as numeric_registers

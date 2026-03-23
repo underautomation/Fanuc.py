@@ -2,6 +2,7 @@ from enum import IntEnum
 
 class IOType(IntEnum):
 	'''I/O types supported by Stream Motion protocol'''
+	None_ = 0 # No I/O operation
 	DI = 1 # Digital Input
 	DO = 2 # Digital Output
 	RI = 8 # Robot Input

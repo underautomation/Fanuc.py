@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.stream_motion.internal.stream_motion_client_base import StreamMotionClientBase
 from UnderAutomation.Fanuc.StreamMotion.Internal import StreamMotionClientInternal as stream_motion_client_internal
 

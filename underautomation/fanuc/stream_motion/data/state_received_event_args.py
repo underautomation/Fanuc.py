@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.stream_motion.data.state_packet import StatePacket
 from UnderAutomation.Fanuc.StreamMotion.Data import StateReceivedEventArgs as state_received_event_args
 

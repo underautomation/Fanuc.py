@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.com_space_variable_type import ComSpaceVariableType
 from underautomation.fanuc.ftp.variables.gp_hold_variable_type import GpHoldVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType

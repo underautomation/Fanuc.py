@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.aavm_wrk_variable_type import AavmWrkVariableType
 from underautomation.fanuc.ftp.variables.abspos_grp_variable_type import AbsposGrpVariableType
 from underautomation.fanuc.ftp.variables.aio_cnv_variable_type import AioCnvVariableType

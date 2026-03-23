@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.stream_motion.data.robot_status_flags import RobotStatusFlags
 from UnderAutomation.Fanuc.StreamMotion.Data import RobotStatus as robot_status
 from UnderAutomation.Fanuc.StreamMotion.Data import RobotStatusFlags as robot_status_flags

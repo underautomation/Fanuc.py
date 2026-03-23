@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Snpx.Internal import Assignment as assignment
 
 class Assignment:

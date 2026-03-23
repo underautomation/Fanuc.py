@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.tpgl_uview_variable_type import TpglUviewVariableType
 from underautomation.fanuc.ftp.variables.tpgl_cam_variable_type import TpglCamVariableType
 from underautomation.fanuc.ftp.variables.tpgl_view_variable_type import TpglViewVariableType

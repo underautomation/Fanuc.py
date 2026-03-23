@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.generic_field import GenericField
 from UnderAutomation.Fanuc.Ftp.Variables import ArrayElement as array_element
 

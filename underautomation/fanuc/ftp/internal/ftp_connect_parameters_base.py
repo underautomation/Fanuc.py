@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Ftp.Internal import FtpConnectParametersBase as ftp_connect_parameters_base
 
 class FtpConnectParametersBase:

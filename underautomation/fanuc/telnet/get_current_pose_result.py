@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.cartesian_position import CartesianPosition
 from underautomation.fanuc.telnet.result import Result
 from UnderAutomation.Fanuc.Telnet import GetCurrentPoseResult as get_current_pose_result

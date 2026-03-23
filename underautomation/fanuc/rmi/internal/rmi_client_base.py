@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.rmi.data.controller_error_text import ControllerErrorText
 from underautomation.fanuc.rmi.data.controller_status import ControllerStatus
 from underautomation.fanuc.rmi.data.indexed_frame import IndexedFrame

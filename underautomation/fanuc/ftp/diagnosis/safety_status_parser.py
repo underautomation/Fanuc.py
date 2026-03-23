@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.internal.section_parser_1 import SectionParser1
 from underautomation.fanuc.ftp.diagnosis.safety_status import SafetyStatus
 from UnderAutomation.Fanuc.Ftp.Diagnosis import SafetyStatusParser as safety_status_parser

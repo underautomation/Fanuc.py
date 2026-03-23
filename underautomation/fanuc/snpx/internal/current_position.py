@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.position import Position
 from underautomation.fanuc.snpx.internal.snpx_assignable_elements_2 import SnpxAssignableElements2
 from underautomation.fanuc.snpx.internal.current_position_request import CurrentPositionRequest

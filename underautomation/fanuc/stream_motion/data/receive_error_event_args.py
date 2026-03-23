@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.StreamMotion.Data import ReceiveErrorEventArgs as receive_error_event_args
 
 class ReceiveErrorEventArgs:

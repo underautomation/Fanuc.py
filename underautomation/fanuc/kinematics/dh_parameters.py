@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.kinematics.i_dh_parameters import IDhParameters
 from underautomation.fanuc.kinematics.kinematics_category import KinematicsCategory
 from underautomation.fanuc.kinematics.arm_kinematic_models import ArmKinematicModels

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from UnderAutomation.Fanuc.Common import XYZPosition as xyz_position
 
 class XYZPosition:

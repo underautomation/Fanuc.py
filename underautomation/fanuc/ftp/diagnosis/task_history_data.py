@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.program_type import ProgramType
 from UnderAutomation.Fanuc.Ftp.Diagnosis import TaskHistoryData as task_history_data
 from UnderAutomation.Fanuc.Common import ProgramType as program_type

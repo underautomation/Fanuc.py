@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.digital_ports import DigitalPorts
 from UnderAutomation.Fanuc.Common import IOStatus as io_status
 from UnderAutomation.Fanuc.Common import DigitalPorts as digital_ports

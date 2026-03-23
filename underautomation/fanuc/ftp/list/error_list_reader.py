@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.list.error_list import ErrorList
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.internal.file_reader_1 import FileReader1
@@ -14,7 +15,7 @@ class ErrorListReader(FileReader1[ErrorList]):
 		else:
 			self._instance = _internal
 
-	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str="None") -> ErrorList:
+	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str=None) -> ErrorList:
 		return ErrorList(self._instance.ReadFile(fileStream, languages(int(language)), fileName))
 
 	def __str__(self):

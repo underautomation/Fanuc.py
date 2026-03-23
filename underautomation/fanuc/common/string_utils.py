@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.languages import Languages
 from UnderAutomation.Fanuc.Common import StringUtils as string_utils
 from UnderAutomation.Fanuc.Common import Languages as languages

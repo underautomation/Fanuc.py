@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.common.cartesian_position import CartesianPosition
 from UnderAutomation.Fanuc.Ftp.Variables import CartesianPositionVariable as cartesian_position_variable
 

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 # Circular dependencies  : GenericValue
 from underautomation.fanuc.ftp.variables.generic_value import GenericValue
 from UnderAutomation.Fanuc.Ftp.Variables import GenericField as generic_field

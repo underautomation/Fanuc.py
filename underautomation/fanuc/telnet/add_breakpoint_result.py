@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.telnet.result import Result
 from UnderAutomation.Fanuc.Telnet import AddBreakpointResult as add_breakpoint_result
 

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.cellset_variable_type import CellsetVariableType
 from underautomation.fanuc.ftp.variables.clmlio_variable_type import ClmlioVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile

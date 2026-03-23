@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.rmi.data.motion_configuration import MotionConfiguration
 from underautomation.fanuc.rmi.data.frame import Frame
 from underautomation.fanuc.rmi.data.rmi_timed_response import RmiTimedResponse

@@ -1,4 +1,5 @@
 import typing
+from __future__ import annotation
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.variables.generic_variable import GenericVariable
