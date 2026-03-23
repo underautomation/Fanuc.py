@@ -1,18 +1,18 @@
 import typing
-from underautomation.fanuc.telnet.internal.telnet_connect_parameters_base import TelnetConnectParametersBase
-from UnderAutomation.Fanuc.Common import TelnetConnectParameters as telnet_connect_parameters
+from underautomation.fanuc.cgtp.internal.cgtp_connect_parameters_base import CgtpConnectParametersBase
+from UnderAutomation.Fanuc.Common import CgtpConnectParameters as cgtp_connect_parameters
 
-class TelnetConnectParameters(TelnetConnectParametersBase):
-	'''Connect parameters for remote command'''
+class CgtpConnectParameters(CgtpConnectParametersBase):
+	'''CGTP Web Server connection parameters'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
-			self._instance = telnet_connect_parameters()
+			self._instance = cgtp_connect_parameters()
 		else:
 			self._instance = _internal
 
 	@property
 	def enable(self) -> bool:
-		'''Should use this service (default: false)'''
+		'''Should enable CGTP Web Server for this connection (default: true)'''
 		return self._instance.Enable
 
 	@enable.setter
@@ -26,7 +26,7 @@ class TelnetConnectParameters(TelnetConnectParametersBase):
 		return self.__str__()
 
 	def __eq__(self, other) -> bool:
-		if not isinstance(other, TelnetConnectParameters):
+		if not isinstance(other, CgtpConnectParameters):
 			NotImplemented
 		return self._instance.Equals(other._instance)
 

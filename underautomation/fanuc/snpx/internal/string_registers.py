@@ -20,6 +20,15 @@ class StringRegisters(SnpxWritableAssignableIndexableElements2[str, StringRegist
 		'''
 		return StringRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
 
+	@property
+	def string_length(self) -> int:
+		'''Number of characters for string register reads/writes. Must be even, greater than 2, and less than ushort.MaxValue. Warning: this static value must be set before any string register read/write and must not be changed while the SDK is running. Default: 80.'''
+		return self._instance.StringLength
+
+	@string_length.setter
+	def string_length(self, value: int):
+		self._instance.StringLength = value
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

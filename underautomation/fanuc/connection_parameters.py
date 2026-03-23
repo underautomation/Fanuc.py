@@ -5,6 +5,7 @@ from underautomation.fanuc.common.ftp_connect_parameters import FtpConnectParame
 from underautomation.fanuc.common.snpx_connect_parameters import SnpxConnectParameters
 from underautomation.fanuc.common.rmi_connect_parameters import RmiConnectParameters
 from underautomation.fanuc.common.stream_motion_connect_parameters import StreamMotionConnectParameters
+from underautomation.fanuc.common.cgtp_connect_parameters import CgtpConnectParameters
 from UnderAutomation.Fanuc import ConnectionParameters as connection_parameters
 from UnderAutomation.Fanuc.Common import Languages as languages
 
@@ -88,6 +89,15 @@ class ConnectionParameters:
 	@stream_motion.setter
 	def stream_motion(self, value: StreamMotionConnectParameters):
 		self._instance.StreamMotion = value._instance if value else None
+
+	@property
+	def cgtp(self) -> CgtpConnectParameters:
+		'''Parameters for CGTP Web Server (HTTP-based COMET RPC interface)'''
+		return CgtpConnectParameters(self._instance.Cgtp)
+
+	@cgtp.setter
+	def cgtp(self, value: CgtpConnectParameters):
+		self._instance.Cgtp = value._instance if value else None
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

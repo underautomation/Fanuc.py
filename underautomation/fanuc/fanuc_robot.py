@@ -5,6 +5,7 @@ from underautomation.fanuc.ftp.internal.ftp_client_internal import FtpClientInte
 from underautomation.fanuc.snpx.internal.snpx_client_internal import SnpxClientInternal
 from underautomation.fanuc.rmi.internal.rmi_client_internal import RmiClientInternal
 from underautomation.fanuc.stream_motion.internal.stream_motion_client_internal import StreamMotionClientInternal
+from underautomation.fanuc.cgtp.internal.cgtp_client_internal import CgtpClientInternal
 from underautomation.fanuc.license.license_info import LicenseInfo
 from UnderAutomation.Fanuc import FanucRobot as fanuc_robot
 
@@ -69,6 +70,11 @@ class FanucRobot:
 	def stream_motion(self) -> StreamMotionClientInternal:
 		'''Stream Motion client for real-time motion control'''
 		return StreamMotionClientInternal(self._instance.StreamMotion)
+
+	@property
+	def cgtp(self) -> CgtpClientInternal:
+		'''CGTP Web Server client for HTTP-based COMET RPC interface'''
+		return CgtpClientInternal(self._instance.Cgtp)
 
 	@property
 	def license_info(self) -> LicenseInfo:

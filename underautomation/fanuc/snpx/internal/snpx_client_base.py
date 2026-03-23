@@ -4,7 +4,6 @@ from underautomation.fanuc.snpx.internal.numeric_registers_int32 import NumericR
 from underautomation.fanuc.snpx.internal.numeric_registers_int16 import NumericRegistersInt16
 from underautomation.fanuc.snpx.internal.position_registers import PositionRegisters
 from underautomation.fanuc.snpx.internal.string_registers import StringRegisters
-from underautomation.fanuc.snpx.internal.string_registers_span import StringRegistersSpan
 from underautomation.fanuc.snpx.internal.integer_system_variables import IntegerSystemVariables
 from underautomation.fanuc.snpx.internal.real_system_variables import RealSystemVariables
 from underautomation.fanuc.snpx.internal.position_system_variables import PositionSystemVariables
@@ -93,11 +92,6 @@ class SnpxClientBase:
 	def string_registers(self) -> StringRegisters:
 		'''String registers'''
 		return StringRegisters(self._instance.StringRegisters)
-
-	@property
-	def string_registers_span(self) -> StringRegistersSpan:
-		'''String registers with control over start index and length'''
-		return StringRegistersSpan(self._instance.StringRegistersSpan)
 
 	@property
 	def integer_system_variables(self) -> IntegerSystemVariables:
