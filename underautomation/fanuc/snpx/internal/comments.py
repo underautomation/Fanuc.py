@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.snpx.internal.comment_type import CommentType
 from underautomation.fanuc.snpx.internal.snpx_writable_assignable_elements_3 import SnpxWritableAssignableElements3
 from underautomation.fanuc.snpx.internal.comment_data import CommentData

@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Rmi.Data import RmiResponseBase as rmi_response_base
 
 class RmiResponseBase:

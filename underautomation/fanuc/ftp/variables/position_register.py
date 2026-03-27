@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.joint_position_variable import JointPositionVariable
 from underautomation.fanuc.ftp.variables.cartesian_position_variable import CartesianPositionVariable
 from UnderAutomation.Fanuc.Ftp.Variables import PositionRegister as position_register

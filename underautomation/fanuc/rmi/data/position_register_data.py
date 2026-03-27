@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.rmi.data.motion_configuration import MotionConfiguration
 from underautomation.fanuc.rmi.data.frame import Frame
 from underautomation.fanuc.rmi.data.rmi_response_base import RmiResponseBase

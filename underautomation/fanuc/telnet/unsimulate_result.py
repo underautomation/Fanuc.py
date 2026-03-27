@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.telnet.base_result import BaseResult
 from UnderAutomation.Fanuc.Telnet import UnsimulateResult as unsimulate_result
 

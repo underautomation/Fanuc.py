@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.snpx.internal.snpx_client_base import SnpxClientBase
 from UnderAutomation.Fanuc.Snpx.Internal import SnpxClientInternal as snpx_client_internal
 

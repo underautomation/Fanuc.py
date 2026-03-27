@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Ftp.Internal import SectionParser as section_parser
 
 class SectionParser:

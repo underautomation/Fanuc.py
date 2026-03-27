@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.vsmo_pls_variable_type import VsmoPlsVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType
 from UnderAutomation.Fanuc.Ftp.Variables import VsmoTmpVariableType as vsmo_tmp_variable_type

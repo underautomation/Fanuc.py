@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.user_tool_variable_type import UserToolVariableType
 from underautomation.fanuc.ftp.variables.user_ufram_variable_type import UserUframVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType

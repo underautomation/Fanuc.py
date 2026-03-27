@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.telnet.result import Result
 from UnderAutomation.Fanuc.Telnet import PauseResult as pause_result
 

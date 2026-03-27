@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.position_variable_type import PositionVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType
 from UnderAutomation.Fanuc.Ftp.Variables import VsmoValVariableType as vsmo_val_variable_type

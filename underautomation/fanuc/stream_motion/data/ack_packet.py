@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.stream_motion.data.packet_type_from_robot import PacketTypeFromRobot
 from underautomation.fanuc.stream_motion.data.threshold_type import ThresholdType
 from UnderAutomation.Fanuc.StreamMotion.Data import AckPacket as ack_packet

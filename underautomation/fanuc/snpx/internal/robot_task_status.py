@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.snpx.internal.robot_task_state import RobotTaskState
 from underautomation.fanuc.common.languages import Languages
 from UnderAutomation.Fanuc.Snpx.Internal import RobotTaskStatus as robot_task_status

@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.ftp.internal.file_reader_1 import FileReader1
 from UnderAutomation.Fanuc.Ftp.Variables import VariableReader as variable_reader_1

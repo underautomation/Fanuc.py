@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from datetime import datetime, timedelta
 from UnderAutomation.Fanuc.Ftp.List import ErrallSectionItem as errall_section_item
 

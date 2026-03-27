@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Ftp.Internal import IFanucContent as i_fanuc_content
 
 class IFanucContent:

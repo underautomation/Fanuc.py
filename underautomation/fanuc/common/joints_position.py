@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Common import JointsPosition as joints_position
 
 class JointsPosition:

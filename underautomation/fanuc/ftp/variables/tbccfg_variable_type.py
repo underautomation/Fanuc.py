@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.tbc_acc_variable_type import TbcAccVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType
 from UnderAutomation.Fanuc.Ftp.Variables import TbccfgVariableType as tbccfg_variable_type

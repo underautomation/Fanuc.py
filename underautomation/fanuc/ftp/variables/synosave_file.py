@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.aavm_grp_variable_type import AavmGrpVariableType
 from underautomation.fanuc.ftp.variables.dbwork_variable_type import DbworkVariableType
 from underautomation.fanuc.ftp.variables.dhcp_int_variable_type import DhcpIntVariableType

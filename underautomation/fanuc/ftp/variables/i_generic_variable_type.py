@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Ftp.Variables import IGenericVariableType as i_generic_variable_type
 
 class IGenericVariableType:

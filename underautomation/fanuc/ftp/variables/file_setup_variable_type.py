@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.filecomp_variable_type import FilecompVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType
 from UnderAutomation.Fanuc.Ftp.Variables import FileSetupVariableType as file_setup_variable_type

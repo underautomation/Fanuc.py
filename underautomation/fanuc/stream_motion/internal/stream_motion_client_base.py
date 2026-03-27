@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.stream_motion.data.state_packet import StatePacket
 from underautomation.fanuc.stream_motion.data.command_packet import CommandPacket
 from underautomation.fanuc.stream_motion.data.motion_data import MotionData

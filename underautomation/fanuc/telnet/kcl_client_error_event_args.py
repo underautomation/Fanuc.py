@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Telnet import KclClientErrorEventArgs as kcl_client_error_event_args
 
 class KclClientErrorEventArgs:

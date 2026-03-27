@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.bin_cfg_variable_type import BinCfgVariableType
 from underautomation.fanuc.ftp.variables.dhcp_ctrl_variable_type import DhcpCtrlVariableType
 from underautomation.fanuc.ftp.variables.dnss_cfg_variable_type import DnssCfgVariableType

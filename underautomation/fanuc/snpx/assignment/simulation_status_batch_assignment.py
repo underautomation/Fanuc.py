@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.snpx.internal.batch_assignment_2 import BatchAssignment2
 from underautomation.fanuc.snpx.internal.simulation_data import SimulationData
 from UnderAutomation.Fanuc.Snpx.Assignment import SimulationStatusBatchAssignment as simulation_status_batch_assignment

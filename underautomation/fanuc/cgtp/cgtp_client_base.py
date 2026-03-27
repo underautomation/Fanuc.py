@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.cgtp.program_sub_type import ProgramSubType
 from underautomation.fanuc.cgtp.io_port_type import IoPortType

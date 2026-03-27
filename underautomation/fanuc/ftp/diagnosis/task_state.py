@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.common.task_status import TaskStatus
 from underautomation.fanuc.ftp.diagnosis.task_history_data import TaskHistoryData
 from UnderAutomation.Fanuc.Ftp.Diagnosis import TaskState as task_state

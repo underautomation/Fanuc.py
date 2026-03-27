@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.dmr_grp_variable_type import DmrGrpVariableType
 from underautomation.fanuc.ftp.variables.fms_grp_variable_type import FmsGrpVariableType
 from underautomation.fanuc.ftp.variables.plcl_grp_variable_type import PlclGrpVariableType

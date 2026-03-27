@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.kinematics.i_dh_parameters import IDhParameters
 from UnderAutomation.Fanuc.Kinematics.Internal import ArmModelAttribute as arm_model_attribute
 

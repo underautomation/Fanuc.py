@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 from UnderAutomation.Fanuc.Ftp.Variables import KlactionFile as klaction_file
 

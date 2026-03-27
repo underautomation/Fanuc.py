@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from datetime import datetime, timedelta
 from underautomation.fanuc.license.license_state import LicenseState
 from UnderAutomation.Fanuc.License import LicenseInfo as license_info

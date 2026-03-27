@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Cgtp.Internal import CgtpConnectParametersBase as cgtp_connect_parameters_base
 
 class CgtpConnectParametersBase:

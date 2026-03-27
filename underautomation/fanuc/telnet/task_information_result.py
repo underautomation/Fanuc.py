@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.common.task_status import TaskStatus
 from underautomation.fanuc.common.program_type import ProgramType
 from underautomation.fanuc.telnet.result import Result

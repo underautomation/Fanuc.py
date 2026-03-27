@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.telnet.set_value_result import SetValueResult
 from UnderAutomation.Fanuc.Telnet import SetPortResult as set_port_result
 

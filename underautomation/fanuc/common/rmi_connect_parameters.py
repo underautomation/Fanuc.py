@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.rmi.internal.rmi_connect_parameters_base import RmiConnectParametersBase
 from UnderAutomation.Fanuc.Common import RmiConnectParameters as rmi_connect_parameters
 

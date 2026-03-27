@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.max_pld_cal_variable_type import MaxPldCalVariableType
 from underautomation.fanuc.ftp.variables.j3d_pld_cal_variable_type import J3dPldCalVariableType
 from underautomation.fanuc.ftp.variables.calc_result_variable_type import CalcResultVariableType

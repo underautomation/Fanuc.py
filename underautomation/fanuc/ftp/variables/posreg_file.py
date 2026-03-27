@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.position_register import PositionRegister
 from underautomation.fanuc.ftp.variables.generic_variable_file import GenericVariableFile
 from UnderAutomation.Fanuc.Ftp.Variables import PosregFile as posreg_file

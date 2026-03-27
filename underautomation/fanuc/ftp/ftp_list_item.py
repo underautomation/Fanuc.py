@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from datetime import datetime, timedelta
 from underautomation.fanuc.ftp.ftp_file_system_object_type import FtpFileSystemObjectType
 from UnderAutomation.Fanuc.Ftp import FtpListItem as ftp_list_item

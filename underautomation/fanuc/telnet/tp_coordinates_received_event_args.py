@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.telnet.tp_coordinates import TpCoordinates
 from UnderAutomation.Fanuc.Telnet import TpCoordinatesReceivedEventArgs as tp_coordinates_received_event_args
 from UnderAutomation.Fanuc.Telnet import TpCoordinates as tp_coordinates

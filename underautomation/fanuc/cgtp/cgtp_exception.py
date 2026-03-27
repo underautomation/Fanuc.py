@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from UnderAutomation.Fanuc.Cgtp import CgtpException as cgtp_exception
 
 class CgtpException:

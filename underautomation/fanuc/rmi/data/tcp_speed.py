@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.rmi.data.rmi_timed_response import RmiTimedResponse
 from UnderAutomation.Fanuc.Rmi.Data import TcpSpeed as tcp_speed
 

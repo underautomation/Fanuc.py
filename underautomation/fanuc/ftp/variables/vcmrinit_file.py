@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.vcal_vd_variable_type import VcalVdVariableType
 from underautomation.fanuc.ftp.variables.vcal_vf_variable_type import VcalVfVariableType
 from underautomation.fanuc.ftp.variables.vcal_mv_variable_type import VcalMvVariableType

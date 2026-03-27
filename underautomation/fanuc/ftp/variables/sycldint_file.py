@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.variables.jcr_variable_type import JcrVariableType
 from underautomation.fanuc.ftp.variables.jcr_grp_variable_type import JcrGrpVariableType
 from underautomation.fanuc.ftp.variables.mcr_variable_type import McrVariableType

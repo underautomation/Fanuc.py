@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.connection_parameters import ConnectionParameters
 from underautomation.fanuc.telnet.internal.telnet_client_internal import TelnetClientInternal
 from underautomation.fanuc.ftp.internal.ftp_client_internal import FtpClientInternal

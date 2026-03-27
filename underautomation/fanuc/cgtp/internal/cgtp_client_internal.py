@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.cgtp.cgtp_client_base import CgtpClientBase
 from UnderAutomation.Fanuc.Cgtp.Internal import CgtpClientInternal as cgtp_client_internal
 

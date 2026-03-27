@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.snpx.internal.snpx_assignable_elements_2 import SnpxAssignableElements2
 from underautomation.fanuc.snpx.internal.robot_alarm import RobotAlarm
 from UnderAutomation.Fanuc.Snpx.Internal import AlarmAccess as alarm_access

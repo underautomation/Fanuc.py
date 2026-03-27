@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.common.configuration import Configuration
 from underautomation.fanuc.ftp.variables.ax_ofs_variable_type import AxOfsVariableType
 from underautomation.fanuc.ftp.variables.generic_variable_type import GenericVariableType

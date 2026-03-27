@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.rmi.data.joint_angles import JointAngles
 from underautomation.fanuc.rmi.data.rmi_timed_response import RmiTimedResponse
 from UnderAutomation.Fanuc.Rmi.Data import JointAnglesSample as joint_angles_sample

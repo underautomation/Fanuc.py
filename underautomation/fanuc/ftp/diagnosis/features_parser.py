@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.ftp.internal.section_parser_1 import SectionParser1
 from underautomation.fanuc.ftp.diagnosis.features import Features
 from UnderAutomation.Fanuc.Ftp.Diagnosis import FeaturesParser as features_parser

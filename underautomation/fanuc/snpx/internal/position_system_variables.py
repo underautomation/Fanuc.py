@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.common.joints_position import JointsPosition
 from underautomation.fanuc.common.extended_cartesian_position import ExtendedCartesianPosition
 from underautomation.fanuc.common.cartesian_position import CartesianPosition

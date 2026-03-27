@@ -1,5 +1,5 @@
+from __future__ import annotations
 import typing
-from __future__ import annotation
 from underautomation.fanuc.snpx.internal.segment_selector import SegmentSelector
 from underautomation.fanuc.snpx.internal.segment_offset import SegmentOffset
 from underautomation.fanuc.snpx.internal.segment_name import SegmentName
