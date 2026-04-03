@@ -1,0 +1,41 @@
+from __future__ import annotations
+import typing
+from underautomation.fanuc.common.files.variables.generic_variable_type import GenericVariableType
+from UnderAutomation.Fanuc.Common.Files.Variables import TxscreenVariableType as txscreen_variable_type
+
+class TxscreenVariableType(GenericVariableType):
+	'''Describes the Fanuc type TXSCREEN_T'''
+	def __init__(self, _internal = 0):
+		if(_internal == 0):
+			self._instance = txscreen_variable_type()
+		else:
+			self._instance = _internal
+
+	@property
+	def destination(self) -> str:
+		'''Value of variable $DESTINATION'''
+		return self._instance.Destination
+
+	@property
+	def screen_name(self) -> str:
+		'''Value of variable $SCREEN_NAME'''
+		return self._instance.ScreenName
+
+	@property
+	def fanuc_internal_type_name(self) -> str:
+		'''Type Name on the robot'''
+		return self._instance.FanucInternalTypeName
+
+	def __str__(self):
+		return self._instance.ToString() if self._instance is not None else ""
+
+	def __repr__(self):
+		return self.__str__()
+
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, TxscreenVariableType):
+			NotImplemented
+		return self._instance.Equals(other._instance)
+
+	def __hash__(self) -> int:
+		return self._instance.GetHashCode() if self._instance is not None else 0

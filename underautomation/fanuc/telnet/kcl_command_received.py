@@ -1,6 +1,6 @@
 from __future__ import annotations
 import typing
-from underautomation.fanuc.telnet.result import Result
+from underautomation.fanuc.common.kcl.result import Result
 from UnderAutomation.Fanuc.Telnet import KclCommandReceived as kcl_command_received
 
 class KclCommandReceived:

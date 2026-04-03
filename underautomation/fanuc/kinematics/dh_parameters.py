@@ -3,8 +3,8 @@ import typing
 from underautomation.fanuc.kinematics.i_dh_parameters import IDhParameters
 from underautomation.fanuc.kinematics.kinematics_category import KinematicsCategory
 from underautomation.fanuc.kinematics.arm_kinematic_models import ArmKinematicModels
-from underautomation.fanuc.ftp.variables.symotn_file import SymotnFile
-from underautomation.fanuc.ftp.variables.mrr_grp_variable_type import MrrGrpVariableType
+from underautomation.fanuc.common.files.variables.symotn_file import SymotnFile
+from underautomation.fanuc.common.files.variables.mrr_grp_variable_type import MrrGrpVariableType
 from UnderAutomation.Fanuc.Kinematics import DhParameters as dh_parameters
 from UnderAutomation.Fanuc.Kinematics import KinematicsCategory as kinematics_category
 from UnderAutomation.Fanuc.Kinematics import ArmKinematicModels as arm_kinematic_models

@@ -19,6 +19,11 @@ class Configuration:
 		else:
 			self._instance = _internal
 
+	@staticmethod
+	def parse(value: str) -> 'Configuration':
+		'''Parse a Fanuc configuration from its string representation, like : "N U T, 0, 0, 0" or "R, 0, 0, 0"'''
+		return Configuration(None, None, None, None, None, None, None, configuration.Parse(value))
+
 	def from_string(self, value: str) -> None:
 		'''Parse a Fanuc configuration string representation, like : "N U T, 0, 0, 0" or "R, 0, 0, 0"'''
 		self._instance.FromString(value)

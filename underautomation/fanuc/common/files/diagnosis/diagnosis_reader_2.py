@@ -1,0 +1,33 @@
+from __future__ import annotations
+import typing
+from underautomation.fanuc.common.languages import Languages
+from underautomation.fanuc.common.files.file_reader_1 import FileReader1
+from UnderAutomation.Fanuc.Common.Files.Diagnosis import DiagnosisReader as diagnosis_reader_2
+from UnderAutomation.Fanuc.Common import Languages as languages
+
+T = typing.TypeVar('T')
+U = typing.TypeVar('U')
+class DiagnosisReader2(FileReader1[T], typing.Generic[T, U]):
+	'''Generic diagnosis file reader that parses a specific section from a diagnostic stream.'''
+	def __init__(self, _internal = 0):
+		if(_internal == 0):
+			self._instance = diagnosis_reader_2()
+		else:
+			self._instance = _internal
+
+	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str=None) -> T:
+		return self._instance.ReadFile(fileStream, languages(int(language)), fileName)
+
+	def __str__(self):
+		return self._instance.ToString() if self._instance is not None else ""
+
+	def __repr__(self):
+		return self.__str__()
+
+	def __eq__(self, other) -> bool:
+		if not isinstance(other, DiagnosisReader2):
+			NotImplemented
+		return self._instance.Equals(other._instance)
+
+	def __hash__(self) -> int:
+		return self._instance.GetHashCode() if self._instance is not None else 0

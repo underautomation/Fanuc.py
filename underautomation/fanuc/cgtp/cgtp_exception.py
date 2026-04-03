@@ -3,11 +3,10 @@ import typing
 from UnderAutomation.Fanuc.Cgtp import CgtpException as cgtp_exception
 
 class CgtpException:
-	'''Represents an error returned by the FANUC COMET RPC interface.'''
-	def __init__(self, message: str, inner: typing.Any, _internal = 0):
-		'''Constructs a new CgtpException with a message and inner exception.'''
+	'''Represents an error returned by the FANUC controller via CGTP.'''
+	def __init__(self, _internal = 0):
 		if(_internal == 0):
-			self._instance = cgtp_exception(message, inner)
+			self._instance = cgtp_exception()
 		else:
 			self._instance = _internal
 

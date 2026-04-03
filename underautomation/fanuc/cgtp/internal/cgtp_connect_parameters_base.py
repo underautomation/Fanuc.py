@@ -28,6 +28,24 @@ class CgtpConnectParametersBase:
 	def request_timeout_ms(self, value: int):
 		self._instance.RequestTimeoutMs = value
 
+	@property
+	def login(self) -> str:
+		'''Login for HTTP Basic authentication (optional).'''
+		return self._instance.Login
+
+	@login.setter
+	def login(self, value: str):
+		self._instance.Login = value
+
+	@property
+	def password(self) -> str:
+		'''Password for HTTP Basic authentication (optional).'''
+		return self._instance.Password
+
+	@password.setter
+	def password(self, value: str):
+		self._instance.Password = value
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

@@ -1,6 +1,7 @@
 from enum import IntEnum
 
 class RpcId(IntEnum):
+	'''CGTP function identifiers.'''
 	CHGOVRD = 220
 	CPKCL = 87
 	DPEWRITE_STR = 83
@@ -33,6 +34,7 @@ class RpcId(IntEnum):
 	MMMSOPEN = 9
 	MMRENPRG = 116
 	MMSETATR = 21
+	MNCHGREP = 93
 	PASTELIN = 225
 	PGABORT = 102
 	POSREGVALRD = 248
