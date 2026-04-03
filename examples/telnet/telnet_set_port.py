@@ -8,7 +8,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from examples import connect_robot
-from underautomation.fanuc.telnet.kcl_ports import KCLPorts
+from underautomation.fanuc.common.kcl.kcl_ports import KCLPorts
 
 print("=" * 60)
 print("  FANUC SDK - Telnet: Set Digital Output Port")
@@ -47,7 +47,7 @@ try:
             print("  Invalid number.")
             continue
 
-        value_str = input(f"Enter value (1=ON, 0=OFF): ").strip()
+        value_str = input("Enter value (1=ON, 0=OFF): ").strip()
         try:
             value = int(value_str)
             if value not in (0, 1):

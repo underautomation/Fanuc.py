@@ -124,6 +124,29 @@ def get_ftp_password():
     return _get_setting("ftp_password", "FTP password", default="")
 
 # ==============================================================================
+# CGTP settings
+# ==============================================================================
+def get_cgtp_login():
+    """
+    Gets the CGTP Web Server login.
+    Default is usually empty.
+    
+    Returns:
+        str: CGTP login
+    """
+    return _get_setting("cgtp_login", "CGTP login", default="")
+
+def get_cgtp_password():
+    """
+    Gets the CGTP Web Server password.
+    Default is usually empty.
+    
+    Returns:
+        str: CGTP password
+    """
+    return _get_setting("cgtp_password", "CGTP password", default="")
+
+# ==============================================================================
 # Language setting
 # ==============================================================================
 def get_language():
@@ -217,7 +240,7 @@ def setup_license():
 # ==============================================================================
 # Helper: Connect to robot with selected protocols
 # ==============================================================================
-def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False):
+def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enable_cgtp=False):
     """
     Creates a FanucRobot, sets up license, asks for connection settings,
     and connects with the specified protocols enabled.
@@ -226,6 +249,7 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False):
         enable_telnet: Enable Telnet/KCL protocol
         enable_ftp: Enable FTP protocol
         enable_snpx: Enable SNPX protocol
+        enable_cgtp: Enable CGTP Web Server protocol
     
     Returns:
         FanucRobot: Connected robot instance
@@ -248,6 +272,7 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False):
     params.telnet.enable = enable_telnet
     params.ftp.enable = enable_ftp
     params.snpx.enable = enable_snpx
+    params.cgtp.enable = enable_cgtp
 
     # Set controller language
     language_name = get_language()
@@ -269,11 +294,18 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False):
         params.ftp.ftp_user = user
         params.ftp.ftp_password = pwd
 
+    if enable_cgtp:
+        login = get_cgtp_login()
+        pwd = get_cgtp_password()
+        params.cgtp.login = login
+        params.cgtp.password = pwd
+
     # Connect
     protocols = []
     if enable_telnet: protocols.append("Telnet")
     if enable_ftp: protocols.append("FTP")
     if enable_snpx: protocols.append("SNPX")
+    if enable_cgtp: protocols.append("CGTP")
     print(f"\nConnecting to {robot_ip} ({', '.join(protocols)})...")
 
     try:

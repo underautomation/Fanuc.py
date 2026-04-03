@@ -35,6 +35,7 @@ It supports communication with **real robots** and **ROBOGUIDE** simulation.
 - ⚡ **I/O control** (UI, UO, GI, GO, SDI, SDO, etc.)
 - 🔍 **State & diagnostics monitoring**
 - 📂 **FTP file & variable access**
+- 🌐 **CGTP Web Server** - programs, variables, registers, I/O, kinematics, batch operations
 - 🏎️ **Remote motion:** Remote move the robot
 - 📐 **Kinematics Calculations:** Perform forward and inverse kinematics offline (CRX and standard robots)
 
@@ -125,6 +126,11 @@ params.telnet.telnet_kcl_password="telnet_password"
 params.ftp.enable = True
 params.ftp.ftp_user = ""
 params.ftp.ftp_password = ""
+
+# Enable CGTP Web Server
+params.cgtp.enable = True
+params.cgtp.login = ""
+params.cgtp.password = ""
 
 # Enable SNPX
 # You need option R553 "HMI Device SNPX" for FANUC America (R650 FRA)
@@ -248,7 +254,10 @@ And you will get a menu like this to select and run any example with a single ke
 ║  📂  1. FTP          (16 examples)                                             ║
 ║         File Transfer Protocol - read/write files, registers, diagnostics      ║
 ║                                                                                ║
-║  🦾  2. KINEMATICS   (1 example)                                               ║
+║  🌐  2. CGTP         (24 examples)                                             ║
+║         CGTP Web Server - programs, variables, registers, I/O, kinematics      ║
+║                                                                                ║
+║  🦾  3. KINEMATICS   (1 example)                                               ║
 ║         Kinematics - offline forward & inverse kinematics, no connection needed║
 ║                                                                                ║
 ║  🔑  3. LICENSE      (1 example)                                               ║
@@ -265,7 +274,7 @@ And you will get a menu like this to select and run any example with a single ke
 ║                                                                                ║
 ╚════════════════════════════════════════════════════════════════════════════════╝
 
-  Enter category number [0-5]:
+  Enter category number [0-6]:
 ```
 
 ---
@@ -292,6 +301,35 @@ And you will get a menu like this to select and run any example with a single ke
 | 14  | [ftp_safety_status.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_safety_status.py)                     | Read safety signals: E-Stop, deadman, fence open, TP enable, and more                 |
 | 15  | [ftp_summary_diagnostic.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_summary_diagnostic.py)           | Get a complete diagnostic snapshot: position, safety, I/O, features, programs         |
 | 16  | [ftp_upload_file.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_upload_file.py)                         | Upload a local file to the robot controller                                           |
+
+#### 🌐 CGTP - Web Server Protocol
+
+| #   | Example                                                                                                                              | Description                                                                               |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| 1   | [cgtp_batch_read.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_batch_read.py)                         | Read multiple variables (numeric, string, position registers) in a single batch operation |
+| 2   | [cgtp_batch_write.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_batch_write.py)                       | Write multiple variables to the controller in a single batch operation                    |
+| 3   | [cgtp_change_active_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_change_active_program.py)   | Change the active TP program on the controller                                            |
+| 4   | [cgtp_create_delete_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_create_delete_program.py)   | Create a new TP program and optionally delete it                                          |
+| 5   | [cgtp_http_files.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_http_files.py)                         | List variable files, TP programs, diagnostic files via HTTP and download as string        |
+| 6   | [cgtp_kinematics.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_kinematics.py)                         | Compute forward and inverse kinematics on the controller via CGTP                         |
+| 7   | [cgtp_list_read_files.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_list_read_files.py)               | List files on the controller and read file content as string                              |
+| 8   | [cgtp_pause_abort.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_pause_abort.py)                       | Pause all running programs and abort a specific task                                      |
+| 9   | [cgtp_program_properties.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_program_properties.py)         | Read and write program properties: comment, owner, stack size, ignore pause, etc.         |
+| 10  | [cgtp_read_current_position.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_current_position.py)   | Read the current Cartesian and joint position of the robot                                |
+| 11  | [cgtp_read_io_comments.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_io_comments.py)             | Read input and output comments for Robot, Digital, Group, or Analog I/O                   |
+| 12  | [cgtp_read_numeric_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_numeric_registers.py) | Read all numeric registers (R[]) with comments, or a single register                      |
+| 13  | [cgtp_read_position_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_position_register.py) | Read a position register PR[index] with comment and position data                         |
+| 14  | [cgtp_read_set_comments.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_set_comments.py)           | Read all comments for registers or I/O and set a comment                                  |
+| 15  | [cgtp_read_string_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_string_registers.py)   | Read all string registers (SR[]) with comments and values                                 |
+| 16  | [cgtp_read_variable.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_variable.py)                   | Read a system or program variable as string or typed value                                |
+| 17  | [cgtp_read_write_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_write_io.py)                   | Read and write I/O ports (DI, DO, RI, RO, GI, GO, AI, AO, Flag)                           |
+| 18  | [cgtp_rename_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_rename_program.py)                 | Rename a TP program on the controller                                                     |
+| 19  | [cgtp_select_run_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_select_run_program.py)         | Select a TP program and run it from a given line                                          |
+| 20  | [cgtp_simulate_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_simulate_io.py)                       | Simulate, unsimulate, and check simulation status of I/O ports                            |
+| 21  | [cgtp_user_alarms.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_user_alarms.py)                       | Read user alarm definitions and set alarm severity                                        |
+| 22  | [cgtp_write_numeric_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_write_numeric_register.py) | Write an integer or real value to a numeric register R[index]                             |
+| 23  | [cgtp_write_string_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_write_string_register.py)   | Write a string value to string register SR[index]                                         |
+| 24  | [cgtp_write_variable.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_write_variable.py)                 | Write a numeric value to a system or program variable                                     |
 
 #### ⚡ SNPX - High-Speed Industrial Protocol
 
@@ -344,6 +382,85 @@ And you will get a menu like this to select and run any example with a single ke
 ---
 
 ## 📌 Feature Documentation
+
+### 🌐 CGTP - Web Server Protocol
+
+CGTP (Controller Gateway Transfer Protocol) communicates with the robot controller's **built-in web server** via HTTP. It provides a comprehensive API for program management, variable access, register operations, I/O control, and kinematics — all through a single protocol.
+
+**What you can do:**
+
+- **Full program lifecycle** - create, delete, rename, select, run, pause, and abort TP programs
+- **Read and write program properties** - comment, owner, stack size, ignore pause, write protect, sub-type
+- **Read/write system and program variables** with type information
+- **Read/write numeric registers** (R[]) as integer or real, with comments
+- **Read/write string registers** (SR[]) with comments
+- **Read position registers** (PR[]) with Cartesian and joint data
+- **Read/write I/O ports** - DI, DO, RI, RO, GI, GO, AI, AO, Flag
+- **Simulate and unsimulate I/O** for testing without physical devices
+- **Read current Cartesian and joint position** of the robot
+- **Forward and inverse kinematics** computed on the controller
+- **Batch read/write** multiple variables in a single operation for maximum efficiency
+- **Read and set comments** for registers, I/O ports, and user alarms
+- **Read user alarm** definitions and set severity
+- **List and read files** from the controller's file system
+- **HTTP file access** - list and download variable files, TP programs, diagnostic files
+
+**Quick example:**
+
+```python
+from underautomation.fanuc.fanuc_robot import FanucRobot
+from underautomation.fanuc.connection_parameters import ConnectionParameters
+from underautomation.fanuc.cgtp.cgtp_io_port_type import CgtpIoPortType
+from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_variables import CgtpBatchVariables
+
+robot = FanucRobot()
+params = ConnectionParameters("192.168.0.1")
+params.cgtp.enable = True
+params.cgtp.login = ""       # HTTP Basic auth (optional)
+params.cgtp.password = ""
+robot.connect(params)
+
+# Read/write variables
+value = robot.cgtp.read_variable_as_string("$MCR.$GENOVERRIDE")
+robot.cgtp.write_variable("$MCR.$GENOVERRIDE", 50)
+
+# Read a numeric register
+reg = robot.cgtp.read_numeric_register_with_comment(1)
+print(f"R[1] = {reg}")
+
+# Write registers
+robot.cgtp.write_numeric_register_as_integer(1, 42)
+robot.cgtp.write_string_register(1, "Hello CGTP")
+
+# Program control
+robot.cgtp.select_program("MAIN", 1)
+robot.cgtp.run_program("MAIN")
+robot.cgtp.pause_all_programs()
+robot.cgtp.abort_task("MAIN")
+
+# I/O
+value = robot.cgtp.read_io(CgtpIoPortType.DO, 1)
+robot.cgtp.write_io(CgtpIoPortType.DO, 1, 1)
+robot.cgtp.simulate_io(CgtpIoPortType.DI, 3)
+
+# Current position
+cart = robot.cgtp.read_cartesian_position(1)
+print(f"X={cart.x:.3f}, Y={cart.y:.3f}, Z={cart.z:.3f}")
+
+# Batch operations (read multiple variables in one call)
+batch = CgtpBatchVariables()
+batch.add_numeric_register(1)
+batch.add_numeric_register(2)
+batch.add_string_register(1)
+batch.add_variable("$MCR.$GENOVERRIDE")
+robot.cgtp.read_batch_variables(batch)
+for var in batch:
+    print(f"{var.name} = {var.string_value}")
+
+robot.disconnect()
+```
+
+---
 
 ### 🖥️ Telnet KCL - Remote Command Interface
 

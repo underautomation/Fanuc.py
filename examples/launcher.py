@@ -15,6 +15,7 @@ from pathlib import Path
 EXAMPLES_DIR = Path(__file__).parent
 IGNORED_FILES = {"__init__.py", "launcher.py"}
 CATEGORY_ICONS = {
+    "cgtp":       "🌐",
     "ftp":        "📂",
     "kinematics": "🦾",
     "snpx":       "⚡",
@@ -22,6 +23,7 @@ CATEGORY_ICONS = {
     "license":    "🔑",
 }
 CATEGORY_DESCRIPTIONS = {
+    "cgtp":       "CGTP Web Server - programs, variables, registers, I/O, kinematics",
     "ftp":        "File Transfer Protocol - read/write files, registers, diagnostics",
     "kinematics": "Kinematics - offline forward & inverse kinematics, no connection needed",
     "snpx":       "SNPX industrial protocol - fast real-time register & I/O access",

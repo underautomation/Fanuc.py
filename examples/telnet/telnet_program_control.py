@@ -85,7 +85,7 @@ try:
     print(f"\n[2/5] Pausing program '{prog_name}'...")
     result = robot.telnet.pause(prog_name)
     if result.succeed:
-        print(f"  Program paused successfully.")
+        print("  Program paused successfully.")
     else:
         print(f"  Error: {result.error_text}")
 
@@ -119,7 +119,7 @@ try:
     print(f"\n[5/5] Aborting program '{prog_name}'...")
     result = robot.telnet.abort(prog_name)
     if result.succeed:
-        print(f"  Program aborted successfully.")
+        print("  Program aborted successfully.")
     else:
         print(f"  Error: {result.error_text}")
 

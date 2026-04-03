@@ -15,7 +15,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from examples import connect_robot
-from underautomation.fanuc.ftp.variables.value_kind import ValueKind
+from underautomation.fanuc.common.files.variables.value_kind import ValueKind
 
 # ==============================================================================
 # Display helpers

@@ -31,7 +31,7 @@ try:
         old_value = robot.snpx.string_registers.read(sr_num)
         print(f"  Current SR[{sr_num}] = \"{old_value}\"")
 
-        new_value = input(f"  Enter new string value: ").strip()
+        new_value = input("  Enter new string value: ").strip()
 
         # Write new value
         robot.snpx.string_registers.write(sr_num, new_value)

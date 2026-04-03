@@ -112,7 +112,7 @@ try:
 
         print(f"\n  PR[{pr_num}] updated value:")
         if updated_cart._instance:
-            print(f"    Cartesian:")
+            print("    Cartesian:")
             print(f"      X = {updated_cart.x:.3f} mm")
             print(f"      Y = {updated_cart.y:.3f} mm")
             print(f"      Z = {updated_cart.z:.3f} mm")
@@ -121,7 +121,7 @@ try:
             print(f"      R = {updated_cart.r:.3f} deg")
 
         if updated_joints._instance:
-            print(f"    Joints:")
+            print("    Joints:")
             print(f"      J1 = {updated_joints.j1:.3f} deg")
             print(f"      J2 = {updated_joints.j2:.3f} deg")
             print(f"      J3 = {updated_joints.j3:.3f} deg")

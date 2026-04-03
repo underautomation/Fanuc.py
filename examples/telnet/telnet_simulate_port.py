@@ -10,7 +10,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from examples import connect_robot
-from underautomation.fanuc.telnet.kcl_ports import KCLPorts
+from underautomation.fanuc.common.kcl.kcl_ports import KCLPorts
 
 print("=" * 60)
 print("  FANUC SDK - Telnet: Simulate / Unsimulate Port")
@@ -46,7 +46,7 @@ try:
             if port_name not in port_map:
                 print("  Unknown port type.")
                 continue
-            index = int(input(f"Port index: "))
+            index = int(input("Port index: "))
             value = int(input("Simulated value (0 or 1): "))
 
             result = robot.telnet.simulate(port_map[port_name], index, value)
@@ -60,7 +60,7 @@ try:
             if port_name not in port_map:
                 print("  Unknown port type.")
                 continue
-            index = int(input(f"Port index: "))
+            index = int(input("Port index: "))
 
             result = robot.telnet.unsimulate(port_map[port_name], index)
             if result.succeed:
