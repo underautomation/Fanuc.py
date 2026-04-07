@@ -14,10 +14,10 @@ from underautomation.fanuc.cgtp.cgtp_comment_io_type import CgtpCommentIoType
 from underautomation.fanuc.common.position_register_with_comment import PositionRegisterWithComment
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_read_result import CgtpBatchReadResult
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_variables import CgtpBatchVariables
-from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_write_result import CgtpBatchWriteResult
-from underautomation.fanuc.cgtp.cgtp_io_port_type import CgtpIoPortType
 from underautomation.fanuc.common.cartesian_position import CartesianPosition
 from underautomation.fanuc.common.joints_position import JointsPosition
+from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_write_result import CgtpBatchWriteResult
+from underautomation.fanuc.cgtp.cgtp_io_port_type import CgtpIoPortType
 from UnderAutomation.Fanuc.Cgtp import CgtpClientBase as cgtp_client_base
 from UnderAutomation.Fanuc.Common import Languages as languages
 from UnderAutomation.Fanuc.Cgtp import CgtpProgramSubType as cgtp_program_sub_type
@@ -237,6 +237,24 @@ class CgtpClientBase:
 		:returns: A result object containing the controller firmware version.
 		'''
 		return CgtpBatchReadResult(self._instance.ReadBatchVariables(variables._instance if variables else None))
+
+	def write_position_register_as_cartesian(self, index: int, value: CartesianPosition, groupNum: int=1) -> None:
+		'''Write a cartesian position value to a position register (PR[])
+
+		:param index: 1-based register index.
+		:param value: Cartesian position value to write.
+		:param groupNum: Motion group number (1-based). Default is 1.
+		'''
+		self._instance.WritePositionRegisterAsCartesian(index, value._instance if value else None, groupNum)
+
+	def write_position_register_as_joint(self, index: int, value: JointsPosition, groupNum: int=1) -> None:
+		'''Write a joint position value to a position register (PR[])
+
+		:param index: 1-based register index.
+		:param value: Joint position value to write.
+		:param groupNum: Motion group number (1-based). Default is 1.
+		'''
+		self._instance.WritePositionRegisterAsJoint(index, value._instance if value else None, groupNum)
 
 	def write_batch_variables(self, variables: CgtpBatchVariables) -> CgtpBatchWriteResult:
 		'''Write multiple variables to the controller in a single batch operation.
