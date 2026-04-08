@@ -2,7 +2,7 @@
 Kinematics - Forward & Inverse Kinematics
 ===========================================
 Compute forward kinematics (FK) from joint angles and inverse kinematics (IK)
-from a cartesian position, entirely offline — no robot connection or license required.
+from a cartesian position, entirely offline : no robot connection or license required.
 
 Steps:
   1. Select a robot model from the built-in catalogue
@@ -120,7 +120,7 @@ print(f"\nComputing forward kinematics for J=[{j1:.2f}, {j2:.2f}, {j3:.2f}, {j4:
 
 fk_pos = KinematicsUtils.forward_kinematics(joints_rad, dh)
 
-print(f"\nFK result — Cartesian position:")
+print(f"\nFK result : Cartesian position:")
 print("-" * 40)
 print(f"  X = {fk_pos.x:>12.4f} mm")
 print(f"  Y = {fk_pos.y:>12.4f} mm")

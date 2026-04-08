@@ -160,3 +160,4 @@ cython_debug/
 
 # Project-specific: Robot configuration (local only)
 examples/robot_config.json
+/.vscode/launch.json

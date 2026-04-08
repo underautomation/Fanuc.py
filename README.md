@@ -385,7 +385,7 @@ And you will get a menu like this to select and run any example with a single ke
 
 ### 🌐 CGTP - Web Server Protocol
 
-CGTP (Controller Gateway Transfer Protocol) communicates with the robot controller's **built-in web server** via HTTP. It provides a comprehensive API for program management, variable access, register operations, I/O control, and kinematics — all through a single protocol.
+CGTP (Controller Gateway Transfer Protocol) communicates with the robot controller's **built-in web server** via HTTP. It provides a comprehensive API for program management, variable access, register operations, I/O control, and kinematics : all through a single protocol.
 
 **What you can do:**
 
@@ -588,7 +588,7 @@ robot.disconnect()
 
 ### 📐 Kinematics - Offline Forward & Inverse Kinematics
 
-The kinematics module lets you compute **forward kinematics** (joint angles → Cartesian position) and **inverse kinematics** (Cartesian position → all joint angle solutions) **entirely offline** — no robot connection or license required.
+The kinematics module lets you compute **forward kinematics** (joint angles → Cartesian position) and **inverse kinematics** (Cartesian position → all joint angle solutions) **entirely offline** : no robot connection or license required.
 
 It includes built-in Denavit-Hartenberg parameters for **80+ FANUC robot models** (CRX collaborative and standard OPW arms).
 
@@ -697,7 +697,7 @@ Enter joint angles in degrees (press Enter for 0):
 
 Computing forward kinematics for J=[10.00, 20.00, 40.00, 10.00, -10.00, 0.00] deg ...
 
-FK result — Cartesian position:
+FK result : Cartesian position:
 ----------------------------------------
   X =     735.4571 mm
   Y =     -25.2181 mm
