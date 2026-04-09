@@ -390,6 +390,8 @@ CGTP (Controller Gateway Transfer Protocol) communicates with the robot controll
 **What you can do:**
 
 - **Full program lifecycle** - create, delete, rename, select, run, pause, and abort TP programs
+- **List programs** - enumerate all TP or Karel programs on the controller, filtered by type and sub-type
+- **Source code editing** - insert, replace, and delete lines in TP programs directly on the controller (firmware V9.10+)
 - **Read and write program properties** - comment, owner, stack size, ignore pause, write protect, sub-type
 - **Read/write system and program variables** with type information
 - **Read/write numeric registers** (R[]) as integer or real, with comments
@@ -437,6 +439,16 @@ robot.cgtp.select_program("MAIN", 1)
 robot.cgtp.run_program("MAIN")
 robot.cgtp.pause_all_programs()
 robot.cgtp.abort_task("MAIN")
+
+# List all TP programs
+programs = robot.cgtp.list_tp_programs()
+for prog in programs:
+    print(prog)
+
+# Source code editing (firmware V9.10+)
+robot.cgtp.insert_source_line("MY_PROGRAM", "L P[5] 100mm/sec FINE", 3)
+robot.cgtp.replace_source_line("MY_PROGRAM", "J P[1] 50% FINE", 5)
+robot.cgtp.delete_source_lines("MY_PROGRAM", 4, 2)
 
 # I/O
 value = robot.cgtp.read_io(CgtpIoPortType.DO, 1)
