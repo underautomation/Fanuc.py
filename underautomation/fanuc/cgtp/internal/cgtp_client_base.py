@@ -4,6 +4,7 @@ from underautomation.fanuc.cgtp.internal.cgtp_kcl_client import CgtpKclClient
 from underautomation.fanuc.cgtp.internal.cgtp_http_client import CgtpHttpClient
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.cgtp.cgtp_program_sub_type import CgtpProgramSubType
+from underautomation.fanuc.cgtp.cgtp_program_type import CgtpProgramType
 from underautomation.fanuc.cgtp.cgtp_variable_value import CgtpVariableValue
 from underautomation.fanuc.cgtp.cgtp_comment_type import CgtpCommentType
 from underautomation.fanuc.common.numeric_register_with_comment import NumericRegisterWithComment
@@ -18,9 +19,10 @@ from underautomation.fanuc.common.cartesian_position import CartesianPosition
 from underautomation.fanuc.common.joints_position import JointsPosition
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_write_result import CgtpBatchWriteResult
 from underautomation.fanuc.cgtp.cgtp_io_port_type import CgtpIoPortType
-from UnderAutomation.Fanuc.Cgtp import CgtpClientBase as cgtp_client_base
+from UnderAutomation.Fanuc.Cgtp.Internal import CgtpClientBase as cgtp_client_base
 from UnderAutomation.Fanuc.Common import Languages as languages
 from UnderAutomation.Fanuc.Cgtp import CgtpProgramSubType as cgtp_program_sub_type
+from UnderAutomation.Fanuc.Cgtp import CgtpProgramType as cgtp_program_type
 from UnderAutomation.Fanuc.Cgtp import CgtpCommentType as cgtp_comment_type
 from UnderAutomation.Fanuc.Cgtp import CgtpCommentIoType as cgtp_comment_io_type
 from UnderAutomation.Fanuc.Cgtp import CgtpIoPortType as cgtp_io_port_type
@@ -114,6 +116,30 @@ class CgtpClientBase:
 	def rename_program(self, sourceName: str, newName: str) -> None:
 		'''Rename program sourceName to newName. From firmware 9.10'''
 		self._instance.RenameProgram(sourceName, newName)
+
+	def list_programs(self, type: CgtpProgramType, subType: CgtpProgramSubType) -> typing.List[str]:
+		'''List all TP or Karel programs on the controller
+
+		:param type: TP or Karel
+		:param subType: Sub-type of the program (none, macro, job, ...)
+		'''
+		return self._instance.ListPrograms(cgtp_program_type(int(type)), cgtp_program_sub_type(int(subType)))
+
+	def list_tp_programs(self) -> typing.List[str]:
+		'''List all TP programs on the controller, regardless of their sub-type.'''
+		return self._instance.ListTpPrograms()
+
+	def delete_source_lines(self, progName: str, lineNum: int, count: int=1) -> None:
+		'''Delete count lines starting at lineNum in program progName. From firmware 9.10'''
+		self._instance.DeleteSourceLines(progName, lineNum, count)
+
+	def insert_source_line(self, progName: str, lineContent: str, lineNum: int) -> None:
+		'''Insert a source line before lineNum in program progName. From firmware 9.10'''
+		self._instance.InsertSourceLine(progName, lineContent, lineNum)
+
+	def replace_source_line(self, progName: str, lineContent: str, lineNum: int) -> None:
+		'''Replace the source line at lineNum in program progName. From firmware 9.10'''
+		self._instance.ReplaceSourceLine(progName, lineContent, lineNum)
 
 	def run_program(self, progName: str, lineNum: int=1) -> None:
 		'''Run the specified program starting at lineNum. From firmware 9.30'''
