@@ -126,6 +126,7 @@ params.telnet.telnet_kcl_password="telnet_password"
 params.ftp.enable = True
 params.ftp.ftp_user = ""
 params.ftp.ftp_password = ""
+params.ftp.ftp_timeout_ms = 10000  # optional, default is 30 seconds
 
 # Enable CGTP Web Server
 params.cgtp.enable = True
