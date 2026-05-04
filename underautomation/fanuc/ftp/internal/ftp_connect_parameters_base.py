@@ -28,6 +28,15 @@ class FtpConnectParametersBase:
 	def ftp_password(self, value: str):
 		self._instance.FtpPassword = value
 
+	@property
+	def ftp_timeout_ms(self) -> int:
+		'''FTP connection timeout in milliseconds, default : 30000 (30 seconds)'''
+		return self._instance.FtpTimeoutMs
+
+	@ftp_timeout_ms.setter
+	def ftp_timeout_ms(self, value: int):
+		self._instance.FtpTimeoutMs = value
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

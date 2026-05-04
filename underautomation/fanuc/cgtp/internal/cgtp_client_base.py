@@ -5,6 +5,8 @@ from underautomation.fanuc.cgtp.internal.cgtp_http_client import CgtpHttpClient
 from underautomation.fanuc.common.languages import Languages
 from underautomation.fanuc.cgtp.cgtp_program_sub_type import CgtpProgramSubType
 from underautomation.fanuc.cgtp.cgtp_program_type import CgtpProgramType
+from underautomation.fanuc.common.cartesian_position import CartesianPosition
+from underautomation.fanuc.common.position import Position
 from underautomation.fanuc.cgtp.cgtp_variable_value import CgtpVariableValue
 from underautomation.fanuc.cgtp.cgtp_comment_type import CgtpCommentType
 from underautomation.fanuc.common.numeric_register_with_comment import NumericRegisterWithComment
@@ -15,7 +17,6 @@ from underautomation.fanuc.cgtp.cgtp_comment_io_type import CgtpCommentIoType
 from underautomation.fanuc.common.position_register_with_comment import PositionRegisterWithComment
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_read_result import CgtpBatchReadResult
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_variables import CgtpBatchVariables
-from underautomation.fanuc.common.cartesian_position import CartesianPosition
 from underautomation.fanuc.common.joints_position import JointsPosition
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_write_result import CgtpBatchWriteResult
 from underautomation.fanuc.cgtp.cgtp_io_port_type import CgtpIoPortType
@@ -140,6 +141,19 @@ class CgtpClientBase:
 	def replace_source_line(self, progName: str, lineContent: str, lineNum: int) -> None:
 		'''Replace the source line at lineNum in program progName. From firmware 9.10'''
 		self._instance.ReplaceSourceLine(progName, lineContent, lineNum)
+
+	def set_program_position_to_current_cartesian_position(self, progName: str, positionIndex: int, groupNumber: int=1) -> CartesianPosition:
+		'''Set position at index positionIndex to the current Cartesian position in program progName and return the updated position.'''
+		return CartesianPosition(None, None, None, None, None, None, None, self._instance.SetProgramPositionToCurrentCartesianPosition(progName, positionIndex, groupNumber))
+
+	def set_program_position(self, progName: str, positionIndex: int, position: Position) -> None:
+		'''Set position at index positionIndex in program progName to the given position. Supports both joint and Cartesian representations. Only the first motion group is supported via CGTP. From firmware 9.10
+
+		:param progName: Program name
+		:param positionIndex: 1-based position index in the program (P[n])
+		:param position: Position to write. Either CartesianPosition or JointsPosition must be set.
+		'''
+		self._instance.SetProgramPosition(progName, positionIndex, position._instance if position else None)
 
 	def run_program(self, progName: str, lineNum: int=1) -> None:
 		'''Run the specified program starting at lineNum. From firmware 9.30'''

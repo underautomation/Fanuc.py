@@ -12,14 +12,16 @@ class FtpClient(FtpClientBase):
 		else:
 			self._instance = _internal
 
-	def connect(self, ip: str, user: str, password: str) -> None:
+	def connect(self, ip: str, user: str, password: str, port: int=21, timeoutMs: int=30000) -> None:
 		'''Connect to a robot
 
 		:param ip: IP or network name of the robot
 		:param user: FTP username
 		:param password: FTP password for username
+		:param port: FTP port
+		:param timeoutMs: FTP connection timeout in milliseconds
 		'''
-		self._instance.Connect(ip, user, password)
+		self._instance.Connect(ip, user, password, port, timeoutMs)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

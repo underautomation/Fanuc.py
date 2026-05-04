@@ -1,30 +1,35 @@
-## CGTP Source Code Editing and Program Listing
+## CGTP: write position into a TP program
 
-New CGTP methods for editing TP program source code directly on the controller, and listing programs. These features require firmware **V9.10+** (source editing) or standard CGTP support (listing).
+`CgtpClient` has a new `set_program_position` method. It writes a Cartesian or joint position to a given position index (P[n]) inside a TP program. Only the first motion group is supported via CGTP.
 
-### List programs
+```python
+from underautomation.fanuc.common.position import Position
+from underautomation.fanuc.common.extended_cartesian_position import ExtendedCartesianPosition
+from underautomation.fanuc.common.joints_position import JointsPosition
 
-Retrieve all TP or Karel programs on the controller, filtered by type and sub-type.
+# Cartesian position
+position = Position(0, 1, None, ExtendedCartesianPosition(500, 200, 300, 0, 90, 0, 0, 0, 0))
+robot.cgtp.set_program_position("MY_PROG", 1, position)
 
-```csharp
-// List all TP programs (all sub-types)
-string[] tpPrograms = robot.Cgtp.ListTpPrograms();
-
-// List programs with a specific type and sub-type
-string[] macros = robot.Cgtp.ListPrograms(CgtpProgramType.Tp, CgtpProgramSubType.Macro);
+# Joint position
+joint_position = Position(0, 1, JointsPosition(j1=0, j2=0, j3=0, j4=0, j5=-90, j6=0), None)
+robot.cgtp.set_program_position("MY_PROG", 2, joint_position)
 ```
 
-### Source code editing
+## FTP connection timeout
 
-Insert, replace, or delete lines in a TP program on the controller.
+The `FtpConnectParameters` class has a new `ftp_timeout_ms` property. It controls the connection, read, and data transfer timeouts for all FTP operations. The default is 30,000 ms (30 seconds).
 
-```csharp
-// Insert a new line before line 3
-robot.Cgtp.InsertSourceLine("MY_PROGRAM", "L P[5] 100mm/sec FINE", 3);
+```python
+parameters.ftp.enable = True
+parameters.ftp.ftp_timeout_ms = 10000  # 10 seconds
+```
 
-// Replace line 5
-robot.Cgtp.ReplaceSourceLine("MY_PROGRAM", "J P[1] 50% FINE", 5);
+## CGTP: record current position into a program
 
-// Delete 2 lines starting at line 4
-robot.Cgtp.DeleteSourceLines("MY_PROGRAM", 4, 2);
+`CgtpClient` has a new `set_program_position_to_current_cartesian_position` method. It writes the robot's current Cartesian position to a given position index inside a TP program and returns the recorded position.
+
+```python
+pos = robot.cgtp.set_program_position_to_current_cartesian_position("MY_PROG", 1)
+print(f"Recorded: X={pos.x}, Y={pos.y}, Z={pos.z}")
 ```
