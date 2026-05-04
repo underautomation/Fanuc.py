@@ -451,6 +451,10 @@ robot.cgtp.insert_source_line("MY_PROGRAM", "L P[5] 100mm/sec FINE", 3)
 robot.cgtp.replace_source_line("MY_PROGRAM", "J P[1] 50% FINE", 5)
 robot.cgtp.delete_source_lines("MY_PROGRAM", 4, 2)
 
+# Write position data into a program (firmware V9.10+, first motion group only)
+position = Position(0, 1, None, ExtendedCartesianPosition(500, 200, 300, 0, 90, 0, 0, 0, 0))
+robot.cgtp.set_program_position("MY_PROG", 1, position)
+
 # I/O
 value = robot.cgtp.read_io(CgtpIoPortType.DO, 1)
 robot.cgtp.write_io(CgtpIoPortType.DO, 1, 1)
