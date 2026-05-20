@@ -12,6 +12,14 @@ class RealSystemVariables(SnpxWritableAssignableElements3[float, str, RealSystem
 		else:
 			self._instance = _internal
 
+	def create_batch_assignment(self, indexes: typing.List[str]) -> RealSystemVariablesBatchAssignment:
+		'''Creates a batch assignment for the specified indices.
+
+		:param indexes: The indices to include in the batch.
+		:returns: A batch assignment for the specified indices.
+		'''
+		return RealSystemVariablesBatchAssignment(self._instance.CreateBatchAssignment(indexes))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

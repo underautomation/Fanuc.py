@@ -33,6 +33,14 @@ class SimulationStatus(SnpxWritableAssignableElements3[bool, SimulationData, Sim
 		'''
 		self._instance.Write(simulation_type(int(type)), index, value)
 
+	def create_batch_assignment(self, indexes: typing.List[SimulationData]) -> SimulationStatusBatchAssignment:
+		'''Creates a batch assignment for the specified indices.
+
+		:param indexes: The indices to include in the batch.
+		:returns: A batch assignment for the specified indices.
+		'''
+		return SimulationStatusBatchAssignment(self._instance.CreateBatchAssignment([x._instance for x in indexes]))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

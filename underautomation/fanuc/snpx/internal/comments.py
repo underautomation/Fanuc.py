@@ -35,6 +35,14 @@ class Comments(SnpxWritableAssignableElements3[str, CommentData, CommentBatchAss
 		'''
 		self._instance.Write(comment_type(int(type)), index, value, stringLength)
 
+	def create_batch_assignment(self, indexes: typing.List[CommentData]) -> CommentBatchAssignment:
+		'''Creates a batch assignment for the specified indices.
+
+		:param indexes: The indices to include in the batch.
+		:returns: A batch assignment for the specified indices.
+		'''
+		return CommentBatchAssignment(self._instance.CreateBatchAssignment([x._instance for x in indexes]))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

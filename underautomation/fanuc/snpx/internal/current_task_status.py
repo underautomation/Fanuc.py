@@ -12,6 +12,9 @@ class CurrentTaskStatus(SnpxAssignableElements2[RobotTaskStatus, int]):
 		else:
 			self._instance = _internal
 
+	def read(self, index: int) -> RobotTaskStatus:
+		return RobotTaskStatus(self._instance.Read(index))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

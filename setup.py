@@ -34,7 +34,7 @@ setuptools.setup(
         "Topic :: Software Development :: Libraries",
     ],
     packages=setuptools.find_packages(include=["underautomation", "underautomation.*"]),
-    python_requires=">=3.7",
+    python_requires="<3.14,>=3.7",
     install_requires=[
         "pythonnet==3.0.5",
     ],

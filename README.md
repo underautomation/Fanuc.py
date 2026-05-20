@@ -3,7 +3,7 @@
 [![UnderAutomation Fanuc communication SDK](https://raw.githubusercontent.com/underautomation/Fanuc.NET/refs/heads/main/.github/assets/banner.png)](https://underautomation.com)
 
 [![PyPI](https://img.shields.io/pypi/v/UnderAutomation.Fanuc?label=PyPI&logo=pypi)](https://pypi.org/project/UnderAutomation.Fanuc/)
-[![Python](https://img.shields.io/badge/Python-3.7_|_3.8_|_3.9_|_3.10_|_3.11_|_3.12-blue?logo=python)](#)
+[![Python](https://img.shields.io/badge/Python-3.7_|_3.8_|_3.9_|_3.10_|_3.11_|_3.12_|_3.13-blue?logo=python)](#)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)](#)
 [![License](https://img.shields.io/badge/License-Commercial-red)](https://underautomation.com/fanuc/eula)
 

@@ -30,6 +30,9 @@ class CurrentPosition(SnpxAssignableElements2[Position, CurrentPositionRequest])
 		'''
 		return Position(None, None, None, None, self._instance.ReadUserFramePosition(userFrame, group))
 
+	def read(self, index: CurrentPositionRequest) -> Position:
+		return Position(None, None, None, None, self._instance.Read(index._instance if index else None))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

@@ -12,6 +12,9 @@ class AlarmAccess(SnpxAssignableElements2[RobotAlarm, int]):
 		else:
 			self._instance = _internal
 
+	def read(self, index: int) -> RobotAlarm:
+		return RobotAlarm(self._instance.Read(index))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 
