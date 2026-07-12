@@ -25,6 +25,11 @@ class RmiResponseBase:
 	def error_id(self, value: int):
 		self._instance.ErrorId = value
 
+	@property
+	def error_text(self) -> str:
+		'''Human-readable description of ErrorId. Empty string when there is no error.'''
+		return self._instance.ErrorText
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

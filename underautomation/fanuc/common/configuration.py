@@ -15,7 +15,7 @@ class Configuration:
 	def __init__(self, wristFlip: WristFlip, armUpDown: ArmUpDown, armLeftRight: ArmLeftRight, armFrontBack: ArmFrontBack, turnAxis1: int, turnAxis2: int, turnAxis3: int, _internal = 0):
 		'''Constructor with all configuration parameters'''
 		if(_internal == 0):
-			self._instance = configuration(wristFlip, armUpDown, armLeftRight, armFrontBack, turnAxis1, turnAxis2, turnAxis3)
+			self._instance = configuration(wrist_flip(int(wristFlip)), arm_up_down(int(armUpDown)), arm_left_right(int(armLeftRight)), arm_front_back(int(armFrontBack)), turnAxis1, turnAxis2, turnAxis3)
 		else:
 			self._instance = _internal
 

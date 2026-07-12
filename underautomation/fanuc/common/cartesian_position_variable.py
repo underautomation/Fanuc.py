@@ -12,7 +12,7 @@ class CartesianPositionVariable(CartesianPosition):
 		:param position: Cartesian position values
 		'''
 		if(_internal == 0):
-			self._instance = cartesian_position_variable(group, position)
+			self._instance = cartesian_position_variable(group, position._instance if position else None)
 		else:
 			self._instance = _internal
 

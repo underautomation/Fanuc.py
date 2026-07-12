@@ -12,7 +12,7 @@ class JointPositionVariable(JointsPosition):
 		:param position: Joint position values to copy.
 		'''
 		if(_internal == 0):
-			self._instance = joint_position_variable(group, position)
+			self._instance = joint_position_variable(group, position._instance if position else None)
 		else:
 			self._instance = _internal
 

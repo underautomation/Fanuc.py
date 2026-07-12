@@ -13,7 +13,7 @@ class SimulationData:
 		:param index: The 1-based index of the I/O.
 		'''
 		if(_internal == 0):
-			self._instance = simulation_data(type, index)
+			self._instance = simulation_data(simulation_type(int(type)), index)
 		else:
 			self._instance = _internal
 

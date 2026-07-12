@@ -14,7 +14,7 @@ class CommentData:
 		:param stringLength: The number of characters (must be even, >= 2). Default is 16.
 		'''
 		if(_internal == 0):
-			self._instance = comment_data(type, index, stringLength)
+			self._instance = comment_data(comment_type(int(type)), index, stringLength)
 		else:
 			self._instance = _internal
 

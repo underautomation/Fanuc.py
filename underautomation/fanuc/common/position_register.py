@@ -9,7 +9,7 @@ class PositionRegister:
 	def __init__(self, jointsPosition: JointPositionVariable, cartesianPosition: CartesianPositionVariable, _internal = 0):
 		'''Creates a position register from joint and Cartesian position values'''
 		if(_internal == 0):
-			self._instance = position_register(jointsPosition, cartesianPosition)
+			self._instance = position_register(jointsPosition._instance if jointsPosition else None, cartesianPosition._instance if cartesianPosition else None)
 		else:
 			self._instance = _internal
 

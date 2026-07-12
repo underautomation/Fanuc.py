@@ -23,6 +23,10 @@ class CartesianPositionWithUserFrame(CartesianPositionWithTool):
 		'''Frame ID in the controller'''
 		return self._instance.Frame
 
+	@frame.setter
+	def frame(self, value: int):
+		self._instance.Frame = value
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

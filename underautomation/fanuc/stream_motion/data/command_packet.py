@@ -12,7 +12,7 @@ class CommandPacket:
 	def __init__(self, dataStyle: DataStyle, motionData: MotionData, _internal = 0):
 		'''Constructor with motion data'''
 		if(_internal == 0):
-			self._instance = command_packet(dataStyle, motionData)
+			self._instance = command_packet(data_style(int(dataStyle)), motionData._instance if motionData else None)
 		else:
 			self._instance = _internal
 

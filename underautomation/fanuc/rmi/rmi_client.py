@@ -12,15 +12,14 @@ class RmiClient(RmiClientBase):
 		else:
 			self._instance = _internal
 
-	def connect(self, ip: str, port: int=16001, readTimeoutMs: int=3000, writeTimeoutMs: int=3000) -> None:
+	def connect(self, ip: str, port: int=16001, readTimeoutMs: int=2000) -> None:
 		'''Connect to the FANUC controller using the RMI protocol.
 
 		:param ip: Controller IP address or hostname.
 		:param port: Bootstrap port number.
 		:param readTimeoutMs: Read timeout in milliseconds.
-		:param writeTimeoutMs: Write timeout in milliseconds.
 		'''
-		self._instance.Connect(ip, port, readTimeoutMs, writeTimeoutMs)
+		self._instance.Connect(ip, port, readTimeoutMs)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

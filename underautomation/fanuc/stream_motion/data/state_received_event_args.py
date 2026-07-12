@@ -11,7 +11,7 @@ class StateReceivedEventArgs:
 		:param state: The state packet received from the robot
 		'''
 		if(_internal == 0):
-			self._instance = state_received_event_args(state)
+			self._instance = state_received_event_args(state._instance if state else None)
 		else:
 			self._instance = _internal
 

@@ -2,14 +2,15 @@ from __future__ import annotations
 import typing
 from underautomation.fanuc.common.configuration import Configuration
 from underautomation.fanuc.common.xyz_position import XYZPosition
+from underautomation.fanuc.common.xyzwpr_position import XYZWPRPosition
 from UnderAutomation.Fanuc.Common import CartesianPosition as cartesian_position
 
-class CartesianPosition(XYZPosition):
+class CartesianPosition(XYZWPRPosition):
 	'''Fanuc cartesian position and rotations'''
 	def __init__(self, x: float, y: float, z: float, w: float, p: float, r: float, configuration: Configuration, _internal = 0):
 		'''Constructor with position, rotations and configuration'''
 		if(_internal == 0):
-			self._instance = cartesian_position(x, y, z, w, p, r, configuration)
+			self._instance = cartesian_position(x, y, z, w, p, r, configuration._instance if configuration else None)
 		else:
 			self._instance = _internal
 
@@ -43,36 +44,13 @@ class CartesianPosition(XYZPosition):
 		return cartesian_position.IsNear(a._instance if a else None, b._instance if b else None, mmTolerance, degreesTolerance)
 
 	@property
-	def w(self) -> float:
-		'''W rotation in degrees (Rx)'''
-		return self._instance.W
-
-	@w.setter
-	def w(self, value: float):
-		self._instance.W = value
-
-	@property
-	def p(self) -> float:
-		'''P rotation in degrees (Ry)'''
-		return self._instance.P
-
-	@p.setter
-	def p(self, value: float):
-		self._instance.P = value
-
-	@property
-	def r(self) -> float:
-		'''R rotation in degrees (Rz)'''
-		return self._instance.R
-
-	@r.setter
-	def r(self, value: float):
-		self._instance.R = value
-
-	@property
 	def configuration(self) -> Configuration:
 		'''Position configuration'''
 		return Configuration(None, None, None, None, None, None, None, self._instance.Configuration)
+
+	@configuration.setter
+	def configuration(self, value: Configuration):
+		self._instance.Configuration = value._instance if value else None
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

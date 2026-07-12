@@ -9,7 +9,7 @@ class Position:
 	def __init__(self, userFrame: int, userTool: int, jointsPosition: JointsPosition, cartesianPosition: ExtendedCartesianPosition, _internal = 0):
 		'''Constructor with user frame, tool, joints and cartesian position'''
 		if(_internal == 0):
-			self._instance = position(userFrame, userTool, jointsPosition, cartesianPosition)
+			self._instance = position(userFrame, userTool, jointsPosition._instance if jointsPosition else None, cartesianPosition._instance if cartesianPosition else None)
 		else:
 			self._instance = _internal
 

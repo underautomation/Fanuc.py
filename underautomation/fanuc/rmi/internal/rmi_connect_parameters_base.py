@@ -21,21 +21,12 @@ class RmiConnectParametersBase:
 
 	@property
 	def read_timeout_ms(self) -> int:
-		'''Read timeout in milliseconds.'''
+		'''RMI read timeout in milliseconds.'''
 		return self._instance.ReadTimeoutMs
 
 	@read_timeout_ms.setter
 	def read_timeout_ms(self, value: int):
 		self._instance.ReadTimeoutMs = value
-
-	@property
-	def write_timeout_ms(self) -> int:
-		'''Write timeout in milliseconds.'''
-		return self._instance.WriteTimeoutMs
-
-	@write_timeout_ms.setter
-	def write_timeout_ms(self, value: int):
-		self._instance.WriteTimeoutMs = value
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
@@ -54,8 +45,5 @@ class RmiConnectParametersBase:
 # Default RMI bootstrap port (16001).
 RmiConnectParametersBase.DEFAULT_PORT = rmi_connect_parameters_base.DEFAULT_PORT
 
-# Default read timeout in milliseconds (3000).
+# Default RMI read timeout (infinite).
 RmiConnectParametersBase.DEFAULT_READ_TIMEOUT_MS = rmi_connect_parameters_base.DEFAULT_READ_TIMEOUT_MS
-
-# Default write timeout in milliseconds (3000).
-RmiConnectParametersBase.DEFAULT_WRITE_TIMEOUT_MS = rmi_connect_parameters_base.DEFAULT_WRITE_TIMEOUT_MS

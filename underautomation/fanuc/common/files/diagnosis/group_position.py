@@ -37,7 +37,7 @@ class GroupPosition:
 	@property
 	def world_positions(self) -> typing.List[CartesianPositionWithTool]:
 		'''Position of each tools in world coordinates'''
-		return [CartesianPositionWithTool(None, None, None, None, None, None, None, x) for x in self._instance.WorldPositions]
+		return [CartesianPositionWithTool(None, None, None, None, None, None, None, None, None, None, x) for x in self._instance.WorldPositions]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

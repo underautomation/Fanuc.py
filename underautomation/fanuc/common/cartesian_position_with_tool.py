@@ -1,14 +1,14 @@
 from __future__ import annotations
 import typing
-from underautomation.fanuc.common.cartesian_position import CartesianPosition
+from underautomation.fanuc.common.extended_cartesian_position import ExtendedCartesianPosition
 from UnderAutomation.Fanuc.Common import CartesianPositionWithTool as cartesian_position_with_tool
 
-class CartesianPositionWithTool(CartesianPosition):
+class CartesianPositionWithTool(ExtendedCartesianPosition):
 	'''A cartesian position with a tool ID'''
-	def __init__(self, x: float, y: float, z: float, w: float, p: float, r: float, tool: int, _internal = 0):
+	def __init__(self, x: float, y: float, z: float, w: float, p: float, r: float, e1: float, e2: float, e3: float, tool: int, _internal = 0):
 		'''Constructor with position, rotations and tool ID'''
 		if(_internal == 0):
-			self._instance = cartesian_position_with_tool(x, y, z, w, p, r, tool)
+			self._instance = cartesian_position_with_tool(x, y, z, w, p, r, e1, e2, e3, tool)
 		else:
 			self._instance = _internal
 

@@ -3,6 +3,7 @@ import typing
 from underautomation.fanuc.common.files.on_progress_delegate import OnProgressDelegate
 from underautomation.fanuc.ftp.ftp_list_item import FtpListItem
 from UnderAutomation.Fanuc.Ftp.Internal import FtpDirectFileHandling as ftp_direct_file_handling
+from  import FtpExistsBehavior as ftp_exists_behavior
 
 class FtpDirectFileHandling:
 	'''Methods to handle files on a Fanuc controller (upload, download, delete, enumerate, ...)'''
@@ -12,16 +13,17 @@ class FtpDirectFileHandling:
 		else:
 			self._instance = _internal
 
-	def upload_file_to_controller(self, localPath: str, remotePath: str, createRemoteDir: bool=False, progress: OnProgressDelegate=None) -> bool:
+	def upload_file_to_controller(self, localPath: str, remotePath: str, createRemoteDir: bool=False, progress: OnProgressDelegate=None, existsBehavior: typing.Any=typing.Any.Overwrite) -> bool:
 		'''Uploads the specified file directly onto the controller. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
 
 		:param localPath: The full or relative path to the file on the local file system
 		:param remotePath: The full or relative path to the file on the controller
 		:param createRemoteDir: Create the remote directory if it does not exist. Slows down upload due to additional checks required.
 		:param progress: Track upload progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
+		:param existsBehavior: Specifies the behavior when the file already exists on the controller.
 		:returns: If true then the file was uploaded, false otherwise.
 		'''
-		return self._instance.UploadFileToController(localPath, remotePath, createRemoteDir, progress._instance if progress else None)
+		return self._instance.UploadFileToController(localPath, remotePath, createRemoteDir, progress._instance if progress else None, ftp_exists_behavior(int(existsBehavior)))
 
 	def upload_files_to_controller(self, localPaths: typing.List[str], remoteDir: str, progress: OnProgressDelegate=None) -> typing.List[str]:
 		'''Uploads the given file paths to a single folder on the controller. All files are placed directly into the given folder regardless of their path on the local filesystem. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
