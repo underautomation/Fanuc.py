@@ -1,9 +1,10 @@
 from __future__ import annotations
 import typing
 from underautomation.fanuc.common.files.on_progress_delegate import OnProgressDelegate
+from underautomation.fanuc.ftp.ftp_exists_behavior import FtpExistsBehavior
 from underautomation.fanuc.ftp.ftp_list_item import FtpListItem
 from UnderAutomation.Fanuc.Ftp.Internal import FtpDirectFileHandling as ftp_direct_file_handling
-from  import FtpExistsBehavior as ftp_exists_behavior
+from UnderAutomation.Fanuc.Ftp import FtpExistsBehavior as ftp_exists_behavior
 
 class FtpDirectFileHandling:
 	'''Methods to handle files on a Fanuc controller (upload, download, delete, enumerate, ...)'''
@@ -13,7 +14,7 @@ class FtpDirectFileHandling:
 		else:
 			self._instance = _internal
 
-	def upload_file_to_controller(self, localPath: str, remotePath: str, createRemoteDir: bool=False, progress: OnProgressDelegate=None, existsBehavior: typing.Any=typing.Any.Overwrite) -> bool:
+	def upload_file_to_controller(self, localPath: str, remotePath: str, createRemoteDir: bool=False, progress: OnProgressDelegate=None, existsBehavior: FtpExistsBehavior=FtpExistsBehavior.Overwrite) -> bool:
 		'''Uploads the specified file directly onto the controller. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
 
 		:param localPath: The full or relative path to the file on the local file system
