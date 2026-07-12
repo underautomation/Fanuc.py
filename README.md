@@ -753,6 +753,59 @@ Done.
 
 ---
 
+### 🏎️ RMI - Remote Motion Interface
+
+RMI (Remote Motion Interface, option R912) lets you send TP-equivalent motion instructions to the robot in real time. Before using RMI, make sure the teach pendant is disabled and the controller is in AUTO mode.
+
+**What you can do:**
+
+- Send linear, joint, circular, and spline motions
+- Use Cartesian or joint-angle target representations
+- Track each instruction with a status object (queued, executing, completed, error)
+- Read/write I/O, frames, registers, and system variables
+- Subscribe to controller events (fault, position record)
+
+**Quick example:**
+
+```python
+from underautomation.fanuc.fanuc_robot import FanucRobot
+from underautomation.fanuc.connection_parameters import ConnectionParameters
+from underautomation.fanuc.rmi.tp_instructions.cartesian_linear_instructions import LinearMotionTpInstruction
+from underautomation.fanuc.rmi.tp_instructions.simple_instructions import WaitTimeTpInstruction
+from underautomation.fanuc.rmi.data.enums import RmiLinearSpeedType, RmiTerminationType
+from underautomation.fanuc.common.cartesian_position_with_user_frame import CartesianPositionWithUserFrame
+
+robot = FanucRobot()
+params = ConnectionParameters("192.168.0.1")
+params.rmi.enable = True
+robot.connect(params)
+
+# Start RMI_MOVE on the controller (TP must be OFF, controller in AUTO)
+robot.rmi.initialize()
+
+# Set speed override
+robot.rmi.set_override(80)
+
+# Linear motion to a Cartesian target (tool 1, frame 0)
+instr = LinearMotionTpInstruction()
+instr.speed_type = RmiLinearSpeedType.MM_SEC
+instr.speed = 100
+instr.term_type = RmiTerminationType.FINE
+instr.target = CartesianPositionWithUserFrame(500, 200, 300, 0, 90, 0, 1, 0)
+
+r = robot.rmi.send_tp_instruction(instr)
+r.wait_for_completion()
+
+# Wait 0.5 seconds
+robot.rmi.send_tp_instruction(WaitTimeTpInstruction(seconds=0.5))
+
+# Abort and disconnect when done
+robot.rmi.abort()
+robot.disconnect()
+```
+
+---
+
 ### 📂 FTP - File Transfer & Variable Management
 
 FTP gives you access to the robot's **file system** and **internal variable files**. It's ideal for bulk data access, diagnostics, backups, and program management.
