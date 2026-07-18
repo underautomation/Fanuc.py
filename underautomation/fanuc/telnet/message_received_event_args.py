@@ -10,12 +10,6 @@ class MessageReceivedEventArgs:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def is_reset(self) -> bool:
 		'''Gets a value indicating whether the message is a reset (empty message).'''

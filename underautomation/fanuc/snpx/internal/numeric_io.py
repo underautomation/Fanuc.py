@@ -26,13 +26,14 @@ class NumericIO(SnpxElements2[int, int]):
 		'''
 		return self._instance.Read(firstIndex, count)
 
-	def write(self, firstIndex: int, values: typing.List[int]) -> None:
-		'''Writes values to consecutive numeric I/O.
+	def write(self, firstIndex_or_index: int, value_or_values: int | typing.List[int]) -> None:
+		'''Writes a value to the numeric I/O at the specified index.
+		Writes values to consecutive numeric I/O.
 
-		:param firstIndex: The first I/O index (1-based).
-		:param values: The values to write.
+		:param firstIndex_or_index: The I/O index (1-based). — or — The first I/O index (1-based).
+		:param value_or_values: The value to write. — or — The values to write.
 		'''
-		self._instance.Write(firstIndex, values)
+		self._instance.Write(firstIndex_or_index, value_or_values)
 
 	@property
 	def segment_selector(self) -> SegmentSelector:

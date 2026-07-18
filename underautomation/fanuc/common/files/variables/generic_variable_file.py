@@ -17,15 +17,9 @@ class GenericVariableFile(IGenericVariableType, IFanucContent):
 		'''Gets a variable by name (case-insensitive)'''
 		return GenericVariable(self._instance.GetField(name))
 
-	def generate_va(self, stream: typing.Any) -> None:
-		'''Generates a .va file and writes it to the specified stream'''
-		self._instance.GenerateVa(stream)
-
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
+	def generate_va(self, pathToVa: str) -> None:
+		'''Generates a .va file and writes it to the specified path'''
+		self._instance.GenerateVa(pathToVa)
 
 	def generated_va(self) -> str:
 		'''Generates the content of a .va variable file as a string.'''

@@ -15,9 +15,6 @@ class ErrorListReader(FileReader1[ErrorList]):
 		else:
 			self._instance = _internal
 
-	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str=None) -> ErrorList:
-		return ErrorList(self._instance.ReadFile(fileStream, languages(int(language)), fileName))
-
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

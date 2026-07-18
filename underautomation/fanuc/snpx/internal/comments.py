@@ -15,6 +15,14 @@ class Comments(SnpxWritableAssignableElements3[str, CommentData, CommentBatchAss
 		else:
 			self._instance = _internal
 
+	def create_batch_assignment(self, indexes: typing.List[CommentData]) -> CommentBatchAssignment:
+		'''Creates a batch assignment for the specified indices.
+
+		:param indexes: The indices to include in the batch.
+		:returns: A batch assignment for the specified indices.
+		'''
+		return CommentBatchAssignment(self._instance.CreateBatchAssignment([x._instance if x else None for x in indexes]))
+
 	def read(self, type: CommentType, index: int, stringLength: int=16) -> str:
 		'''Reads the comment for the specified data type and index.
 
@@ -34,14 +42,6 @@ class Comments(SnpxWritableAssignableElements3[str, CommentData, CommentBatchAss
 		:param stringLength: The number of characters to write (must be even, >= 2). Default is 16.
 		'''
 		self._instance.Write(comment_type(int(type)), index, value, stringLength)
-
-	def create_batch_assignment(self, indexes: typing.List[CommentData]) -> CommentBatchAssignment:
-		'''Creates a batch assignment for the specified indices.
-
-		:param indexes: The indices to include in the batch.
-		:returns: A batch assignment for the specified indices.
-		'''
-		return CommentBatchAssignment(self._instance.CreateBatchAssignment([x._instance for x in indexes]))
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

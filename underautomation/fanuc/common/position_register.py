@@ -18,12 +18,6 @@ class PositionRegister:
 		'''Parses a position register from its string representation'''
 		return PositionRegister(None, None, position_register.Parse(value))
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def joints_position(self) -> JointPositionVariable:
 		'''Joint position value, if available'''

@@ -26,11 +26,6 @@ class FanucFileReaders:
 		else:
 			self._instance = _internal
 
-	@staticmethod
-	def read_file(fileStream: typing.Any, fileName: str, language: Languages) -> IFanucContent:
-		'''Read any file by path on disc, recognize it by name and decode it'''
-		return IFanucContent(fanuc_file_readers.ReadFile(fileStream, fileName, languages(int(language))))
-
 	@property
 	def readers(self) -> typing.List[IFileReader1]:
 		'''Get the collection of all parsers'''

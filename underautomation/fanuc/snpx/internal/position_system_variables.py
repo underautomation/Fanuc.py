@@ -16,13 +16,23 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 		else:
 			self._instance = _internal
 
-	def write(self, variable: str, cartesianPosition: CartesianPosition) -> None:
+	def create_batch_assignment(self, indexes: typing.List[str]) -> PositionSystemVariablesBatchAssignment:
+		'''Creates a batch assignment for the specified indices.
+
+		:param indexes: The indices to include in the batch.
+		:returns: A batch assignment for the specified indices.
+		'''
+		return PositionSystemVariablesBatchAssignment(self._instance.CreateBatchAssignment(indexes))
+
+	def write(self, variable: str, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: CartesianPosition | ExtendedCartesianPosition | JointsPosition) -> None:
 		'''Writes a Cartesian position to the specified system variable.
+		Writes an extended Cartesian position to the specified system variable.
+		Writes a joints position to the specified system variable.
 
 		:param variable: The system variable name.
-		:param cartesianPosition: The Cartesian position to write.
+		:param cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: The Cartesian position to write. — or — The extended Cartesian position to write. — or — The joints position to write.
 		'''
-		self._instance.Write(variable, cartesianPosition._instance if cartesianPosition else None)
+		self._instance.Write(variable, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition._instance if cartesianPosition_or_extendedCartesianPosition_or_jointsPosition else None)
 
 	def read(self, index: str) -> Position:
 		'''Reads the position at the specified system variable.
@@ -31,14 +41,6 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 		:returns: The position value.
 		'''
 		return Position(None, None, None, None, self._instance.Read(index))
-
-	def create_batch_assignment(self, indexes: typing.List[str]) -> PositionSystemVariablesBatchAssignment:
-		'''Creates a batch assignment for the specified indices.
-
-		:param indexes: The indices to include in the batch.
-		:returns: A batch assignment for the specified indices.
-		'''
-		return PositionSystemVariablesBatchAssignment(self._instance.CreateBatchAssignment(indexes))
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

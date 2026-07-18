@@ -16,14 +16,6 @@ class PositionRegisters(SnpxWritableAssignableIndexableElements2[Position, Posit
 		else:
 			self._instance = _internal
 
-	def write(self, index: int, cartesianPosition: CartesianPosition) -> None:
-		'''Writes a Cartesian position to the specified position register.
-
-		:param index: The register index.
-		:param cartesianPosition: The Cartesian position to write.
-		'''
-		self._instance.Write(index, cartesianPosition._instance if cartesianPosition else None)
-
 	def create_batch_assignment(self, startIndex: int, count: int) -> PositionRegistersBatchAssignment:
 		'''Creates a batch assignment for reading multiple position registers.
 
@@ -32,6 +24,16 @@ class PositionRegisters(SnpxWritableAssignableIndexableElements2[Position, Posit
 		:returns: A batch assignment for the specified range.
 		'''
 		return PositionRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+
+	def write(self, index: int, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: CartesianPosition | ExtendedCartesianPosition | JointsPosition) -> None:
+		'''Writes a Cartesian position to the specified position register.
+		Writes an extended Cartesian position to the specified position register.
+		Writes a joints position to the specified position register.
+
+		:param index: The register index.
+		:param cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: The Cartesian position to write. — or — The extended Cartesian position to write. — or — The joints position to write.
+		'''
+		self._instance.Write(index, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition._instance if cartesianPosition_or_extendedCartesianPosition_or_jointsPosition else None)
 
 	def read(self, index: int) -> Position:
 		'''Reads the position at the specified register index.

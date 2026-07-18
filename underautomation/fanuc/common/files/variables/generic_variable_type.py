@@ -16,12 +16,6 @@ class GenericVariableType(IGenericVariableType):
 		'''Gets a field by name (case-insensitive)'''
 		return GenericField(self._instance.GetField(name))
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def fields(self) -> typing.List[GenericField]:
 		'''Fields contained in this type'''

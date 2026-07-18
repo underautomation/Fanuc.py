@@ -13,12 +13,6 @@ class OnProgressDelegate:
 	def invoke(self, progress: float) -> None:
 		self._instance.Invoke(progress)
 
-	def begin_invoke(self, progress: float, callback: typing.Any, object: typing.Any) -> typing.Any:
-		return self._instance.BeginInvoke(progress, callback, object)
-
-	def end_invoke(self, result: typing.Any) -> None:
-		self._instance.EndInvoke(result)
-
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

@@ -21,12 +21,6 @@ class CartesianPositionVariable(CartesianPosition):
 		'''Parses a Cartesian position from its string representation'''
 		return CartesianPositionVariable(None, None, cartesian_position_variable.Parse(value))
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def group(self) -> int:
 		'''Motion group number'''

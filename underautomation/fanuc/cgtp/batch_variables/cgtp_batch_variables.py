@@ -29,9 +29,6 @@ class CgtpBatchVariables:
 	def copy_to(self, array: typing.List[ICgtpBatchVariable], arrayIndex: int) -> None:
 		self._instance.CopyTo([x._instance if x else None for x in array], arrayIndex)
 
-	def get_enumerator(self) -> typing.Any:
-		return self._instance.GetEnumerator()
-
 	def index_of(self, item: ICgtpBatchVariable) -> int:
 		return self._instance.IndexOf(item._instance if item else None)
 
@@ -43,9 +40,6 @@ class CgtpBatchVariables:
 
 	def remove_at(self, index: int) -> None:
 		self._instance.RemoveAt(index)
-
-	def add_range(self, items: typing.Any) -> None:
-		self._instance.AddRange(items)
 
 	def add_numeric_register(self, index: int) -> CgtpNumericRegister:
 		'''Add a numeric register for reading. The value and comment will be populated after a batch read.

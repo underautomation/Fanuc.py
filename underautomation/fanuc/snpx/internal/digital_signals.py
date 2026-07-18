@@ -26,13 +26,14 @@ class DigitalSignals(SnpxElements2[bool, int]):
 		'''
 		return self._instance.Read(firstIndex, count)
 
-	def write(self, firstIndex: int, values: typing.List[bool]) -> None:
-		'''Writes values to consecutive digital signals.
+	def write(self, firstIndex_or_index: int, value_or_values: bool | typing.List[bool]) -> None:
+		'''Writes a value to the digital signal at the specified index.
+		Writes values to consecutive digital signals.
 
-		:param firstIndex: The first signal index (1-based).
-		:param values: The boolean values to write.
+		:param firstIndex_or_index: The signal index (1-based). — or — The first signal index (1-based).
+		:param value_or_values: The boolean value to write. — or — The boolean values to write.
 		'''
-		self._instance.Write(firstIndex, values)
+		self._instance.Write(firstIndex_or_index, value_or_values)
 
 	@property
 	def segment_selector(self) -> SegmentSelector:

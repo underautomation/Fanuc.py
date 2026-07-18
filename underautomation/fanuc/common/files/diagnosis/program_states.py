@@ -12,12 +12,6 @@ class ProgramStates(IFanucContent):
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def task_states(self) -> typing.List[TaskState]:
 		'''Array of task states currently on the controller.'''

@@ -14,12 +14,6 @@ class RobotTaskStatus:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@staticmethod
 	def from_bytes(bytes: typing.List[int], language: Languages, start: int=0) -> 'RobotTaskStatus':
 		'''Creates a RobotTaskStatus from a byte array.

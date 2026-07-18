@@ -51,19 +51,6 @@ class VariableReader(FileReader1[GenericVariableFile]):
 		else:
 			self._instance = _internal
 
-	def read_file(self, fileStream: typing.Any, language: Languages, fileName: str) -> GenericVariableFile:
-		return GenericVariableFile(self._instance.ReadFile(fileStream, languages(int(language)), fileName))
-
-	@staticmethod
-	def read_variable_file(fileStream: typing.Any, fileName: str, language: Languages) -> GenericVariableFile:
-		'''Reads and parses a variable file from a stream'''
-		return GenericVariableFile(variable_reader.ReadVariableFile(fileStream, fileName, languages(int(language))))
-
-	@staticmethod
-	def parse_variable_file(stream: typing.Any, language: Languages) -> typing.List[GenericVariable]:
-		'''Parses all variables from a stream'''
-		return [GenericVariable(x) for x in variable_reader.ParseVariableFile(stream, languages(int(language)))]
-
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

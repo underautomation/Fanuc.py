@@ -14,17 +14,18 @@ class FtpDirectFileHandling:
 		else:
 			self._instance = _internal
 
-	def upload_file_to_controller(self, localPath: str, remotePath: str, createRemoteDir: bool=False, progress: OnProgressDelegate=None, existsBehavior: FtpExistsBehavior=FtpExistsBehavior.Overwrite) -> bool:
-		'''Uploads the specified file directly onto the controller. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
+	def upload_file_to_controller(self, fileData_or_localPath: typing.List[int] | str, remotePath: str, createRemoteDir: bool=False, progress: OnProgressDelegate=None, existsBehavior: FtpExistsBehavior=FtpExistsBehavior.Overwrite) -> bool:
+		'''Uploads the specified byte array as a file onto the controller. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks. It overwrites file if it already exists.
+		Uploads the specified file directly onto the controller. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
 
-		:param localPath: The full or relative path to the file on the local file system
+		:param fileData_or_localPath: The full data of the file, as a byte array — or — The full or relative path to the file on the local file system
 		:param remotePath: The full or relative path to the file on the controller
 		:param createRemoteDir: Create the remote directory if it does not exist. Slows down upload due to additional checks required.
 		:param progress: Track upload progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:param existsBehavior: Specifies the behavior when the file already exists on the controller.
 		:returns: If true then the file was uploaded, false otherwise.
 		'''
-		return self._instance.UploadFileToController(localPath, remotePath, createRemoteDir, progress._instance if progress else None, ftp_exists_behavior(int(existsBehavior)))
+		return self._instance.UploadFileToController(fileData_or_localPath, remotePath, createRemoteDir, progress._instance if progress else None, ftp_exists_behavior(int(existsBehavior)))
 
 	def upload_files_to_controller(self, localPaths: typing.List[str], remoteDir: str, progress: OnProgressDelegate=None) -> typing.List[str]:
 		'''Uploads the given file paths to a single folder on the controller. All files are placed directly into the given folder regardless of their path on the local filesystem. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
@@ -36,15 +37,16 @@ class FtpDirectFileHandling:
 		'''
 		return self._instance.UploadFilesToController(localPaths, remoteDir, progress._instance if progress else None)
 
-	def download_file_from_controller(self, localPath: str, remotePath: str, progress: OnProgressDelegate=None) -> bool:
-		'''Downloads the specified file onto the local file system. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks. It overwrites the file if it already exists.
+	def download_file_from_controller(self, localPath_or_outBytes: int | str, remotePath: str, progress: OnProgressDelegate=None) -> bool:
+		'''Downloads the specified file and return the raw byte array. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks.
+		Downloads the specified file onto the local file system. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks. It overwrites the file if it already exists.
 
-		:param localPath: The full or relative path to the file on the local file system
+		:param localPath_or_outBytes: The variable that will receive the bytes. — or — The full or relative path to the file on the local file system
 		:param remotePath: The full or relative path to the file on the controller
-		:param progress: Provide an implementation of IProgress to track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
+		:param progress: Track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent. — or — Provide an implementation of IProgress to track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:returns: If true then the file was downloaded, false otherwise.
 		'''
-		return self._instance.DownloadFileFromController(localPath, remotePath, progress._instance if progress else None)
+		return self._instance.DownloadFileFromController(localPath_or_outBytes, remotePath, progress._instance if progress else None)
 
 	def download_files_from_controller(self, localDir: str, remotePaths: typing.List[str], progress: OnProgressDelegate=None) -> typing.List[str]:
 		'''Downloads the specified files into a local single directory. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks.

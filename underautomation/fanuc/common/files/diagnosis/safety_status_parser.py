@@ -12,9 +12,6 @@ class SafetyStatusParser(SectionParser1[SafetyStatus]):
 		else:
 			self._instance = _internal
 
-	def parse_line(self, line: str, start: str, setValue: typing.Any) -> None:
-		self._instance.ParseLine(line, start, setValue)
-
 	@property
 	def section_start(self) -> typing.List[str]:
 		return self._instance.SectionStart

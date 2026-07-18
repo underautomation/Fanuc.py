@@ -28,12 +28,6 @@ class Configuration:
 		'''Parse a Fanuc configuration string representation, like : "N U T, 0, 0, 0" or "R, 0, 0, 0"'''
 		self._instance.FromString(value)
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def is_unknown(self) -> bool:
 		'''Indicates if the configuration is unknown'''

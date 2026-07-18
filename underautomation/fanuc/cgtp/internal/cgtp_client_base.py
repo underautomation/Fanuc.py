@@ -180,8 +180,11 @@ class CgtpClientBase:
 		'''
 		return CgtpVariableValue(self._instance.ReadVariable(varName, progName))
 
-	def write_variable(self, varName: str, value: float, progName: str=None) -> None:
-		'''Write a real (double) value to variable varName in program progName. From firmware 8.30'''
+	def write_variable(self, varName: str, value: float | int | str, progName: str=None) -> None:
+		'''Write a real (double) value to variable varName in program progName. From firmware 8.30
+		Write an integer value to variable varName in program progName. From firmware 8.30
+		Write value to variable varName in program progName. From firmware 8.30
+		'''
 		self._instance.WriteVariable(varName, value, progName)
 
 	def set_comment(self, type: CgtpCommentType, index: int, comment: str) -> None:

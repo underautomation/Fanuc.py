@@ -104,7 +104,7 @@ class KclClientBase:
 		'''
 		return SetPortResult(self._instance.SetPort(kcl_ports(int(port)), index, value))
 
-	def set_variable(self, name: str, value: float, program: str=None) -> SetVariableResult:
+	def set_variable(self, name: str, value: float | int | str, program: str=None) -> SetVariableResult:
 		'''Assigns the specified value to the specified variable. You can assign constant values or variable values, but the value must be of the data type that has been declared for the variable. You can assign values to system variables with KCL write access, to program variables, or to standard and user-defined variables and fields. You can assign only one ARRAY element. Use brackets ([]) after the variable name to specify an element. Certain data types like positions and vectors might have more than one value specified.
 
 		:param name: A valid program variable
@@ -146,12 +146,13 @@ class KclClientBase:
 		'''
 		return UnsimulateResult(self._instance.Unsimulate(kcl_ports(int(port)), index))
 
-	def send_custom_command(self, command: str) -> T:
+	def send_custom_command(self, command: str) -> T | CustomCommandResult:
 		'''Sends a custom KCL command to the robot and returns the raw result.
 
 		:param command: Custom command to send
 		'''
-		return self._instance.SendCustomCommand(command)
+		__r = self._instance.SendCustomCommand(command)
+		return CustomCommandResult(__r) if not isinstance(__r, (bool, int, float, str, bytes, type(None))) else __r
 
 	def get_task_information(self, prog_name: str) -> TaskInformationResult:
 		'''Return the task control data for the specified task. If prog_name is not specified, the default program is used

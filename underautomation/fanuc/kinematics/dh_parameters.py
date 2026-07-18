@@ -26,16 +26,12 @@ class DhParameters(IDhParameters):
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@staticmethod
-	def from_arm_kinematic_model(model: ArmKinematicModels) -> 'DhParameters':
-		'''Returns DH parameters from a known Arm Kinematic Model.'''
-		return DhParameters(None, None, None, None, None, None, dh_parameters.FromArmKinematicModel(arm_kinematic_models(int(model))))
+	def from_arm_kinematic_model(model_or_modelName: str | ArmKinematicModels) -> 'DhParameters':
+		'''Returns DH parameters from a known Arm Kinematic Model name. Returns null if not found in enum ArmKinematicModels.
+		Returns DH parameters from a known Arm Kinematic Model.
+		'''
+		return DhParameters(None, None, None, None, None, None, dh_parameters.FromArmKinematicModel(model_or_modelName))
 
 	@staticmethod
 	def from_opw_parameters(a1: float, a2: float, c2: float, c3: float, c4: float) -> 'DhParameters':
@@ -50,9 +46,9 @@ class DhParameters(IDhParameters):
 		return DhParameters(None, None, None, None, None, None, dh_parameters.FromOpwParameters(a1, a2, c2, c3, c4))
 
 	@staticmethod
-	def from_def_file(doc: typing.Any) -> typing.List['DhParameters']:
+	def from_def_file(path: str) -> typing.List['DhParameters']:
 		'''Loads DH parameters of each robots described in a ROBOGUIDE definition file (*.def). By default, this file is located in "C:\ProgramData\FANUC\ROBOGUIDE\Robot Library".'''
-		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromDefFile(doc)]
+		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromDefFile(path)]
 
 	@staticmethod
 	def from_symotn_file(file: SymotnFile) -> typing.List['DhParameters']:

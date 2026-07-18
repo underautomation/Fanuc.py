@@ -11,12 +11,6 @@ class RmiControllerErrorTextResponse(RmiResponseBase):
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def error_data_entries(self) -> typing.List[str]:
 		'''Error entries in the form XXXX-NNN (up to 5 entries).'''

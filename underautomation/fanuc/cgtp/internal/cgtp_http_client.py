@@ -21,10 +21,6 @@ class CgtpHttpClient(FileClientBase):
 		'''Download a file from the controller and return its content as a string.'''
 		return self._instance.DownloadAsString(fileName)
 
-	def download_as_stream(self, fileName: str) -> typing.Any:
-		'''Download a file from the controller and return a readable stream. Otherwise the raw binary response is returned.'''
-		return self._instance.DownloadAsStream(fileName)
-
 	def list_variable_files(self) -> typing.List[CgtpAsciiFileItem]:
 		'''List variable files available on the controller.'''
 		return [CgtpAsciiFileItem(x) for x in self._instance.ListVariableFiles()]

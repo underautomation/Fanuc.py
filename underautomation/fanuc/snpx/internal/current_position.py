@@ -13,6 +13,9 @@ class CurrentPosition(SnpxAssignableElements2[Position, CurrentPositionRequest])
 		else:
 			self._instance = _internal
 
+	def read(self, index: CurrentPositionRequest) -> Position:
+		return Position(None, None, None, None, self._instance.Read(index._instance if index else None))
+
 	def read_world_position(self, group: int) -> Position:
 		'''Reads the current world position of the specified motion group.
 
@@ -29,9 +32,6 @@ class CurrentPosition(SnpxAssignableElements2[Position, CurrentPositionRequest])
 		:returns: The current position in the user frame.
 		'''
 		return Position(None, None, None, None, self._instance.ReadUserFramePosition(userFrame, group))
-
-	def read(self, index: CurrentPositionRequest) -> Position:
-		return Position(None, None, None, None, self._instance.Read(index._instance if index else None))
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

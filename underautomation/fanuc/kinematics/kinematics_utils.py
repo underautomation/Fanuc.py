@@ -14,9 +14,11 @@ class KinematicsUtils:
 			self._instance = _internal
 
 	@staticmethod
-	def forward_kinematics(jointAnglesRad: typing.List[float], dhParameters: DhParameters) -> CartesianPosition:
-		'''Compute FK for given joint angles (rad) and DH parameters'''
-		return CartesianPosition(None, None, None, None, None, None, None, kinematics_utils.ForwardKinematics(jointAnglesRad, dhParameters._instance if dhParameters else None))
+	def forward_kinematics(jointAnglesDeg_or_jointAnglesRad: typing.List[float] | JointsPosition, dhParameters_or_parameters: DhParameters) -> CartesianPosition:
+		'''Compute FK for given joint angles (rad) and DH parameters
+		Compute FK for given joint angles (deg) and DH parameters
+		'''
+		return CartesianPosition(None, None, None, None, None, None, None, kinematics_utils.ForwardKinematics(getattr(jointAnglesDeg_or_jointAnglesRad, '_instance', jointAnglesDeg_or_jointAnglesRad), dhParameters_or_parameters._instance if dhParameters_or_parameters else None))
 
 	@staticmethod
 	def inverse_kinematics(position: CartesianPosition, parameters: DhParameters) -> typing.List[JointsPosition]:

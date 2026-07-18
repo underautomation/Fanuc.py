@@ -15,12 +15,6 @@ class VectorVariable:
 		'''Parses a vector variable from its string representation'''
 		return VectorVariable(vector_variable.Parse(value))
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def x(self) -> float:
 		'''X component of the vector'''

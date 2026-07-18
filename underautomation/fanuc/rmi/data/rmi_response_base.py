@@ -10,12 +10,6 @@ class RmiResponseBase:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def error_id(self) -> int:
 		'''Error identifier. 0 means success; non-zero indicates a controller error.'''

@@ -28,12 +28,6 @@ class RobotAlarm:
 		'''
 		return RobotAlarm(robot_alarm.FromBytes(bytes, languages(int(language)), start))
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def id(self) -> AlarmId:
 		'''Alarm Category'''

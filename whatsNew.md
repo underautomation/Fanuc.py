@@ -1,4 +1,7 @@
-## Bug fixes
+## Breaking changes
 
-- Fixed a missing namespace declaration on `FtpExistsBehavior`, which caused the type to be inaccessible when referenced from outside the assembly.
-- Fixed incorrect namespace references in RMI motion instruction classes, which prevented motion instructions from working correctly.
+- Removed `equals` and `get_hash_code` methods from all data classes. Use the standard Python `==` operator and `hash()` built-in instead.
+
+## Improvements
+
+- Methods that previously had multiple overloads are now exposed as a single method with union-typed parameters (e.g. `float | int | str`). This aligns with Python conventions and avoids name collisions.

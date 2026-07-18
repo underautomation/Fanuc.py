@@ -12,11 +12,6 @@ class StringUtils:
 		else:
 			self._instance = _internal
 
-	@staticmethod
-	def get_encoding(language: Languages) -> typing.Any:
-		'''Gets the encoding for the specified controller language'''
-		return string_utils.GetEncoding(languages(int(language)))
-
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

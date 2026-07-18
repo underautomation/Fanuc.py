@@ -19,9 +19,11 @@ class FanucRobot:
 		else:
 			self._instance = _internal
 
-	def connect(self, parameters: ConnectionParameters) -> None:
-		'''Initialize a conenction to the robot with specified parameters'''
-		self._instance.Connect(parameters._instance if parameters else None)
+	def connect(self, ip_or_parameters: str | ConnectionParameters) -> None:
+		'''Connect to robot by IP with default connection parameters
+		Initialize a conenction to the robot with specified parameters
+		'''
+		self._instance.Connect(getattr(ip_or_parameters, '_instance', ip_or_parameters))
 
 	def disconnect(self) -> None:
 		'''Disconnect all services connected to the robot'''

@@ -14,12 +14,6 @@ class CartesianPosition(XYZWPRPosition):
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	def to_homogeneous_matrix(self) -> typing.List[float]:
 		'''Convert position to a homogeneous rotation and translation 4x4 matrix'''
 		return self._instance.ToHomogeneousMatrix()

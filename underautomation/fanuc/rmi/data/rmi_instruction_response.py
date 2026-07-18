@@ -28,12 +28,6 @@ class RmiInstructionResponse(RmiResponseBase):
 		'''
 		return self._instance.WaitForCompletion(timeoutMs)
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def sequence_id(self) -> int:
 		'''Sequence identifier assigned to this instruction. 0 until the instruction has been dispatched to the controller.'''

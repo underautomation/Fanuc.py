@@ -11,12 +11,6 @@ class JointsPosition:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@staticmethod
 	def is_near(j1: 'JointsPosition', j2: 'JointsPosition', degreesTolerance: float) -> bool:
 		'''Check if joints position is near to expected joints position with a tolerance value'''

@@ -45,11 +45,14 @@ class SnpxClientBase:
 		'''Clear all active alarms'''
 		self._instance.ClearAlarms()
 
-	def set_variable(self, name: str, value: str) -> None:
-		'''Set string variable without assignments.
+	def set_variable(self, name: str, value: bool | float | int | str) -> None:
+		'''Set boolean variable without assignments.
+		Set double variable without assignments.
+		Set integer variable without assignments.
+		Set string variable without assignments.
 
 		:param name: Variable name.
-		:param value: String value to set.
+		:param value: Boolean value to set. — or — Double value to set. — or — Integer value to set. — or — String value to set.
 		'''
 		self._instance.SetVariable(name, value)
 

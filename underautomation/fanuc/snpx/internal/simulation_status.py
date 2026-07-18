@@ -15,6 +15,14 @@ class SimulationStatus(SnpxWritableAssignableElements3[bool, SimulationData, Sim
 		else:
 			self._instance = _internal
 
+	def create_batch_assignment(self, indexes: typing.List[SimulationData]) -> SimulationStatusBatchAssignment:
+		'''Creates a batch assignment for the specified indices.
+
+		:param indexes: The indices to include in the batch.
+		:returns: A batch assignment for the specified indices.
+		'''
+		return SimulationStatusBatchAssignment(self._instance.CreateBatchAssignment([x._instance if x else None for x in indexes]))
+
 	def read(self, type: SimulationType, index: int) -> bool:
 		'''Reads the simulation status for the specified I/O type and index.
 
@@ -32,14 +40,6 @@ class SimulationStatus(SnpxWritableAssignableElements3[bool, SimulationData, Sim
 		:param value: True to enable simulation, false to disable.
 		'''
 		self._instance.Write(simulation_type(int(type)), index, value)
-
-	def create_batch_assignment(self, indexes: typing.List[SimulationData]) -> SimulationStatusBatchAssignment:
-		'''Creates a batch assignment for the specified indices.
-
-		:param indexes: The indices to include in the batch.
-		:returns: A batch assignment for the specified indices.
-		'''
-		return SimulationStatusBatchAssignment(self._instance.CreateBatchAssignment([x._instance for x in indexes]))
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

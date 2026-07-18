@@ -11,12 +11,6 @@ class MotionData:
 		else:
 			self._instance = _internal
 
-	def equals(self, obj: typing.Any) -> bool:
-		return self._instance.Equals(obj)
-
-	def get_hash_code(self) -> int:
-		return self._instance.GetHashCode()
-
 	@property
 	def values(self) -> typing.List[float]:
 		'''Raw axis values (9 values: J1-J6 or X,Y,Z,W,P,R + E1,E2,E3)'''
