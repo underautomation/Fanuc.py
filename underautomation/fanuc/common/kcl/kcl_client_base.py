@@ -146,13 +146,12 @@ class KclClientBase:
 		'''
 		return UnsimulateResult(self._instance.Unsimulate(kcl_ports(int(port)), index))
 
-	def send_custom_command(self, command: str) -> T | CustomCommandResult:
+	def send_custom_command(self, command: str) -> CustomCommandResult:
 		'''Sends a custom KCL command to the robot and returns the raw result.
 
 		:param command: Custom command to send
 		'''
-		__r = self._instance.SendCustomCommand(command)
-		return CustomCommandResult(__r) if not isinstance(__r, (bool, int, float, str, bytes, type(None))) else __r
+		return CustomCommandResult(self._instance.SendCustomCommand(command))
 
 	def get_task_information(self, prog_name: str) -> TaskInformationResult:
 		'''Return the task control data for the specified task. If prog_name is not specified, the default program is used
