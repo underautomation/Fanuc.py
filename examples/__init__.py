@@ -147,6 +147,20 @@ def get_cgtp_password():
     return _get_setting("cgtp_password", "CGTP password", default="")
 
 # ==============================================================================
+# Stream Motion settings
+# ==============================================================================
+def get_stream_motion_version():
+    """
+    Gets the Stream Motion protocol version (1, 2 or 3).
+    It must not be higher than the system variable $STMO.$USABLE_VER of the robot.
+    Version 1 works on all controllers.
+
+    Returns:
+        int: Protocol version
+    """
+    return int(_get_setting("stream_motion_version", "Stream Motion protocol version (1, 2 or 3)", default="1"))
+
+# ==============================================================================
 # Language setting
 # ==============================================================================
 def get_language():
@@ -240,7 +254,7 @@ def setup_license():
 # ==============================================================================
 # Helper: Connect to robot with selected protocols
 # ==============================================================================
-def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enable_cgtp=False):
+def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enable_cgtp=False, enable_stream_motion=False):
     """
     Creates a FanucRobot, sets up license, asks for connection settings,
     and connects with the specified protocols enabled.
@@ -250,6 +264,7 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enab
         enable_ftp: Enable FTP protocol
         enable_snpx: Enable SNPX protocol
         enable_cgtp: Enable CGTP Web Server protocol
+        enable_stream_motion: Enable Stream Motion (J519 option)
     
     Returns:
         FanucRobot: Connected robot instance
@@ -281,7 +296,7 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enab
 
     # Disable unused protocols
     params.rmi.enable = False
-    params.stream_motion.enable = False
+    params.stream_motion.enable = enable_stream_motion
 
     # Set credentials if protocols are enabled
     if enable_telnet:
@@ -293,6 +308,9 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enab
         pwd = get_ftp_password()
         params.ftp.ftp_user = user
         params.ftp.ftp_password = pwd
+
+    if enable_stream_motion:
+        params.stream_motion.protocol_version = get_stream_motion_version()
 
     if enable_cgtp:
         login = get_cgtp_login()
@@ -306,6 +324,7 @@ def connect_robot(enable_telnet=False, enable_ftp=False, enable_snpx=False, enab
     if enable_ftp: protocols.append("FTP")
     if enable_snpx: protocols.append("SNPX")
     if enable_cgtp: protocols.append("CGTP")
+    if enable_stream_motion: protocols.append("Stream Motion")
     print(f"\nConnecting to {robot_ip} ({', '.join(protocols)})...")
 
     try:

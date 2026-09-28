@@ -37,9 +37,11 @@ It supports communication with **real robots** and **ROBOGUIDE** simulation.
 - 📂 **FTP file & variable access**
 - 🌐 **CGTP Web Server** - programs, variables, registers, I/O, kinematics, batch operations
 - 🏎️ **Remote motion:** Remote move the robot
+- 🌊 **Stream Motion:** Real-time motion at every communication cycle (option J519): trajectories, target tracking, I/O
+- 🛤️ **Motion Planner:** Smooth jerk limited trajectories offline (J, L, C, CNT, CR, splines, shapes)
 - 📐 **Kinematics Calculations:** Perform forward and inverse kinematics offline (CRX and standard robots)
 
-> No custom robot options or installations are required. The SDK uses **standard communication** protocols available on all Fanuc controllers.
+> Nothing has to be installed on the robot, and most features work without any Fanuc option, with the **standard communication** protocols of all Fanuc controllers. For advanced uses, if your controller has the RMI (R912), Stream Motion (J519) or HMI Device SNPX (R553) option, the SDK can use it too.
 
 ---
 
@@ -252,22 +254,28 @@ And you will get a menu like this to select and run any example with a single ke
 ║                                SELECT A CATEGORY                               ║
 ╠════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                ║
-║  📂  1. FTP          (16 examples)                                             ║
-║         File Transfer Protocol - read/write files, registers, diagnostics      ║
-║                                                                                ║
-║  🌐  2. CGTP         (24 examples)                                             ║
+║  🌐  1. CGTP         (24 examples)                                             ║
 ║         CGTP Web Server - programs, variables, registers, I/O, kinematics      ║
+║                                                                                ║
+║  📂  2. FTP          (16 examples)                                             ║
+║         File Transfer Protocol - read/write files, registers, diagnostics      ║
 ║                                                                                ║
 ║  🦾  3. KINEMATICS   (1 example)                                               ║
 ║         Kinematics - offline forward & inverse kinematics, no connection needed║
 ║                                                                                ║
-║  🔑  3. LICENSE      (1 example)                                               ║
+║  🔑  4. LICENSE      (1 example)                                               ║
 ║         License management - activation & status                               ║
 ║                                                                                ║
-║  ⚡  4. SNPX         (19 examples)                                             ║
+║  📐  5. MOTION       (4 examples)                                              ║
+║         Motion planner - smooth trajectories, splines, shapes, frames (offline)║
+║                                                                                ║
+║  ⚡  6. SNPX         (19 examples)                                             ║
 ║         SNPX industrial protocol - fast real-time register & I/O access        ║
 ║                                                                                ║
-║  🔌  5. TELNET       (7 examples)                                              ║
+║  🌊  7. STREAM_MOTION (6 examples)                                             ║
+║         Stream Motion (J519) - real-time trajectories and target tracking      ║
+║                                                                                ║
+║  🔌  8. TELNET       (7 examples)                                              ║
 ║         Telnet KCL - send commands, read variables, control I/O                ║
 ║                                                                                ║
 ╠════════════════════════════════════════════════════════════════════════════════╣
@@ -275,7 +283,7 @@ And you will get a menu like this to select and run any example with a single ke
 ║                                                                                ║
 ╚════════════════════════════════════════════════════════════════════════════════╝
 
-  Enter category number [0-6]:
+  Enter category number [0-8]:
 ```
 
 ---
@@ -373,6 +381,28 @@ And you will get a menu like this to select and run any example with a single ke
 | #   | Example                                                                                                                                  | Description                                                                                                    |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | 1   | [kinematics_forward_inverse.py](https://github.com/underautomation/fanuc.py/blob/main/examples/kinematics/kinematics_forward_inverse.py) | Interactive forward & inverse kinematics: select a model, view DH parameters, compute FK then all IK solutions |
+
+#### 📐 Motion - Offline Motion Planner (no robot connection needed)
+
+| #   | Example                                                                                                                            | Description                                                                                  |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 1   | [motion_frames_quaternions.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_frames_quaternions.py) | Convert W, P, R angles to quaternions, interpolate orientations, change frames               |
+| 2   | [motion_joint_path.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_joint_path.py)                 | Plan joint motions (J, CNT, FINE), read the duration and the velocity, acceleration and jerk |
+| 3   | [motion_shapes.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_shapes.py)                         | Create a circle, a rounded rectangle, a helix and a spline through points                    |
+| 4   | [motion_timed_points.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_timed_points.py)             | Pass through joint positions at given times, check the limits and slow down when too fast    |
+
+#### 🌊 Stream Motion - Real-Time Motion (option J519)
+
+| #   | Example                                                                                                                                             | Description                                                                    |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 1   | [stream_motion_cartesian_circle.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_cartesian_circle.py) | Draw a horizontal circle that starts and ends at the current position          |
+| 2   | [stream_motion_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_io.py)                             | Read DI[1] to DI[16] during a session and switch DO[1] ON during a motion      |
+| 3   | [stream_motion_joint_move.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_joint_move.py)             | Move J1 back and forth with a smooth trajectory within the limits of the robot |
+| 4   | [stream_motion_monitor.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_monitor.py)                   | Read the limits, then display the position and state of the robot (no motion)  |
+| 5   | [stream_motion_override_pause.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_override_pause.py)     | Change the override, pause, resume and abort a motion                          |
+| 6   | [stream_motion_tracking.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_tracking.py)                 | The robot follows a J1 target that you type, even during the motion            |
+
+> Stream Motion examples need a TP program with `IBGN start[1]` and `IBGN end[1]` running on the robot, in AUTO mode at 100% override.
 
 #### 🔑 License
 
@@ -806,6 +836,146 @@ robot.disconnect()
 
 ---
 
+### 🌊 Stream Motion (J519) - Real-Time Motion
+
+Stream Motion (option **J519**) gives the position of the robot at every communication cycle (2 to 8 ms). The SDK does the real-time part for you: it synchronizes the positions with the status of the robot, sends a few positions in advance, and stops the robot smoothly if your application stops giving positions.
+
+The robot must run a TP program with `IBGN start[1]` and `IBGN end[1]`, in AUTO mode at 100% override.
+
+**What you can do:**
+
+- **Read the status** of the robot at every cycle: joint and Cartesian positions, motor currents, flags
+- **Read the limits** of the robot: velocity, acceleration and jerk of each axis
+- **Queue trajectories** planned with the motion planner, with override, pause, resume and abort
+- **Follow a target** that changes at any time (sensor, joystick, vision)
+- **Compute each position** in a callback (with Python, prefer target tracking: the timing of the callback depends on the interpreter)
+- **Read and write I/O** synchronized with the motion
+- **Protocol versions 1, 2 and 3** (version 2 sends joint positions in double precision)
+
+**Quick example:**
+
+```python
+from underautomation.fanuc.fanuc_robot import FanucRobot
+from underautomation.fanuc.connection_parameters import ConnectionParameters
+from underautomation.fanuc.common.joints_position import JointsPosition
+from underautomation.fanuc.motion.fanuc_motion import FanucMotion
+from underautomation.fanuc.stream_motion.data.io_type import IOType
+from underautomation.robotics.motion.motion_planner import MotionPlanner
+from underautomation.robotics.motion.position_format import PositionFormat
+
+robot = FanucRobot()
+params = ConnectionParameters("192.168.0.1")
+params.stream_motion.enable = True
+params.stream_motion.protocol_version = 1  # 1, 2 or 3, not higher than $STMO.$USABLE_VER
+robot.connect(params)
+sm = robot.stream_motion
+
+# Read the limits of the robot, start the status output and measure the communication cycle
+sm.start_monitoring()
+status = sm.last_status
+print(f"J1={status.joint_position.j1:.3f} Moving={status.is_moving}")
+
+# Read DI[1] to DI[16] during the session
+sm.add_io_monitor(IOType.DI, 1)
+
+# J1 +10 degrees then back, at 20% of the velocity limits
+start = sm.queue_end_joint_position
+values = list(start.values)
+values[0] += 10
+target = JointsPosition(*values)
+planner = MotionPlanner(sm.joint_limits, None)
+trajectory = planner.create_joint_path(FanucMotion.to_joint_values(start)) \
+    .move_joint(FanucMotion.to_joint_values(target), 20, FanucMotion.cnt(100)) \
+    .move_joint(FanucMotion.to_joint_values(start), 20, FanucMotion.fine()) \
+    .build()
+
+# The motion starts when the TP program reaches IBGN start
+motion_id = sm.enqueue(trajectory)
+sm.wait_for_motion(motion_id, 60000)
+sm.wait_for_idle(10000)  # the queue is empty and the robot is at rest
+
+# Follow a target that can change at any time, at 30% of the velocity limits
+sm.start_tracking(PositionFormat.Joint, 30)
+sm.set_joint_tracking_target(target)
+sm.wait_for_idle(10000)
+sm.stop_tracking()
+
+# Release the TP program: it continues after IBGN end
+sm.finish(10000)
+robot.disconnect()
+```
+
+📖 [Stream Motion documentation](https://underautomation.com/fanuc/documentation/stream-motion)
+
+---
+
+### 🛤️ Motion Planner - Offline Trajectories
+
+The motion planner creates smooth trajectories **offline**, within velocity, acceleration and jerk limits. Motions are described as in a TP program: J, L and C motions with FINE, CNT or CR termination. Trajectories can be sent with Stream Motion, sampled for a simulation, or checked against the limits of the robot.
+
+The planner is in the `underautomation.robotics` modules, common to all UnderAutomation robot SDKs. `FanucMotion` (`underautomation.fanuc.motion.fanuc_motion`) converts FANUC positions, gives the FINE, CNT and CR terminations and the I/O signals.
+
+**What you can do:**
+
+- **Joint motions** - `move_joint()`, `move_joint_time()`, `move_joint_spline()`, with waits and I/O
+- **Cartesian motions** - `move_linear()`, `move_circular()`, `move_linear_time()`, `move_spline()`, in a tool frame and a user frame
+- **Shapes in any plane** - circle, rectangle, polygon, helix, spiral
+- **Trajectories from your own positions** - one per cycle, or with their time
+- **Check a trajectory** against the limits of the robot, and slow it down if needed
+- **Quaternions and frame changes** on `XYZWPRPosition` (flange, tool, user frame, world frame)
+
+**Quick example:**
+
+```python
+from underautomation.fanuc.common.xyzwpr_position import XYZWPRPosition
+from underautomation.fanuc.motion.fanuc_motion import FanucMotion
+from underautomation.robotics.geometry.joint_values import JointValues
+from underautomation.robotics.motion.joint_limits import JointLimits
+from underautomation.robotics.motion.cartesian_limits import CartesianLimits
+from underautomation.robotics.motion.motion_planner import MotionPlanner
+
+# Limits of each axis: read them with robot.stream_motion.read_limits().reference_limits
+joint_limits = JointLimits(
+    [120, 120, 180, 180, 180, 180],         # velocity, deg/s
+    [300, 300, 450, 675, 675, 675],         # acceleration, deg/s2
+    [1125, 1125, 1687, 2530, 1265, 2530])   # jerk, deg/s3
+cartesian_limits = CartesianLimits(500, 2000, 10000, 90, 360, 1800)
+planner = MotionPlanner(joint_limits, cartesian_limits)
+
+# J P[1] 50% CNT100, J P[2] 50% FINE
+home = JointValues([0, 0, 0, 0, -90, 0])
+pick = JointValues([30, 20, -10, 0, -70, 30])
+joint = planner.create_joint_path(home) \
+    .move_joint(pick, 50, FanucMotion.cnt(100)) \
+    .move_joint(home, 50, FanucMotion.fine()) \
+    .build()
+
+# L 200mm/sec CR10, then a circle of radius 30 mm at 150 mm/s
+def wpr(x, y, z, w, p, r):
+    return FanucMotion.to_cartesian_pose(XYZWPRPosition(x, y, z, w, p, r))
+
+plane = wpr(600, 0, 250, 0, 0, 0)  # origin = center of the circle
+cartesian = planner.create_cartesian_path(wpr(500, 0, 300, 180, 0, 0)) \
+    .move_linear(wpr(600, 0, 300, 180, 0, 0), 200, FanucMotion.cr(10)) \
+    .add_circle(plane, 30, 150, FanucMotion.fine()) \
+    .build()
+
+# FANUC positions of the trajectory, with continuous W, P, R
+positions = FanucMotion.sample_cartesian(cartesian, 0.008)
+
+# Duration, position at any time, one position per cycle
+print(f"Duration: {joint.duration:.3f} s")
+samples = joint.sample_joints(0.008)
+
+# Velocity, acceleration and jerk of each axis, computed as the robot does
+report = joint.check(joint_limits, 0.008, False)
+print(report.is_valid)
+```
+
+📖 [Motion planner documentation](https://underautomation.com/fanuc/documentation/motion)
+
+---
+
 ### 📂 FTP - File Transfer & Variable Management
 
 FTP gives you access to the robot's **file system** and **internal variable files**. It's ideal for bulk data access, diagnostics, backups, and program management.
@@ -904,13 +1074,21 @@ Read full tutorial: [underautomation.com/fanuc/documentation/enable-telnet](http
 - For **FANUC America (R650 FRA)**: Enable option R553 "HMI Device SNPX"
 - For **FANUC Ltd. (R651 FRL)**: No additional options required
 
+### ✅ Enable Stream Motion
+
+Read full tutorial: [underautomation.com/fanuc/documentation/stream-motion](https://underautomation.com/fanuc/documentation/stream-motion)
+
+1. Check that option **J519 Stream Motion** is installed (`features.has_stream_motion`)
+2. Set `$PARAM_GROUP[1].$SV_OFF_ENB[*]` to `FALSE`
+3. Run a TP program with `IBGN start[1]` and `IBGN end[1]`, in AUTO mode at 100% override
+
 ---
 
 ## 🔍 Compatibility
 
 |                       | Supported                                   |
 | --------------------- | ------------------------------------------- |
-| **Robot Controllers** | R-J3iB, R-30iA, R-30iB, R-30iB+, R-50iA     |
+| **Robot Controllers** | R-J3iB, R-30iA, R-30iB, R-50iA              |
 | **OS**                | Windows, Linux, macOS                       |
 | **Python**            | 3.7+                                        |
 | **Dependency**        | `pythonnet 3.0.5` (installed automatically) |

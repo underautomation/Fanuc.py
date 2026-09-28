@@ -21,6 +21,8 @@ CATEGORY_ICONS = {
     "snpx":       "⚡",
     "telnet":     "🔌",
     "license":    "🔑",
+    "motion":     "📐",
+    "stream_motion": "🌊",
 }
 CATEGORY_DESCRIPTIONS = {
     "cgtp":       "CGTP Web Server - programs, variables, registers, I/O, kinematics",
@@ -29,6 +31,8 @@ CATEGORY_DESCRIPTIONS = {
     "snpx":       "SNPX industrial protocol - fast real-time register & I/O access",
     "telnet":     "Telnet KCL - send commands, read variables, control I/O",
     "license":    "License management - activation & status",
+    "motion":     "Motion planner - smooth trajectories, splines, shapes, frames (offline)",
+    "stream_motion": "Stream Motion (J519) - real-time trajectories and target tracking",
 }
 
 # ─── Box-drawing helpers ─────────────────────────────────────────────────────
