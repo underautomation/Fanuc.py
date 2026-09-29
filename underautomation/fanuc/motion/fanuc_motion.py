@@ -119,6 +119,7 @@ class FanucMotion:
 		'''
 		return [ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, x) for x in fanuc_motion.SampleCartesian(trajectory._instance if trajectory else None, cycleTime)]
 
+	@staticmethod
 	def _get_wpr_convention() -> EulerConvention:
 		'''Convention of the W, P, R angles of FANUC positions: rotation W around the fixed X axis, then P around the fixed Y axis, then R around the fixed Z axis'''
 		return EulerConvention(int(fanuc_motion.WprConvention))

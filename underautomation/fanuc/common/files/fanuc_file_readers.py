@@ -41,6 +41,7 @@ class FanucFileReaders:
 		else:
 			self._instance = _internal
 
+	@staticmethod
 	def _get_readers() -> typing.List[IFileReader1]:
 		'''Get the collection of all parsers'''
 		return [IFileReader1(x) for x in fanuc_file_readers.Readers]

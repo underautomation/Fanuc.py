@@ -94,6 +94,7 @@ class FanucRobot:
 		'''CGTP Web Server client for HTTP-based COMET RPC interface'''
 		return CgtpClientInternal(self._instance.Cgtp)
 
+	@staticmethod
 	def _get_license_info() -> LicenseInfo:
 		'''Return information about your license'''
 		return LicenseInfo(None, None, fanuc_robot.LicenseInfo)
