@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import JointRelativeJRepTpInstruct
 from UnderAutomation.Fanuc.Rmi.Data import RmiJointSpeedType as rmi_joint_speed_type
 
 class JointRelativeJRepTpInstruction(JRepMotionTpInstructionBase):
-	'''Instruction for an incremental joint motion (J in TP), joint-angle representation, full options. Pass to RmiInstructionBase).'''
+	'''Instruction for an incremental joint motion (J in TP), joint-angle representation, full options. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = joint_relative_j_rep_tp_instruction()

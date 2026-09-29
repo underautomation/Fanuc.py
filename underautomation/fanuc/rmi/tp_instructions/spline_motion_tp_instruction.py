@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import SplineMotionTpInstruction a
 from UnderAutomation.Fanuc.Rmi.Data import RmiLinearSpeedType as rmi_linear_speed_type
 
 class SplineMotionTpInstruction(CartesianMotionTpInstructionBase):
-	'''Instruction for a spline motion with a Cartesian target. Pass to RmiInstructionBase). Requires MajorVersion >= 7.'''
+	'''Instruction for a spline motion with a Cartesian target. Pass to send_tp_instruction(). Requires MajorVersion >= 7.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = spline_motion_tp_instruction()

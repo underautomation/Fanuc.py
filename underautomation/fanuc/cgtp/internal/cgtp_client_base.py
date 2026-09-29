@@ -151,7 +151,7 @@ class CgtpClientBase:
 
 		:param progName: Program name
 		:param positionIndex: 1-based position index in the program (P[n])
-		:param position: Position to write. Either CartesianPosition or JointsPosition must be set.
+		:param position: Position to write. Either cartesian_position or joints_position must be set.
 		'''
 		self._instance.SetProgramPosition(progName, positionIndex, position._instance if position else None)
 

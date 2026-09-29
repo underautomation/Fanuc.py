@@ -18,6 +18,21 @@ from underautomation.fanuc.common.files.diagnosis.program_states_parser import P
 from UnderAutomation.Fanuc.Common.Files import FanucFileReaders as fanuc_file_readers
 from UnderAutomation.Fanuc.Common import Languages as languages
 
+class _StaticProperty:
+	'''Property of the class, readable from the class or from an instance'''
+	def __init__(self, fget, fset=None):
+		self._fget = fget
+		self._fset = fset
+		self.__doc__ = fget.__doc__
+
+	def __get__(self, obj, owner=None):
+		return self._fget()
+
+	def __set__(self, obj, value):
+		if self._fset is None:
+			raise AttributeError("read-only property")
+		self._fset(value)
+
 class FanucFileReaders:
 	'''Contains static functions to decode Fanuc files (variables, diagnosis, listing, ...)'''
 	def __init__(self, _internal = 0):
@@ -26,10 +41,12 @@ class FanucFileReaders:
 		else:
 			self._instance = _internal
 
-	@property
-	def readers(self) -> typing.List[IFileReader1]:
+	def _get_readers() -> typing.List[IFileReader1]:
 		'''Get the collection of all parsers'''
-		return [IFileReader1(x) for x in self._instance.Readers]
+		return [IFileReader1(x) for x in fanuc_file_readers.Readers]
+
+	readers = _StaticProperty(_get_readers)
+	del _get_readers
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

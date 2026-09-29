@@ -4,7 +4,7 @@ from underautomation.fanuc.stream_motion.internal.stream_motion_client_base impo
 from UnderAutomation.Fanuc.StreamMotion.Internal import StreamMotionClientInternal as stream_motion_client_internal
 
 class StreamMotionClientInternal(StreamMotionClientBase):
-	'''Internal Stream Motion client for use within FanucRobot'''
+	'''Stream Motion client used by FanucRobot'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = stream_motion_client_internal()

@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import WaitDinTpInstruction as wai
 from UnderAutomation.Fanuc.Rmi.Data import RmiOnOff as rmi_on_off
 
 class WaitDinTpInstruction(RmiInstructionBase):
-	'''Instruction for a WAIT DI[n] = value condition. Pass to RmiInstructionBase).'''
+	'''Instruction for a WAIT DI[n] = value condition. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = wait_din_tp_instruction()

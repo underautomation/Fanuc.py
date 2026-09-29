@@ -1,26 +1,25 @@
 from __future__ import annotations
 import typing
+from underautomation.fanuc.stream_motion.internal.stream_motion_connect_parameters_base import StreamMotionConnectParametersBase
 from underautomation.fanuc.stream_motion.internal.stream_motion_client_base import StreamMotionClientBase
 from UnderAutomation.Fanuc.StreamMotion import StreamMotionClient as stream_motion_client
 
 class StreamMotionClient(StreamMotionClientBase):
-	'''Stream Motion client for standalone use (J519 option) Provides UDP-based real-time streaming motion control for Fanuc robots'''
+	'''Stream Motion client for standalone use (J519 option): real-time control of the robot by sending a position every communication cycle.'''
 	def __init__(self, _internal = 0):
-		'''Creates a new instance of the Stream Motion client'''
+		'''Creates a new Stream Motion client'''
 		if(_internal == 0):
 			self._instance = stream_motion_client()
 		else:
 			self._instance = _internal
 
-	def connect(self, ip: str, port: int=60015, sendTimeoutMs: int=1000, receiveTimeoutMs: int=1000) -> None:
-		'''Connect to the robot using Stream Motion protocol
+	def connect(self, ip: str, parameters: StreamMotionConnectParametersBase=None) -> None:
+		'''Connects to the robot. Call start_monitoring() next to receive the robot status.
 
 		:param ip: IP address of the robot
-		:param port: UDP port (default: 60015)
-		:param sendTimeoutMs: Send timeout in milliseconds
-		:param receiveTimeoutMs: Receive timeout in milliseconds
+		:param parameters: Connection parameters. Default values are used when null.
 		'''
-		self._instance.Connect(ip, port, sendTimeoutMs, receiveTimeoutMs)
+		self._instance.Connect(ip, parameters._instance if parameters else None)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

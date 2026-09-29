@@ -3,7 +3,7 @@ import typing
 from UnderAutomation.Fanuc.Rmi.Data import RmiSetPayloadCompensationParameters as rmi_set_payload_compensation_parameters
 
 class RmiSetPayloadCompensationParameters:
-	'''Parameters for defining payload compensation for a payload schedule. Used by RmiSetPayloadCompensationParameters). All positional values are in meters; mass in kg; inertia in kg·m².'''
+	'''Parameters for defining payload compensation for a payload schedule. Used by set_payload_compensation(). All positional values are in meters; mass in kg; inertia in kg·m².'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = rmi_set_payload_compensation_parameters()

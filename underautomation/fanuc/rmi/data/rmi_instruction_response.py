@@ -7,7 +7,7 @@ from UnderAutomation.Fanuc.Rmi.Data import RmiInstructionResponse as rmi_instruc
 from UnderAutomation.Fanuc.Rmi.Data import RmiInstructionStatus as rmi_instruction_status
 
 class RmiInstructionResponse(RmiResponseBase):
-	'''Response returned immediately when a motion instruction is queued. The Status property and ErrorId are updated in the background as the controller processes the instruction. Use Int32) to block until the instruction reaches a terminal state.'''
+	'''Response returned immediately when a motion instruction is queued. The status property and error_id are updated in the background as the controller processes the instruction. Use wait_for_completion() to block until the instruction reaches a terminal state.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = rmi_instruction_response()

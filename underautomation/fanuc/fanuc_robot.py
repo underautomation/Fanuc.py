@@ -10,6 +10,21 @@ from underautomation.fanuc.cgtp.internal.cgtp_client_internal import CgtpClientI
 from underautomation.fanuc.license.license_info import LicenseInfo
 from UnderAutomation.Fanuc import FanucRobot as fanuc_robot
 
+class _StaticProperty:
+	'''Property of the class, readable from the class or from an instance'''
+	def __init__(self, fget, fset=None):
+		self._fget = fget
+		self._fset = fset
+		self.__doc__ = fget.__doc__
+
+	def __get__(self, obj, owner=None):
+		return self._fget()
+
+	def __set__(self, obj, value):
+		if self._fset is None:
+			raise AttributeError("read-only property")
+		self._fset(value)
+
 class FanucRobot:
 	'''Main class of the SDK that represents a connection to a Fanuc robot'''
 	def __init__(self, _internal = 0):
@@ -79,10 +94,12 @@ class FanucRobot:
 		'''CGTP Web Server client for HTTP-based COMET RPC interface'''
 		return CgtpClientInternal(self._instance.Cgtp)
 
-	@property
-	def license_info(self) -> LicenseInfo:
+	def _get_license_info() -> LicenseInfo:
 		'''Return information about your license'''
-		return LicenseInfo(None, None, self._instance.LicenseInfo)
+		return LicenseInfo(None, None, fanuc_robot.LicenseInfo)
+
+	license_info = _StaticProperty(_get_license_info)
+	del _get_license_info
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

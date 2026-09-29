@@ -31,6 +31,11 @@ class Features:
 		'''Indicates if the robot has the ASCII upload feature enabled : R507 ("ASCII Upload" on older controllers) or R796 ("ASCII Program Loader" on most recent controllers).'''
 		return self._instance.HasAsciiUpload
 
+	@property
+	def has_stream_motion(self) -> bool:
+		'''Indicates if the robot has the Stream Motion feature enabled (J519).'''
+		return self._instance.HasStreamMotion
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

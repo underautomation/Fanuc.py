@@ -4,7 +4,7 @@ from underautomation.fanuc.rmi.tp_instructions.rmi_instruction_base import RmiIn
 from UnderAutomation.Fanuc.Rmi.TpInstructions import SetUFrameTpInstruction as set_u_frame_tp_instruction
 
 class SetUFrameTpInstruction(RmiInstructionBase):
-	'''Instruction for a UFRAME_NUM = n assignment. Pass to RmiInstructionBase).'''
+	'''Instruction for a UFRAME_NUM = n assignment. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = set_u_frame_tp_instruction()

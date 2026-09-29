@@ -3,7 +3,7 @@ import typing
 from UnderAutomation.Fanuc.Rmi.TpInstructions import RmiInstructionBase as rmi_instruction_base
 
 class RmiInstructionBase:
-	'''Base class for all RMI TP instructions. Pass an instance to RmiInstructionBase) to queue the instruction on the controller.'''
+	'''Base class for all RMI TP instructions. Pass an instance to send_tp_instruction() to queue the instruction on the controller.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = rmi_instruction_base()

@@ -3,7 +3,7 @@ import typing
 from UnderAutomation.Fanuc.Rmi.Data import RmiSetPayloadParameters as rmi_set_payload_parameters
 
 class RmiSetPayloadParameters:
-	'''Parameters for defining payload mass, center of gravity, and optionally inertia for a payload schedule. Used by RmiSetPayloadParameters). All positional values are in meters; mass in kg; inertia in kg·m².'''
+	'''Parameters for defining payload mass, center of gravity, and optionally inertia for a payload schedule. Used by set_payload_value(). All positional values are in meters; mass in kg; inertia in kg·m².'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = rmi_set_payload_parameters()

@@ -53,7 +53,7 @@ class FullMotionTpInstructionBase(MotionTpInstructionBase):
 
 	@property
 	def lcb_value(self) -> int | None:
-		'''Lock-and-continue (LCB) condition value. Required when LcbType is set.'''
+		'''Lock-and-continue (LCB) condition value. Required when lcb_type is set.'''
 		return self._instance.LcbValue
 
 	@lcb_value.setter
@@ -71,7 +71,7 @@ class FullMotionTpInstructionBase(MotionTpInstructionBase):
 
 	@property
 	def port_number(self) -> int | None:
-		'''Digital output port number. Required when PortType is set.'''
+		'''Digital output port number. Required when port_type is set.'''
 		return self._instance.PortNumber
 
 	@port_number.setter
@@ -80,7 +80,7 @@ class FullMotionTpInstructionBase(MotionTpInstructionBase):
 
 	@property
 	def port_value(self) -> RmiOnOff | None:
-		'''Digital output port value. Required when PortType is set.'''
+		'''Digital output port value. Required when port_type is set.'''
 		return RmiOnOff(int(self._instance.PortValue))
 
 	@port_value.setter

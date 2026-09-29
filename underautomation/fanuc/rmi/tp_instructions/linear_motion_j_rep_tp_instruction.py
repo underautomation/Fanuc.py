@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import LinearMotionJRepTpInstructi
 from UnderAutomation.Fanuc.Rmi.Data import RmiLinearSpeedType as rmi_linear_speed_type
 
 class LinearMotionJRepTpInstruction(JRepMotionTpInstructionBase):
-	'''Instruction for a linear motion (L in TP), joint-angle representation. Pass to RmiInstructionBase).'''
+	'''Instruction for a linear motion (L in TP), joint-angle representation. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = linear_motion_j_rep_tp_instruction()

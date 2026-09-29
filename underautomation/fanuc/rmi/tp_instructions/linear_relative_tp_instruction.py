@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import LinearRelativeTpInstruction
 from UnderAutomation.Fanuc.Rmi.Data import RmiLinearSpeedType as rmi_linear_speed_type
 
 class LinearRelativeTpInstruction(CartesianMotionTpInstructionBase):
-	'''Instruction for an incremental linear motion (L in TP), Cartesian delta representation. Pass to RmiInstructionBase).'''
+	'''Instruction for an incremental linear motion (L in TP), Cartesian delta representation. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = linear_relative_tp_instruction()

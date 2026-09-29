@@ -4,7 +4,7 @@ from underautomation.fanuc.rmi.tp_instructions.rmi_instruction_base import RmiIn
 from UnderAutomation.Fanuc.Rmi.TpInstructions import WaitTimeTpInstruction as wait_time_tp_instruction
 
 class WaitTimeTpInstruction(RmiInstructionBase):
-	'''Instruction for a WAIT t (sec) time delay. Pass to RmiInstructionBase).'''
+	'''Instruction for a WAIT t (sec) time delay. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = wait_time_tp_instruction()

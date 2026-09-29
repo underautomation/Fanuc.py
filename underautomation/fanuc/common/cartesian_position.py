@@ -14,10 +14,6 @@ class CartesianPosition(XYZWPRPosition):
 		else:
 			self._instance = _internal
 
-	def to_homogeneous_matrix(self) -> typing.List[float]:
-		'''Convert position to a homogeneous rotation and translation 4x4 matrix'''
-		return self._instance.ToHomogeneousMatrix()
-
 	@staticmethod
 	def from_homogeneous_matrix(R: typing.List[float]) -> 'CartesianPosition':
 		return CartesianPosition(None, None, None, None, None, None, None, cartesian_position.FromHomogeneousMatrix(R))

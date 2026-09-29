@@ -4,7 +4,7 @@ from underautomation.fanuc.rmi.tp_instructions.rmi_instruction_base import RmiIn
 from UnderAutomation.Fanuc.Rmi.TpInstructions import CallProgramTpInstruction as call_program_tp_instruction
 
 class CallProgramTpInstruction(RmiInstructionBase):
-	'''Instruction for a CALL program instruction. Pass to RmiInstructionBase). Requires MajorVersion >= 4.'''
+	'''Instruction for a CALL program instruction. Pass to send_tp_instruction(). Requires MajorVersion >= 4.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = call_program_tp_instruction()

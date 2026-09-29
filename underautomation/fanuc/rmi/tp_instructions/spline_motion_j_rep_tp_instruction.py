@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import SplineMotionJRepTpInstructi
 from UnderAutomation.Fanuc.Rmi.Data import RmiJointSpeedType as rmi_joint_speed_type
 
 class SplineMotionJRepTpInstruction(JRepMotionTpInstructionBase):
-	'''Instruction for a spline motion with joint-angle representation. Pass to RmiInstructionBase). Requires MajorVersion >= 7.'''
+	'''Instruction for a spline motion with joint-angle representation. Pass to send_tp_instruction(). Requires MajorVersion >= 7.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = spline_motion_j_rep_tp_instruction()

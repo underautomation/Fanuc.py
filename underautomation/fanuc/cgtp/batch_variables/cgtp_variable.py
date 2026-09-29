@@ -55,7 +55,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def cartesian_position_value(self) -> CartesianPositionVariable:
-		'''Gets or sets the value as a Cartesian position. Setting this property updates StringValue.'''
+		'''Gets or sets the value as a Cartesian position. Setting this property updates string_value.'''
 		return CartesianPositionVariable(None, None, self._instance.CartesianPositionValue)
 
 	@cartesian_position_value.setter
@@ -64,7 +64,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def joint_position_value(self) -> JointPositionVariable:
-		'''Gets or sets the value as a joint position. Setting this property updates StringValue.'''
+		'''Gets or sets the value as a joint position. Setting this property updates string_value.'''
 		return JointPositionVariable(None, None, self._instance.JointPositionValue)
 
 	@joint_position_value.setter
@@ -73,7 +73,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def integer_value(self) -> int:
-		'''Gets or sets the value as an integer. Setting this property updates StringValue.'''
+		'''Gets or sets the value as an integer. Setting this property updates string_value.'''
 		return self._instance.IntegerValue
 
 	@integer_value.setter
@@ -82,7 +82,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def real_value(self) -> float:
-		'''Gets or sets the value as a double. Setting this property updates StringValue.'''
+		'''Gets or sets the value as a double. Setting this property updates string_value.'''
 		return self._instance.RealValue
 
 	@real_value.setter
@@ -91,7 +91,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def boolean_value(self) -> bool:
-		'''Gets or sets the value as a boolean. Setting this property updates StringValue.'''
+		'''Gets or sets the value as a boolean. Setting this property updates string_value.'''
 		return self._instance.BooleanValue
 
 	@boolean_value.setter
@@ -100,7 +100,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def vector_value(self) -> VectorVariable:
-		'''Gets or sets the value as a 3D vector. Setting this property updates StringValue.'''
+		'''Gets or sets the value as a 3D vector. Setting this property updates string_value.'''
 		return VectorVariable(self._instance.VectorValue)
 
 	@vector_value.setter
@@ -109,7 +109,7 @@ class CgtpVariable(ICgtpBatchVariable):
 
 	@property
 	def configuration_value(self) -> Configuration:
-		'''Gets or sets the value as a robot configuration. Setting this property updates StringValue.'''
+		'''Gets or sets the value as a robot configuration. Setting this property updates string_value.'''
 		return Configuration(None, None, None, None, None, None, None, self._instance.ConfigurationValue)
 
 	@configuration_value.setter

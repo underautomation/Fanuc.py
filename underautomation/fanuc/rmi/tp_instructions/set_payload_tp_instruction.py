@@ -4,7 +4,7 @@ from underautomation.fanuc.rmi.tp_instructions.rmi_instruction_base import RmiIn
 from UnderAutomation.Fanuc.Rmi.TpInstructions import SetPayloadTpInstruction as set_payload_tp_instruction
 
 class SetPayloadTpInstruction(RmiInstructionBase):
-	'''Instruction for a PAYLOAD[n] schedule selection. Pass to RmiInstructionBase).'''
+	'''Instruction for a PAYLOAD[n] schedule selection. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = set_payload_tp_instruction()

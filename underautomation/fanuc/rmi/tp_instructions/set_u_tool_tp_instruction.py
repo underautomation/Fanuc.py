@@ -4,7 +4,7 @@ from underautomation.fanuc.rmi.tp_instructions.rmi_instruction_base import RmiIn
 from UnderAutomation.Fanuc.Rmi.TpInstructions import SetUToolTpInstruction as set_u_tool_tp_instruction
 
 class SetUToolTpInstruction(RmiInstructionBase):
-	'''Instruction for a UTOOL_NUM = n assignment. Pass to RmiInstructionBase).'''
+	'''Instruction for a UTOOL_NUM = n assignment. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = set_u_tool_tp_instruction()

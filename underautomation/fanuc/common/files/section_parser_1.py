@@ -7,7 +7,7 @@ T = typing.TypeVar('T')
 class SectionParser1(SectionParser, typing.Generic[T]):
 	'''Abstract generic section parser that creates and populates a section of type T.'''
 	def __init__(self, _internal = 0):
-		'''Initializes a new instance of the SectionParser`1 class.'''
+		'''Initializes a new instance of the SectionParser class.'''
 		if(_internal == 0):
 			self._instance = section_parser_1()
 		else:

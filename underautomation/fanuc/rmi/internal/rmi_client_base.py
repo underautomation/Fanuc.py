@@ -106,7 +106,7 @@ class RmiClientBase:
 		return RmiControllerStatusResponse(self._instance.GetStatus())
 
 	def auto_set_next_sequence_id(self) -> RmiControllerStatusResponse:
-		'''Calls internally GetStatus and set LastSequenceId only if $RMI_CFG.$Chk_seqID = FALSE. It also set CheckSequenceId to $RMI_CFG.$Chk_seqID.'''
+		'''Calls internally get_status() and set last_sequence_id only if $RMI_CFG.$Chk_seqID = FALSE. It also set check_sequence_id to $RMI_CFG.$Chk_seqID.'''
 		return RmiControllerStatusResponse(self._instance.AutoSetNextSequenceId())
 
 	def get_extended_status(self) -> RmiExtendedControllerStatusResponse:
@@ -219,7 +219,7 @@ class RmiClientBase:
 		self._instance.ClearCompletedInstructions()
 
 	def clear_local_queued_instructions(self) -> None:
-		'''Cancels and removes all instructions that are still in the local client buffer (LocalQueued). These instructions have not been sent to the controller yet. Each cancelled instruction is marked with an error so that any thread blocked on Int32) is unblocked. Instructions already sent to the controller are not affected.'''
+		'''Cancels and removes all instructions that are still in the local client buffer (LocalQueued). These instructions have not been sent to the controller yet. Each cancelled instruction is marked with an error so that any thread blocked on wait_for_completion() is unblocked. Instructions already sent to the controller are not affected.'''
 		self._instance.ClearLocalQueuedInstructions()
 
 	def send_tp_instruction(self, instruction: RmiInstructionBase) -> RmiInstructionResponse:
@@ -255,12 +255,12 @@ class RmiClientBase:
 
 	@property
 	def last_sequence_id(self) -> int:
-		'''Sequence ID used for the last instruction sent to the controller. Reset to 0 by RmiPltzMode}).. Modified by AutoSetNextSequenceId.'''
+		'''Sequence ID used for the last instruction sent to the controller. Reset to 0 by initialize().. Modified by auto_set_next_sequence_id().'''
 		return self._instance.LastSequenceId
 
 	@property
 	def check_sequence_id(self) -> bool:
-		'''Indicates whether the controller checks for consecutive sequence IDs in motion instructions ($RMI_CFG.$Chk_seqID). Modified by AutoSetNextSequenceId.'''
+		'''Indicates whether the controller checks for consecutive sequence IDs in motion instructions ($RMI_CFG.$Chk_seqID). Modified by auto_set_next_sequence_id().'''
 		return self._instance.CheckSequenceId
 
 	@check_sequence_id.setter
@@ -269,7 +269,7 @@ class RmiClientBase:
 
 	@property
 	def is_in_hold_state(self) -> bool:
-		'''Indicates that the controller has entered the HOLD state and will not accept new TP instructions until Reset is called. The HOLD state is entered in two situations: An invalid sequence ID was detected (error RMIT-029, error code 2556957). RMI checks that sequence IDs are consecutive. If a gap is found, RMI rejects the instruction and enters HOLD. The controller continues executing the TP instructions already queued but blocks all new ones. Use to recover the correct sequence ID, then call before resuming. An invalid motion instruction was received (error RMIT-024, error code 2556952), for example a motion option that is not loaded on the controller. RMI returns an error for that instruction, puts the controller in HOLD, and continues executing any instructions already in the TP program queue. Call once the problem is corrected, then resume sending instructions. All instructions sent while in the HOLD state are ignored by the controller and returned with an error code. This flag is cleared automatically when succeeds.'''
+		'''Indicates that the controller has entered the HOLD state and will not accept new TP instructions until reset() is called. The HOLD state is entered in two situations: An invalid sequence ID was detected (error RMIT-029, error code 2556957). RMI checks that sequence IDs are consecutive. If a gap is found, RMI rejects the instruction and enters HOLD. The controller continues executing the TP instructions already queued but blocks all new ones. Use to recover the correct sequence ID, then call before resuming. An invalid motion instruction was received (error RMIT-024, error code 2556952), for example a motion option that is not loaded on the controller. RMI returns an error for that instruction, puts the controller in HOLD, and continues executing any instructions already in the TP program queue. Call once the problem is corrected, then resume sending instructions. All instructions sent while in the HOLD state are ignored by the controller and returned with an error code. This flag is cleared automatically when succeeds.'''
 		return self._instance.IsInHoldState
 
 	@property
@@ -279,7 +279,7 @@ class RmiClientBase:
 
 	@property
 	def instructions(self) -> typing.List[RmiInstructionResponse]:
-		'''All instructions submitted since the last RmiPltzMode}) or explicit clear, in submission order. Includes instructions in all states: LocalQueued, ControllerQueued, Executing, Completed and Error. Returns a snapshot array; the array is not updated after it is returned.'''
+		'''All instructions submitted since the last initialize() or explicit clear, in submission order. Includes instructions in all states: LocalQueued, ControllerQueued, Executing, Completed and Error. Returns a snapshot array; the array is not updated after it is returned.'''
 		return [RmiInstructionResponse(x) for x in self._instance.Instructions]
 
 	def __str__(self):

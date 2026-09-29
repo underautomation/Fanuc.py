@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import JointRelativeTpInstruction 
 from UnderAutomation.Fanuc.Rmi.Data import RmiJointSpeedType as rmi_joint_speed_type
 
 class JointRelativeTpInstruction(CartesianMotionTpInstructionBase):
-	'''Instruction for an incremental joint motion (J in TP), Cartesian delta representation. Pass to RmiInstructionBase).'''
+	'''Instruction for an incremental joint motion (J in TP), Cartesian delta representation. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = joint_relative_tp_instruction()

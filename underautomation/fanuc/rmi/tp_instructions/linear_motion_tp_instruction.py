@@ -6,7 +6,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import LinearMotionTpInstruction a
 from UnderAutomation.Fanuc.Rmi.Data import RmiLinearSpeedType as rmi_linear_speed_type
 
 class LinearMotionTpInstruction(CartesianMotionTpInstructionBase):
-	'''Instruction for a linear motion (L in TP), Cartesian target representation. Pass to RmiInstructionBase).'''
+	'''Instruction for a linear motion (L in TP), Cartesian target representation. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = linear_motion_tp_instruction()

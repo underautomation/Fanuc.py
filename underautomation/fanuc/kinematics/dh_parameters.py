@@ -47,7 +47,7 @@ class DhParameters(IDhParameters):
 
 	@staticmethod
 	def from_def_file(path: str) -> typing.List['DhParameters']:
-		'''Loads DH parameters of each robots described in a ROBOGUIDE definition file (*.def). By default, this file is located in "C:\ProgramData\FANUC\ROBOGUIDE\Robot Library".'''
+		'''Loads DH parameters of each robots described in a ROBOGUIDE definition file (*.def). By default, this file is located in "C:\\ProgramData\\FANUC\\ROBOGUIDE\\Robot Library".'''
 		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromDefFile(path)]
 
 	@staticmethod

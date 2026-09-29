@@ -4,7 +4,7 @@ from underautomation.fanuc.rmi.data.rmi_response_base import RmiResponseBase
 from UnderAutomation.Fanuc.Rmi.Data import RmiTimedResponse as rmi_timed_response
 
 class RmiTimedResponse(RmiResponseBase):
-	'''Base class for responses with a controller TimeTag value.'''
+	'''Base class for responses with a controller time_tag value.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = rmi_timed_response()

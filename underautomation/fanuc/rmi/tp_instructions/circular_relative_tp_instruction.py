@@ -7,7 +7,7 @@ from UnderAutomation.Fanuc.Rmi.TpInstructions import CircularRelativeTpInstructi
 from UnderAutomation.Fanuc.Rmi.Data import RmiLinearSpeedType as rmi_linear_speed_type
 
 class CircularRelativeTpInstruction(CartesianMotionTpInstructionBase):
-	'''Instruction for an incremental circular motion (C in TP), Cartesian delta representation. Pass to RmiInstructionBase).'''
+	'''Instruction for an incremental circular motion (C in TP), Cartesian delta representation. Pass to send_tp_instruction().'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = circular_relative_tp_instruction()
