@@ -1,487 +1,276 @@
-# Fanuc Communication SDK for Python
+# Fanuc Robot Communication SDK for Python
 
-[![UnderAutomation Fanuc communication SDK](https://raw.githubusercontent.com/underautomation/Fanuc.NET/refs/heads/main/.github/assets/banner.png)](https://underautomation.com)
+[![UnderAutomation Fanuc communication SDK](https://raw.githubusercontent.com/underautomation/Fanuc.NET/refs/heads/main/.github/assets/banner.png)](https://underautomation.com/fanuc)
 
 [![PyPI](https://img.shields.io/pypi/v/UnderAutomation.Fanuc?label=PyPI&logo=pypi)](https://pypi.org/project/UnderAutomation.Fanuc/)
-[![Python](https://img.shields.io/badge/Python-3.7_|_3.8_|_3.9_|_3.10_|_3.11_|_3.12_|_3.13-blue?logo=python)](#)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)](#)
-[![License](https://img.shields.io/badge/License-Commercial-red)](https://underautomation.com/fanuc/eula)
+[![PyPI downloads](https://img.shields.io/pypi/dm/UnderAutomation.Fanuc?label=Downloads&logo=pypi)](https://pypi.org/project/UnderAutomation.Fanuc/)
+[![Python](https://img.shields.io/badge/Python-3.7_to_3.13-blue)](#compatibility)
+[![Platforms](https://img.shields.io/badge/OS-Windows_Linux_macOS-informational)](#compatibility)
+[![License](https://img.shields.io/badge/license-commercial-blue)](https://underautomation.com/fanuc/eula)
 
-### 🤖 Effortlessly Communicate with Fanuc Robots
+**UnderAutomation.Fanuc** is a Python package that communicates with Fanuc robot controllers (R-J3iB,
+R-30iA, R-30iB, R-50iA) and with **ROBOGUIDE**. Nothing is installed on the robot. No PCDK and no Robot
+Interface are needed on the PC.
 
-The **Fanuc SDK for Python** enables seamless integration with Fanuc robots for automation, data exchange, and remote control through multiple native communication protocols.
+Use it to read and write variables, registers and I/O, run and stop programs, read and reset alarms,
+transfer files, read the state of the robot and move it, from a Python script. It also computes the
+kinematics and plans trajectories offline.
 
-> Whether you're building a custom application, integrating with a MES/SCADA system, or performing advanced diagnostics, this SDK provides the tools you need.
+- Product page: [underautomation.com/fanuc](https://underautomation.com/fanuc)
+- Documentation: [underautomation.com/fanuc/documentation/get-started-python](https://underautomation.com/fanuc/documentation/get-started-python)
+- Also available for .NET: [Fanuc.NET](https://github.com/underautomation/Fanuc.NET), and for LabVIEW: [Fanuc.vi](https://github.com/underautomation/Fanuc.vi)
 
-It supports communication with **real robots** and **ROBOGUIDE** simulation.
+## What you can do
 
-🔗 **More Information:** [https://underautomation.com/fanuc](https://underautomation.com/fanuc)  
-🔗 Also available in **[🟦 .NET](https://github.com/underautomation/Fanuc.NET)** & **[🟨 LabVIEW](https://github.com/underautomation/Fanuc.vi)**
+| Feature | Protocol | Controller option |
+| --- | --- | --- |
+| Run, pause, hold, abort programs, read and write variables, set and simulate ports | Telnet KCL | none |
+| Upload and download files, read variable files, registers, I/O, alarms, safety status, diagnostics | FTP | none |
+| Fast read and write of registers, I/O, flags, system variables, current position, alarms | SNPX | R553 "HMI Device SNPX" on FANUC America controllers (R650 FRA), none on FANUC Ltd. controllers (R651 FRL) |
+| Programs, source lines, variables, registers, I/O, comments, kinematics on the controller | CGTP (web server of the controller) | none |
+| Motion instructions sent from the PC, with a status per instruction | RMI | R912 |
+| Real-time motion at every communication cycle: trajectories, target tracking, I/O | Stream Motion | J519 |
+| Forward and inverse kinematics, 82 arm models | offline | none |
+| Motion planner: J, L, C motions, FINE, CNT, CR, splines, shapes, jerk limits | offline | none |
 
----
+## How it works
 
-[⭐ Star this repo if it's useful to you!](https://github.com/underautomation/Fanuc.py/stargazers)  
-[👁️ Watch for updates](https://github.com/underautomation/Fanuc.py/watchers)
+The package wraps the .NET library `UnderAutomation.Fanuc.dll` with [pythonnet](https://github.com/pythonnet/pythonnet).
+The DLL is inside the package: `pip install` installs everything, including pythonnet.
 
----
+- **Windows:** the DLL runs on the .NET Framework 4.x of Windows. Nothing else to install.
+- **Linux and macOS:** install the .NET runtime (for example .NET 8), then tell pythonnet to use it before
+  you start Python:
 
-## 🚀 TL;DR
+  ```bash
+  sudo apt-get install -y dotnet-runtime-8.0   # Ubuntu, for example
+  export PYTHONNET_RUNTIME=coreclr
+  ```
 
-- ✔️ **No PCDK needed** - Connect without Fanuc's Robot Interface
-- 📖 **Read/write system variables**
-- 🔄 **Register access** for numbers, strings, and positions
-- 🎬 **Program control** (run, pause, abort, etc.)
-- 🔔 **Alarm viewing and reset**
-- ⚡ **I/O control** (UI, UO, GI, GO, SDI, SDO, etc.)
-- 🔍 **State & diagnostics monitoring**
-- 📂 **FTP file & variable access**
-- 🌐 **CGTP Web Server** - programs, variables, registers, I/O, kinematics, batch operations
-- 🏎️ **Remote motion:** Remote move the robot
-- 🌊 **Stream Motion:** Real-time motion at every communication cycle (option J519): trajectories, target tracking, I/O
-- 🛤️ **Motion Planner:** Smooth jerk limited trajectories offline (J, L, C, CNT, CR, splines, shapes)
-- 📐 **Kinematics Calculations:** Perform forward and inverse kinematics offline (CRX and standard robots)
+  Without this variable, pythonnet uses Mono, its default runtime on Linux and macOS. You can also choose
+  the runtime in your code, before the first import of the package:
 
-> Nothing has to be installed on the robot, and most features work without any Fanuc option, with the **standard communication** protocols of all Fanuc controllers. For advanced uses, if your controller has the RMI (R912), Stream Motion (J519) or HMI Device SNPX (R553) option, the SDK can use it too.
+  ```python
+  from pythonnet import load
+  load("coreclr")
+  ```
 
----
+## Installation
 
-## 🛠 Installation & Getting Started
-
-### Prerequisites
-
-- **Python 3.7** or higher
-- A Fanuc robot or **ROBOGUIDE** simulation
-
-### Step 1 - Create a Virtual Environment
-
-We recommend using a virtual environment to keep your project dependencies isolated.
-
-Open a terminal (Command Prompt, PowerShell, or your favorite terminal) and run:
-
-```bash
-# Create a project folder
-mkdir my-fanuc-project
-cd my-fanuc-project
-
-# Create a virtual environment
-python -m venv venv
-
-# Activate it
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-```
-
-You should see `(venv)` in your terminal prompt, indicating the virtual environment is active.
-
-### Step 2 - Install the SDK
-
-The SDK is published on PyPI. Install it with a single command:
+Python 3.7 to 3.13 is supported (the limit of pythonnet 3.0.5). Install the package in a virtual
+environment:
 
 ```bash
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# Linux and macOS
+source .venv/bin/activate
+
 pip install UnderAutomation.Fanuc
 ```
 
-That's it! All dependencies (including `pythonnet`) are installed automatically.
-
-On **Linux**, you should also install .NET Core and set environment variable PYTHONNET_RUNTIME to coreclr :
+Or install it from the sources of this repository:
 
 ```bash
-sudo apt-get install -y dotnet-runtime-8.0
-PYTHONNET_RUNTIME=coreclr
+git clone https://github.com/underautomation/Fanuc.py.git
+cd Fanuc.py
+pip install -e .
 ```
 
-> **Alternative: install from source**
->
-> ```bash
-> git clone https://github.com/underautomation/Fanuc.py.git
-> cd Fanuc.py
-> pip install -e .
-> ```
-
-### Step 3 - Connect to Your Robot
-
-Create a Python file (e.g. `main.py`) and write:
+## Getting started
 
 ```python
 from underautomation.fanuc.fanuc_robot import FanucRobot
 from underautomation.fanuc.connection_parameters import ConnectionParameters
 from underautomation.fanuc.common.languages import Languages
 
-# Create a robot instance
-robot = FanucRobot()
+# The SDK runs in trial mode for 30 days. Register your key to remove the trial limit.
+# FanucRobot.register_license("Your Company", "your-license-key")
 
-# Connect (replace with your robot's IP address)
-params = ConnectionParameters('192.168.0.1')
+# IP address of the controller, or the folder of a ROBOGUIDE robot:
+# ConnectionParameters(r"C:\Users\you\Documents\My Workcells\CRX 10iA L\Robot_1")
+params = ConnectionParameters("192.168.0.1")
+params.language = Languages.English  # Japanese and Chinese controllers are also supported
 
-# Set the controller language among English, Japanese and Chinese (optional, defaults to English)
-params.language = Languages.English
-
-# Enable Telnet KCL
-# Activate Telnet on your robot or ROBOGUIDE : https://underautomation.com/fanuc/documentation/enable-telnet
 params.telnet.enable = True
-params.telnet.telnet_kcl_password="telnet_password"
+params.telnet.telnet_kcl_password = "telnet_password"
 
-
-# Enable FTP
 params.ftp.enable = True
 params.ftp.ftp_user = ""
 params.ftp.ftp_password = ""
-params.ftp.ftp_timeout_ms = 10000  # optional, default is 30 seconds
 
-# Enable CGTP Web Server
-params.cgtp.enable = True
-params.cgtp.login = ""
-params.cgtp.password = ""
-
-# Enable SNPX
-# You need option R553 "HMI Device SNPX" for FANUC America (R650 FRA)
-# No additional options needed for FANUC Ltd. (R651 FRL)
 params.snpx.enable = True
 
-# Connect to the robot
-# If you get a license exception, ask a trial license here: https://underautomation.com/license and call FanucRobot.register_license(...) before connecting
+robot = FanucRobot()
 robot.connect(params)
+
+if robot.snpx.connected:
+    print(f"R[1] = {robot.snpx.numeric_registers.read(1)}")
+    print(robot.snpx.current_position.read_world_position(1))
 
 if robot.ftp.connected:
     safety = robot.ftp.get_safety_status()
-    print(f"Safety Status:")
-    print(f"  External E-Stop  : {safety.external_e_stop}")
-    print(f"  SOP E-Stop       : {safety.sope_stop}")
-    print(f"  TP E-Stop        : {safety.tpe_stop}")
-    print(f"  TP Enable        : {safety.tp_enable}")
-    print(f"  TP Deadman       : {safety.tp_deadman}")
-    print()
-
-if robot.snpx.connected:
-    position = robot.snpx.current_position.read_world_position(1)
-    print(position)
-    r1 = robot.snpx.numeric_registers.read(1)
-    print(f"  R[1] = {r1}")
-    print()
+    print(f"External E-Stop: {safety.external_e_stop}, TP enable: {safety.tp_enable}")
 
 if robot.telnet.connected:
     speed_override = robot.telnet.get_variable("$MCR.$GENOVERRIDE")
     print(f"Speed override: {speed_override.raw_value}%")
-    print()
 
-# Don't forget to disconnect
 robot.disconnect()
 ```
 
-Run it:
+Enable only the protocols you use. Each protocol needs its own setup on the controller, see
+[Robot configuration](#robot-configuration).
 
-```bash
-python main.py
-```
+## From .NET names to Python names
 
-> **Connecting to ROBOGUIDE?** Instead of an IP address, pass the workcell path:
->
-> ```python
-> params = ConnectionParameters(r"C:\Users\you\Documents\My Workcells\CRX 10iA L\Robot_1")
-> ```
+The Python API is the .NET API with Python names. The [.NET documentation](https://underautomation.com/fanuc/documentation)
+applies to Python.
 
----
+| .NET | Python |
+| --- | --- |
+| Method `Snpx.NumericRegisters.Read(1)` | `snpx.numeric_registers.read(1)` |
+| Property `Telnet.TelnetKclPassword` | `telnet.telnet_kcl_password` |
+| Static method `FanucRobot.RegisterLicense(...)` | `FanucRobot.register_license(...)` |
+| Enum value `CgtpIoPortType.DO` | `CgtpIoPortType.DO` (an `IntEnum`) |
+| Array `JointsPosition[]` | list-like object, use `list(...)` to copy it |
+| `Nullable<int>` | `int \| None` |
 
-## 🔑 Licensing
+Each type is in the module named after it, in snake case:
+`UnderAutomation.Fanuc.Common.JointsPosition` is `underautomation.fanuc.common.joints_position.JointsPosition`.
+The motion planner, common to the UnderAutomation SDKs, is in `underautomation.robotics`.
 
-The SDK works out of the box for **30 days** (trial period) - no registration needed.
+## Features
 
-After the trial, you can:
+### Telnet KCL
 
-- **Buy a license** at [underautomation.com/order](https://underautomation.com/order?sdk=fanuc)
-- **Get a new trial period immediately by email** at [underautomation.com/license](https://underautomation.com/license?sdk=fanuc)
-
-To register a license in code:
-
-```python
-from underautomation.fanuc.fanuc_robot import FanucRobot
-
-license_info = FanucRobot.register_license("your-licensee", "your-license-key")
-print(license_info)
-```
-
----
-
-## 📂 Examples
-
-The repository includes a complete set of ready-to-run examples in the [`examples/`](https://github.com/underautomation/fanuc.py/tree/main/examples) folder, organized by communication protocol.
-
-### How the Examples Work
-
-| File                                                                                                 | Role                                                                                                                                   |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| [`examples/launcher.py`](https://github.com/underautomation/fanuc.py/blob/main/examples/launcher.py) | **Interactive menu** - browse and run any example from a single launcher                                                               |
-| [`examples/__init__.py`](https://github.com/underautomation/fanuc.py/blob/main/examples/__init__.py) | **Shared helpers** - sets up the Python path, manages robot connection settings, and handles license registration                      |
-| `examples/robot_config.json`                                                                         | **Saved settings** (git-ignored) - remembers your robot IP, credentials, and license key so you don't have to re-enter them every time |
-
-**Run manually each examples**
-
-> The first time you run an example, it will ask for your robot IP (or ROBOGUIDE path) and credentials. These are saved in `robot_config.json` so you only enter them once.
-
-```bash
-# run any example directly
-python examples/snpx/snpx_write_numeric_register.py
-```
-
-**Or browse examples with the launcher:**
-
-Use the launcher to easily browse and run any example without needing to open each file.
-
-```bash
-# Launch the interactive menu
-python examples/launcher.py
-```
-
-And you will get a menu like this to select and run any example with a single keystroke:
-
-```
-╔════════════════════════════════════════════════════════════════════════════════╗
-║                                                                                ║
-║                   ███████╗ █████╗ ███╗   ██╗██╗   ██╗ ██████╗                  ║
-║                   ██╔════╝██╔══██╗████╗  ██║██║   ██║██╔════╝                  ║
-║                   █████╗  ███████║██╔██╗ ██║██║   ██║██║                       ║
-║                   ██╔══╝  ██╔══██║██║╚██╗██║██║   ██║██║                       ║
-║                   ██║     ██║  ██║██║ ╚████║╚██████╔╝╚██████╗                  ║
-║                   ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝                  ║
-║                                                                                ║
-║                    Python SDK - Interactive Example Launcher                   ║
-║                                                                                ║
-╚════════════════════════════════════════════════════════════════════════════════╝
-
-╔════════════════════════════════════════════════════════════════════════════════╗
-║                                SELECT A CATEGORY                               ║
-╠════════════════════════════════════════════════════════════════════════════════╣
-║                                                                                ║
-║  🌐  1. CGTP         (24 examples)                                             ║
-║         CGTP Web Server - programs, variables, registers, I/O, kinematics      ║
-║                                                                                ║
-║  📂  2. FTP          (16 examples)                                             ║
-║         File Transfer Protocol - read/write files, registers, diagnostics      ║
-║                                                                                ║
-║  🦾  3. KINEMATICS   (1 example)                                               ║
-║         Kinematics - offline forward & inverse kinematics, no connection needed║
-║                                                                                ║
-║  🔑  4. LICENSE      (1 example)                                               ║
-║         License management - activation & status                               ║
-║                                                                                ║
-║  📐  5. MOTION       (4 examples)                                              ║
-║         Motion planner - smooth trajectories, splines, shapes, frames (offline)║
-║                                                                                ║
-║  ⚡  6. SNPX         (19 examples)                                             ║
-║         SNPX industrial protocol - fast real-time register & I/O access        ║
-║                                                                                ║
-║  🌊  7. STREAM_MOTION (6 examples)                                             ║
-║         Stream Motion (J519) - real-time trajectories and target tracking      ║
-║                                                                                ║
-║  🔌  8. TELNET       (7 examples)                                              ║
-║         Telnet KCL - send commands, read variables, control I/O                ║
-║                                                                                ║
-╠════════════════════════════════════════════════════════════════════════════════╣
-║  0. Exit                                                                       ║
-║                                                                                ║
-╚════════════════════════════════════════════════════════════════════════════════╝
-
-  Enter category number [0-8]:
-```
-
----
-
-### 📋 Complete Example List
-
-#### 📂 FTP - File Transfer & Variable Access
-
-| #   | Example                                                                                                                             | Description                                                                           |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 1   | [ftp_check_file_exists.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_check_file_exists.py)             | Check if a file or directory exists on the robot controller                           |
-| 2   | [ftp_current_position.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_current_position.py)               | Read the current robot position (joints + Cartesian) for all motion groups            |
-| 3   | [ftp_download_file.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_download_file.py)                     | Download a file from the robot controller to your local machine                       |
-| 4   | [ftp_error_list.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_error_list.py)                           | Retrieve the complete error/alarm history with codes, timestamps, and active status   |
-| 5   | [ftp_get_all_variables.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_get_all_variables.py)             | Interactive navigator to browse all variable files, search, and drill into structures |
-| 6   | [ftp_io_state.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_io_state.py)                               | Read all digital I/O states (DIN, DOUT, RI, RO, UI, UO, SI, SO, FLG)                  |
-| 7   | [ftp_list_files.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_list_files.py)                           | Browse files and directories on the controller's file system                          |
-| 8   | [ftp_program_states.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_program_states.py)                   | Read the state of all running tasks/programs with call history                        |
-| 9   | [ftp_read_features.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_read_features.py)                     | List all installed software features/options on the controller                        |
-| 10  | [ftp_read_numeric_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_read_numeric_registers.py)   | Read numeric registers (R[1], R[2], ...) from the NUMREG variable file                |
-| 11  | [ftp_read_position_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_read_position_registers.py) | Read position registers (PR[1], PR[2], ...) with Cartesian and joint data             |
-| 12  | [ftp_read_string_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_read_string_registers.py)     | Read string registers (SR[1], SR[2], ...) from the STRREG variable file               |
-| 13  | [ftp_read_system_variables.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_read_system_variables.py)     | Read commonly used system variables (robot name, hostname, language, etc.)            |
-| 14  | [ftp_safety_status.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_safety_status.py)                     | Read safety signals: E-Stop, deadman, fence open, TP enable, and more                 |
-| 15  | [ftp_summary_diagnostic.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_summary_diagnostic.py)           | Get a complete diagnostic snapshot: position, safety, I/O, features, programs         |
-| 16  | [ftp_upload_file.py](https://github.com/underautomation/fanuc.py/blob/main/examples/ftp/ftp_upload_file.py)                         | Upload a local file to the robot controller                                           |
-
-#### 🌐 CGTP - Web Server Protocol
-
-| #   | Example                                                                                                                              | Description                                                                               |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| 1   | [cgtp_batch_read.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_batch_read.py)                         | Read multiple variables (numeric, string, position registers) in a single batch operation |
-| 2   | [cgtp_batch_write.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_batch_write.py)                       | Write multiple variables to the controller in a single batch operation                    |
-| 3   | [cgtp_change_active_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_change_active_program.py)   | Change the active TP program on the controller                                            |
-| 4   | [cgtp_create_delete_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_create_delete_program.py)   | Create a new TP program and optionally delete it                                          |
-| 5   | [cgtp_http_files.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_http_files.py)                         | List variable files, TP programs, diagnostic files via HTTP and download as string        |
-| 6   | [cgtp_kinematics.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_kinematics.py)                         | Compute forward and inverse kinematics on the controller via CGTP                         |
-| 7   | [cgtp_list_read_files.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_list_read_files.py)               | List files on the controller and read file content as string                              |
-| 8   | [cgtp_pause_abort.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_pause_abort.py)                       | Pause all running programs and abort a specific task                                      |
-| 9   | [cgtp_program_properties.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_program_properties.py)         | Read and write program properties: comment, owner, stack size, ignore pause, etc.         |
-| 10  | [cgtp_read_current_position.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_current_position.py)   | Read the current Cartesian and joint position of the robot                                |
-| 11  | [cgtp_read_io_comments.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_io_comments.py)             | Read input and output comments for Robot, Digital, Group, or Analog I/O                   |
-| 12  | [cgtp_read_numeric_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_numeric_registers.py) | Read all numeric registers (R[]) with comments, or a single register                      |
-| 13  | [cgtp_read_position_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_position_register.py) | Read a position register PR[index] with comment and position data                         |
-| 14  | [cgtp_read_set_comments.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_set_comments.py)           | Read all comments for registers or I/O and set a comment                                  |
-| 15  | [cgtp_read_string_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_string_registers.py)   | Read all string registers (SR[]) with comments and values                                 |
-| 16  | [cgtp_read_variable.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_variable.py)                   | Read a system or program variable as string or typed value                                |
-| 17  | [cgtp_read_write_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_read_write_io.py)                   | Read and write I/O ports (DI, DO, RI, RO, GI, GO, AI, AO, Flag)                           |
-| 18  | [cgtp_rename_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_rename_program.py)                 | Rename a TP program on the controller                                                     |
-| 19  | [cgtp_select_run_program.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_select_run_program.py)         | Select a TP program and run it from a given line                                          |
-| 20  | [cgtp_simulate_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_simulate_io.py)                       | Simulate, unsimulate, and check simulation status of I/O ports                            |
-| 21  | [cgtp_user_alarms.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_user_alarms.py)                       | Read user alarm definitions and set alarm severity                                        |
-| 22  | [cgtp_write_numeric_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_write_numeric_register.py) | Write an integer or real value to a numeric register R[index]                             |
-| 23  | [cgtp_write_string_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_write_string_register.py)   | Write a string value to string register SR[index]                                         |
-| 24  | [cgtp_write_variable.py](https://github.com/underautomation/fanuc.py/blob/main/examples/cgtp/cgtp_write_variable.py)                 | Write a numeric value to a system or program variable                                     |
-
-#### ⚡ SNPX - High-Speed Industrial Protocol
-
-| #   | Example                                                                                                                                | Description                                                           |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| 1   | [snpx_clear_alarms.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_clear_alarms.py)                       | Clear all active alarms on the robot                                  |
-| 2   | [snpx_read_alarm_history.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_alarm_history.py)           | Read the alarm history with severity and cause information            |
-| 3   | [snpx_read_alarms.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_alarms.py)                         | Read currently active alarms with ID, severity, message, and cause    |
-| 4   | [snpx_read_batch_flags.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_batch_flags.py)               | Read multiple flags at once using batch assignment (much faster)      |
-| 5   | [snpx_read_batch_registers.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_batch_registers.py)       | Read a batch of numeric registers at once for high performance        |
-| 6   | [snpx_read_current_position.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_current_position.py)     | Read real-time Cartesian and joint position via SNPX                  |
-| 7   | [snpx_read_digital_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_digital_io.py)                 | Read digital I/O signals (SDI, SDO, RDI, RDO, UI, UO, SI, SO, WI, WO) |
-| 8   | [snpx_read_flag.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_flag.py)                             | Read a single boolean flag (FLG[i])                                   |
-| 9   | [snpx_read_integer_sysvar.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_integer_sysvar.py)         | Read integer system variables by name (e.g. `$MCR.$GENOVERRIDE`)      |
-| 10  | [snpx_read_numeric_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_numeric_io.py)                 | Read numeric/analog I/O values (GI, GO, AI, AO)                       |
-| 11  | [snpx_read_numeric_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_numeric_register.py)     | Read a single numeric register (R[i]) with fast direct access         |
-| 12  | [snpx_read_position_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_position_register.py)   | Read a position register (PR[i]) with Cartesian and joint data        |
-| 13  | [snpx_read_string_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_read_string_register.py)       | Read a string register (SR[i])                                        |
-| 14  | [snpx_write_digital_output.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_write_digital_output.py)       | Write digital output signals (SDO, RDO, UO, SO, WO)                   |
-| 15  | [snpx_write_flag.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_write_flag.py)                           | Write a boolean flag (FLG[i]) with read-back confirmation             |
-| 16  | [snpx_write_numeric_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_write_numeric_register.py)   | Write a numeric register (R[i]) with read-back confirmation           |
-| 17  | [snpx_write_position_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_write_position_register.py) | Write a position register (PR[i]) in Cartesian or Joint mode          |
-| 18  | [snpx_write_string_register.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_write_string_register.py)     | Write a string register (SR[i]) with read-back confirmation           |
-| 19  | [snpx_write_sysvar.py](https://github.com/underautomation/fanuc.py/blob/main/examples/snpx/snpx_write_sysvar.py)                       | Write a system variable (e.g. speed override) via `set_variable`      |
-
-#### 🔌 Telnet - KCL Remote Control
-
-| #   | Example                                                                                                                      | Description                                                       |
-| --- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| 1   | [telnet_get_position.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_get_position.py)       | Read the current Cartesian position (X, Y, Z, W, P, R)            |
-| 2   | [telnet_read_variable.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_read_variable.py)     | Read any robot variable by name (e.g. `$MCR.$GENOVERRIDE`)        |
-| 3   | [telnet_set_port.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_set_port.py)               | Set a digital output port (DOUT, RDO, OPOUT, TPOUT, GOUT)         |
-| 4   | [telnet_simulate_port.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_simulate_port.py)     | Simulate/unsimulate I/O ports for testing without real hardware   |
-| 5   | [telnet_task_info.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_task_info.py)             | Get task information: status, current line, routine, program type |
-| 6   | [telnet_write_variable.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_write_variable.py)   | Write a numeric value to any robot variable                       |
-| 7   | [telnet_program_control.py](https://github.com/underautomation/fanuc.py/blob/main/examples/telnet/telnet_program_control.py) | Program lifecycle control: run, pause, resume, task info, abort   |
-
-#### 🦾 Kinematics - Offline FK & IK (no robot connection needed)
-
-| #   | Example                                                                                                                                  | Description                                                                                                    |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 1   | [kinematics_forward_inverse.py](https://github.com/underautomation/fanuc.py/blob/main/examples/kinematics/kinematics_forward_inverse.py) | Interactive forward & inverse kinematics: select a model, view DH parameters, compute FK then all IK solutions |
-
-#### 📐 Motion - Offline Motion Planner (no robot connection needed)
-
-| #   | Example                                                                                                                            | Description                                                                                  |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| 1   | [motion_frames_quaternions.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_frames_quaternions.py) | Convert W, P, R angles to quaternions, interpolate orientations, change frames               |
-| 2   | [motion_joint_path.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_joint_path.py)                 | Plan joint motions (J, CNT, FINE), read the duration and the velocity, acceleration and jerk |
-| 3   | [motion_shapes.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_shapes.py)                         | Create a circle, a rounded rectangle, a helix and a spline through points                    |
-| 4   | [motion_timed_points.py](https://github.com/underautomation/fanuc.py/blob/main/examples/motion/motion_timed_points.py)             | Pass through joint positions at given times, check the limits and slow down when too fast    |
-
-#### 🌊 Stream Motion - Real-Time Motion (option J519)
-
-| #   | Example                                                                                                                                             | Description                                                                    |
-| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 1   | [stream_motion_cartesian_circle.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_cartesian_circle.py) | Draw a horizontal circle that starts and ends at the current position          |
-| 2   | [stream_motion_io.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_io.py)                             | Read DI[1] to DI[16] during a session and switch DO[1] ON during a motion      |
-| 3   | [stream_motion_joint_move.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_joint_move.py)             | Move J1 back and forth with a smooth trajectory within the limits of the robot |
-| 4   | [stream_motion_monitor.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_monitor.py)                   | Read the limits, then display the position and state of the robot (no motion)  |
-| 5   | [stream_motion_override_pause.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_override_pause.py)     | Change the override, pause, resume and abort a motion                          |
-| 6   | [stream_motion_tracking.py](https://github.com/underautomation/fanuc.py/blob/main/examples/stream_motion/stream_motion_tracking.py)                 | The robot follows a J1 target that you type, even during the motion            |
-
-> Stream Motion examples need a TP program with `IBGN start[1]` and `IBGN end[1]` running on the robot, in AUTO mode at 100% override.
-
-#### 🔑 License
-
-| #   | Example                                                                                                                   | Description                                                                |
-| --- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| 1   | [license_info_example.py](https://github.com/underautomation/fanuc.py/blob/main/examples/license/license_info_example.py) | Display license state, register a license, and view all license properties |
-
----
-
-## 📌 Feature Documentation
-
-### 🌐 CGTP - Web Server Protocol
-
-CGTP (Controller Gateway Transfer Protocol) communicates with the robot controller's **built-in web server** via HTTP. It provides a comprehensive API for program management, variable access, register operations, I/O control, and kinematics : all through a single protocol.
-
-**What you can do:**
-
-- **Full program lifecycle** - create, delete, rename, select, run, pause, and abort TP programs
-- **List programs** - enumerate all TP or Karel programs on the controller, filtered by type and sub-type
-- **Source code editing** - insert, replace, and delete lines in TP programs directly on the controller (firmware V9.10+)
-- **Read and write program properties** - comment, owner, stack size, ignore pause, write protect, sub-type
-- **Read/write system and program variables** with type information
-- **Read/write numeric registers** (R[]) as integer or real, with comments
-- **Read/write string registers** (SR[]) with comments
-- **Read position registers** (PR[]) with Cartesian and joint data
-- **Read/write I/O ports** - DI, DO, RI, RO, GI, GO, AI, AO, Flag
-- **Simulate and unsimulate I/O** for testing without physical devices
-- **Read current Cartesian and joint position** of the robot
-- **Forward and inverse kinematics** computed on the controller
-- **Batch read/write** multiple variables in a single operation for maximum efficiency
-- **Read and set comments** for registers, I/O ports, and user alarms
-- **Read user alarm** definitions and set severity
-- **List and read files** from the controller's file system
-- **HTTP file access** - list and download variable files, TP programs, diagnostic files
-
-**Quick example:**
+Telnet KCL (Karel Command Line) sends commands to the controller. It needs no option on the controller.
 
 ```python
-from underautomation.fanuc.fanuc_robot import FanucRobot
-from underautomation.fanuc.connection_parameters import ConnectionParameters
+from underautomation.fanuc.common.kcl.kcl_ports import KCLPorts
+
+# Variables
+result = robot.telnet.get_variable("$MCR.$GENOVERRIDE")
+print(f"Speed override: {result.raw_value}%")
+robot.telnet.set_variable("$MCR.$GENOVERRIDE", 50)
+
+# Programs
+robot.telnet.run("MyProgram")
+robot.telnet.pause("MyProgram")
+robot.telnet.abort("MyProgram", force=True)
+
+info = robot.telnet.get_task_information("MAINPROG")
+print(f"Status: {info.task_status_str}, Line: {info.current_line}")
+
+# Ports: set DOUT[1], simulate DIN[3]
+robot.telnet.set_port(KCLPorts.DOUT, 1, 1)
+robot.telnet.simulate(KCLPorts.DIN, 3, 1)
+robot.telnet.unsimulate(KCLPorts.DIN, 3)
+
+# Current position
+pose = robot.telnet.get_current_pose()
+print(f"X={pose.position.x}, Y={pose.position.y}, Z={pose.position.z}")
+```
+
+### SNPX
+
+SNPX (also known as SRTP or RobotIF) is the fastest way to read and write registers, I/O and variables.
+Batch reads read several values in one request.
+
+```python
+# Numeric registers, one value or a batch (R[1] to R[10] in one request)
+value = robot.snpx.numeric_registers.read(1)
+robot.snpx.numeric_registers.write(1, 42.5)
+batch = robot.snpx.numeric_registers.create_batch_assignment(1, 10)
+values = batch.read()
+
+# String and position registers
+text = robot.snpx.string_registers.read(1)
+robot.snpx.string_registers.write(1, "Hello Fanuc")
+position = robot.snpx.position_registers.read(1)
+print(f"PR[1]: X={position.cartesian_position.x}, Y={position.cartesian_position.y}")
+
+# Digital I/O: read SDI[1] to SDI[8], write SDO[1] and SDO[2]
+sdi_values = robot.snpx.sdi.read(1, 8)
+robot.snpx.sdo.write(1, [True, False])
+
+# Current position
+pos = robot.snpx.current_position.read_world_position(1)
+
+# Alarms and system variables
+robot.snpx.clear_alarms()
+speed = robot.snpx.integer_system_variables.read("$MCR.$GENOVERRIDE")
+robot.snpx.set_variable("$MCR.$GENOVERRIDE", 50)
+```
+
+### FTP
+
+FTP gives access to the files of the controller, and reads and decodes the variable files and the
+diagnostic files.
+
+```python
+# Files
+robot.ftp.direct_file_handling.upload_file_to_controller("local.tp", "/md:/remote.tp")
+robot.ftp.direct_file_handling.download_file_from_controller("backup.va", "/md:/backup.va")
+exists = robot.ftp.direct_file_handling.file_exists("/md:/summary.dg")
+
+# Registers and system variables from the variable files
+numreg = robot.ftp.known_variable_files.get_numreg_file()
+for idx, val in enumerate(numreg.numreg, start=1):
+    print(f"R[{idx}] = {val}")
+system = robot.ftp.known_variable_files.get_system_file()
+print(f"Robot: {system.robot_name}, Host: {system.hostname}")
+
+# Current position of each motion group
+for gp in robot.ftp.get_current_position().groups_position:
+    print(f"J1={gp.joints_position.j1}, J2={gp.joints_position.j2}")
+
+# Safety status, active alarms, I/O states, complete diagnostic
+safety = robot.ftp.get_safety_status()
+for err in robot.ftp.get_all_errors_list().filter_active_alarms():
+    print(f"[{err.error_code}] {err.message}")
+for signal in robot.ftp.get_io_state().states:
+    print(f"{signal.port}[{signal.id}] = {'ON' if signal.value else 'OFF'}")
+diag = robot.ftp.get_summary_diagnostic()
+```
+
+### CGTP (web server of the controller)
+
+CGTP uses the web server of the controller. It gives access to the programs, the variables, the
+registers, the I/O and the kinematics.
+
+```python
 from underautomation.fanuc.cgtp.cgtp_io_port_type import CgtpIoPortType
 from underautomation.fanuc.cgtp.batch_variables.cgtp_batch_variables import CgtpBatchVariables
+from underautomation.fanuc.common.position import Position
+from underautomation.fanuc.common.extended_cartesian_position import ExtendedCartesianPosition
 
-robot = FanucRobot()
 params = ConnectionParameters("192.168.0.1")
 params.cgtp.enable = True
-params.cgtp.login = ""       # HTTP Basic auth (optional)
+params.cgtp.login = ""       # HTTP authentication, when the controller asks for it
 params.cgtp.password = ""
 robot.connect(params)
 
-# Read/write variables
+# Variables and registers
 value = robot.cgtp.read_variable_as_string("$MCR.$GENOVERRIDE")
 robot.cgtp.write_variable("$MCR.$GENOVERRIDE", 50)
-
-# Read a numeric register
 reg = robot.cgtp.read_numeric_register_with_comment(1)
-print(f"R[1] = {reg}")
-
-# Write registers
 robot.cgtp.write_numeric_register_as_integer(1, 42)
 robot.cgtp.write_string_register(1, "Hello CGTP")
 
-# Program control
+# Programs
 robot.cgtp.select_program("MAIN", 1)
 robot.cgtp.run_program("MAIN")
 robot.cgtp.pause_all_programs()
 robot.cgtp.abort_task("MAIN")
-
-# List all TP programs
-programs = robot.cgtp.list_tp_programs()
-for prog in programs:
+for prog in robot.cgtp.list_tp_programs():
     print(prog)
 
-# Source code editing (firmware V9.10+)
+# Source lines and positions of a TP program (firmware V9.10 or later, first motion group only)
 robot.cgtp.insert_source_line("MY_PROGRAM", "L P[5] 100mm/sec FINE", 3)
 robot.cgtp.replace_source_line("MY_PROGRAM", "J P[1] 50% FINE", 5)
 robot.cgtp.delete_source_lines("MY_PROGRAM", 4, 2)
-
-# Write position data into a program (firmware V9.10+, first motion group only)
 position = Position(0, 1, None, ExtendedCartesianPosition(500, 200, 300, 0, 90, 0, 0, 0, 0))
 robot.cgtp.set_program_position("MY_PROG", 1, position)
 
@@ -494,388 +283,84 @@ robot.cgtp.simulate_io(CgtpIoPortType.DI, 3)
 cart = robot.cgtp.read_cartesian_position(1)
 print(f"X={cart.x:.3f}, Y={cart.y:.3f}, Z={cart.z:.3f}")
 
-# Batch operations (read multiple variables in one call)
+# Several variables in one request
 batch = CgtpBatchVariables()
 batch.add_numeric_register(1)
-batch.add_numeric_register(2)
 batch.add_string_register(1)
 batch.add_variable("$MCR.$GENOVERRIDE")
 robot.cgtp.read_batch_variables(batch)
 for var in batch:
     print(f"{var.name} = {var.string_value}")
-
-robot.disconnect()
 ```
 
----
+### RMI (option R912)
 
-### 🖥️ Telnet KCL - Remote Command Interface
-
-Telnet KCL (Karel Command Language) lets you remotely send commands to the robot controller. It's the simplest way to control programs, read/write variables, and manage I/O.
-
-**What you can do:**
-
-- **Run, pause, hold, continue, and abort programs** remotely
-- **Read and write any robot variable** (`$MCR.$GENOVERRIDE`, `$RMT_MASTER`, custom variables, etc.)
-- **Set digital output ports** (DOUT, RDO, OPOUT, TPOUT, GOUT)
-- **Simulate and unsimulate I/O ports** for testing without physical devices
-- **Get task information** - which programs are running, their status, and current line
-- **Read the current Cartesian position** of the robot
-
-**Quick example:**
+RMI (Remote Motion Interface) sends TP motion instructions to the robot. The SDK manages the instruction
+buffer of the controller and returns a response object for each instruction. The teach pendant must be
+disabled and the controller in AUTO mode before `initialize()`.
 
 ```python
-from underautomation.fanuc.fanuc_robot import FanucRobot
-from underautomation.fanuc.connection_parameters import ConnectionParameters
-from underautomation.fanuc.telnet.kcl_ports import KCLPorts
-
-robot = FanucRobot()
-params = ConnectionParameters("192.168.0.1")
-params.telnet.enable = True
-robot.connect(params)
-
-# Read a variable
-result = robot.telnet.get_variable("$MCR.$GENOVERRIDE")
-print(f"Speed override: {result.raw_value}%")
-
-# Write a variable
-robot.telnet.set_variable("$MCR.$GENOVERRIDE", 50)
-
-# Control programs
-robot.telnet.run("MyProgram")
-robot.telnet.pause("MyProgram")
-robot.telnet.abort("MyProgram", force=True)
-
-# Set a digital output
-robot.telnet.set_port(KCLPorts.DOUT, 1, 1)  # DOUT[1] = ON
-
-# Simulate an input for testing
-robot.telnet.simulate(KCLPorts.DIN, 3, 1)   # DIN[3] simulated to ON
-robot.telnet.unsimulate(KCLPorts.DIN, 3)     # Restore normal operation
-
-# Get task info
-info = robot.telnet.get_task_information("MAINPROG")
-print(f"Status: {info.task_status_str}, Line: {info.current_line}")
-
-# Read current position
-pose = robot.telnet.get_current_pose()
-print(f"X={pose.position.x}, Y={pose.position.y}, Z={pose.position.z}")
-
-robot.disconnect()
-```
-
----
-
-### ⚡ SNPX (RobotIF) - High-Speed Industrial Protocol
-
-SNPX provides **fast, structured data exchange** with the robot. It's the best choice for real-time monitoring and high-frequency register access. It supports batch reads for maximum throughput.
-
-**What you can do:**
-
-- **Read/write numeric registers** (R[1], R[2], ...) - single or batch
-- **Read/write string registers** (SR[1], SR[2], ...)
-- **Read/write position registers** (PR[1], PR[2], ...) with Cartesian and joint data
-- **Read/write boolean flags** (FLG[1], FLG[2], ...) - single or batch
-- **Read/write digital I/O** - SDI, SDO, RDI, RDO, UI, UO, SI, SO, WI, WO
-- **Read/write numeric I/O** - GI, GO, AI, AO (group and analog signals)
-- **Read/write system variables** (e.g. speed override)
-- **Read the current robot position** in real-time (world and joint coordinates)
-- **Read active alarms** and **alarm history** with severity and cause
-- **Clear alarms** remotely
-
-**Quick example:**
-
-```python
-from underautomation.fanuc.fanuc_robot import FanucRobot
-from underautomation.fanuc.connection_parameters import ConnectionParameters
-
-robot = FanucRobot()
-params = ConnectionParameters("192.168.0.1")
-params.snpx.enable = True
-robot.connect(params)
-
-# Read a numeric register
-value = robot.snpx.numeric_registers.read(1)
-print(f"R[1] = {value}")
-
-# Write a numeric register
-robot.snpx.numeric_registers.write(1, 42.5)
-
-# Batch read for maximum speed
-batch = robot.snpx.numeric_registers.create_batch_assignment(1, 10)
-values = batch.read()  # Reads R[1] through R[10] in one call
-
-# Read/write string registers
-text = robot.snpx.string_registers.read(1)
-robot.snpx.string_registers.write(1, "Hello Fanuc")
-
-# Read a position register
-position = robot.snpx.position_registers.read(1)
-print(f"PR[1]: X={position.cartesian_position.x}, Y={position.cartesian_position.y}")
-
-# Digital I/O
-sdi_values = robot.snpx.sdi.read(1, 8)     # Read SDI[1..8]
-robot.snpx.sdo.write(1, [True, False])      # Write SDO[1]=ON, SDO[2]=OFF
-
-# Current position
-pos = robot.snpx.current_position.read_world_position(1)
-print(f"X={pos.cartesian_position.x}, Y={pos.cartesian_position.y}")
-
-# Alarms
-robot.snpx.clear_alarms()
-
-# System variables
-speed = robot.snpx.integer_system_variables.read("$MCR.$GENOVERRIDE")
-robot.snpx.set_variable("$MCR.$GENOVERRIDE", "50")
-
-robot.disconnect()
-```
-
----
-
-### 📐 Kinematics - Offline Forward & Inverse Kinematics
-
-The kinematics module lets you compute **forward kinematics** (joint angles → Cartesian position) and **inverse kinematics** (Cartesian position → all joint angle solutions) **entirely offline** : no robot connection or license required.
-
-It includes built-in Denavit-Hartenberg parameters for **80+ FANUC robot models** (CRX collaborative and standard OPW arms).
-
-**What you can do:**
-
-- **List all supported robot models** and their DH parameters
-- **Forward kinematics** - compute the TCP Cartesian pose from 6 joint angles
-- **Inverse kinematics** - compute **all** valid joint configurations for a given Cartesian pose
-- **No connection needed** - works fully offline, no robot or license required
-- **Supports CRX and standard (OPW) kinematics categories**
-
-**Quick example:**
-
-```python
-import math
-from underautomation.fanuc.kinematics.arm_kinematic_models import ArmKinematicModels
-from underautomation.fanuc.kinematics.dh_parameters import DhParameters
-from underautomation.fanuc.kinematics.kinematics_utils import KinematicsUtils
-from underautomation.fanuc.common.cartesian_position import CartesianPosition
-
-# Get DH parameters for a specific robot model
-dh = DhParameters.from_arm_kinematic_model(ArmKinematicModels.CRX10iA)
-print(f"a1={dh.a1}, a2={dh.a2}, a3={dh.a3}, d4={dh.d4}, d5={dh.d5}, d6={dh.d6}")
-
-# Forward kinematics: joint angles (radians) → Cartesian position
-joints_rad = [math.radians(j) for j in [0, -30, 45, 0, 60, 0]]
-fk = KinematicsUtils.forward_kinematics(joints_rad, dh)
-print(f"FK → X={fk.x:.2f}, Y={fk.y:.2f}, Z={fk.z:.2f}, W={fk.w:.2f}, P={fk.p:.2f}, R={fk.r:.2f}")
-
-# Inverse kinematics: Cartesian position → all joint solutions
-target = CartesianPosition(fk.x, fk.y, fk.z, fk.w, fk.p, fk.r, None)
-solutions = KinematicsUtils.inverse_kinematics(target, dh)
-for i, sol in enumerate(solutions, 1):
-    print(f"  IK #{i}: J1={sol.j1:.2f}, J2={sol.j2:.2f}, J3={sol.j3:.2f}, "
-          f"J4={sol.j4:.2f}, J5={sol.j5:.2f}, J6={sol.j6:.2f}")
-```
-
-**TRY IT:**
-
-To test IK and FK, you can run the complete example : [kinematics_forward_inverse.py](https://github.com/underautomation/fanuc.py/blob/main/examples/kinematics/kinematics_forward_inverse.py)
-
-```bash
-python .\examples\kinematics\kinematics_forward_inverse.py
-```
-
-And get this kind of output (with interactive model selection and joint input):
-
-```
-(.venv) PS Fanuc.py> python .\examples\kinematics\kinematics_forward_inverse.py
-============================================================
-  FANUC SDK - Forward & Inverse Kinematics (offline)
-============================================================
-
-Available robot models (82):
-
-    1. ARCMate0iA               2. ARCMate0iB               3. ARCMate0iB_2
-    4. ARCMate100iD             5. ARCMate100iD10L          6. ARCMate100iD16S
-    7. ARCMate100iD8L           8. ARCMate120iD             9. ARCMate120iD12L
-   10. ARCMate120iD35          11. CR14iAL                 12. CR15iA
-   13. CR35iA                  14. CR7iA                   15. CR7iAL
-   16. CRX10iA                 17. CRX10iAL                18. LRMate200iD
-   19. LRMate200iD7C           20. LRMate200iD7L           21. LRMate200iD7LC
-   22. LaserRobotHA            23. M10iA10M                24. M10iA10MS
-   25. M10iA12                 26. M10iA12S                27. M10iA7L
-   28. M10iA8L                 29. M2000iA1200             30. M2000iA1700L
-   31. M2000iA2300             32. M2000iA900L             33. M20iA
-   34. M20iA12L                35. M20iA20M                36. M20iA35M
-   37. M20iB25                 38. M20iB25C                39. M20iB35S
-   40. M410iC110               41. M410iC185               42. M410iC185_2
-   43. M410iC500               44. M410iC500_2             45. M710iC12L
-   46. M710iC20M               47. M710iC45M               48. M710iC50
-   49. M800iA60                50. M900iB280L              51. M900iB330L
-   52. M900iB360               53. M900iB400L              54. M900iB700
-   55. M900iBKAI               56. P350iA45LeftHand        57. P350iA45RightHand
-   58. P700iANewRightyArmRightOffset   59. R1000iA100F             60. R1000iA100F7
-   61. R1000iA120F7B           62. R1000iA120F7BS          63. R1000iA120F7BS_2
-   64. R1000iA120F7BS_3        65. R1000iA120F7B_2         66. R1000iA120F7B_3
-   67. R1000iA130F             68. R1000iA80F              69. R2000iB125L
-   70. R2000iB175L             71. R2000iB210FS            72. R2000iB220US
-   73. R2000iC100S             74. R2000iC125L             75. R2000iC190U
-   76. R2000iC210F             77. R2000iC210L             78. R2000iC210WE
-   79. R2000iC210WEProto       80. R2000iC220U             81. R2000iC270F
-   82. R2000iD100FH
-
-Select a model number [1-82] (default 1): 16
-
-→ Selected model: CRX10iA
-
-Denavit-Hartenberg parameters for CRX10iA:
-----------------------------------------
-  a1 =     0.0000 mm
-  a2 =   540.0000 mm
-  a3 =     0.0000 mm
-  d4 =  -540.0000 mm
-  d5 =   150.0000 mm
-  d6 =  -160.0000 mm
-  Category: Crx
-
-Enter joint angles in degrees (press Enter for 0):
-  J1 (0.0000): 10
-  J2 (0.0000): 20
-  J3 (0.0000): 40
-  J4 (0.0000): 10
-  J5 (0.0000): -10
-  J6 (0.0000):
-
-Computing forward kinematics for J=[10.00, 20.00, 40.00, 10.00, -10.00, 0.00] deg ...
-
-FK result : Cartesian position:
-----------------------------------------
-  X =     735.4571 mm
-  Y =     -25.2181 mm
-  Z =     954.8160 mm
-  W =      14.8408 deg
-  P =     -58.7116 deg
-  R =     170.7749 deg
-  Conf = N U T, 0, 0, 0
-
-Enter cartesian position for IK (press Enter to keep FK value):
-  X [mm] (735.4571):
-  Y [mm] (-25.2181):
-  Z [mm] (954.8160):
-  W [deg] (14.8408):
-  P [deg] (-58.7116):
-  R [deg] (170.7749):
-
-Computing inverse kinematics for X=735.4571, Y=-25.2181, Z=954.8160, W=14.8408, P=-58.7116, R=170.7749 ...
-
-8 IK solution(s) found:
-----------------------------------------------------------------------------------------------------
-  #            J1         J2         J3         J4         J5         J6   Configuration
-----------------------------------------------------------------------------------------------------
-  1      -15.6154    48.3697    60.5986   142.0264    34.2715  -150.7098   F D T, 0, 0, 0
-  2       10.2040    47.1644    69.1161     3.0266   -39.0031     7.6007   N D T, 0, 0, 0
-  3        3.2969    19.0319    27.7002    58.2991     4.7830   -51.7280   F U T, 0, 0, 0
-  4       10.0000    20.0000    40.0000    10.0000   -10.0000     0.0000   N U T, 0, 0, 0
-  5      164.3846   -48.3697   119.4014   -37.9736    34.2715  -150.7098   F U B, 0, 0, 0
-  6     -169.7960   -47.1644   110.8839  -176.9734   -39.0031     7.6007   N U B, 0, 0, 0
-  7     -176.7031   -19.0319   152.2998  -121.7009     4.7830   -51.7280   F D B, 0, 0, 0
-  8     -170.0000   -20.0000   140.0000  -170.0000   -10.0000     0.0000   N D B, 0, 0, 0
-----------------------------------------------------------------------------------------------------
-
-Done.
-```
-
----
-
-### 🏎️ RMI - Remote Motion Interface
-
-RMI (Remote Motion Interface, option R912) lets you send TP-equivalent motion instructions to the robot in real time. Before using RMI, make sure the teach pendant is disabled and the controller is in AUTO mode.
-
-**What you can do:**
-
-- Send linear, joint, circular, and spline motions
-- Use Cartesian or joint-angle target representations
-- Track each instruction with a status object (queued, executing, completed, error)
-- Read/write I/O, frames, registers, and system variables
-- Subscribe to controller events (fault, position record)
-
-**Quick example:**
-
-```python
-from underautomation.fanuc.fanuc_robot import FanucRobot
-from underautomation.fanuc.connection_parameters import ConnectionParameters
-from underautomation.fanuc.rmi.tp_instructions.cartesian_linear_instructions import LinearMotionTpInstruction
-from underautomation.fanuc.rmi.tp_instructions.simple_instructions import WaitTimeTpInstruction
-from underautomation.fanuc.rmi.data.enums import RmiLinearSpeedType, RmiTerminationType
+from underautomation.fanuc.rmi.tp_instructions.linear_motion_tp_instruction import LinearMotionTpInstruction
+from underautomation.fanuc.rmi.tp_instructions.wait_time_tp_instruction import WaitTimeTpInstruction
+from underautomation.fanuc.rmi.data.rmi_linear_speed_type import RmiLinearSpeedType
+from underautomation.fanuc.rmi.data.rmi_termination_type import RmiTerminationType
 from underautomation.fanuc.common.cartesian_position_with_user_frame import CartesianPositionWithUserFrame
 
-robot = FanucRobot()
 params = ConnectionParameters("192.168.0.1")
 params.rmi.enable = True
 robot.connect(params)
 
-# Start RMI_MOVE on the controller (TP must be OFF, controller in AUTO)
+# Starts the RMI_MOVE program on the controller
 robot.rmi.initialize()
-
-# Set speed override
 robot.rmi.set_override(80)
 
 # Linear motion to a Cartesian target (tool 1, frame 0)
 instr = LinearMotionTpInstruction()
-instr.speed_type = RmiLinearSpeedType.MM_SEC
+instr.speed_type = RmiLinearSpeedType.MmSec
 instr.speed = 100
-instr.term_type = RmiTerminationType.FINE
+instr.term_type = RmiTerminationType.Fine
 instr.target = CartesianPositionWithUserFrame(500, 200, 300, 0, 90, 0, 1, 0)
+response = robot.rmi.send_tp_instruction(instr)
+response.wait_for_completion()
 
-r = robot.rmi.send_tp_instruction(instr)
-r.wait_for_completion()
+# Wait 0.5 s
+wait = WaitTimeTpInstruction()
+wait.seconds = 0.5
+robot.rmi.send_tp_instruction(wait)
 
-# Wait 0.5 seconds
-robot.rmi.send_tp_instruction(WaitTimeTpInstruction(seconds=0.5))
-
-# Abort and disconnect when done
+# Stops the RMI_MOVE program
 robot.rmi.abort()
-robot.disconnect()
 ```
 
----
+### Stream Motion (option J519)
 
-### 🌊 Stream Motion (J519) - Real-Time Motion
+Stream Motion gives the position of the robot at every communication cycle (2 to 8 ms). The SDK does the
+real-time part: it synchronizes the positions with the status of the robot, sends a few positions in
+advance, and stops the robot smoothly when your script stops giving positions. The robot must run a TP
+program with `IBGN start[1]` and `IBGN end[1]`, in AUTO mode at 100% override.
 
-Stream Motion (option **J519**) gives the position of the robot at every communication cycle (2 to 8 ms). The SDK does the real-time part for you: it synchronizes the positions with the status of the robot, sends a few positions in advance, and stops the robot smoothly if your application stops giving positions.
-
-The robot must run a TP program with `IBGN start[1]` and `IBGN end[1]`, in AUTO mode at 100% override.
-
-**What you can do:**
-
-- **Read the status** of the robot at every cycle: joint and Cartesian positions, motor currents, flags
-- **Read the limits** of the robot: velocity, acceleration and jerk of each axis
-- **Queue trajectories** planned with the motion planner, with override, pause, resume and abort
-- **Follow a target** that changes at any time (sensor, joystick, vision)
-- **Compute each position** in a callback (with Python, prefer target tracking: the timing of the callback depends on the interpreter)
-- **Read and write I/O** synchronized with the motion
-- **Protocol versions 1, 2 and 3** (version 2 sends joint positions in double precision)
-
-**Quick example:**
+With Python, prefer the target tracking to the callback that computes each position: the timing of a
+Python callback depends on the interpreter.
 
 ```python
-from underautomation.fanuc.fanuc_robot import FanucRobot
-from underautomation.fanuc.connection_parameters import ConnectionParameters
 from underautomation.fanuc.common.joints_position import JointsPosition
 from underautomation.fanuc.motion.fanuc_motion import FanucMotion
 from underautomation.fanuc.stream_motion.data.io_type import IOType
 from underautomation.robotics.motion.motion_planner import MotionPlanner
 from underautomation.robotics.motion.position_format import PositionFormat
 
-robot = FanucRobot()
 params = ConnectionParameters("192.168.0.1")
 params.stream_motion.enable = True
 params.stream_motion.protocol_version = 1  # 1, 2 or 3, not higher than $STMO.$USABLE_VER
 robot.connect(params)
 sm = robot.stream_motion
 
-# Read the limits of the robot, start the status output and measure the communication cycle
+# Reads the limits of the robot, starts the status output and measures the communication cycle
 sm.start_monitoring()
 status = sm.last_status
 print(f"J1={status.joint_position.j1:.3f} Moving={status.is_moving}")
 
-# Read DI[1] to DI[16] during the session
+# Reads DI[1] to DI[16] during the session
 sm.add_io_monitor(IOType.DI, 1)
 
 # J1 +10 degrees then back, at 20% of the velocity limits
@@ -892,7 +377,7 @@ trajectory = planner.create_joint_path(FanucMotion.to_joint_values(start)) \
 # The motion starts when the TP program reaches IBGN start
 motion_id = sm.enqueue(trajectory)
 sm.wait_for_motion(motion_id, 60000)
-sm.wait_for_idle(10000)  # the queue is empty and the robot is at rest
+sm.wait_for_idle(10000)
 
 # Follow a target that can change at any time, at 30% of the velocity limits
 sm.start_tracking(PositionFormat.Joint, 30)
@@ -900,31 +385,51 @@ sm.set_joint_tracking_target(target)
 sm.wait_for_idle(10000)
 sm.stop_tracking()
 
-# Release the TP program: it continues after IBGN end
+# Releases the TP program: it continues after IBGN end
 sm.finish(10000)
 robot.disconnect()
 ```
 
-📖 [Stream Motion documentation](https://underautomation.com/fanuc/documentation/stream-motion)
+Documentation: [Stream Motion](https://underautomation.com/fanuc/documentation/stream-motion).
 
----
+### Kinematics
 
-### 🛤️ Motion Planner - Offline Trajectories
+The SDK computes the forward and inverse kinematics offline, with no connection and no license. It
+contains the Denavit-Hartenberg parameters of 82 arm models (CRX cobots and OPW arms).
 
-The motion planner creates smooth trajectories **offline**, within velocity, acceleration and jerk limits. Motions are described as in a TP program: J, L and C motions with FINE, CNT or CR termination. Trajectories can be sent with Stream Motion, sampled for a simulation, or checked against the limits of the robot.
+```python
+import math
+from underautomation.fanuc.kinematics.arm_kinematic_models import ArmKinematicModels
+from underautomation.fanuc.kinematics.dh_parameters import DhParameters
+from underautomation.fanuc.kinematics.kinematics_utils import KinematicsUtils
+from underautomation.fanuc.common.cartesian_position import CartesianPosition
 
-The planner is in the `underautomation.robotics` modules, common to all UnderAutomation robot SDKs. `FanucMotion` (`underautomation.fanuc.motion.fanuc_motion`) converts FANUC positions, gives the FINE, CNT and CR terminations and the I/O signals.
+dh = DhParameters.from_arm_kinematic_model(ArmKinematicModels.CRX10iA)
 
-**What you can do:**
+# Forward kinematics: joint angles in radians to Cartesian position
+joints_rad = [math.radians(j) for j in [0, -30, 45, 0, 60, 0]]
+fk = KinematicsUtils.forward_kinematics(joints_rad, dh)
+print(f"X={fk.x:.2f}, Y={fk.y:.2f}, Z={fk.z:.2f}, W={fk.w:.2f}, P={fk.p:.2f}, R={fk.r:.2f}")
 
-- **Joint motions** - `move_joint()`, `move_joint_time()`, `move_joint_spline()`, with waits and I/O
-- **Cartesian motions** - `move_linear()`, `move_circular()`, `move_linear_time()`, `move_spline()`, in a tool frame and a user frame
-- **Shapes in any plane** - circle, rectangle, polygon, helix, spiral
-- **Trajectories from your own positions** - one per cycle, or with their time
-- **Check a trajectory** against the limits of the robot, and slow it down if needed
-- **Quaternions and frame changes** on `XYZWPRPosition` (flange, tool, user frame, world frame)
+# Inverse kinematics: every joint solution of a Cartesian position
+target = CartesianPosition(fk.x, fk.y, fk.z, fk.w, fk.p, fk.r, None)
+for i, sol in enumerate(KinematicsUtils.inverse_kinematics(target, dh), 1):
+    print(f"IK #{i}: J1={sol.j1:.2f}, J2={sol.j2:.2f}, J3={sol.j3:.2f}, J4={sol.j4:.2f}, J5={sol.j5:.2f}, J6={sol.j6:.2f}")
+```
 
-**Quick example:**
+The example [kinematics_forward_inverse.py](examples/kinematics/kinematics_forward_inverse.py) lets you
+choose a model, type the joints, and prints the forward kinematics and the 8 solutions of the inverse
+kinematics with their configuration.
+
+### Motion planner
+
+The motion planner creates trajectories offline, within velocity, acceleration and jerk limits. Motions
+are described as in a TP program: J, L and C motions with FINE, CNT or CR termination. A trajectory can be
+sent with Stream Motion, sampled for a simulation, or checked against the limits of the robot.
+
+The planner is in the `underautomation.robotics` modules, common to the UnderAutomation robot SDKs.
+`FanucMotion` (`underautomation.fanuc.motion.fanuc_motion`) converts the Fanuc positions and gives the
+FINE, CNT and CR terminations and the I/O signals.
 
 ```python
 from underautomation.fanuc.common.xyzwpr_position import XYZWPRPosition
@@ -960,10 +465,10 @@ cartesian = planner.create_cartesian_path(wpr(500, 0, 300, 180, 0, 0)) \
     .add_circle(plane, 30, 150, FanucMotion.fine()) \
     .build()
 
-# FANUC positions of the trajectory, with continuous W, P, R
+# Fanuc positions of the trajectory, with continuous W, P, R
 positions = FanucMotion.sample_cartesian(cartesian, 0.008)
 
-# Duration, position at any time, one position per cycle
+# Duration, one position per cycle
 print(f"Duration: {joint.duration:.3f} s")
 samples = joint.sample_joints(0.008)
 
@@ -972,153 +477,199 @@ report = joint.check(joint_limits, 0.008, False)
 print(report.is_valid)
 ```
 
-📖 [Motion planner documentation](https://underautomation.com/fanuc/documentation/motion)
+Documentation: [Motion planner](https://underautomation.com/fanuc/documentation/motion).
 
----
+## Examples
 
-### 📂 FTP - File Transfer & Variable Management
+The folder [`examples`](examples) contains scripts ready to run, one folder per protocol. The first run
+asks the address of the robot (or the path of the ROBOGUIDE robot) and the credentials, and saves them in
+`examples/robot_config.json` (ignored by git). It also checks the license and asks a key when the trial
+has ended.
 
-FTP gives you access to the robot's **file system** and **internal variable files**. It's ideal for bulk data access, diagnostics, backups, and program management.
+Run a script from the root of the repository, or choose it in the menu of the launcher:
 
-It not only allows you to upload/download files but also provides **structured** and **parsed** access to system files, variables files, and more. You can even get a complete diagnostic snapshot in one call.
+```bash
+python examples/snpx/snpx_write_numeric_register.py
+python examples/launcher.py
+```
 
-**What you can do:**
+| File | Role |
+| --- | --- |
+| [`examples/launcher.py`](examples/launcher.py) | Menu that lists the examples by category and runs the one you choose. |
+| [`examples/__init__.py`](examples/__init__.py) | Shared helpers: Python path, connection settings, license registration. |
 
-- **Upload and download files** to/from the controller
-- **Browse the controller's file system** - list files, check existence
-- **Read all variable files at once** - navigate through an interactive explorer
-- **Read numeric, string, and position registers** from variable files
-- **Read system variables** (robot name, hostname, language, timers)
-- **Get the complete error/alarm history** with codes and timestamps
-- **Read all I/O states** (DIN, DOUT, RI, RO, UI, UO, SI, SO, FLG)
-- **Get safety status** - E-Stop, deadman, fence open, TP enable
-- **Get program/task states** - which programs are running and their call stacks
-- **Read installed features/options** on the controller
-- **Get a full summary diagnostic** - position, safety, I/O, features, programs in one call
+The scripts that move the robot (RMI, Stream Motion) need the surroundings of the robot to be checked
+first.
 
-**Quick example:**
+### FTP
+
+| Script | What it does |
+| --- | --- |
+| [ftp_check_file_exists.py](examples/ftp/ftp_check_file_exists.py) | Checks if a file or a folder exists on the controller. |
+| [ftp_current_position.py](examples/ftp/ftp_current_position.py) | Reads the current position (joints and Cartesian) of every motion group. |
+| [ftp_download_file.py](examples/ftp/ftp_download_file.py) | Downloads a file from the controller. |
+| [ftp_error_list.py](examples/ftp/ftp_error_list.py) | Reads the alarm history with codes, dates and active state. |
+| [ftp_get_all_variables.py](examples/ftp/ftp_get_all_variables.py) | Browses all the variable files, searches and opens structures. |
+| [ftp_io_state.py](examples/ftp/ftp_io_state.py) | Reads all the digital I/O states (DIN, DOUT, RI, RO, UI, UO, SI, SO, FLG). |
+| [ftp_list_files.py](examples/ftp/ftp_list_files.py) | Lists the files and folders of the controller. |
+| [ftp_program_states.py](examples/ftp/ftp_program_states.py) | Reads the state of the tasks and programs, with the call history. |
+| [ftp_read_features.py](examples/ftp/ftp_read_features.py) | Lists the software options installed on the controller. |
+| [ftp_read_numeric_registers.py](examples/ftp/ftp_read_numeric_registers.py) | Reads the numeric registers (R[1], R[2]...). |
+| [ftp_read_position_registers.py](examples/ftp/ftp_read_position_registers.py) | Reads the position registers (PR[1], PR[2]...), Cartesian and joints. |
+| [ftp_read_string_registers.py](examples/ftp/ftp_read_string_registers.py) | Reads the string registers (SR[1], SR[2]...). |
+| [ftp_read_system_variables.py](examples/ftp/ftp_read_system_variables.py) | Reads common system variables (robot name, host name, language...). |
+| [ftp_safety_status.py](examples/ftp/ftp_safety_status.py) | Reads the safety signals: E-Stop, deadman, fence, TP enable... |
+| [ftp_summary_diagnostic.py](examples/ftp/ftp_summary_diagnostic.py) | Reads a complete diagnostic: position, safety, I/O, options, programs. |
+| [ftp_upload_file.py](examples/ftp/ftp_upload_file.py) | Uploads a file to the controller. |
+
+### CGTP
+
+| Script | What it does |
+| --- | --- |
+| [cgtp_batch_read.py](examples/cgtp/cgtp_batch_read.py) | Reads several variables and registers in one request. |
+| [cgtp_batch_write.py](examples/cgtp/cgtp_batch_write.py) | Writes several variables in one request. |
+| [cgtp_change_active_program.py](examples/cgtp/cgtp_change_active_program.py) | Changes the active TP program. |
+| [cgtp_create_delete_program.py](examples/cgtp/cgtp_create_delete_program.py) | Creates a TP program and deletes it. |
+| [cgtp_http_files.py](examples/cgtp/cgtp_http_files.py) | Lists and downloads the variable files, TP programs and diagnostic files. |
+| [cgtp_kinematics.py](examples/cgtp/cgtp_kinematics.py) | Computes the forward and inverse kinematics on the controller. |
+| [cgtp_list_read_files.py](examples/cgtp/cgtp_list_read_files.py) | Lists the files of the controller and reads their content. |
+| [cgtp_pause_abort.py](examples/cgtp/cgtp_pause_abort.py) | Pauses all the programs and aborts a task. |
+| [cgtp_program_properties.py](examples/cgtp/cgtp_program_properties.py) | Reads and writes the properties of a program: comment, owner, stack size, ignore pause... |
+| [cgtp_read_current_position.py](examples/cgtp/cgtp_read_current_position.py) | Reads the current Cartesian and joint position. |
+| [cgtp_read_io_comments.py](examples/cgtp/cgtp_read_io_comments.py) | Reads the comments of the robot, digital, group or analog I/O. |
+| [cgtp_read_numeric_registers.py](examples/cgtp/cgtp_read_numeric_registers.py) | Reads the numeric registers (R[]) with their comments. |
+| [cgtp_read_position_register.py](examples/cgtp/cgtp_read_position_register.py) | Reads a position register with its comment. |
+| [cgtp_read_set_comments.py](examples/cgtp/cgtp_read_set_comments.py) | Reads the comments of registers or I/O, and sets a comment. |
+| [cgtp_read_string_registers.py](examples/cgtp/cgtp_read_string_registers.py) | Reads the string registers (SR[]) with their comments. |
+| [cgtp_read_variable.py](examples/cgtp/cgtp_read_variable.py) | Reads a system or program variable, as a string or a typed value. |
+| [cgtp_read_write_io.py](examples/cgtp/cgtp_read_write_io.py) | Reads and writes I/O ports (DI, DO, RI, RO, GI, GO, AI, AO, flags). |
+| [cgtp_rename_program.py](examples/cgtp/cgtp_rename_program.py) | Renames a TP program. |
+| [cgtp_select_run_program.py](examples/cgtp/cgtp_select_run_program.py) | Selects a TP program and runs it from a given line. |
+| [cgtp_simulate_io.py](examples/cgtp/cgtp_simulate_io.py) | Simulates and unsimulates I/O ports, reads their simulation state. |
+| [cgtp_user_alarms.py](examples/cgtp/cgtp_user_alarms.py) | Reads the user alarms and sets their severity. |
+| [cgtp_write_numeric_register.py](examples/cgtp/cgtp_write_numeric_register.py) | Writes an integer or a real value to a numeric register. |
+| [cgtp_write_string_register.py](examples/cgtp/cgtp_write_string_register.py) | Writes a string register. |
+| [cgtp_write_variable.py](examples/cgtp/cgtp_write_variable.py) | Writes a numeric value to a system or program variable. |
+
+### SNPX
+
+| Script | What it does |
+| --- | --- |
+| [snpx_clear_alarms.py](examples/snpx/snpx_clear_alarms.py) | Clears the active alarms. |
+| [snpx_read_alarm_history.py](examples/snpx/snpx_read_alarm_history.py) | Reads the alarm history with severity and cause. |
+| [snpx_read_alarms.py](examples/snpx/snpx_read_alarms.py) | Reads the active alarms with ID, severity, message and cause. |
+| [snpx_read_batch_flags.py](examples/snpx/snpx_read_batch_flags.py) | Reads several flags in one request. |
+| [snpx_read_batch_registers.py](examples/snpx/snpx_read_batch_registers.py) | Reads several numeric registers in one request. |
+| [snpx_read_current_position.py](examples/snpx/snpx_read_current_position.py) | Reads the current Cartesian and joint position. |
+| [snpx_read_digital_io.py](examples/snpx/snpx_read_digital_io.py) | Reads digital signals (SDI, SDO, RDI, RDO, UI, UO, SI, SO, WI, WO). |
+| [snpx_read_flag.py](examples/snpx/snpx_read_flag.py) | Reads a flag (FLG[i]). |
+| [snpx_read_integer_sysvar.py](examples/snpx/snpx_read_integer_sysvar.py) | Reads integer system variables by name (`$MCR.$GENOVERRIDE`). |
+| [snpx_read_numeric_io.py](examples/snpx/snpx_read_numeric_io.py) | Reads group and analog I/O (GI, GO, AI, AO). |
+| [snpx_read_numeric_register.py](examples/snpx/snpx_read_numeric_register.py) | Reads a numeric register (R[i]). |
+| [snpx_read_position_register.py](examples/snpx/snpx_read_position_register.py) | Reads a position register (PR[i]), Cartesian and joints. |
+| [snpx_read_string_register.py](examples/snpx/snpx_read_string_register.py) | Reads a string register (SR[i]). |
+| [snpx_write_digital_output.py](examples/snpx/snpx_write_digital_output.py) | Writes digital outputs (SDO, RDO, UO, SO, WO). |
+| [snpx_write_flag.py](examples/snpx/snpx_write_flag.py) | Writes a flag and reads it back. |
+| [snpx_write_numeric_register.py](examples/snpx/snpx_write_numeric_register.py) | Writes a numeric register and reads it back. |
+| [snpx_write_position_register.py](examples/snpx/snpx_write_position_register.py) | Writes a position register, Cartesian or joints. |
+| [snpx_write_string_register.py](examples/snpx/snpx_write_string_register.py) | Writes a string register and reads it back. |
+| [snpx_write_sysvar.py](examples/snpx/snpx_write_sysvar.py) | Writes a system variable (speed override) with `set_variable`. |
+
+### Telnet
+
+| Script | What it does |
+| --- | --- |
+| [telnet_get_position.py](examples/telnet/telnet_get_position.py) | Reads the current Cartesian position (X, Y, Z, W, P, R). |
+| [telnet_read_variable.py](examples/telnet/telnet_read_variable.py) | Reads a variable by name (`$MCR.$GENOVERRIDE`). |
+| [telnet_set_port.py](examples/telnet/telnet_set_port.py) | Sets an output port (DOUT, RDO, OPOUT, TPOUT, GOUT). |
+| [telnet_simulate_port.py](examples/telnet/telnet_simulate_port.py) | Simulates and unsimulates I/O ports. |
+| [telnet_task_info.py](examples/telnet/telnet_task_info.py) | Reads the state of a task: status, current line, routine, program type. |
+| [telnet_write_variable.py](examples/telnet/telnet_write_variable.py) | Writes a numeric value to a variable. |
+| [telnet_program_control.py](examples/telnet/telnet_program_control.py) | Runs, pauses, resumes and aborts a program. |
+
+### Kinematics and motion planner (offline, no robot)
+
+| Script | What it does |
+| --- | --- |
+| [kinematics_forward_inverse.py](examples/kinematics/kinematics_forward_inverse.py) | Chooses a model, shows its DH parameters, computes the forward kinematics and every inverse kinematics solution. |
+| [motion_frames_quaternions.py](examples/motion/motion_frames_quaternions.py) | Converts W, P, R to quaternions, interpolates orientations, changes frames. |
+| [motion_joint_path.py](examples/motion/motion_joint_path.py) | Plans joint motions (J, CNT, FINE), reads the duration, the velocity, the acceleration and the jerk. |
+| [motion_shapes.py](examples/motion/motion_shapes.py) | Creates a circle, a rounded rectangle, a helix and a spline through points. |
+| [motion_timed_points.py](examples/motion/motion_timed_points.py) | Goes through joint positions at given times, checks the limits and slows down when needed. |
+
+### Stream Motion (option J519)
+
+These scripts need a TP program with `IBGN start[1]` and `IBGN end[1]` running on the robot, in AUTO mode
+at 100% override.
+
+| Script | What it does |
+| --- | --- |
+| [stream_motion_cartesian_circle.py](examples/stream_motion/stream_motion_cartesian_circle.py) | Draws a horizontal circle that starts and ends at the current position. |
+| [stream_motion_io.py](examples/stream_motion/stream_motion_io.py) | Reads DI[1] to DI[16] during a session and sets DO[1] during a motion. |
+| [stream_motion_joint_move.py](examples/stream_motion/stream_motion_joint_move.py) | Moves J1 back and forth within the limits of the robot. |
+| [stream_motion_monitor.py](examples/stream_motion/stream_motion_monitor.py) | Reads the limits, then shows the position and the state of the robot (no motion). |
+| [stream_motion_override_pause.py](examples/stream_motion/stream_motion_override_pause.py) | Changes the override, pauses, resumes and aborts a motion. |
+| [stream_motion_tracking.py](examples/stream_motion/stream_motion_tracking.py) | The robot follows a J1 target that you type, also during the motion. |
+
+### License
+
+| Script | What it does |
+| --- | --- |
+| [license_info_example.py](examples/license/license_info_example.py) | Shows the license state, registers a license and shows its properties. |
+
+## Robot configuration
+
+### Telnet KCL
+
+1. Go to **SETUP > Host Comm**.
+2. Select **TELNET**, then **[DETAIL]**.
+3. Set a password and restart the controller.
+
+Tutorial: [underautomation.com/fanuc/documentation/telnet-enable-on-robot](https://underautomation.com/fanuc/documentation/telnet-enable-on-robot)
+
+### FTP
+
+1. Go to **SETUP > Host Comm > FTP**.
+2. Set a user and a password.
+3. Do a cold start.
+
+### SNPX
+
+- FANUC America parameters (R650 FRA): the controller needs option R553 "HMI Device SNPX".
+- FANUC Ltd. parameters (R651 FRL): no option is needed.
+
+### Stream Motion
+
+1. Check that option J519 Stream Motion is installed (`features.has_stream_motion`).
+2. Set `$PARAM_GROUP[1].$SV_OFF_ENB[*]` to `FALSE`.
+3. Run a TP program with `IBGN start[1]` and `IBGN end[1]`, in AUTO mode at 100% override.
+
+Tutorial: [underautomation.com/fanuc/documentation/stream-motion](https://underautomation.com/fanuc/documentation/stream-motion)
+
+## Compatibility
+
+- **Python:** 3.7 to 3.13, with pythonnet 3.0.5.
+- **Operating systems:** Windows (.NET Framework), Linux and macOS (.NET runtime and `export PYTHONNET_RUNTIME=coreclr`).
+- **Controllers:** R-J3iB, R-30iA, R-30iB, R-50iA, and ROBOGUIDE.
+
+## License
+
+This SDK needs a commercial license. A 30-day trial starts at the first use, no key needed. After the
+trial, register your key in your code:
 
 ```python
 from underautomation.fanuc.fanuc_robot import FanucRobot
-from underautomation.fanuc.connection_parameters import ConnectionParameters
 
-robot = FanucRobot()
-params = ConnectionParameters("192.168.0.1")
-params.ftp.enable = True
-robot.connect(params)
-
-# File operations
-robot.ftp.direct_file_handling.upload_file_to_controller("local.tp", "/md:/remote.tp")
-robot.ftp.direct_file_handling.download_file_from_controller("backup.va", "/md:/backup.va")
-exists = robot.ftp.direct_file_handling.file_exists("/md:/summary.dg")
-
-# Read registers from variable files
-numreg = robot.ftp.known_variable_files.get_numreg_file()
-for idx, val in enumerate(numreg.numreg, start=1):
-    print(f"R[{idx}] = {val}")
-
-posreg = robot.ftp.known_variable_files.get_posreg_file()
-strreg = robot.ftp.known_variable_files.get_strreg_file()
-
-# System variables
-system = robot.ftp.known_variable_files.get_system_file()
-print(f"Robot: {system.robot_name}, Host: {system.hostname}")
-
-# Current position (all groups, all frames)
-position = robot.ftp.get_current_position()
-for gp in position.groups_position:
-    print(f"J1={gp.joints_position.j1}, J2={gp.joints_position.j2}")
-
-# Safety status
-safety = robot.ftp.get_safety_status()
-print(f"E-Stop: {safety.external_e_stop}, TP Enable: {safety.tp_enable}")
-
-# Error history
-errors = robot.ftp.get_all_errors_list()
-for err in errors.filter_active_alarms():
-    print(f"[{err.error_code}] {err.message}")
-
-# I/O states (all ports at once)
-io = robot.ftp.get_io_state()
-for signal in io.states:
-    print(f"{signal.port}[{signal.id}] = {'ON' if signal.value else 'OFF'}")
-
-# Complete diagnostic in one call
-diag = robot.ftp.get_summary_diagnostic()
-
-robot.disconnect()
+license_info = FanucRobot.register_license("Your Company", "your-license-key")
+print(license_info.state)
 ```
 
----
+- License agreement: [underautomation.com/fanuc/eula](https://underautomation.com/fanuc/eula) and [License.md](License.md)
+- Trial key: [underautomation.com/license](https://underautomation.com/license?sdk=fanuc)
+- Prices and quote: [underautomation.com/fanuc](https://underautomation.com/fanuc)
 
-## 🔧 Robot Configuration
+## Support
 
-Some features require enabling protocols on the controller.
-
-### ✅ Enable Telnet KCL
-
-Read full tutorial: [underautomation.com/fanuc/documentation/enable-telnet](https://underautomation.com/fanuc/documentation/enable-telnet)
-
-1. Go to **SETUP > Host Comm**
-2. Select **TELNET** → **[DETAIL]**
-3. Set a password and reboot
-
-### ✅ Enable FTP
-
-1. Go to **SETUP > Host Comm > FTP**
-2. Set username/password
-3. Perform a cold start
-
-### ✅ Enable SNPX
-
-- For **FANUC America (R650 FRA)**: Enable option R553 "HMI Device SNPX"
-- For **FANUC Ltd. (R651 FRL)**: No additional options required
-
-### ✅ Enable Stream Motion
-
-Read full tutorial: [underautomation.com/fanuc/documentation/stream-motion](https://underautomation.com/fanuc/documentation/stream-motion)
-
-1. Check that option **J519 Stream Motion** is installed (`features.has_stream_motion`)
-2. Set `$PARAM_GROUP[1].$SV_OFF_ENB[*]` to `FALSE`
-3. Run a TP program with `IBGN start[1]` and `IBGN end[1]`, in AUTO mode at 100% override
-
----
-
-## 🔍 Compatibility
-
-|                       | Supported                                   |
-| --------------------- | ------------------------------------------- |
-| **Robot Controllers** | R-J3iB, R-30iA, R-30iB, R-50iA              |
-| **OS**                | Windows, Linux, macOS                       |
-| **Python**            | 3.7+                                        |
-| **Dependency**        | `pythonnet 3.0.5` (installed automatically) |
-
----
-
-## 📢 Contributing
-
-We welcome your feedback and contributions!
-
-- Report issues via [GitHub Issues](https://github.com/underautomation/Fanuc.py/issues)
-- Submit pull requests with enhancements
-- Suggest features and improvements
-
----
-
-## 📜 License
-
-**⚠️ This SDK requires a commercial license.**
-
-- 🆓 **30-day free trial** included out of the box
-- 🔄 **Get a new trial immediately** at [underautomation.com/license](https://underautomation.com/license?sdk=fanuc)
-- 🛒 **Buy a license** at [underautomation.com/fanuc](https://underautomation.com/fanuc)
-- 📄 **EULA**: [underautomation.com/fanuc/eula](https://underautomation.com/fanuc/eula)
-
----
-
-## 📬 Need Help?
-
-- 📖 **Documentation**: [underautomation.com/fanuc/documentation](https://underautomation.com/fanuc/documentation)
-- 🐍 **Python Get Started Guide**: [underautomation.com/fanuc/documentation/get-started-python](https://underautomation.com/fanuc/documentation/get-started-python)
-- 📦 **PyPI Package**: [pypi.org/project/UnderAutomation.Fanuc](https://pypi.org/project/UnderAutomation.Fanuc/)
-- 📩 **Contact Us**: [underautomation.com/contact](https://underautomation.com/contact)
+- Documentation: [underautomation.com/fanuc/documentation](https://underautomation.com/fanuc/documentation)
+- Issues: [GitHub Issues](https://github.com/underautomation/Fanuc.py/issues)
+- Contact: [underautomation.com/contact](https://underautomation.com/contact)
