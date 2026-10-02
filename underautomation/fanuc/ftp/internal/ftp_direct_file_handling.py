@@ -26,7 +26,7 @@ class FtpDirectFileHandling:
 		:param existsBehavior: Specifies the behavior when the file already exists on the controller.
 		:returns: True if the file was uploaded, false if it was skipped or if the transfer failed.
 		'''
-		return self._instance.UploadFileToController(fileData_or_localPath, remotePath, createRemoteDir, (progress._instance if hasattr(progress, '_instance') else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None, ftp_exists_behavior(int(existsBehavior)))
+		return self._instance.UploadFileToController(fileData_or_localPath, remotePath, createRemoteDir, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None, ftp_exists_behavior(int(existsBehavior)))
 
 	def upload_files_to_controller(self, localPaths: typing.List[str], remoteDir: str, progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> typing.List[str]:
 		'''Uploads the given file paths to a single folder on the controller. All files are placed directly into the given folder regardless of their path on the local filesystem. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks. A file that fails is skipped: it is not in the returned list.
@@ -36,7 +36,7 @@ class FtpDirectFileHandling:
 		:param progress: Track upload progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:returns: The list of files that were uploaded successfully
 		'''
-		return self._instance.UploadFilesToController(localPaths, remoteDir, (progress._instance if hasattr(progress, '_instance') else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
+		return self._instance.UploadFilesToController(localPaths, remoteDir, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
 
 	def download_file_from_controller(self, localPath_or_outBytes: typing.List[int] | str, remotePath: str, progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> bool:
 		'''Downloads the specified file and return the raw byte array. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks.
@@ -47,7 +47,7 @@ class FtpDirectFileHandling:
 		:param progress: Track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:returns: If true then the file was downloaded, false otherwise.
 		'''
-		return self._instance.DownloadFileFromController(localPath_or_outBytes, remotePath, (progress._instance if hasattr(progress, '_instance') else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
+		return self._instance.DownloadFileFromController(localPath_or_outBytes, remotePath, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
 
 	def download_files_from_controller(self, localDir: str, remotePaths: typing.List[str], progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> typing.List[str]:
 		'''Downloads the specified files into a local single directory. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks. A file that fails is skipped: it is not in the returned list.
@@ -57,7 +57,7 @@ class FtpDirectFileHandling:
 		:param progress: Track download progress. The value provided is in the range 0 to 100, indicating the percentage of the files transferred.
 		:returns: The list of all local files downloaded
 		'''
-		return self._instance.DownloadFilesFromController(localDir, remotePaths, (progress._instance if hasattr(progress, '_instance') else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
+		return self._instance.DownloadFilesFromController(localDir, remotePaths, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
 
 	def file_exists(self, path: str) -> bool:
 		'''Checks if a file exists on the controller.

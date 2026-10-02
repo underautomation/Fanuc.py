@@ -55,7 +55,7 @@ class FileClientBase:
 
 	def get_all_variables(self, progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> VariableFileList:
 		'''Get the list of all variables on the controller. All variables files are read and decoded'''
-		return VariableFileList(self._instance.GetAllVariables((progress._instance if hasattr(progress, '_instance') else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None))
+		return VariableFileList(self._instance.GetAllVariables((progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None))
 
 	@property
 	def known_variable_files(self) -> KnownVariableFiles:
