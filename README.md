@@ -235,6 +235,22 @@ for signal in robot.ftp.get_io_state().states:
 diag = robot.ftp.get_summary_diagnostic()
 ```
 
+When the controller refuses an operation, the SDK raises an `FtpException` with the reply of the
+controller. Without an FTP user, the controller logs in at the OPERATOR level and can refuse the upload
+of a program ("Operation password protected"). A program that is selected or runs cannot be replaced
+(`ProgramInUse`): select another program on the teach pendant, or with `robot.cgtp.select_program(...)`
+(firmware V9.10 and later).
+
+```python
+from UnderAutomation.Fanuc.Ftp import FtpException
+
+try:
+    robot.ftp.direct_file_handling.upload_file_to_controller("MyPrg.ls", "md:/MyPrg.ls")
+except FtpException as ex:
+    # .NET exception: its members keep their .NET names
+    print(ex.ProgramInUse, ex.ReplyMessage)
+```
+
 ### CGTP (web server of the controller)
 
 CGTP uses the web server of the controller. It gives access to the programs, the variables, the
