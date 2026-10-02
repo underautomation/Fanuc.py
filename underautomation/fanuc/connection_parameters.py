@@ -48,7 +48,7 @@ class ConnectionParameters:
 
 	@property
 	def telnet(self) -> TelnetConnectParameters:
-		'''Sends commands to the robot for remote control'''
+		'''Parameters of the Telnet KCL client, which sends commands to the robot for remote control. Telnet KCL is a legacy protocol: it is not secured (password and commands are sent in clear text), and its behavior changes with the firmware version and on ROBOGUIDE. The same KCL commands are available on the web server of the controller with robot.Cgtp.Kcl (firmware V8.30 and later): prefer it for new developments.'''
 		return TelnetConnectParameters(self._instance.Telnet)
 
 	@telnet.setter
@@ -93,7 +93,7 @@ class ConnectionParameters:
 
 	@property
 	def cgtp(self) -> CgtpConnectParameters:
-		'''Parameters for CGTP Web Server (HTTP-based COMET RPC interface)'''
+		'''Parameters of the CGTP client, which uses the web server of the controller (HTTP)'''
 		return CgtpConnectParameters(self._instance.Cgtp)
 
 	@cgtp.setter

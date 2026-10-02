@@ -1,7 +1,7 @@
 from enum import IntEnum
 
 class SegmentSelector(IntEnum):
-	'''Defines segment selector codes for SNPX memory access operations.'''
+	'''Data areas of the controller that the SNPX client reads and writes. Used by the SDK to address the signals.'''
 	BIT_I = 70 # Bit-level input segment.
 	BIT_Q = 72 # Bit-level output segment.
 	BIT_T = 74 # Bit-level T segment.

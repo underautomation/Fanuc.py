@@ -31,7 +31,7 @@ class PositionRegisters(SnpxWritableAssignableIndexableElements2[Position, Posit
 		Writes a joints position to the specified position register.
 
 		:param index: The register index.
-		:param cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: The Cartesian position to write. — or — The extended Cartesian position to write. — or — The joints position to write.
+		:param cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: The Cartesian position to write. Or: The extended Cartesian position to write. Or: The joints position to write.
 		'''
 		self._instance.Write(index, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition._instance if cartesianPosition_or_extendedCartesianPosition_or_jointsPosition else None)
 

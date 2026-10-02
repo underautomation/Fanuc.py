@@ -1,7 +1,7 @@
 from enum import IntEnum
 
 class RpcId(IntEnum):
-	'''CGTP function identifiers.'''
+	'''Functions of the controller called by the CGTP client. Used by the SDK only.'''
 	CHGOVRD = 220
 	CPKCL = 87
 	DPEWRITE_STR = 83

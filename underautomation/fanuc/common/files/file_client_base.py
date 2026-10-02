@@ -11,6 +11,7 @@ from underautomation.fanuc.common.files.variables.generic_variable_file import G
 from underautomation.fanuc.common.files.variables.variable_file_list import VariableFileList
 from underautomation.fanuc.common.files.on_progress_delegate import OnProgressDelegate
 from UnderAutomation.Fanuc.Common.Files import FileClientBase as file_client_base
+from UnderAutomation.Fanuc.Common.Files import OnProgressDelegate as on_progress_delegate
 
 class FileClientBase:
 	'''Base class for Fanuc file client. It provides methods to read and parse known files such as summary diagnostic, error list, current position, ...'''
@@ -52,9 +53,9 @@ class FileClientBase:
 		'''Get the list of all variable file names available on the controller'''
 		return self._instance.EnumerateVariableFileNames()
 
-	def get_all_variables(self, progress: OnProgressDelegate=None) -> VariableFileList:
+	def get_all_variables(self, progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> VariableFileList:
 		'''Get the list of all variables on the controller. All variables files are read and decoded'''
-		return VariableFileList(self._instance.GetAllVariables(progress._instance if progress else None))
+		return VariableFileList(self._instance.GetAllVariables((progress._instance if hasattr(progress, '_instance') else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None))
 
 	@property
 	def known_variable_files(self) -> KnownVariableFiles:

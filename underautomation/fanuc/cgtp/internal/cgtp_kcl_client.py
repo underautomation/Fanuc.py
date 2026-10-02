@@ -5,7 +5,7 @@ from underautomation.fanuc.common.kcl.kcl_client_base import KclClientBase
 from UnderAutomation.Fanuc.Cgtp.Internal import CgtpKclClient as cgtp_kcl_client
 
 class CgtpKclClient(KclClientBase):
-	'''KCL client implementation using the CGTP Web Server. Provides KCL commands over HTTP endpoints.'''
+	'''KCL client that uses the web server of the controller (CGTP) instead of Telnet. It has the same commands as the Telnet KCL client and does not need a Telnet password. Some commands (Abort, AbortAll, ClearProgram, ClearVars, Continue, Hold, Pause, Run, StepOn, StepOff, SendCustomCommandUnsafe) are sent in Unsafe mode, from firmware V9.30: the controller returns no status, the result always reports a success, and you cannot know if the command was executed. Check the state of the controller after the command, for example with GetTaskInformation() or by reading a variable. To start a program, prefer robot.Cgtp.RunProgram() (firmware V9.30 and later): it can start at a given line and throws a CgtpException when the controller refuses the command.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = cgtp_kcl_client()

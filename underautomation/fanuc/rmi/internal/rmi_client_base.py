@@ -208,11 +208,55 @@ class RmiClientBase:
 	def set_payload_schedule(self, scheduleNumber: int, group: int | None=None) -> None:
 		self._instance.SetPayloadSchedule(scheduleNumber, group)
 
-	def set_payload_value(self, scheduleNumber: int, massKg: float, cgXm: float, cgYm: float, cgZm: float, inertiaXkgm2: float | None=None, inertiaYkgm2: float | None=None, inertiaZkgm2: float | None=None, group: int | None=None) -> None:
-		self._instance.SetPayloadValue(scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
+	@typing.overload
+	def set_payload_value(self, scheduleNumber: int, massKg: float, cgXm: float, cgYm: float, cgZm: float, inertiaXkgm2: float | None=None, inertiaYkgm2: float | None=None, inertiaZkgm2: float | None=None, group: int | None=None) -> None: ...
 
-	def set_payload_compensation(self, scheduleNumber: int, massKg: float, cgXm: float, cgYm: float, cgZm: float, inertiaXkgm2: float, inertiaYkgm2: float, inertiaZkgm2: float, group: int | None=None) -> None:
-		self._instance.SetPayloadCompensation(scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
+	@typing.overload
+	def set_payload_value(self, p: RmiSetPayloadParameters) -> None: ...
+
+	def set_payload_value(self, *args, **kwargs) -> None:
+		'''Define payload mass, center of gravity, and optionally inertia for a payload schedule.
+
+		Arguments: (scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
+		Arguments: (p)
+		:param p: Payload parameters (user units: meters for offsets, kg for mass, kg·m² for inertia).
+		'''
+		__a = _bind_overload(args, kwargs, ['scheduleNumber', 'massKg', 'cgXm', 'cgYm', 'cgZm', 'inertiaXkgm2', 'inertiaYkgm2', 'inertiaZkgm2', 'group'], {'inertiaXkgm2': None, 'inertiaYkgm2': None, 'inertiaZkgm2': None, 'group': None})
+		if __a is not None:
+			scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group = __a
+			self._instance.SetPayloadValue(scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
+			return
+		__a = _bind_overload(args, kwargs, ['p'], {})
+		if __a is not None:
+			p, = __a
+			self._instance.SetPayloadValue(p._instance if p else None)
+			return
+		raise TypeError("set_payload_value(): no overload takes these arguments")
+
+	@typing.overload
+	def set_payload_compensation(self, scheduleNumber: int, massKg: float, cgXm: float, cgYm: float, cgZm: float, inertiaXkgm2: float, inertiaYkgm2: float, inertiaZkgm2: float, group: int | None=None) -> None: ...
+
+	@typing.overload
+	def set_payload_compensation(self, p: RmiSetPayloadCompensationParameters) -> None: ...
+
+	def set_payload_compensation(self, *args, **kwargs) -> None:
+		'''Define payload compensation parameters for a payload schedule.
+
+		Arguments: (scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
+		Arguments: (p)
+		:param p: Payload compensation parameters (user units: meters for offsets, kg for mass, kg·m² for inertia).
+		'''
+		__a = _bind_overload(args, kwargs, ['scheduleNumber', 'massKg', 'cgXm', 'cgYm', 'cgZm', 'inertiaXkgm2', 'inertiaYkgm2', 'inertiaZkgm2', 'group'], {'group': None})
+		if __a is not None:
+			scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group = __a
+			self._instance.SetPayloadCompensation(scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
+			return
+		__a = _bind_overload(args, kwargs, ['p'], {})
+		if __a is not None:
+			p, = __a
+			self._instance.SetPayloadCompensation(p._instance if p else None)
+			return
+		raise TypeError("set_payload_compensation(): no overload takes these arguments")
 
 	def clear_completed_instructions(self) -> None:
 		'''Removes all instructions with a terminal status (Completed or Error) from the tracked instruction list. Instructions that are still pending or in progress are not affected.'''
@@ -223,7 +267,7 @@ class RmiClientBase:
 		self._instance.ClearLocalQueuedInstructions()
 
 	def send_tp_instruction(self, instruction: RmiInstructionBase) -> RmiInstructionResponse:
-		'''Serializes the instruction to the RMI wire format and queues it on the controller. Returns an RmiInstructionResponse that tracks execution.
+		'''Sends the instruction to the controller, which queues it. Returns an RmiInstructionResponse that tracks execution.
 
 		:param instruction: Instruction to send. Must not be null.
 		'''
@@ -302,3 +346,16 @@ class RmiClientBase:
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		self._instance.Dispose()
 		return False
+
+def _bind_overload(args, kwargs, names, defaults):
+	if len(args) > len(names) or any(k not in names[len(args):] for k in kwargs):
+		return None
+	values = list(args)
+	for name in names[len(args):]:
+		if name in kwargs:
+			values.append(kwargs[name])
+		elif name in defaults:
+			values.append(defaults[name])
+		else:
+			return None
+	return values

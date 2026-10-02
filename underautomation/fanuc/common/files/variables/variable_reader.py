@@ -51,6 +51,11 @@ class VariableReader(FileReader1[GenericVariableFile]):
 		else:
 			self._instance = _internal
 
+	@staticmethod
+	def read_variable_file(fileName: str, language: Languages) -> GenericVariableFile:
+		'''Reads and parses a variable file from a file path'''
+		return GenericVariableFile(variable_reader.ReadVariableFile(fileName, languages(int(language))))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

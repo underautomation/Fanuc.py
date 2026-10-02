@@ -17,37 +17,55 @@ class NumericIO(SnpxElements2[int, int]):
 		else:
 			self._instance = _internal
 
-	def read(self, firstIndex: int, count: int) -> typing.List[int]:
-		'''Reads a range of numeric I/O values.
+	@typing.overload
+	def read(self, firstIndex: int, count: int) -> typing.List[int]: ...
 
+	@typing.overload
+	def read(self, index: int) -> int: ...
+
+	def read(self, *args, **kwargs) -> typing.List[int] | int:
+		'''Reads a range of numeric I/O values.
+		Reads the numeric I/O value at the specified index.
+
+		Arguments: (firstIndex, count)
+		Arguments: (index)
 		:param firstIndex: The first I/O index (1-based).
 		:param count: The number of values to read.
+		:param index: The I/O index (1-based).
 		:returns: An array of numeric I/O values.
 		'''
-		return self._instance.Read(firstIndex, count)
+		__a = _bind_overload(args, kwargs, ['firstIndex', 'count'], {})
+		if __a is not None:
+			firstIndex, count = __a
+			return self._instance.Read(firstIndex, count)
+		__a = _bind_overload(args, kwargs, ['index'], {})
+		if __a is not None:
+			index, = __a
+			return self._instance.Read(index)
+		raise TypeError("read(): no overload takes these arguments")
 
 	def write(self, firstIndex_or_index: int, value_or_values: int | typing.List[int]) -> None:
 		'''Writes a value to the numeric I/O at the specified index.
 		Writes values to consecutive numeric I/O.
 
-		:param firstIndex_or_index: The I/O index (1-based). — or — The first I/O index (1-based).
-		:param value_or_values: The value to write. — or — The values to write.
+		:param firstIndex_or_index: The I/O index (1-based). Or: The first I/O index (1-based).
+		:param value_or_values: The value to write. Or: The values to write.
 		'''
 		self._instance.Write(firstIndex_or_index, value_or_values)
 
 	@property
 	def segment_selector(self) -> SegmentSelector:
-		'''Gets the segment selector for this I/O group.'''
+		'''Gets the data area of the controller that holds this I/O group. Used by the SDK.'''
 		return SegmentSelector(int(self._instance.SegmentSelector))
 
 	@property
 	def segment_offset(self) -> SegmentOffset:
-		'''Gets the segment offset for this I/O group.'''
+		'''Gets the family of signals of this I/O group. Used by the SDK.'''
 		return SegmentOffset(int(self._instance.SegmentOffset))
 
 	@property
 	def segment_name(self) -> SegmentName:
-		'''Gets the segment name identifying this I/O group.'''
+		'''Gets the name of the family of signals of this I/O group.'''
 		return SegmentName(int(self._instance.SegmentName))
 
 	def __str__(self):
@@ -63,3 +81,16 @@ class NumericIO(SnpxElements2[int, int]):
 
 	def __hash__(self) -> int:
 		return self._instance.GetHashCode() if self._instance is not None else 0
+
+def _bind_overload(args, kwargs, names, defaults):
+	if len(args) > len(names) or any(k not in names[len(args):] for k in kwargs):
+		return None
+	values = list(args)
+	for name in names[len(args):]:
+		if name in kwargs:
+			values.append(kwargs[name])
+		elif name in defaults:
+			values.append(defaults[name])
+		else:
+			return None
+	return values

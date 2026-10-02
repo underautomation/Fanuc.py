@@ -66,7 +66,7 @@ class FanucRobot:
 
 	@property
 	def telnet(self) -> TelnetClientInternal:
-		'''Telnet client for remote command execution'''
+		'''Telnet KCL client for remote command execution. Telnet KCL is a legacy protocol: it is not secured (password and commands are sent in clear text), and its behavior changes with the firmware version and on ROBOGUIDE. The same KCL commands are available on the web server of the controller with robot.Cgtp.Kcl (firmware V8.30 and later): prefer it for new developments.'''
 		return TelnetClientInternal(self._instance.Telnet)
 
 	@property
@@ -91,7 +91,7 @@ class FanucRobot:
 
 	@property
 	def cgtp(self) -> CgtpClientInternal:
-		'''CGTP Web Server client for HTTP-based COMET RPC interface'''
+		'''CGTP client, which uses the web server of the controller (HTTP)'''
 		return CgtpClientInternal(self._instance.Cgtp)
 
 	@staticmethod

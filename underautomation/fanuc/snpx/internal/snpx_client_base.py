@@ -52,7 +52,7 @@ class SnpxClientBase:
 		Set string variable without assignments.
 
 		:param name: Variable name.
-		:param value: Boolean value to set. — or — Double value to set. — or — Integer value to set. — or — String value to set.
+		:param value: Boolean value to set. Or: Double value to set. Or: Integer value to set. Or: String value to set.
 		'''
 		self._instance.SetVariable(name, value)
 
@@ -178,12 +178,12 @@ class SnpxClientBase:
 		return DigitalSignals(self._instance.WSI)
 
 	@property
-	def pm_c__k(self) -> DigitalSignals:
+	def pmc_k(self) -> DigitalSignals:
 		'''Programmable Machine Controller Constants'''
 		return DigitalSignals(self._instance.PMC_K)
 
 	@property
-	def pm_c__r(self) -> DigitalSignals:
+	def pmc_r(self) -> DigitalSignals:
 		'''Programmable Machine Controller Relays'''
 		return DigitalSignals(self._instance.PMC_R)
 
@@ -213,7 +213,7 @@ class SnpxClientBase:
 		return NumericIO(self._instance.AO)
 
 	@property
-	def pm_c__d(self) -> NumericIO:
+	def pmc_d(self) -> NumericIO:
 		'''Programmable Machine Controller Data'''
 		return NumericIO(self._instance.PMC_D)
 

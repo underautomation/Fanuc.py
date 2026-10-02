@@ -3,7 +3,7 @@ import typing
 from UnderAutomation.Fanuc.Snpx.Internal import Assignment as assignment
 
 class Assignment:
-	'''Represents an SNPX memory assignment mapping a named element to a memory offset.'''
+	'''Represents an SNPX assignment: an element of the robot that the SNPX client can read in one request.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = assignment()
@@ -12,7 +12,7 @@ class Assignment:
 
 	@property
 	def offset(self) -> int:
-		'''Gets the memory offset for this assignment. Negative if cleared.'''
+		'''Gets the position of this assignment in the data of the SNPX client. Negative if cleared.'''
 		return self._instance.Offset
 
 	@property

@@ -30,7 +30,7 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 		Writes a joints position to the specified system variable.
 
 		:param variable: The system variable name.
-		:param cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: The Cartesian position to write. — or — The extended Cartesian position to write. — or — The joints position to write.
+		:param cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: The Cartesian position to write. Or: The extended Cartesian position to write. Or: The joints position to write.
 		'''
 		self._instance.Write(variable, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition._instance if cartesianPosition_or_extendedCartesianPosition_or_jointsPosition else None)
 

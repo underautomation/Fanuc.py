@@ -223,6 +223,10 @@ class StreamMotionClientBase:
 		'''
 		self._instance.WriteIOGroup(io_type(int(type)), index, mask, value)
 
+	def dispose(self) -> None:
+		'''Disconnects and releases the resources'''
+		self._instance.Dispose()
+
 	@property
 	def ip(self) -> str:
 		'''IP address of the robot'''

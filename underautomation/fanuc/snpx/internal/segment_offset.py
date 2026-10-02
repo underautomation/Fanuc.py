@@ -1,7 +1,7 @@
 from enum import IntEnum
 
 class SegmentOffset(IntEnum):
-	'''Defines the base offset values for different I/O segment types.'''
+	'''Families of I/O signals that the SNPX client reads and writes. Used by the SDK to address the signals.'''
 	SDIO = 0 # Digital I/O
 	RDIO = 5000 # Robot I/O
 	UOP = 6000 # UI and UO

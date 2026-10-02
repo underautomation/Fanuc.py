@@ -14,7 +14,7 @@ from UnderAutomation.Fanuc.Common import Languages as languages
 from UnderAutomation.Fanuc.Telnet import TpCoordinates as tp_coordinates
 
 class TelnetClientBase(KclClientBase):
-	'''Base class for Telnet KCL client'''
+	'''Base class for Telnet KCL client. Telnet KCL is a legacy protocol: it is not secured (password and commands are sent in clear text), and its behavior changes with the firmware version and on ROBOGUIDE. The same KCL commands are available on the web server of the controller with robot.Cgtp.Kcl (firmware V8.30 and later): prefer it for new developments.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = telnet_client_base()

@@ -89,7 +89,7 @@ class KclClientBase:
 		return ProgramCommandResult(self._instance.Reset())
 
 	def run(self, program: str=None) -> RunResult:
-		'''Executes the specified program. The program must be loaded in memory If no program is specified the default program is run. If uninitialized variables are encountered, program execution is paused. Execution begins at the first executable line. RUN is a motion command; therefore, the device from which it is issued must have motion control. If a RUN command is issued in a command file, it is executed as a NOWAIT command. Therefore, the statement following the RUN command will be executed immediately after the RUN command is issued without waiting for the program, specified by the RUN command, to end. When used through the CGTP KCL client (Unsafe mode, from firmware 9.30), success or failure cannot be determined from the result.
+		'''Executes the specified program. The program must be loaded in memory If no program is specified the default program is run. If uninitialized variables are encountered, program execution is paused. Execution begins at the first executable line. RUN is a motion command; therefore, the device from which it is issued must have motion control. If a RUN command is issued in a command file, it is executed as a NOWAIT command. Therefore, the statement following the RUN command will be executed immediately after the RUN command is issued without waiting for the program, specified by the RUN command, to end. When used through the CGTP KCL client (Unsafe mode, from firmware 9.30), success or failure cannot be determined from the result. With CGTP, prefer robot.Cgtp.RunProgram(), which can start at a given line and throws an exception when the controller refuses the command.
 
 		:param program: The name of any KAREL or TP program without extension
 		'''
@@ -107,8 +107,8 @@ class KclClientBase:
 	def set_variable(self, name: str, value: float | int | str, program: str=None) -> SetVariableResult:
 		'''Assigns the specified value to the specified variable. You can assign constant values or variable values, but the value must be of the data type that has been declared for the variable. You can assign values to system variables with KCL write access, to program variables, or to standard and user-defined variables and fields. You can assign only one ARRAY element. Use brackets ([]) after the variable name to specify an element. Certain data types like positions and vectors might have more than one value specified.
 
-		:param name: A valid program variable
-		:param value: New value for variable or a program or system variable
+		:param name: A valid program variable.
+		:param value: New value for variable or a program or system variable.
 		:param program: The name of any KAREL or TP program.
 		'''
 		return SetVariableResult(self._instance.SetVariable(name, value, program))

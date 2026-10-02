@@ -12,7 +12,7 @@ class CgtpException:
 
 	@property
 	def status(self) -> int:
-		'''The RPC status code returned by the controller when available.'''
+		'''The status code returned by the controller when available.'''
 		return self._instance.Status
 
 	def __str__(self):

@@ -4,7 +4,7 @@ from underautomation.fanuc.telnet.internal.telnet_connect_parameters_base import
 from UnderAutomation.Fanuc.Common import TelnetConnectParameters as telnet_connect_parameters
 
 class TelnetConnectParameters(TelnetConnectParametersBase):
-	'''Connect parameters for remote command'''
+	'''Connection parameters of the Telnet KCL client (remote commands). Telnet KCL is a legacy protocol: it is not secured (password and commands are sent in clear text), and its behavior changes with the firmware version and on ROBOGUIDE. The same KCL commands are available on the web server of the controller with robot.Cgtp.Kcl (firmware V8.30 and later): prefer it for new developments.'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = telnet_connect_parameters()
@@ -13,7 +13,7 @@ class TelnetConnectParameters(TelnetConnectParametersBase):
 
 	@property
 	def enable(self) -> bool:
-		'''Should use this service (default: false)'''
+		'''Should use this service (default: false). Prefer robot.Cgtp.Kcl, enabled by default, for new developments.'''
 		return self._instance.Enable
 
 	@enable.setter

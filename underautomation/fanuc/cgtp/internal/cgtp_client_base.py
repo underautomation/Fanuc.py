@@ -371,7 +371,7 @@ class CgtpClientBase:
 
 	@property
 	def kcl(self) -> CgtpKclClient:
-		'''KCL client for executing KCL commands over CGTP.'''
+		'''KCL client for executing KCL commands over CGTP. Use it instead of the Telnet KCL client, which is a legacy protocol. Some commands are sent in Unsafe mode: the controller returns no status, so the result cannot tell if the command was executed. To start a program, prefer RunProgram().'''
 		return CgtpKclClient(self._instance.Kcl)
 
 	@property

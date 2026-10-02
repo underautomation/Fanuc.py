@@ -16,6 +16,10 @@ class FileReader1(FileReader, IFileReader1[T], IFileReader, typing.Generic[T]):
 		else:
 			self._instance = _internal
 
+	def read_file(self, filePath: str, language: Languages) -> T:
+		'''Read and decode the file on disc'''
+		return self._instance.ReadFile(filePath, languages(int(language)))
+
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
 

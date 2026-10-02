@@ -42,6 +42,11 @@ class FanucFileReaders:
 			self._instance = _internal
 
 	@staticmethod
+	def read_file(fileName: str, language: Languages) -> IFanucContent:
+		'''Read any file by path on disc, recognize it by name and decode it'''
+		return IFanucContent(fanuc_file_readers.ReadFile(fileName, languages(int(language))))
+
+	@staticmethod
 	def _get_readers() -> typing.List[IFileReader1]:
 		'''Get the collection of all parsers'''
 		return [IFileReader1(x) for x in fanuc_file_readers.Readers]
