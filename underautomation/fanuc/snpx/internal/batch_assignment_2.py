@@ -18,12 +18,14 @@ class BatchAssignment2(typing.Generic[TValue, TIndex]):
 
 		:returns: An array of values read from the robot.
 		'''
-		return list(self._instance.Read())
+		__r = self._instance.Read()
+		return None if __r is None else list(__r)
 
 	@property
 	def assignments(self) -> typing.List[Assignment1]:
 		'''The assignments included in this batch.'''
-		return [Assignment1(x) for x in self._instance.Assignments]
+		__r = self._instance.Assignments
+		return None if __r is None else [None if x is None else Assignment1(x) for x in __r]
 
 	@assignments.setter
 	def assignments(self, value: typing.List[Assignment1]):

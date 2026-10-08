@@ -13,7 +13,8 @@ class VectorVariable:
 	@staticmethod
 	def parse(value: str) -> 'VectorVariable':
 		'''Parses a vector variable from its string representation'''
-		return VectorVariable(vector_variable.Parse(value))
+		__r = vector_variable.Parse(value)
+		return None if __r is None else VectorVariable(__r)
 
 	@property
 	def x(self) -> float:

@@ -15,7 +15,8 @@ class PositionRegisterWithComment(PositionRegister):
 	@staticmethod
 	def parse(value: str) -> 'PositionRegisterWithComment':
 		'''Parses a position register with comment from its string representation.'''
-		return PositionRegisterWithComment(position_register_with_comment.Parse(value))
+		__r = position_register_with_comment.Parse(value)
+		return None if __r is None else PositionRegisterWithComment(__r)
 
 	@property
 	def comment(self) -> str:

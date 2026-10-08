@@ -16,12 +16,14 @@ class PositionRegister:
 	@staticmethod
 	def parse(value: str) -> 'PositionRegister':
 		'''Parses a position register from its string representation'''
-		return PositionRegister(None, None, position_register.Parse(value))
+		__r = position_register.Parse(value)
+		return None if __r is None else PositionRegister(None, None, __r)
 
 	@property
 	def joints_position(self) -> JointPositionVariable:
 		'''Joint position value, if available'''
-		return JointPositionVariable(None, None, self._instance.JointsPosition)
+		__r = self._instance.JointsPosition
+		return None if __r is None else JointPositionVariable(None, None, __r)
 
 	@joints_position.setter
 	def joints_position(self, value: JointPositionVariable):
@@ -30,7 +32,8 @@ class PositionRegister:
 	@property
 	def cartesian_position(self) -> CartesianPositionVariable:
 		'''Cartesian position value, if available'''
-		return CartesianPositionVariable(None, None, self._instance.CartesianPosition)
+		__r = self._instance.CartesianPosition
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@cartesian_position.setter
 	def cartesian_position(self, value: CartesianPositionVariable):

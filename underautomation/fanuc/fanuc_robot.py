@@ -52,7 +52,8 @@ class FanucRobot:
 		:param key: The associated key supplied by UnderAutomation
 		:returns: Information about the supplied license
 		'''
-		return LicenseInfo(None, None, fanuc_robot.RegisterLicense(licensee, key))
+		__r = fanuc_robot.RegisterLicense(licensee, key)
+		return None if __r is None else LicenseInfo(None, None, __r)
 
 	@property
 	def address(self) -> str:
@@ -66,38 +67,45 @@ class FanucRobot:
 
 	@property
 	def telnet(self) -> TelnetClientInternal:
-		'''Telnet KCL client for remote command execution. Telnet KCL is a legacy protocol: it is not secured (password and commands are sent in clear text), and its behavior changes with the firmware version and on ROBOGUIDE. The same KCL commands are available on the web server of the controller with robot.Cgtp.Kcl (firmware V8.30 and later): prefer it for new developments.'''
-		return TelnetClientInternal(self._instance.Telnet)
+		'''Telnet client for remote command execution'''
+		__r = self._instance.Telnet
+		return None if __r is None else TelnetClientInternal(__r)
 
 	@property
 	def ftp(self) -> FtpClientInternal:
 		'''FTP client for memory and file access'''
-		return FtpClientInternal(self._instance.Ftp)
+		__r = self._instance.Ftp
+		return None if __r is None else FtpClientInternal(__r)
 
 	@property
 	def snpx(self) -> SnpxClientInternal:
 		'''SNPX client for IO, alarms and task reading'''
-		return SnpxClientInternal(self._instance.Snpx)
+		__r = self._instance.Snpx
+		return None if __r is None else SnpxClientInternal(__r)
 
 	@property
 	def rmi(self) -> RmiClientInternal:
 		'''RMI client for remote motion interface'''
-		return RmiClientInternal(self._instance.Rmi)
+		__r = self._instance.Rmi
+		return None if __r is None else RmiClientInternal(__r)
 
 	@property
 	def stream_motion(self) -> StreamMotionClientInternal:
 		'''Stream Motion client for real-time motion control'''
-		return StreamMotionClientInternal(self._instance.StreamMotion)
+		__r = self._instance.StreamMotion
+		return None if __r is None else StreamMotionClientInternal(__r)
 
 	@property
 	def cgtp(self) -> CgtpClientInternal:
-		'''CGTP client, which uses the web server of the controller (HTTP)'''
-		return CgtpClientInternal(self._instance.Cgtp)
+		'''CGTP Web Server client for HTTP-based COMET RPC interface'''
+		__r = self._instance.Cgtp
+		return None if __r is None else CgtpClientInternal(__r)
 
 	@staticmethod
 	def _get_license_info() -> LicenseInfo:
 		'''Return information about your license'''
-		return LicenseInfo(None, None, fanuc_robot.LicenseInfo)
+		__r = fanuc_robot.LicenseInfo
+		return None if __r is None else LicenseInfo(None, None, __r)
 
 	license_info = _StaticProperty(_get_license_info)
 	del _get_license_info

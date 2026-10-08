@@ -41,7 +41,8 @@ class RmiInstructionResponse(RmiResponseBase):
 	@property
 	def instruction(self) -> RmiInstructionBase:
 		'''Sent instruction'''
-		return RmiInstructionBase(self._instance.Instruction)
+		__r = self._instance.Instruction
+		return None if __r is None else RmiInstructionBase(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

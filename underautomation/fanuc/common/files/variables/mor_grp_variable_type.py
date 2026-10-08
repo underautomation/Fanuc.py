@@ -18,7 +18,8 @@ class MorGrpVariableType(GenericVariableType):
 	@property
 	def nilpos(self) -> CartesianPositionVariable:
 		'''Value of variable $NILPOS'''
-		return CartesianPositionVariable(None, None, self._instance.Nilpos)
+		__r = self._instance.Nilpos
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def overrun_cnt(self) -> int:
@@ -28,7 +29,8 @@ class MorGrpVariableType(GenericVariableType):
 	@property
 	def current_pos(self) -> CurrentPosVariableType:
 		'''Value of variable $CURRENT_POS'''
-		return CurrentPosVariableType(self._instance.CurrentPos)
+		__r = self._instance.CurrentPos
+		return None if __r is None else CurrentPosVariableType(__r)
 
 	@property
 	def segmovedist(self) -> float:
@@ -303,7 +305,8 @@ class MorGrpVariableType(GenericVariableType):
 	@property
 	def tune(self) -> typing.List[TuneVariableType]:
 		'''Value of variable $TUNE'''
-		return [TuneVariableType(x) for x in self._instance.Tune]
+		__r = self._instance.Tune
+		return None if __r is None else [None if x is None else TuneVariableType(x) for x in __r]
 
 	@property
 	def tune_val(self) -> int:
@@ -398,7 +401,8 @@ class MorGrpVariableType(GenericVariableType):
 	@property
 	def pulco_idata(self) -> PulcoIdataVariableType:
 		'''Value of variable $PULCO_IDATA'''
-		return PulcoIdataVariableType(self._instance.PulcoIdata)
+		__r = self._instance.PulcoIdata
+		return None if __r is None else PulcoIdataVariableType(__r)
 
 	@property
 	def cur_nom_ang(self) -> typing.List[float]:
@@ -448,7 +452,8 @@ class MorGrpVariableType(GenericVariableType):
 	@property
 	def cur_tcp(self) -> CartesianPositionVariable:
 		'''Value of variable $CUR_TCP'''
-		return CartesianPositionVariable(None, None, self._instance.CurTcp)
+		__r = self._instance.CurTcp
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def mch_pls_grv(self) -> typing.List[int]:

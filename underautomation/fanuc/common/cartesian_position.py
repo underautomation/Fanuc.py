@@ -16,7 +16,12 @@ class CartesianPosition(XYZWPRPosition):
 
 	@staticmethod
 	def from_homogeneous_matrix(R: typing.List[float]) -> 'CartesianPosition':
-		return CartesianPosition(None, None, None, None, None, None, None, cartesian_position.FromHomogeneousMatrix(R))
+		'''Create a CartesianPosition with unknow configuration from a homogeneous rotation and translation 4x4 matrix
+
+		:param R: Homogeneous 4x4 matrix
+		'''
+		__r = cartesian_position.FromHomogeneousMatrix(R)
+		return None if __r is None else CartesianPosition(None, None, None, None, None, None, None, __r)
 
 	@staticmethod
 	def normalize_angle(angle: float) -> float:
@@ -36,7 +41,8 @@ class CartesianPosition(XYZWPRPosition):
 	@property
 	def configuration(self) -> Configuration:
 		'''Position configuration'''
-		return Configuration(None, None, None, None, None, None, None, self._instance.Configuration)
+		__r = self._instance.Configuration
+		return None if __r is None else Configuration(None, None, None, None, None, None, None, __r)
 
 	@configuration.setter
 	def configuration(self, value: Configuration):

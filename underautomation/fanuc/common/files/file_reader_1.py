@@ -8,7 +8,7 @@ from UnderAutomation.Fanuc.Common.Files import FileReader as file_reader_1
 from UnderAutomation.Fanuc.Common import Languages as languages
 
 T = typing.TypeVar('T')
-class FileReader1(FileReader, IFileReader1[T], IFileReader, typing.Generic[T]):
+class FileReader1(FileReader, IFileReader1[T], typing.Generic[T]):
 	'''File reader for specific files'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):

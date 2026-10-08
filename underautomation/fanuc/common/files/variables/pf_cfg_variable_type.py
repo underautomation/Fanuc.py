@@ -135,7 +135,8 @@ class PfCfgVariableType(GenericVariableType):
 	@property
 	def summary(self) -> typing.List[PfDataVariableType]:
 		'''Value of variable $SUMMARY'''
-		return [PfDataVariableType(x) for x in self._instance.Summary]
+		__r = self._instance.Summary
+		return None if __r is None else [None if x is None else PfDataVariableType(x) for x in __r]
 
 	@property
 	def config_set(self) -> int:

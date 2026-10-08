@@ -15,12 +15,14 @@ class DbRecordVariableType(GenericVariableType):
 	@property
 	def cpos(self) -> XYZPosition:
 		'''Value of variable $CPOS'''
-		return XYZPosition(None, None, None, self._instance.Cpos)
+		__r = self._instance.Cpos
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def lpos(self) -> XYZPosition:
 		'''Value of variable $LPOS'''
-		return XYZPosition(None, None, None, self._instance.Lpos)
+		__r = self._instance.Lpos
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def dpos_dst(self) -> float:
@@ -95,17 +97,20 @@ class DbRecordVariableType(GenericVariableType):
 	@property
 	def pd(self) -> XYZPosition:
 		'''Value of variable $PD'''
-		return XYZPosition(None, None, None, self._instance.Pd)
+		__r = self._instance.Pd
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def pc(self) -> XYZPosition:
 		'''Value of variable $PC'''
-		return XYZPosition(None, None, None, self._instance.Pc)
+		__r = self._instance.Pc
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def pn_at(self) -> XYZPosition:
 		'''Value of variable $PN_AT'''
-		return XYZPosition(None, None, None, self._instance.PnAt)
+		__r = self._instance.PnAt
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def pd2(self) -> float:

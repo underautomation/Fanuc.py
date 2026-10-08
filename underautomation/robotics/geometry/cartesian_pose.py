@@ -32,18 +32,21 @@ class CartesianPose:
 		:param c: Third angle in degrees
 		:param convention: Convention of the angles
 		'''
-		return CartesianPose(None, None, None, None, cartesian_pose.FromEuler(x, y, z, a, b, c, euler_convention(int(convention))))
+		__r = cartesian_pose.FromEuler(x, y, z, a, b, c, euler_convention(int(convention)))
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	def multiply(self, other: 'CartesianPose') -> 'CartesianPose':
 		'''Returns the composition of this frame with another pose: the pose other, expressed in this frame, converted to the frame where this pose is expressed. The external axes of the result are the ones of other.
 
 		:param other: Pose expressed in this frame
 		'''
-		return CartesianPose(None, None, None, None, self._instance.Multiply(other._instance if other else None))
+		__r = self._instance.Multiply(other._instance if other else None)
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	def inverse(self) -> 'CartesianPose':
 		'''Returns the inverse of this frame. The result has no external axes.'''
-		return CartesianPose(None, None, None, None, self._instance.Inverse())
+		__r = self._instance.Inverse()
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	@property
 	def x(self) -> float:
@@ -75,7 +78,8 @@ class CartesianPose:
 	@property
 	def orientation(self) -> Orientation:
 		'''Orientation. Setting null gives the identity orientation.'''
-		return Orientation(self._instance.Orientation)
+		__r = self._instance.Orientation
+		return None if __r is None else Orientation(__r)
 
 	@orientation.setter
 	def orientation(self, value: Orientation):

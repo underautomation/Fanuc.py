@@ -290,7 +290,8 @@ class RcmcfgVariableType(GenericVariableType):
 	@property
 	def pinfo(self) -> typing.List[PinfoVariableType]:
 		'''Value of variable $PINFO'''
-		return [PinfoVariableType(x) for x in self._instance.Pinfo]
+		__r = self._instance.Pinfo
+		return None if __r is None else [None if x is None else PinfoVariableType(x) for x in __r]
 
 	@property
 	def vcount(self) -> int:

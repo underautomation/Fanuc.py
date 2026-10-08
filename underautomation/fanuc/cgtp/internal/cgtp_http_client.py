@@ -23,19 +23,23 @@ class CgtpHttpClient(FileClientBase):
 
 	def list_variable_files(self) -> typing.List[CgtpAsciiFileItem]:
 		'''List variable files available on the controller.'''
-		return [CgtpAsciiFileItem(x) for x in self._instance.ListVariableFiles()]
+		__r = self._instance.ListVariableFiles()
+		return None if __r is None else [None if x is None else CgtpAsciiFileItem(x) for x in __r]
 
 	def list_tp_programs(self) -> typing.List[CgtpAsciiFileItem]:
 		'''List TP program files available on the controller.'''
-		return [CgtpAsciiFileItem(x) for x in self._instance.ListTpPrograms()]
+		__r = self._instance.ListTpPrograms()
+		return None if __r is None else [None if x is None else CgtpAsciiFileItem(x) for x in __r]
 
 	def list_diagnostic_files(self) -> typing.List[CgtpFileItem]:
 		'''List diagnostic and error files available on the controller.'''
-		return [CgtpFileItem(x) for x in self._instance.ListDiagnosticFiles()]
+		__r = self._instance.ListDiagnosticFiles()
+		return None if __r is None else [None if x is None else CgtpFileItem(x) for x in __r]
 
 	def list_other_files(self) -> typing.List[CgtpFileItem]:
 		'''List other files available on the controller.'''
-		return [CgtpFileItem(x) for x in self._instance.ListOtherFiles()]
+		__r = self._instance.ListOtherFiles()
+		return None if __r is None else [None if x is None else CgtpFileItem(x) for x in __r]
 
 	def enumerate_variable_file_names(self) -> typing.List[str]:
 		return self._instance.EnumerateVariableFileNames()

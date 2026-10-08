@@ -30,7 +30,8 @@ class TbjGrpVariableType(GenericVariableType):
 	@property
 	def tb_param(self) -> typing.List[TbparamVariableType]:
 		'''Value of variable $TB_PARAM'''
-		return [TbparamVariableType(x) for x in self._instance.TbParam]
+		__r = self._instance.TbParam
+		return None if __r is None else [None if x is None else TbparamVariableType(x) for x in __r]
 
 	@property
 	def shortmo_scl(self) -> float:

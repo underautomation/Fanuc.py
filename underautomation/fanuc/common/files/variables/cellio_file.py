@@ -21,12 +21,14 @@ class CellioFile(GenericVariableFile):
 	@property
 	def cell_setup(self) -> CellsetVariableType:
 		'''Value of variable $CELL_SETUP'''
-		return CellsetVariableType(self._instance.CellSetup)
+		__r = self._instance.CellSetup
+		return None if __r is None else CellsetVariableType(__r)
 
 	@property
 	def clmlio(self) -> typing.List[ClmlioVariableType]:
 		'''Value of variable $CLMLIO'''
-		return [ClmlioVariableType(x) for x in self._instance.Clmlio]
+		__r = self._instance.Clmlio
+		return None if __r is None else [None if x is None else ClmlioVariableType(x) for x in __r]
 
 	@property
 	def style_comnt(self) -> typing.List[str]:

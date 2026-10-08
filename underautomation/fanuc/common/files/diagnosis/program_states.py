@@ -15,7 +15,8 @@ class ProgramStates(IFanucContent):
 	@property
 	def task_states(self) -> typing.List[TaskState]:
 		'''Array of task states currently on the controller.'''
-		return [TaskState(x) for x in self._instance.TaskStates]
+		__r = self._instance.TaskStates
+		return None if __r is None else [None if x is None else TaskState(x) for x in __r]
 
 	@task_states.setter
 	def task_states(self, value: typing.List[TaskState]):

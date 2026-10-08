@@ -23,7 +23,8 @@ class RmiRecordedJointPosition:
 	@property
 	def joints(self) -> JointsPosition:
 		'''Recorded joint angles in degrees.'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.Joints)
+		__r = self._instance.Joints
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@joints.setter
 	def joints(self, value: JointsPosition):

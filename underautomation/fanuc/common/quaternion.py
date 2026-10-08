@@ -19,18 +19,21 @@ class Quaternion:
 
 	def normalize(self) -> 'Quaternion':
 		'''Returns this quaternion with a norm of 1'''
-		return Quaternion(None, None, None, None, self._instance.Normalize())
+		__r = self._instance.Normalize()
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	def conjugate(self) -> 'Quaternion':
 		'''Returns the conjugate of this quaternion. For a rotation, it is the inverse rotation.'''
-		return Quaternion(None, None, None, None, self._instance.Conjugate())
+		__r = self._instance.Conjugate()
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	def multiply(self, other: 'Quaternion') -> 'Quaternion':
 		'''Returns the product this x other: the rotation other applied after the rotation this, in the frame of this.
 
 		:param other: Right operand
 		'''
-		return Quaternion(None, None, None, None, self._instance.Multiply(other._instance if other else None))
+		__r = self._instance.Multiply(other._instance if other else None)
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	def dot(self, other: 'Quaternion') -> float:
 		'''Dot product of the two quaternions
@@ -54,7 +57,8 @@ class Quaternion:
 		:param end: Orientation for t = 1
 		:param t: Interpolation parameter, usually between 0 and 1
 		'''
-		return Quaternion(None, None, None, None, quaternion.Slerp(start._instance if start else None, end._instance if end else None, t))
+		__r = quaternion.Slerp(start._instance if start else None, end._instance if end else None, t)
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	@staticmethod
 	def from_axis_angle(x: float, y: float, z: float, angle: float) -> 'Quaternion':
@@ -65,7 +69,8 @@ class Quaternion:
 		:param z: Z component of the axis
 		:param angle: Rotation angle in degrees
 		'''
-		return Quaternion(None, None, None, None, quaternion.FromAxisAngle(x, y, z, angle))
+		__r = quaternion.FromAxisAngle(x, y, z, angle)
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	def to_axis_angle(self) -> typing.List[float]:
 		'''Returns the rotation axis and angle: [x, y, z, angle in degrees]. The axis is a unit vector and the angle is between 0 and 180.'''
@@ -73,7 +78,12 @@ class Quaternion:
 
 	@staticmethod
 	def from_rotation_matrix(matrix: typing.List[float]) -> 'Quaternion':
-		return Quaternion(None, None, None, None, quaternion.FromRotationMatrix(matrix))
+		'''Creates a quaternion from a rotation matrix (3x3, or 4x4 homogeneous matrix)
+
+		:param matrix: Rotation matrix
+		'''
+		__r = quaternion.FromRotationMatrix(matrix)
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	def to_rotation_matrix(self) -> typing.List[float]:
 		'''Returns the 3x3 rotation matrix of this orientation'''

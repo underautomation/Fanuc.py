@@ -30,7 +30,8 @@ class CondetIoVariableType(GenericVariableType):
 	@property
 	def io_data(self) -> typing.List[DetIoVariableType]:
 		'''Value of variable $IO_DATA'''
-		return [DetIoVariableType(x) for x in self._instance.IoData]
+		__r = self._instance.IoData
+		return None if __r is None else [None if x is None else DetIoVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

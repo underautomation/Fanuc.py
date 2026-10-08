@@ -65,7 +65,8 @@ class SnpxClientBase:
 
 		:returns: An array of all active assignments.
 		'''
-		return [Assignment(x) for x in self._instance.GetAssignments()]
+		__r = self._instance.GetAssignments()
+		return None if __r is None else [None if x is None else Assignment(x) for x in __r]
 
 	@property
 	def ip(self) -> str:
@@ -75,182 +76,218 @@ class SnpxClientBase:
 	@property
 	def numeric_registers(self) -> NumericRegisters:
 		'''Number registers R[] as floating point values'''
-		return NumericRegisters(self._instance.NumericRegisters)
+		__r = self._instance.NumericRegisters
+		return None if __r is None else NumericRegisters(__r)
 
 	@property
 	def numeric_registers_int32(self) -> NumericRegistersInt32:
 		'''Number registers R[] as 32-bit integer values'''
-		return NumericRegistersInt32(self._instance.NumericRegistersInt32)
+		__r = self._instance.NumericRegistersInt32
+		return None if __r is None else NumericRegistersInt32(__r)
 
 	@property
 	def numeric_registers_int16(self) -> NumericRegistersInt16:
 		'''Number registers R[] as 16-bit integer values'''
-		return NumericRegistersInt16(self._instance.NumericRegistersInt16)
+		__r = self._instance.NumericRegistersInt16
+		return None if __r is None else NumericRegistersInt16(__r)
 
 	@property
 	def position_registers(self) -> PositionRegisters:
 		'''Position registers'''
-		return PositionRegisters(self._instance.PositionRegisters)
+		__r = self._instance.PositionRegisters
+		return None if __r is None else PositionRegisters(__r)
 
 	@property
 	def string_registers(self) -> StringRegisters:
 		'''String registers'''
-		return StringRegisters(self._instance.StringRegisters)
+		__r = self._instance.StringRegisters
+		return None if __r is None else StringRegisters(__r)
 
 	@property
 	def integer_system_variables(self) -> IntegerSystemVariables:
 		'''Integer variables'''
-		return IntegerSystemVariables(self._instance.IntegerSystemVariables)
+		__r = self._instance.IntegerSystemVariables
+		return None if __r is None else IntegerSystemVariables(__r)
 
 	@property
 	def real_system_variables(self) -> RealSystemVariables:
 		'''Real variables'''
-		return RealSystemVariables(self._instance.RealSystemVariables)
+		__r = self._instance.RealSystemVariables
+		return None if __r is None else RealSystemVariables(__r)
 
 	@property
 	def position_system_variables(self) -> PositionSystemVariables:
 		'''Position variables'''
-		return PositionSystemVariables(self._instance.PositionSystemVariables)
+		__r = self._instance.PositionSystemVariables
+		return None if __r is None else PositionSystemVariables(__r)
 
 	@property
 	def string_system_variables(self) -> StringSystemVariables:
 		'''String variables'''
-		return StringSystemVariables(self._instance.StringSystemVariables)
+		__r = self._instance.StringSystemVariables
+		return None if __r is None else StringSystemVariables(__r)
 
 	@property
 	def digital_signals(self) -> typing.List[DigitalSignals]:
 		'''List of all digital signal accessors (SDI, SDO, RDI, RDO, ...)'''
-		return [DigitalSignals(x) for x in self._instance.DigitalSignals]
+		__r = self._instance.DigitalSignals
+		return None if __r is None else [None if x is None else DigitalSignals(x) for x in __r]
 
 	@property
 	def sdi(self) -> DigitalSignals:
 		'''Safety Digital Inputs'''
-		return DigitalSignals(self._instance.SDI)
+		__r = self._instance.SDI
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def sdo(self) -> DigitalSignals:
 		'''Safety Digital Outputs'''
-		return DigitalSignals(self._instance.SDO)
+		__r = self._instance.SDO
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def rdi(self) -> DigitalSignals:
 		'''Remote Digital Inputs'''
-		return DigitalSignals(self._instance.RDI)
+		__r = self._instance.RDI
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def rdo(self) -> DigitalSignals:
 		'''Remote Digital Outputs'''
-		return DigitalSignals(self._instance.RDO)
+		__r = self._instance.RDO
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def ui(self) -> DigitalSignals:
 		'''User Inputs'''
-		return DigitalSignals(self._instance.UI)
+		__r = self._instance.UI
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def uo(self) -> DigitalSignals:
 		'''User Outputs'''
-		return DigitalSignals(self._instance.UO)
+		__r = self._instance.UO
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def si(self) -> DigitalSignals:
 		'''System Inputs'''
-		return DigitalSignals(self._instance.SI)
+		__r = self._instance.SI
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def so(self) -> DigitalSignals:
 		'''System Outputs'''
-		return DigitalSignals(self._instance.SO)
+		__r = self._instance.SO
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def wi(self) -> DigitalSignals:
 		'''Weld Inputs'''
-		return DigitalSignals(self._instance.WI)
+		__r = self._instance.WI
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def wo(self) -> DigitalSignals:
 		'''Weld Outputs'''
-		return DigitalSignals(self._instance.WO)
+		__r = self._instance.WO
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def wsi(self) -> DigitalSignals:
 		'''Weld System Inputs'''
-		return DigitalSignals(self._instance.WSI)
+		__r = self._instance.WSI
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def pmc_k(self) -> DigitalSignals:
 		'''Programmable Machine Controller Constants'''
-		return DigitalSignals(self._instance.PMC_K)
+		__r = self._instance.PMC_K
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def pmc_r(self) -> DigitalSignals:
 		'''Programmable Machine Controller Relays'''
-		return DigitalSignals(self._instance.PMC_R)
+		__r = self._instance.PMC_R
+		return None if __r is None else DigitalSignals(__r)
 
 	@property
 	def numeric_i_os(self) -> typing.List[NumericIO]:
 		'''List of all Numeric IOs accessors (GI, GO, AI, AO, ...)'''
-		return [NumericIO(x) for x in self._instance.NumericIOs]
+		__r = self._instance.NumericIOs
+		return None if __r is None else [None if x is None else NumericIO(x) for x in __r]
 
 	@property
 	def gi(self) -> NumericIO:
 		'''Group Inputs'''
-		return NumericIO(self._instance.GI)
+		__r = self._instance.GI
+		return None if __r is None else NumericIO(__r)
 
 	@property
 	def go(self) -> NumericIO:
 		'''Group Outputs'''
-		return NumericIO(self._instance.GO)
+		__r = self._instance.GO
+		return None if __r is None else NumericIO(__r)
 
 	@property
 	def ai(self) -> NumericIO:
 		'''Analog Inputs'''
-		return NumericIO(self._instance.AI)
+		__r = self._instance.AI
+		return None if __r is None else NumericIO(__r)
 
 	@property
 	def ao(self) -> NumericIO:
 		'''Analog Outputs'''
-		return NumericIO(self._instance.AO)
+		__r = self._instance.AO
+		return None if __r is None else NumericIO(__r)
 
 	@property
 	def pmc_d(self) -> NumericIO:
 		'''Programmable Machine Controller Data'''
-		return NumericIO(self._instance.PMC_D)
+		__r = self._instance.PMC_D
+		return None if __r is None else NumericIO(__r)
 
 	@property
 	def flags(self) -> Flags:
 		'''Flags'''
-		return Flags(self._instance.Flags)
+		__r = self._instance.Flags
+		return None if __r is None else Flags(__r)
 
 	@property
 	def current_position(self) -> CurrentPosition:
 		'''Current position in world or user frame'''
-		return CurrentPosition(self._instance.CurrentPosition)
+		__r = self._instance.CurrentPosition
+		return None if __r is None else CurrentPosition(__r)
 
 	@property
 	def current_task_status(self) -> CurrentTaskStatus:
 		'''Current program tasks status. Index starts from 1.'''
-		return CurrentTaskStatus(self._instance.CurrentTaskStatus)
+		__r = self._instance.CurrentTaskStatus
+		return None if __r is None else CurrentTaskStatus(__r)
 
 	@property
 	def active_alarm(self) -> AlarmAccess:
 		'''Current active alarms'''
-		return AlarmAccess(self._instance.ActiveAlarm)
+		__r = self._instance.ActiveAlarm
+		return None if __r is None else AlarmAccess(__r)
 
 	@property
 	def alarm_history(self) -> AlarmAccess:
 		'''Alarm history'''
-		return AlarmAccess(self._instance.AlarmHistory)
+		__r = self._instance.AlarmHistory
+		return None if __r is None else AlarmAccess(__r)
 
 	@property
 	def comments(self) -> Comments:
 		'''Comments of registers, I/O signals and other data'''
-		return Comments(self._instance.Comments)
+		__r = self._instance.Comments
+		return None if __r is None else Comments(__r)
 
 	@property
 	def simulation_status(self) -> SimulationStatus:
 		'''I/O simulation status'''
-		return SimulationStatus(self._instance.SimulationStatus)
+		__r = self._instance.SimulationStatus
+		return None if __r is None else SimulationStatus(__r)
 
 	@property
 	def language(self) -> Languages:

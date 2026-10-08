@@ -60,7 +60,8 @@ class ComSpaceVariableType(GenericVariableType):
 	@property
 	def gp_status(self) -> typing.List[GpStatusVariableType]:
 		'''Value of variable $GP_STATUS'''
-		return [GpStatusVariableType(x) for x in self._instance.GpStatus]
+		__r = self._instance.GpStatus
+		return None if __r is None else [None if x is None else GpStatusVariableType(x) for x in __r]
 
 	@property
 	def dout1_type(self) -> int:

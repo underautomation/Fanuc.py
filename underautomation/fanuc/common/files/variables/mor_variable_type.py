@@ -51,7 +51,8 @@ class MorVariableType(GenericVariableType):
 	@property
 	def amp_id(self) -> typing.List[AmpIdVariableType]:
 		'''Value of variable $AMP_ID'''
-		return [AmpIdVariableType(x) for x in self._instance.AmpId]
+		__r = self._instance.AmpId
+		return None if __r is None else [None if x is None else AmpIdVariableType(x) for x in __r]
 
 	@property
 	def trans_cur(self) -> typing.List[float]:
@@ -121,7 +122,8 @@ class MorVariableType(GenericVariableType):
 	@property
 	def fltr_ovrn(self) -> FltrOvrnVariableType:
 		'''Value of variable $FLTR_OVRN'''
-		return FltrOvrnVariableType(self._instance.FltrOvrn)
+		__r = self._instance.FltrOvrn
+		return None if __r is None else FltrOvrnVariableType(__r)
 
 	@property
 	def fan_rotnum(self) -> typing.List[int]:

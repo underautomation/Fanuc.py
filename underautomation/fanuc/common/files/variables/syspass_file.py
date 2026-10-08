@@ -16,17 +16,20 @@ class SyspassFile(GenericVariableFile):
 	@property
 	def passname(self) -> typing.List[PassnameVariableType]:
 		'''Value of variable $PASSNAME'''
-		return [PassnameVariableType(x) for x in self._instance.Passname]
+		__r = self._instance.Passname
+		return None if __r is None else [None if x is None else PassnameVariableType(x) for x in __r]
 
 	@property
 	def passsuper(self) -> PassnameVariableType:
 		'''Value of variable $PASSSUPER'''
-		return PassnameVariableType(self._instance.Passsuper)
+		__r = self._instance.Passsuper
+		return None if __r is None else PassnameVariableType(__r)
 
 	@property
 	def password(self) -> PasswordVariableType:
 		'''Value of variable $PASSWORD'''
-		return PasswordVariableType(self._instance.Password)
+		__r = self._instance.Password
+		return None if __r is None else PasswordVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

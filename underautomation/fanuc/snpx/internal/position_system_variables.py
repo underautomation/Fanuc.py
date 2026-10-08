@@ -22,7 +22,8 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 		:param indexes: The indices to include in the batch.
 		:returns: A batch assignment for the specified indices.
 		'''
-		return PositionSystemVariablesBatchAssignment(self._instance.CreateBatchAssignment(indexes))
+		__r = self._instance.CreateBatchAssignment(indexes)
+		return None if __r is None else PositionSystemVariablesBatchAssignment(__r)
 
 	def write(self, variable: str, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: CartesianPosition | ExtendedCartesianPosition | JointsPosition) -> None:
 		'''Writes a Cartesian position to the specified system variable.
@@ -40,7 +41,8 @@ class PositionSystemVariables(SnpxWritableAssignableElements3[Position, str, Pos
 		:param index: The system variable name.
 		:returns: The position value.
 		'''
-		return Position(None, None, None, None, self._instance.Read(index))
+		__r = self._instance.Read(index)
+		return None if __r is None else Position(None, None, None, None, __r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

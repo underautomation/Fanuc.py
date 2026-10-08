@@ -323,12 +323,14 @@ class PlidGrpVariableType(GenericVariableType):
 	@property
 	def max_pld_cal(self) -> MaxPldCalVariableType:
 		'''Value of variable $MAX_PLD_CAL'''
-		return MaxPldCalVariableType(self._instance.MaxPldCal)
+		__r = self._instance.MaxPldCal
+		return None if __r is None else MaxPldCalVariableType(__r)
 
 	@property
 	def j3d_pld_cal(self) -> typing.List[J3dPldCalVariableType]:
 		'''Value of variable $J3D_PLD_CAL'''
-		return [J3dPldCalVariableType(x) for x in self._instance.J3dPldCal]
+		__r = self._instance.J3dPldCal
+		return None if __r is None else [None if x is None else J3dPldCalVariableType(x) for x in __r]
 
 	@property
 	def im_srch_dt(self) -> float:
@@ -353,7 +355,8 @@ class PlidGrpVariableType(GenericVariableType):
 	@property
 	def calc_result(self) -> CalcResultVariableType:
 		'''Value of variable $CALC_RESULT'''
-		return CalcResultVariableType(self._instance.CalcResult)
+		__r = self._instance.CalcResult
+		return None if __r is None else CalcResultVariableType(__r)
 
 	@property
 	def pamswflg(self) -> int:
@@ -498,17 +501,20 @@ class PlidGrpVariableType(GenericVariableType):
 	@property
 	def armload_x(self) -> typing.List[ArmldPosVariableType]:
 		'''Value of variable $ARMLOAD_X'''
-		return [ArmldPosVariableType(x) for x in self._instance.ArmloadX]
+		__r = self._instance.ArmloadX
+		return None if __r is None else [None if x is None else ArmldPosVariableType(x) for x in __r]
 
 	@property
 	def armload_y(self) -> typing.List[ArmldPosVariableType]:
 		'''Value of variable $ARMLOAD_Y'''
-		return [ArmldPosVariableType(x) for x in self._instance.ArmloadY]
+		__r = self._instance.ArmloadY
+		return None if __r is None else [None if x is None else ArmldPosVariableType(x) for x in __r]
 
 	@property
 	def armload_z(self) -> typing.List[ArmldPosVariableType]:
 		'''Value of variable $ARMLOAD_Z'''
-		return [ArmldPosVariableType(x) for x in self._instance.ArmloadZ]
+		__r = self._instance.ArmloadZ
+		return None if __r is None else [None if x is None else ArmldPosVariableType(x) for x in __r]
 
 	@property
 	def rang_mgn(self) -> float:

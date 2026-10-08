@@ -14,7 +14,8 @@ class StatusReceivedEventArgs:
 	@property
 	def status(self) -> StreamMotionStatus:
 		'''Last status received from the robot'''
-		return StreamMotionStatus(self._instance.Status)
+		__r = self._instance.Status
+		return None if __r is None else StreamMotionStatus(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

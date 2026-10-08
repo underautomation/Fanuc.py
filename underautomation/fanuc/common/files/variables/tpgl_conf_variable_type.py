@@ -55,22 +55,26 @@ class TpglConfVariableType(GenericVariableType):
 	@property
 	def user_views(self) -> typing.List[TpglUviewVariableType]:
 		'''Value of variable $USER_VIEWS'''
-		return [TpglUviewVariableType(x) for x in self._instance.UserViews]
+		__r = self._instance.UserViews
+		return None if __r is None else [None if x is None else TpglUviewVariableType(x) for x in __r]
 
 	@property
 	def cameras(self) -> typing.List[TpglCamVariableType]:
 		'''Value of variable $CAMERAS'''
-		return [TpglCamVariableType(x) for x in self._instance.Cameras]
+		__r = self._instance.Cameras
+		return None if __r is None else [None if x is None else TpglCamVariableType(x) for x in __r]
 
 	@property
 	def temp_locs(self) -> typing.List[TpglViewVariableType]:
 		'''Value of variable $TEMP_LOCS'''
-		return [TpglViewVariableType(x) for x in self._instance.TempLocs]
+		__r = self._instance.TempLocs
+		return None if __r is None else [None if x is None else TpglViewVariableType(x) for x in __r]
 
 	@property
 	def scene_view(self) -> typing.List[TpglViewVariableType]:
 		'''Value of variable $SCENE_VIEW'''
-		return [TpglViewVariableType(x) for x in self._instance.SceneView]
+		__r = self._instance.SceneView
+		return None if __r is None else [None if x is None else TpglViewVariableType(x) for x in __r]
 
 	@property
 	def karel_tmo(self) -> int:
@@ -90,7 +94,8 @@ class TpglConfVariableType(GenericVariableType):
 	@property
 	def jog_radius(self) -> typing.List[JogRadVariableType]:
 		'''Value of variable $JOG_RADIUS'''
-		return [JogRadVariableType(x) for x in self._instance.JogRadius]
+		__r = self._instance.JogRadius
+		return None if __r is None else [None if x is None else JogRadVariableType(x) for x in __r]
 
 	@property
 	def check_tools(self) -> int:
@@ -115,7 +120,8 @@ class TpglConfVariableType(GenericVariableType):
 	@property
 	def machset(self) -> typing.List[TpglMsetVariableType]:
 		'''Value of variable $MACHSET'''
-		return [TpglMsetVariableType(x) for x in self._instance.Machset]
+		__r = self._instance.Machset
+		return None if __r is None else [None if x is None else TpglMsetVariableType(x) for x in __r]
 
 	@property
 	def cont_idx(self) -> int:
@@ -160,7 +166,8 @@ class TpglConfVariableType(GenericVariableType):
 	@property
 	def fp_to_fk(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable $FP_TO_FK'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.FpToFk]
+		__r = self._instance.FpToFk
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def html5_enbl(self) -> bool:

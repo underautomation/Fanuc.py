@@ -14,7 +14,8 @@ class Features:
 	@property
 	def features_list(self) -> typing.List[Feature]:
 		'''List of features'''
-		return [Feature(x) for x in self._instance.FeaturesList]
+		__r = self._instance.FeaturesList
+		return None if __r is None else [None if x is None else Feature(x) for x in __r]
 
 	@property
 	def has_telnet(self) -> bool:

@@ -53,7 +53,8 @@ class DoubleSProfile:
 
 		:param duration: New duration in seconds, not lower than duration
 		'''
-		return DoubleSProfile(None, None, None, None, None, None, None, self._instance.StretchTo(duration))
+		__r = self._instance.StretchTo(duration)
+		return None if __r is None else DoubleSProfile(None, None, None, None, None, None, None, __r)
 
 	@property
 	def start_position(self) -> float:

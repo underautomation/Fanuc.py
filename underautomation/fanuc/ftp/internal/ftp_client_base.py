@@ -21,7 +21,8 @@ class FtpClientBase(FileClientBase):
 
 	def enumerate_variable_files(self) -> typing.List[FtpListItem]:
 		'''Get a list of all variable files on controller'''
-		return [FtpListItem(x) for x in self._instance.EnumerateVariableFiles()]
+		__r = self._instance.EnumerateVariableFiles()
+		return None if __r is None else [None if x is None else FtpListItem(x) for x in __r]
 
 	def enumerate_variable_file_names(self) -> typing.List[str]:
 		return self._instance.EnumerateVariableFileNames()
@@ -48,7 +49,8 @@ class FtpClientBase(FileClientBase):
 	@property
 	def direct_file_handling(self) -> FtpDirectFileHandling:
 		'''Contains methods to manipulate files and folders on the controller (upload, download, delete, ...)'''
-		return FtpDirectFileHandling(self._instance.DirectFileHandling)
+		__r = self._instance.DirectFileHandling
+		return None if __r is None else FtpDirectFileHandling(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

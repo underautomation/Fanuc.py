@@ -14,7 +14,8 @@ class ErrorList(IFanucContent):
 
 	def filter_active_alarms(self) -> typing.List[ErrallSectionItem]:
 		'''Return active alarms among the list of all error items'''
-		return [ErrallSectionItem(x) for x in self._instance.FilterActiveAlarms()]
+		__r = self._instance.FilterActiveAlarms()
+		return None if __r is None else [None if x is None else ErrallSectionItem(x) for x in __r]
 
 	@property
 	def name(self) -> str:
@@ -24,7 +25,8 @@ class ErrorList(IFanucContent):
 	@property
 	def items(self) -> typing.List[ErrallSectionItem]:
 		'''List of all error items (active and history)'''
-		return [ErrallSectionItem(x) for x in self._instance.Items]
+		__r = self._instance.Items
+		return None if __r is None else [None if x is None else ErrallSectionItem(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

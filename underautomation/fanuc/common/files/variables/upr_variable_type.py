@@ -50,12 +50,14 @@ class UprVariableType(GenericVariableType):
 	@property
 	def uframe(self) -> CartesianPositionVariable:
 		'''Value of variable $UFRAME'''
-		return CartesianPositionVariable(None, None, self._instance.Uframe)
+		__r = self._instance.Uframe
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def utool(self) -> CartesianPositionVariable:
 		'''Value of variable $UTOOL'''
-		return CartesianPositionVariable(None, None, self._instance.Utool)
+		__r = self._instance.Utool
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def speed(self) -> float:

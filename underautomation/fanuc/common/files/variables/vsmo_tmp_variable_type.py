@@ -50,12 +50,14 @@ class VsmoTmpVariableType(GenericVariableType):
 	@property
 	def prv1_pls(self) -> typing.List[VsmoPlsVariableType]:
 		'''Value of variable $PRV1_PLS'''
-		return [VsmoPlsVariableType(x) for x in self._instance.Prv1Pls]
+		__r = self._instance.Prv1Pls
+		return None if __r is None else [None if x is None else VsmoPlsVariableType(x) for x in __r]
 
 	@property
 	def prv2_pls(self) -> typing.List[VsmoPlsVariableType]:
 		'''Value of variable $PRV2_PLS'''
-		return [VsmoPlsVariableType(x) for x in self._instance.Prv2Pls]
+		__r = self._instance.Prv2Pls
+		return None if __r is None else [None if x is None else VsmoPlsVariableType(x) for x in __r]
 
 	@property
 	def robot_group(self) -> int:
@@ -65,17 +67,20 @@ class VsmoTmpVariableType(GenericVariableType):
 	@property
 	def snap_pls(self) -> VsmoPlsVariableType:
 		'''Value of variable $SNAP_PLS'''
-		return VsmoPlsVariableType(self._instance.SnapPls)
+		__r = self._instance.SnapPls
+		return None if __r is None else VsmoPlsVariableType(__r)
 
 	@property
 	def prv_snp_pls(self) -> VsmoPlsVariableType:
 		'''Value of variable $PRV_SNP_PLS'''
-		return VsmoPlsVariableType(self._instance.PrvSnpPls)
+		__r = self._instance.PrvSnpPls
+		return None if __r is None else VsmoPlsVariableType(__r)
 
 	@property
 	def pst_snp_pls(self) -> VsmoPlsVariableType:
 		'''Value of variable $PST_SNP_PLS'''
-		return VsmoPlsVariableType(self._instance.PstSnpPls)
+		__r = self._instance.PstSnpPls
+		return None if __r is None else VsmoPlsVariableType(__r)
 
 	@property
 	def diff_time(self) -> float:

@@ -15,7 +15,8 @@ class CurrentPosVariableType(GenericVariableType):
 	@property
 	def posxf(self) -> CartesianPositionVariable:
 		'''Value of variable $POSXF'''
-		return CartesianPositionVariable(None, None, self._instance.Posxf)
+		__r = self._instance.Posxf
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def ext1(self) -> float:

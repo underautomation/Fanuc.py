@@ -19,7 +19,8 @@ class XYZWPRPosition(XYZPosition):
 
 	def get_quaternion(self) -> Quaternion:
 		'''Returns the orientation W, P, R as a quaternion'''
-		return Quaternion(None, None, None, None, self._instance.GetQuaternion())
+		__r = self._instance.GetQuaternion()
+		return None if __r is None else Quaternion(None, None, None, None, __r)
 
 	def set_quaternion(self, quaternion: Quaternion) -> None:
 		'''Sets the orientation W, P, R from a quaternion. Angles are between -180 and 180 degrees.
@@ -33,39 +34,45 @@ class XYZWPRPosition(XYZPosition):
 
 		:param other: Pose expressed in this frame
 		'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.Multiply(other._instance if other else None))
+		__r = self._instance.Multiply(other._instance if other else None)
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	def inverse(self) -> 'XYZWPRPosition':
 		'''Returns the inverse of this frame'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.Inverse())
+		__r = self._instance.Inverse()
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	def flange_to_tcp(self, tool: 'XYZWPRPosition') -> 'XYZWPRPosition':
 		'''Converts a flange position to the position of the tool center point (TCP)
 
 		:param tool: Tool frame, relative to the flange (for example a UTOOL value)
 		'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.FlangeToTcp(tool._instance if tool else None))
+		__r = self._instance.FlangeToTcp(tool._instance if tool else None)
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	def tcp_to_flange(self, tool: 'XYZWPRPosition') -> 'XYZWPRPosition':
 		'''Converts a position of the tool center point (TCP) to the flange position
 
 		:param tool: Tool frame, relative to the flange (for example a UTOOL value)
 		'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.TcpToFlange(tool._instance if tool else None))
+		__r = self._instance.TcpToFlange(tool._instance if tool else None)
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	def user_frame_to_world(self, userFrame: 'XYZWPRPosition') -> 'XYZWPRPosition':
 		'''Converts this position, expressed in a user frame, to the world frame
 
 		:param userFrame: User frame, relative to the world frame (for example a UFRAME value)
 		'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.UserFrameToWorld(userFrame._instance if userFrame else None))
+		__r = self._instance.UserFrameToWorld(userFrame._instance if userFrame else None)
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	def world_to_user_frame(self, userFrame: 'XYZWPRPosition') -> 'XYZWPRPosition':
 		'''Converts this position, expressed in the world frame, to a user frame
 
 		:param userFrame: User frame, relative to the world frame (for example a UFRAME value)
 		'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.WorldToUserFrame(userFrame._instance if userFrame else None))
+		__r = self._instance.WorldToUserFrame(userFrame._instance if userFrame else None)
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	@property
 	def w(self) -> float:

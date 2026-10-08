@@ -49,7 +49,8 @@ class CgtpStructureField:
 	@property
 	def children(self) -> typing.List['CgtpStructureField']:
 		'''Child nodes (FIELD and ARRAY elements). Null if this is a leaf node.'''
-		return [CgtpStructureField(x) for x in self._instance.Children]
+		__r = self._instance.Children
+		return None if __r is None else [None if x is None else CgtpStructureField(x) for x in __r]
 
 	@children.setter
 	def children(self, value: typing.List['CgtpStructureField']):

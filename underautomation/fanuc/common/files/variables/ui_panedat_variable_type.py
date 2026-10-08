@@ -85,7 +85,8 @@ class UiPanedatVariableType(GenericVariableType):
 	@property
 	def mouse(self) -> MouseVariableType:
 		'''Value of variable $MOUSE'''
-		return MouseVariableType(self._instance.Mouse)
+		__r = self._instance.Mouse
+		return None if __r is None else MouseVariableType(__r)
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

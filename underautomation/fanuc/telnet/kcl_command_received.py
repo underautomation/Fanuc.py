@@ -14,7 +14,8 @@ class KclCommandReceived:
 	@property
 	def result(self) -> Result:
 		'''Gets the result of the received command.'''
-		return Result(self._instance.Result)
+		__r = self._instance.Result
+		return None if __r is None else Result(__r)
 
 	@result.setter
 	def result(self, value: Result):

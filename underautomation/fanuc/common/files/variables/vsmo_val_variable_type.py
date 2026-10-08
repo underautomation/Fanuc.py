@@ -15,12 +15,14 @@ class VsmoValVariableType(GenericVariableType):
 	@property
 	def position(self) -> PositionVariableType:
 		'''Value of variable $POSITION'''
-		return PositionVariableType(self._instance.Position)
+		__r = self._instance.Position
+		return None if __r is None else PositionVariableType(__r)
 
 	@property
 	def speed(self) -> PositionVariableType:
 		'''Value of variable $SPEED'''
-		return PositionVariableType(self._instance.Speed)
+		__r = self._instance.Speed
+		return None if __r is None else PositionVariableType(__r)
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

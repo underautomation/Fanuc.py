@@ -80,7 +80,8 @@ class MixLogicVariableType(GenericVariableType):
 	@property
 	def tcol_line(self) -> TcolLineVariableType:
 		'''Value of variable $TCOL_LINE'''
-		return TcolLineVariableType(self._instance.TcolLine)
+		__r = self._instance.TcolLine
+		return None if __r is None else TcolLineVariableType(__r)
 
 	@property
 	def tcol_enb(self) -> bool:
@@ -105,7 +106,8 @@ class MixLogicVariableType(GenericVariableType):
 	@property
 	def save_line(self) -> TcolLineVariableType:
 		'''Value of variable $SAVE_LINE'''
-		return TcolLineVariableType(self._instance.SaveLine)
+		__r = self._instance.SaveLine
+		return None if __r is None else TcolLineVariableType(__r)
 
 	@property
 	def tcol_warn(self) -> bool:

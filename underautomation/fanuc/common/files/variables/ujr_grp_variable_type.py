@@ -20,7 +20,8 @@ class UjrGrpVariableType(GenericVariableType):
 	@property
 	def jogframe(self) -> CartesianPositionVariable:
 		'''Value of variable $JOGFRAME'''
-		return CartesianPositionVariable(None, None, self._instance.Jogframe)
+		__r = self._instance.Jogframe
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def fine_dist(self) -> float:

@@ -15,7 +15,8 @@ class CurrentPosition(IFanucContent):
 	@property
 	def groups_position(self) -> typing.List[GroupPosition]:
 		'''Position of each robots handled by this controller'''
-		return [GroupPosition(x) for x in self._instance.GroupsPosition]
+		__r = self._instance.GroupsPosition
+		return None if __r is None else [None if x is None else GroupPosition(x) for x in __r]
 
 	@property
 	def name(self) -> str:

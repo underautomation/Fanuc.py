@@ -74,6 +74,12 @@ class RmiClientBase:
 		self._instance.Disconnect()
 
 	def initialize(self, groupMask: int | None=None, rtsa: bool | None=None, pltzMode: RmiPltzMode | None=None) -> None:
+		'''Initialize RMI and start the motion program. Must be called before sending any motion instructions. It also Resets last_sequence_id and empty the instruction buffer instructions
+
+		:param groupMask: Bitmask of motion groups to activate (bit N enables group N+1). Required for multi-group controllers. null activates the default single group. Requires MajorVersion >= 2.
+		:param rtsa: Real-time singularity avoidance: true to enable, false to disable. null uses the controller default. Requires MajorVersion >= 6 and the R792 option.
+		:param pltzMode: Palletizing motion mode. null uses the controller default. Requires MajorVersion >= 7.
+		'''
 		self._instance.Initialize(groupMask, rtsa, pltzMode)
 
 	def abort(self) -> None:
@@ -93,41 +99,85 @@ class RmiClientBase:
 		self._instance.Reset()
 
 	def read_error(self, count: int | None=None) -> RmiControllerErrorTextResponse:
-		return RmiControllerErrorTextResponse(self._instance.ReadError(count))
+		'''Read the most recent controller error text. Up to 5 consecutive errors can be requested.
+
+		:param count: Number of recent errors to retrieve (1–5). Defaults to 1.
+		'''
+		__r = self._instance.ReadError(count)
+		return None if __r is None else RmiControllerErrorTextResponse(__r)
 
 	def get_u_frame_u_tool(self, group: int | None=None) -> RmiUFrameUToolNumbersResponse:
-		return RmiUFrameUToolNumbersResponse(self._instance.GetUFrameUTool(group))
+		'''Get the current UFRAME and UTOOL numbers.
+
+		:param group: Optional motion group number.
+		'''
+		__r = self._instance.GetUFrameUTool(group)
+		return None if __r is None else RmiUFrameUToolNumbersResponse(__r)
 
 	def set_u_frame_u_tool(self, uframe: int, utool: int, group: int | None=None) -> None:
+		'''Set the current UFRAME and UTOOL numbers.
+
+		:param uframe: UFRAME number.
+		:param utool: UTOOL number.
+		:param group: Optional motion group number.
+		'''
 		self._instance.SetUFrameUTool(uframe, utool, group)
 
 	def get_status(self) -> RmiControllerStatusResponse:
 		'''Get the current controller and RMI motion status.'''
-		return RmiControllerStatusResponse(self._instance.GetStatus())
+		__r = self._instance.GetStatus()
+		return None if __r is None else RmiControllerStatusResponse(__r)
 
 	def auto_set_next_sequence_id(self) -> RmiControllerStatusResponse:
 		'''Calls internally get_status() and set last_sequence_id only if $RMI_CFG.$Chk_seqID = FALSE. It also set check_sequence_id to $RMI_CFG.$Chk_seqID.'''
-		return RmiControllerStatusResponse(self._instance.AutoSetNextSequenceId())
+		__r = self._instance.AutoSetNextSequenceId()
+		return None if __r is None else RmiControllerStatusResponse(__r)
 
 	def get_extended_status(self) -> RmiExtendedControllerStatusResponse:
 		'''Get extended controller status including drive power state and speed clamp.'''
-		return RmiExtendedControllerStatusResponse(self._instance.GetExtendedStatus())
+		__r = self._instance.GetExtendedStatus()
+		return None if __r is None else RmiExtendedControllerStatusResponse(__r)
 
 	def read_u_frame(self, number: int, group: int | None=None) -> RmiIndexedFrameResponse:
-		return RmiIndexedFrameResponse(self._instance.ReadUFrame(number, group))
+		'''Read the UFRAME at the given index.
+
+		:param number: UFRAME number.
+		:param group: Optional motion group number.
+		'''
+		__r = self._instance.ReadUFrame(number, group)
+		return None if __r is None else RmiIndexedFrameResponse(__r)
 
 	def write_u_frame(self, number: int, position: XYZWPRPosition, group: int | None=None) -> None:
+		'''Write the UFRAME at the given index.
+
+		:param number: UFRAME number.
+		:param position: New Cartesian frame values.
+		:param group: Optional motion group number.
+		'''
 		self._instance.WriteUFrame(number, position._instance if position else None, group)
 
 	def read_u_tool(self, number: int, group: int | None=None) -> RmiIndexedFrameResponse:
-		return RmiIndexedFrameResponse(self._instance.ReadUTool(number, group))
+		'''Read the UTOOL at the given index.
+
+		:param number: UTOOL number.
+		:param group: Optional motion group number.
+		'''
+		__r = self._instance.ReadUTool(number, group)
+		return None if __r is None else RmiIndexedFrameResponse(__r)
 
 	def write_u_tool(self, number: int, position: XYZWPRPosition, group: int | None=None) -> None:
+		'''Write the UTOOL at the given index.
+
+		:param number: UTOOL number.
+		:param position: New Cartesian frame values.
+		:param group: Optional motion group number.
+		'''
 		self._instance.WriteUTool(number, position._instance if position else None, group)
 
 	def read_din(self, portNumber: int) -> RmiDigitalInputValueResponse:
 		'''Read a digital input port value.'''
-		return RmiDigitalInputValueResponse(self._instance.ReadDIN(portNumber))
+		__r = self._instance.ReadDIN(portNumber)
+		return None if __r is None else RmiDigitalInputValueResponse(__r)
 
 	def write_dout(self, portNumber: int, value: RmiOnOff) -> None:
 		'''Write a digital output port value.'''
@@ -139,7 +189,8 @@ class RmiClientBase:
 		:param portType: Type of IO port.
 		:param portNumber: Port number.
 		'''
-		return RmiIoPortValueResponse(self._instance.ReadIOPort(rmi_io_port_type(int(portType)), portNumber))
+		__r = self._instance.ReadIOPort(rmi_io_port_type(int(portType)), portNumber)
+		return None if __r is None else RmiIoPortValueResponse(__r)
 
 	def write_io_port(self, portType: RmiIoPortType, portNumber: int, value: float) -> None:
 		'''Write a generic IO port (AO, GO, DO, RO, FLAG).
@@ -151,19 +202,41 @@ class RmiClientBase:
 		self._instance.WriteIOPort(rmi_io_port_type(int(portType)), portNumber, value)
 
 	def read_cartesian_position(self, group: int | None=None) -> RmiCartesianPositionResponse:
-		return RmiCartesianPositionResponse(self._instance.ReadCartesianPosition(group))
+		'''Read current Cartesian TCP position.
+
+		:param group: Optional motion group number.
+		'''
+		__r = self._instance.ReadCartesianPosition(group)
+		return None if __r is None else RmiCartesianPositionResponse(__r)
 
 	def read_joint_angles(self, group: int | None=None) -> RmiJointAnglesSampleResponse:
-		return RmiJointAnglesSampleResponse(self._instance.ReadJointAngles(group))
+		'''Read current joint angles.
+
+		:param group: Optional motion group number.
+		'''
+		__r = self._instance.ReadJointAngles(group)
+		return None if __r is None else RmiJointAnglesSampleResponse(__r)
 
 	def set_override(self, value: int) -> None:
 		'''Set the program speed override (1–100 %).'''
 		self._instance.SetOverride(value)
 
 	def read_position_register(self, number: int, group: int | None=None) -> RmiPositionRegisterDataResponse:
-		return RmiPositionRegisterDataResponse(self._instance.ReadPositionRegister(number, group))
+		'''Read a position register
+
+		:param number: Register number
+		:param group: Optional motion group number.
+		'''
+		__r = self._instance.ReadPositionRegister(number, group)
+		return None if __r is None else RmiPositionRegisterDataResponse(__r)
 
 	def write_position_register_cartesian(self, number: int, target: CartesianPositionWithUserFrame, group: int | None=None) -> None:
+		'''Write a Cartesian position register
+
+		:param number: Register number
+		:param target: Position including configuration and active frame/tool numbers.
+		:param group: Optional motion group number.
+		'''
 		self._instance.WritePositionRegisterCartesian(number, target._instance if target else None, group)
 
 	def read_numeric_register(self, number: int) -> RmiNumericRegisterValueResponse:
@@ -171,7 +244,8 @@ class RmiClientBase:
 
 		:param number: Register number
 		'''
-		return RmiNumericRegisterValueResponse(self._instance.ReadNumericRegister(number))
+		__r = self._instance.ReadNumericRegister(number)
+		return None if __r is None else RmiNumericRegisterValueResponse(__r)
 
 	def write_numeric_register_as_integer(self, number: int, value: int) -> None:
 		'''Write an integer value to a numeric register
@@ -191,7 +265,8 @@ class RmiClientBase:
 
 	def read_variable(self, name: str) -> RmiVariableValueResponse:
 		'''Read a system variable by name (name must include the leading $ character).'''
-		return RmiVariableValueResponse(self._instance.ReadVariable(name))
+		__r = self._instance.ReadVariable(name)
+		return None if __r is None else RmiVariableValueResponse(__r)
 
 	def write_variable_as_integer(self, name: str, value: int) -> None:
 		'''Write an integer value to a system variable (name must include the leading $).'''
@@ -203,9 +278,15 @@ class RmiClientBase:
 
 	def read_tcp_speed(self) -> RmiTcpSpeedResponse:
 		'''Read the current TCP speed in mm/s.'''
-		return RmiTcpSpeedResponse(self._instance.ReadTcpSpeed())
+		__r = self._instance.ReadTcpSpeed()
+		return None if __r is None else RmiTcpSpeedResponse(__r)
 
 	def set_payload_schedule(self, scheduleNumber: int, group: int | None=None) -> None:
+		'''Immediately apply a payload schedule to the active group (command, not an instruction).
+
+		:param scheduleNumber: Payload schedule number.
+		:param group: Optional motion group number.
+		'''
 		self._instance.SetPayloadSchedule(scheduleNumber, group)
 
 	@typing.overload
@@ -219,6 +300,15 @@ class RmiClientBase:
 
 		Arguments: (scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
 		Arguments: (p)
+		:param scheduleNumber: Schedule number.
+		:param massKg: Payload mass in kg.
+		:param cgXm: Center-of-gravity X offset in meters.
+		:param cgYm: Center-of-gravity Y offset in meters.
+		:param cgZm: Center-of-gravity Z offset in meters.
+		:param inertiaXkgm2: Inertia around X in kg·m² (optional).
+		:param inertiaYkgm2: Inertia around Y in kg·m² (optional).
+		:param inertiaZkgm2: Inertia around Z in kg·m² (optional).
+		:param group: Optional motion group number.
 		:param p: Payload parameters (user units: meters for offsets, kg for mass, kg·m² for inertia).
 		'''
 		__a = _bind_overload(args, kwargs, ['scheduleNumber', 'massKg', 'cgXm', 'cgYm', 'cgZm', 'inertiaXkgm2', 'inertiaYkgm2', 'inertiaZkgm2', 'group'], {'inertiaXkgm2': None, 'inertiaYkgm2': None, 'inertiaZkgm2': None, 'group': None})
@@ -244,6 +334,15 @@ class RmiClientBase:
 
 		Arguments: (scheduleNumber, massKg, cgXm, cgYm, cgZm, inertiaXkgm2, inertiaYkgm2, inertiaZkgm2, group)
 		Arguments: (p)
+		:param scheduleNumber: Schedule number.
+		:param massKg: Payload mass in kg.
+		:param cgXm: Center-of-gravity X offset in meters.
+		:param cgYm: Center-of-gravity Y offset in meters.
+		:param cgZm: Center-of-gravity Z offset in meters.
+		:param inertiaXkgm2: Inertia around X in kg.m².
+		:param inertiaYkgm2: Inertia around Y in kg.m².
+		:param inertiaZkgm2: Inertia around Z in kg.m².
+		:param group: Optional motion group number.
 		:param p: Payload compensation parameters (user units: meters for offsets, kg for mass, kg·m² for inertia).
 		'''
 		__a = _bind_overload(args, kwargs, ['scheduleNumber', 'massKg', 'cgXm', 'cgYm', 'cgZm', 'inertiaXkgm2', 'inertiaYkgm2', 'inertiaZkgm2', 'group'], {'group': None})
@@ -267,11 +366,12 @@ class RmiClientBase:
 		self._instance.ClearLocalQueuedInstructions()
 
 	def send_tp_instruction(self, instruction: RmiInstructionBase) -> RmiInstructionResponse:
-		'''Sends the instruction to the controller, which queues it. Returns an RmiInstructionResponse that tracks execution.
+		'''Serializes the instruction to the RMI wire format and queues it on the controller. Returns an RmiInstructionResponse that tracks execution.
 
 		:param instruction: Instruction to send. Must not be null.
 		'''
-		return RmiInstructionResponse(self._instance.SendTpInstruction(instruction._instance if instruction else None))
+		__r = self._instance.SendTpInstruction(instruction._instance if instruction else None)
+		return None if __r is None else RmiInstructionResponse(__r)
 
 	def dispose(self) -> None:
 		'''Disconnect from the controller and release resources.'''
@@ -324,7 +424,8 @@ class RmiClientBase:
 	@property
 	def instructions(self) -> typing.List[RmiInstructionResponse]:
 		'''All instructions submitted since the last initialize() or explicit clear, in submission order. Includes instructions in all states: LocalQueued, ControllerQueued, Executing, Completed and Error. Returns a snapshot array; the array is not updated after it is returned.'''
-		return [RmiInstructionResponse(x) for x in self._instance.Instructions]
+		__r = self._instance.Instructions
+		return None if __r is None else [None if x is None else RmiInstructionResponse(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

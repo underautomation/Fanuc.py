@@ -16,7 +16,8 @@ class OpwKinematicsUtils:
 	@staticmethod
 	def inverse_kinematics(pose: CartesianPosition, dhParameters: DhParameters) -> typing.List[JointsPosition]:
 		'''Compute all inverse kinematics solutions for a desired end effector pose using the OPW model and the closed form from the paper. This method is a direct implementation of the "Positioning Part" and "Orientation Part" formulas summarized on page 6 (Table II) of the paper. Steps: 1) Compute wrist center C in base frame: C = u0 - c4 * R0e * [0; 0; 1] where R0e is taken from pose.ToHomogeneousMatrix(). 2) Compute the four possible position solutions for joints 1..3 (shoulder front/back, elbow up/down) using equations for θ1, θ2, θ3 and the auxiliary quantities n_x1, s1, s2, k, ψ2, ψ3. 3) For each of these four solutions, compute two possible wrist configurations for joints 4..6 using Rc^e = R0c^T * R0e and the formulas for θ4, θ5, θ6 (Section III.C). 4) Convert all OPW joint angles back to Fanuc angles in degrees, fix the q2-q3 coupling, normalize to (-180, 180] and filter out invalid solutions (NaNs).'''
-		return [JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in opw_kinematics_utils.InverseKinematics(pose._instance if pose else None, dhParameters._instance if dhParameters else None)]
+		__r = opw_kinematics_utils.InverseKinematics(pose._instance if pose else None, dhParameters._instance if dhParameters else None)
+		return None if __r is None else [None if x is None else JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

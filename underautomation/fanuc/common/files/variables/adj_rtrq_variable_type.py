@@ -25,7 +25,8 @@ class AdjRtrqVariableType(GenericVariableType):
 	@property
 	def eff_axis(self) -> typing.List[EffAxisVariableType]:
 		'''Value of variable $EFF_AXIS'''
-		return [EffAxisVariableType(x) for x in self._instance.EffAxis]
+		__r = self._instance.EffAxis
+		return None if __r is None else [None if x is None else EffAxisVariableType(x) for x in __r]
 
 	@property
 	def limit(self) -> float:

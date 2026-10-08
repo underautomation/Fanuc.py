@@ -40,7 +40,8 @@ class TbcGrpVariableType(GenericVariableType):
 	@property
 	def tbc_param(self) -> typing.List[TbcparamVariableType]:
 		'''Value of variable $TBC_PARAM'''
-		return [TbcparamVariableType(x) for x in self._instance.TbcParam]
+		__r = self._instance.TbcParam
+		return None if __r is None else [None if x is None else TbcparamVariableType(x) for x in __r]
 
 	@property
 	def cnt_scale(self) -> float:

@@ -55,27 +55,32 @@ class LogDcsVariableType(GenericVariableType):
 	@property
 	def stop(self) -> StopVariableType:
 		'''Value of variable $STOP'''
-		return StopVariableType(self._instance.Stop)
+		__r = self._instance.Stop
+		return None if __r is None else StopVariableType(__r)
 
 	@property
 	def estop(self) -> StopVariableType:
 		'''Value of variable $ESTOP'''
-		return StopVariableType(self._instance.Estop)
+		__r = self._instance.Estop
+		return None if __r is None else StopVariableType(__r)
 
 	@property
 	def cstop(self) -> StopVariableType:
 		'''Value of variable $CSTOP'''
-		return StopVariableType(self._instance.Cstop)
+		__r = self._instance.Cstop
+		return None if __r is None else StopVariableType(__r)
 
 	@property
 	def estop_diff(self) -> StopVariableType:
 		'''Value of variable $ESTOP_DIFF'''
-		return StopVariableType(self._instance.EstopDiff)
+		__r = self._instance.EstopDiff
+		return None if __r is None else StopVariableType(__r)
 
 	@property
 	def cstop_diff(self) -> StopVariableType:
 		'''Value of variable $CSTOP_DIFF'''
-		return StopVariableType(self._instance.CstopDiff)
+		__r = self._instance.CstopDiff
+		return None if __r is None else StopVariableType(__r)
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

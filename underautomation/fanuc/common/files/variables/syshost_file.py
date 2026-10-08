@@ -29,22 +29,26 @@ class SyshostFile(GenericVariableFile):
 	@property
 	def bin_cfg(self) -> BinCfgVariableType:
 		'''Value of variable $BIN_CFG'''
-		return BinCfgVariableType(self._instance.BinCfg)
+		__r = self._instance.BinCfg
+		return None if __r is None else BinCfgVariableType(__r)
 
 	@property
 	def dhcp_ctrl(self) -> typing.List[DhcpCtrlVariableType]:
 		'''Value of variable $DHCP_CTRL'''
-		return [DhcpCtrlVariableType(x) for x in self._instance.DhcpCtrl]
+		__r = self._instance.DhcpCtrl
+		return None if __r is None else [None if x is None else DhcpCtrlVariableType(x) for x in __r]
 
 	@property
 	def dnss_cfg(self) -> DnssCfgVariableType:
 		'''Value of variable $DNSS_CFG'''
-		return DnssCfgVariableType(self._instance.DnssCfg)
+		__r = self._instance.DnssCfg
+		return None if __r is None else DnssCfgVariableType(__r)
 
 	@property
 	def dns_cfg(self) -> DnsCfgVariableType:
 		'''Value of variable $DNS_CFG'''
-		return DnsCfgVariableType(self._instance.DnsCfg)
+		__r = self._instance.DnsCfg
+		return None if __r is None else DnsCfgVariableType(__r)
 
 	@property
 	def dns_loc_dom(self) -> typing.List[int]:
@@ -59,57 +63,68 @@ class SyshostFile(GenericVariableFile):
 	@property
 	def ftp_ctrl(self) -> FtpCtrlVariableType:
 		'''Value of variable $FTP_CTRL'''
-		return FtpCtrlVariableType(self._instance.FtpCtrl)
+		__r = self._instance.FtpCtrl
+		return None if __r is None else FtpCtrlVariableType(__r)
 
 	@property
 	def host_shared(self) -> typing.List[HostentVariableType]:
 		'''Value of variable $HOST_SHARED'''
-		return [HostentVariableType(x) for x in self._instance.HostShared]
+		__r = self._instance.HostShared
+		return None if __r is None else [None if x is None else HostentVariableType(x) for x in __r]
 
 	@property
 	def ppp_list(self) -> typing.List[PppcfgLstVariableType]:
 		'''Value of variable $PPP_LIST'''
-		return [PppcfgLstVariableType(x) for x in self._instance.PppList]
+		__r = self._instance.PppList
+		return None if __r is None else [None if x is None else PppcfgLstVariableType(x) for x in __r]
 
 	@property
 	def rcmcfg(self) -> RcmcfgVariableType:
 		'''Value of variable $RCMCFG'''
-		return RcmcfgVariableType(self._instance.Rcmcfg)
+		__r = self._instance.Rcmcfg
+		return None if __r is None else RcmcfgVariableType(__r)
 
 	@property
 	def rdm_cfg(self) -> RdmCfgVariableType:
 		'''Value of variable $RDM_CFG'''
-		return RdmCfgVariableType(self._instance.RdmCfg)
+		__r = self._instance.RdmCfg
+		return None if __r is None else RdmCfgVariableType(__r)
 
 	@property
 	def smb(self) -> SmbVariableType:
 		'''Value of variable $SMB'''
-		return SmbVariableType(self._instance.Smb)
+		__r = self._instance.Smb
+		return None if __r is None else SmbVariableType(__r)
 
 	@property
 	def smb_clnt(self) -> typing.List[SmbClntVariableType]:
 		'''Value of variable $SMB_CLNT'''
-		return [SmbClntVariableType(x) for x in self._instance.SmbClnt]
+		__r = self._instance.SmbClnt
+		return None if __r is None else [None if x is None else SmbClntVariableType(x) for x in __r]
 
 	@property
 	def smtp_ctrl(self) -> SmtpCtrlVariableType:
 		'''Value of variable $SMTP_CTRL'''
-		return SmtpCtrlVariableType(self._instance.SmtpCtrl)
+		__r = self._instance.SmtpCtrl
+		return None if __r is None else SmtpCtrlVariableType(__r)
 
 	@property
 	def sntp_cfg(self) -> SntpCfgVariableType:
 		'''Value of variable $SNTP_CFG'''
-		return SntpCfgVariableType(self._instance.SntpCfg)
+		__r = self._instance.SntpCfg
+		return None if __r is None else SntpCfgVariableType(__r)
 
 	@property
 	def sntp_custom(self) -> SntpCustomVariableType:
 		'''Value of variable $SNTP_CUSTOM'''
-		return SntpCustomVariableType(self._instance.SntpCustom)
+		__r = self._instance.SntpCustom
+		return None if __r is None else SntpCustomVariableType(__r)
 
 	@property
 	def tcpipcfg(self) -> TcpipcfgVariableType:
 		'''Value of variable $TCPIPCFG'''
-		return TcpipcfgVariableType(self._instance.Tcpipcfg)
+		__r = self._instance.Tcpipcfg
+		return None if __r is None else TcpipcfgVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

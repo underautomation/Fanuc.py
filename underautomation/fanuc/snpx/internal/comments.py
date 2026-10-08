@@ -21,7 +21,8 @@ class Comments(SnpxWritableAssignableElements3[str, CommentData, CommentBatchAss
 		:param indexes: The indices to include in the batch.
 		:returns: A batch assignment for the specified indices.
 		'''
-		return CommentBatchAssignment(self._instance.CreateBatchAssignment([x._instance if x else None for x in indexes]))
+		__r = self._instance.CreateBatchAssignment([x._instance if x else None for x in indexes])
+		return None if __r is None else CommentBatchAssignment(__r)
 
 	def read(self, type: CommentType, index: int, stringLength: int=16) -> str:
 		'''Reads the comment for the specified data type and index.

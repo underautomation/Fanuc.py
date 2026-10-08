@@ -17,7 +17,8 @@ class GenericValue(IGenericVariableType):
 	@property
 	def parent(self) -> 'GenericValue':
 		'''Parent value that contains this value'''
-		return GenericValue(self._instance.Parent)
+		__r = self._instance.Parent
+		return None if __r is None else GenericValue(__r)
 
 	@property
 	def kind(self) -> ValueKind:
@@ -28,7 +29,8 @@ class GenericValue(IGenericVariableType):
 	def fields(self) -> typing.Any:
 		'''Child fields of this value'''
 		from underautomation.fanuc.common.files.variables.generic_field import GenericField
-		return [GenericField(x) for x in self._instance.Fields]
+		__r = self._instance.Fields
+		return None if __r is None else [None if x is None else GenericField(x) for x in __r]
 
 	@property
 	def name(self) -> str:

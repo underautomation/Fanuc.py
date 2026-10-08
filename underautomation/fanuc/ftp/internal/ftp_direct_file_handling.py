@@ -8,7 +8,7 @@ from UnderAutomation.Fanuc.Ftp import FtpExistsBehavior as ftp_exists_behavior
 from UnderAutomation.Fanuc.Common.Files import OnProgressDelegate as on_progress_delegate
 
 class FtpDirectFileHandling:
-	'''Methods to handle files on a Fanuc controller (upload, download, delete, enumerate, ...). The controller can refuse an operation: the rights depend on the FTP user and on the password settings of the controller (for example, an upload of a program needs a user with enough rights), and a program that is selected or runs cannot be replaced. The error is an FtpException with the reply of the controller.'''
+	'''Methods to handle files on a Fanuc controller (upload, download, delete, enumerate, ...)'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
 			self._instance = ftp_direct_file_handling()
@@ -24,12 +24,12 @@ class FtpDirectFileHandling:
 		:param createRemoteDir: Create the remote directory if it does not exist. Slows down upload due to additional checks required.
 		:param progress: Track upload progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:param existsBehavior: Specifies the behavior when the file already exists on the controller.
-		:returns: True if the file was uploaded, false if it was skipped or if the transfer failed.
+		:returns: If true then the file was uploaded, false otherwise.
 		'''
 		return self._instance.UploadFileToController(fileData_or_localPath, remotePath, createRemoteDir, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None, ftp_exists_behavior(int(existsBehavior)))
 
 	def upload_files_to_controller(self, localPaths: typing.List[str], remoteDir: str, progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> typing.List[str]:
-		'''Uploads the given file paths to a single folder on the controller. All files are placed directly into the given folder regardless of their path on the local filesystem. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks. A file that fails is skipped: it is not in the returned list.
+		'''Uploads the given file paths to a single folder on the controller. All files are placed directly into the given folder regardless of their path on the local filesystem. High-level API that takes care of various edge cases internally. Supports very large files since it uploads data in chunks.
 
 		:param localPaths: The full or relative paths to the files on the local file system. Files can be from multiple folders.
 		:param remoteDir: The full or relative path to the directory that files will be uploaded on the controller
@@ -44,17 +44,17 @@ class FtpDirectFileHandling:
 
 		:param localPath_or_outBytes: The variable that will receive the bytes. Or: The full or relative path to the file on the local file system.
 		:param remotePath: The full or relative path to the file on the controller.
-		:param progress: Track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
+		:param progress: Track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent. Or: Provide an implementation of IProgress to track download progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:returns: If true then the file was downloaded, false otherwise.
 		'''
 		return self._instance.DownloadFileFromController(localPath_or_outBytes, remotePath, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
 
 	def download_files_from_controller(self, localDir: str, remotePaths: typing.List[str], progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> typing.List[str]:
-		'''Downloads the specified files into a local single directory. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks. A file that fails is skipped: it is not in the returned list.
+		'''Downloads the specified files into a local single directory. High-level API that takes care of various edge cases internally. Supports very large files since it downloads data in chunks.
 
 		:param localDir: The full or relative path to the directory that files will be downloaded into.
 		:param remotePaths: The full paths to the files on the controller
-		:param progress: Track download progress. The value provided is in the range 0 to 100, indicating the percentage of the files transferred.
+		:param progress: Track upload progress. The value provided is in the range 0 to 100, indicating the percentage of the file transferred. If the progress is indeterminate, -1 is sent.
 		:returns: The list of all local files downloaded
 		'''
 		return self._instance.DownloadFilesFromController(localDir, remotePaths, (progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
@@ -102,15 +102,17 @@ class FtpDirectFileHandling:
 		:param path: The path of the directory to list
 		:returns: An array of FtpListItem objects
 		'''
-		return [FtpListItem(x) for x in self._instance.GetListing(path)]
+		__r = self._instance.GetListing(path)
+		return None if __r is None else [None if x is None else FtpListItem(x) for x in __r]
 
 	def get_object_info(self, path: str) -> FtpListItem:
-		'''Returns information about a file system object. Returns null if the controller response can't be parsed or the controller returns a failure completion code. No exception is thrown on error because that would negate the usefulness of this method for checking for the existence of an object.
+		'''Returns information about a file system object. Returns null if the controller response can't be parsed or the controller returns a failure completion code. The error for a failure is logged with FtpTrace. No exception is thrown on error because that would negate the usefulness of this method for checking for the existence of an object.
 
 		:param path: The path of the file or folder
-		:returns: A FtpListItem object, or null
+		:returns: A FtpListItem object
 		'''
-		return FtpListItem(self._instance.GetObjectInfo(path))
+		__r = self._instance.GetObjectInfo(path)
+		return None if __r is None else FtpListItem(__r)
 
 	def rename(self, path: str, dest: str) -> None:
 		'''Renames an object on the remote file system. Throws exceptions if the file does not exist, or if the destination file already exists.

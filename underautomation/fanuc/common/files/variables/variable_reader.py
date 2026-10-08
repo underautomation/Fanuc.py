@@ -54,7 +54,8 @@ class VariableReader(FileReader1[GenericVariableFile]):
 	@staticmethod
 	def read_variable_file(fileName: str, language: Languages) -> GenericVariableFile:
 		'''Reads and parses a variable file from a file path'''
-		return GenericVariableFile(variable_reader.ReadVariableFile(fileName, languages(int(language))))
+		__r = variable_reader.ReadVariableFile(fileName, languages(int(language)))
+		return None if __r is None else GenericVariableFile(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""
@@ -70,72 +71,72 @@ class VariableReader(FileReader1[GenericVariableFile]):
 	def __hash__(self) -> int:
 		return self._instance.GetHashCode() if self._instance is not None else 0
 
-VariableReader.AavmmainFile = VariableReader1[AavmmainFile](variable_reader.AavmmainFile)
+VariableReader.AavmmainFile = None if variable_reader.AavmmainFile is None else VariableReader1[AavmmainFile](variable_reader.AavmmainFile)
 
-VariableReader.BicsetupFile = VariableReader1[BicsetupFile](variable_reader.BicsetupFile)
+VariableReader.BicsetupFile = None if variable_reader.BicsetupFile is None else VariableReader1[BicsetupFile](variable_reader.BicsetupFile)
 
-VariableReader.CbparamFile = VariableReader1[CbparamFile](variable_reader.CbparamFile)
+VariableReader.CbparamFile = None if variable_reader.CbparamFile is None else VariableReader1[CbparamFile](variable_reader.CbparamFile)
 
-VariableReader.CellioFile = VariableReader1[CellioFile](variable_reader.CellioFile)
+VariableReader.CellioFile = None if variable_reader.CellioFile is None else VariableReader1[CellioFile](variable_reader.CellioFile)
 
-VariableReader.ComsetFile = VariableReader1[ComsetFile](variable_reader.ComsetFile)
+VariableReader.ComsetFile = None if variable_reader.ComsetFile is None else VariableReader1[ComsetFile](variable_reader.ComsetFile)
 
-VariableReader.DiocfgsvFile = VariableReader1[DiocfgsvFile](variable_reader.DiocfgsvFile)
+VariableReader.DiocfgsvFile = None if variable_reader.DiocfgsvFile is None else VariableReader1[DiocfgsvFile](variable_reader.DiocfgsvFile)
 
-VariableReader.GemdataFile = VariableReader1[GemdataFile](variable_reader.GemdataFile)
+VariableReader.GemdataFile = None if variable_reader.GemdataFile is None else VariableReader1[GemdataFile](variable_reader.GemdataFile)
 
-VariableReader.HtcolrecFile = VariableReader1[HtcolrecFile](variable_reader.HtcolrecFile)
+VariableReader.HtcolrecFile = None if variable_reader.HtcolrecFile is None else VariableReader1[HtcolrecFile](variable_reader.HtcolrecFile)
 
-VariableReader.HttpkclFile = VariableReader1[HttpkclFile](variable_reader.HttpkclFile)
+VariableReader.HttpkclFile = None if variable_reader.HttpkclFile is None else VariableReader1[HttpkclFile](variable_reader.HttpkclFile)
 
-VariableReader.IrcCounterFile = VariableReader1[IrcCounterFile](variable_reader.IrcCounterFile)
+VariableReader.IrcCounterFile = None if variable_reader.IrcCounterFile is None else VariableReader1[IrcCounterFile](variable_reader.IrcCounterFile)
 
-VariableReader.IrcMsgFile = VariableReader1[IrcMsgFile](variable_reader.IrcMsgFile)
+VariableReader.IrcMsgFile = None if variable_reader.IrcMsgFile is None else VariableReader1[IrcMsgFile](variable_reader.IrcMsgFile)
 
-VariableReader.IrcStatusFile = VariableReader1[IrcStatusFile](variable_reader.IrcStatusFile)
+VariableReader.IrcStatusFile = None if variable_reader.IrcStatusFile is None else VariableReader1[IrcStatusFile](variable_reader.IrcStatusFile)
 
-VariableReader.IrcStlabelFile = VariableReader1[IrcStlabelFile](variable_reader.IrcStlabelFile)
+VariableReader.IrcStlabelFile = None if variable_reader.IrcStlabelFile is None else VariableReader1[IrcStlabelFile](variable_reader.IrcStlabelFile)
 
-VariableReader.KlactionFile = VariableReader1[KlactionFile](variable_reader.KlactionFile)
+VariableReader.KlactionFile = None if variable_reader.KlactionFile is None else VariableReader1[KlactionFile](variable_reader.KlactionFile)
 
-VariableReader.MixlogicFile = VariableReader1[MixlogicFile](variable_reader.MixlogicFile)
+VariableReader.MixlogicFile = None if variable_reader.MixlogicFile is None else VariableReader1[MixlogicFile](variable_reader.MixlogicFile)
 
-VariableReader.MtparamFile = VariableReader1[MtparamFile](variable_reader.MtparamFile)
+VariableReader.MtparamFile = None if variable_reader.MtparamFile is None else VariableReader1[MtparamFile](variable_reader.MtparamFile)
 
-VariableReader.NumregFile = VariableReader1[NumregFile](variable_reader.NumregFile)
+VariableReader.NumregFile = None if variable_reader.NumregFile is None else VariableReader1[NumregFile](variable_reader.NumregFile)
 
-VariableReader.PalregFile = VariableReader1[PalregFile](variable_reader.PalregFile)
+VariableReader.PalregFile = None if variable_reader.PalregFile is None else VariableReader1[PalregFile](variable_reader.PalregFile)
 
-VariableReader.PosregFile = VariableReader1[PosregFile](variable_reader.PosregFile)
+VariableReader.PosregFile = None if variable_reader.PosregFile is None else VariableReader1[PosregFile](variable_reader.PosregFile)
 
-VariableReader.StrregFile = VariableReader1[StrregFile](variable_reader.StrregFile)
+VariableReader.StrregFile = None if variable_reader.StrregFile is None else VariableReader1[StrregFile](variable_reader.StrregFile)
 
-VariableReader.SwiupdtFile = VariableReader1[SwiupdtFile](variable_reader.SwiupdtFile)
+VariableReader.SwiupdtFile = None if variable_reader.SwiupdtFile is None else VariableReader1[SwiupdtFile](variable_reader.SwiupdtFile)
 
-VariableReader.SycldintFile = VariableReader1[SycldintFile](variable_reader.SycldintFile)
+VariableReader.SycldintFile = None if variable_reader.SycldintFile is None else VariableReader1[SycldintFile](variable_reader.SycldintFile)
 
-VariableReader.SymotnFile = VariableReader1[SymotnFile](variable_reader.SymotnFile)
+VariableReader.SymotnFile = None if variable_reader.SymotnFile is None else VariableReader1[SymotnFile](variable_reader.SymotnFile)
 
-VariableReader.SynosaveFile = VariableReader1[SynosaveFile](variable_reader.SynosaveFile)
+VariableReader.SynosaveFile = None if variable_reader.SynosaveFile is None else VariableReader1[SynosaveFile](variable_reader.SynosaveFile)
 
-VariableReader.SysframeFile = VariableReader1[SysframeFile](variable_reader.SysframeFile)
+VariableReader.SysframeFile = None if variable_reader.SysframeFile is None else VariableReader1[SysframeFile](variable_reader.SysframeFile)
 
-VariableReader.SysfsacFile = VariableReader1[SysfsacFile](variable_reader.SysfsacFile)
+VariableReader.SysfsacFile = None if variable_reader.SysfsacFile is None else VariableReader1[SysfsacFile](variable_reader.SysfsacFile)
 
-VariableReader.SyshostFile = VariableReader1[SyshostFile](variable_reader.SyshostFile)
+VariableReader.SyshostFile = None if variable_reader.SyshostFile is None else VariableReader1[SyshostFile](variable_reader.SyshostFile)
 
-VariableReader.SysmacroFile = VariableReader1[SysmacroFile](variable_reader.SysmacroFile)
+VariableReader.SysmacroFile = None if variable_reader.SysmacroFile is None else VariableReader1[SysmacroFile](variable_reader.SysmacroFile)
 
-VariableReader.SysmastFile = VariableReader1[SysmastFile](variable_reader.SysmastFile)
+VariableReader.SysmastFile = None if variable_reader.SysmastFile is None else VariableReader1[SysmastFile](variable_reader.SysmastFile)
 
-VariableReader.SyspassFile = VariableReader1[SyspassFile](variable_reader.SyspassFile)
+VariableReader.SyspassFile = None if variable_reader.SyspassFile is None else VariableReader1[SyspassFile](variable_reader.SyspassFile)
 
-VariableReader.SysservoFile = VariableReader1[SysservoFile](variable_reader.SysservoFile)
+VariableReader.SysservoFile = None if variable_reader.SysservoFile is None else VariableReader1[SysservoFile](variable_reader.SysservoFile)
 
-VariableReader.SystemFile = VariableReader1[SystemFile](variable_reader.SystemFile)
+VariableReader.SystemFile = None if variable_reader.SystemFile is None else VariableReader1[SystemFile](variable_reader.SystemFile)
 
-VariableReader.SysuifFile = VariableReader1[SysuifFile](variable_reader.SysuifFile)
+VariableReader.SysuifFile = None if variable_reader.SysuifFile is None else VariableReader1[SysuifFile](variable_reader.SysuifFile)
 
-VariableReader.TpsnapFile = VariableReader1[TpsnapFile](variable_reader.TpsnapFile)
+VariableReader.TpsnapFile = None if variable_reader.TpsnapFile is None else VariableReader1[TpsnapFile](variable_reader.TpsnapFile)
 
-VariableReader.VcmrinitFile = VariableReader1[VcmrinitFile](variable_reader.VcmrinitFile)
+VariableReader.VcmrinitFile = None if variable_reader.VcmrinitFile is None else VariableReader1[VcmrinitFile](variable_reader.VcmrinitFile)

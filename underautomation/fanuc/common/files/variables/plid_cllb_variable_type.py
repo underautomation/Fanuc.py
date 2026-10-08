@@ -85,7 +85,8 @@ class PlidCllbVariableType(GenericVariableType):
 	@property
 	def plcl_pos(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable $PLCL_POS'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.PlclPos]
+		__r = self._instance.PlclPos
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def plcl_dis(self) -> typing.List[float]:

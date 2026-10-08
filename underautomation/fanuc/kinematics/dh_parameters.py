@@ -31,7 +31,8 @@ class DhParameters(IDhParameters):
 		'''Returns DH parameters from a known Arm Kinematic Model name. Returns null if not found in enum ArmKinematicModels.
 		Returns DH parameters from a known Arm Kinematic Model.
 		'''
-		return DhParameters(None, None, None, None, None, None, dh_parameters.FromArmKinematicModel(model_or_modelName))
+		__r = dh_parameters.FromArmKinematicModel(model_or_modelName)
+		return None if __r is None else DhParameters(None, None, None, None, None, None, __r)
 
 	@staticmethod
 	def from_opw_parameters(a1: float, a2: float, c2: float, c3: float, c4: float) -> 'DhParameters':
@@ -43,22 +44,26 @@ class DhParameters(IDhParameters):
 		:param c3: OPW C3 parameter in meters
 		:param c4: OPW C4 parameter in meters
 		'''
-		return DhParameters(None, None, None, None, None, None, dh_parameters.FromOpwParameters(a1, a2, c2, c3, c4))
+		__r = dh_parameters.FromOpwParameters(a1, a2, c2, c3, c4)
+		return None if __r is None else DhParameters(None, None, None, None, None, None, __r)
 
 	@staticmethod
 	def from_def_file(path: str) -> typing.List['DhParameters']:
 		'''Loads DH parameters of each robots described in a ROBOGUIDE definition file (*.def). By default, this file is located in "C:\\ProgramData\\FANUC\\ROBOGUIDE\\Robot Library".'''
-		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromDefFile(path)]
+		__r = dh_parameters.FromDefFile(path)
+		return None if __r is None else [None if x is None else DhParameters(None, None, None, None, None, None, x) for x in __r]
 
 	@staticmethod
 	def from_symotn_file(file: SymotnFile) -> typing.List['DhParameters']:
 		'''Loads DH parameters of each group from a parsed symotn.va file.'''
-		return [DhParameters(None, None, None, None, None, None, x) for x in dh_parameters.FromSymotnFile(file._instance if file else None)]
+		__r = dh_parameters.FromSymotnFile(file._instance if file else None)
+		return None if __r is None else [None if x is None else DhParameters(None, None, None, None, None, None, x) for x in __r]
 
 	@staticmethod
 	def from_mrr_grp(mrrGrp: MrrGrpVariableType) -> 'DhParameters':
 		'''Loads DH parameters from parsed variable $MRR_GRP located in symotn.va.'''
-		return DhParameters(None, None, None, None, None, None, dh_parameters.FromMrrGrp(mrrGrp._instance if mrrGrp else None))
+		__r = dh_parameters.FromMrrGrp(mrrGrp._instance if mrrGrp else None)
+		return None if __r is None else DhParameters(None, None, None, None, None, None, __r)
 
 	@property
 	def d4(self) -> float:

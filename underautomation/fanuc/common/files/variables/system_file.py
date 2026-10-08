@@ -274,12 +274,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def aavm_wrk(self) -> typing.List[AavmWrkVariableType]:
 		'''Value of variable $AAVM_WRK'''
-		return [AavmWrkVariableType(x) for x in self._instance.AavmWrk]
+		__r = self._instance.AavmWrk
+		return None if __r is None else [None if x is None else AavmWrkVariableType(x) for x in __r]
 
 	@property
 	def abspos_grp(self) -> typing.List[AbsposGrpVariableType]:
 		'''Value of variable $ABSPOS_GRP'''
-		return [AbsposGrpVariableType(x) for x in self._instance.AbsposGrp]
+		__r = self._instance.AbsposGrp
+		return None if __r is None else [None if x is None else AbsposGrpVariableType(x) for x in __r]
 
 	@property
 	def acc_maxlmt(self) -> int:
@@ -314,17 +316,20 @@ class SystemFile(GenericVariableFile):
 	@property
 	def aio_cnv(self) -> typing.List[AioCnvVariableType]:
 		'''Value of variable $AIO_CNV'''
-		return [AioCnvVariableType(x) for x in self._instance.AioCnv]
+		__r = self._instance.AioCnv
+		return None if __r is None else [None if x is None else AioCnvVariableType(x) for x in __r]
 
 	@property
 	def almdg(self) -> AlmdgVariableType:
 		'''Value of variable $ALMDG'''
-		return AlmdgVariableType(self._instance.Almdg)
+		__r = self._instance.Almdg
+		return None if __r is None else AlmdgVariableType(__r)
 
 	@property
 	def alm_if(self) -> AlmIfVariableType:
 		'''Value of variable $ALM_IF'''
-		return AlmIfVariableType(self._instance.AlmIf)
+		__r = self._instance.AlmIf
+		return None if __r is None else AlmIfVariableType(__r)
 
 	@property
 	def angtol(self) -> typing.List[float]:
@@ -334,7 +339,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def appinfo(self) -> AppinfoVariableType:
 		'''Value of variable $APPINFO'''
-		return AppinfoVariableType(self._instance.Appinfo)
+		__r = self._instance.Appinfo
+		return None if __r is None else AppinfoVariableType(__r)
 
 	@property
 	def application(self) -> typing.List[str]:
@@ -359,12 +365,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ap_coupled(self) -> typing.List[ApcoupledVariableType]:
 		'''Value of variable $AP_COUPLED'''
-		return [ApcoupledVariableType(x) for x in self._instance.ApCoupled]
+		__r = self._instance.ApCoupled
+		return None if __r is None else [None if x is None else ApcoupledVariableType(x) for x in __r]
 
 	@property
 	def ap_cureq(self) -> typing.List[ApcureqVariableType]:
 		'''Value of variable $AP_CUREQ'''
-		return [ApcureqVariableType(x) for x in self._instance.ApCureq]
+		__r = self._instance.ApCureq
+		return None if __r is None else [None if x is None else ApcureqVariableType(x) for x in __r]
 
 	@property
 	def ap_curtool(self) -> int:
@@ -454,7 +462,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def arg_string(self) -> typing.List[ArgStrVariableType]:
 		'''Value of variable $ARG_STRING'''
-		return [ArgStrVariableType(x) for x in self._instance.ArgString]
+		__r = self._instance.ArgString
+		return None if __r is None else [None if x is None else ArgStrVariableType(x) for x in __r]
 
 	@property
 	def arg_word(self) -> typing.List[str]:
@@ -464,17 +473,20 @@ class SystemFile(GenericVariableFile):
 	@property
 	def asbn_config(self) -> AsbnCfgVariableType:
 		'''Value of variable $ASBN_CONFIG'''
-		return AsbnCfgVariableType(self._instance.AsbnConfig)
+		__r = self._instance.AsbnConfig
+		return None if __r is None else AsbnCfgVariableType(__r)
 
 	@property
 	def atcellsetup(self) -> AtCellsetupVariableType:
 		'''Value of variable $ATCELLSETUP'''
-		return AtCellsetupVariableType(self._instance.Atcellsetup)
+		__r = self._instance.Atcellsetup
+		return None if __r is None else AtCellsetupVariableType(__r)
 
 	@property
 	def autobackup(self) -> AutobackupVariableType:
 		'''Value of variable $AUTOBACKUP'''
-		return AutobackupVariableType(self._instance.Autobackup)
+		__r = self._instance.Autobackup
+		return None if __r is None else AutobackupVariableType(__r)
 
 	@property
 	def autoinit(self) -> int:
@@ -499,7 +511,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def autopauspos(self) -> typing.List[JointPositionVariable]:
 		'''Value of variable $AUTOPAUSPOS'''
-		return [JointPositionVariable(None, None, x) for x in self._instance.Autopauspos]
+		__r = self._instance.Autopauspos
+		return None if __r is None else [None if x is None else JointPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def autoppostsk(self) -> typing.List[int]:
@@ -524,7 +537,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def axscrdcfg(self) -> typing.List[AxscrdcfgVariableType]:
 		'''Value of variable $AXSCRDCFG'''
-		return [AxscrdcfgVariableType(x) for x in self._instance.Axscrdcfg]
+		__r = self._instance.Axscrdcfg
+		return None if __r is None else [None if x is None else AxscrdcfgVariableType(x) for x in __r]
 
 	@property
 	def background(self) -> bool:
@@ -539,7 +553,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def back_edit(self) -> typing.List[BackEditVariableType]:
 		'''Value of variable $BACK_EDIT'''
-		return [BackEditVariableType(x) for x in self._instance.BackEdit]
+		__r = self._instance.BackEdit
+		return None if __r is None else [None if x is None else BackEditVariableType(x) for x in __r]
 
 	@property
 	def bck_no_del(self) -> bool:
@@ -554,12 +569,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def bigallow(self) -> typing.List[BigallowVariableType]:
 		'''Value of variable $BIGALLOW'''
-		return [BigallowVariableType(x) for x in self._instance.Bigallow]
+		__r = self._instance.Bigallow
+		return None if __r is None else [None if x is None else BigallowVariableType(x) for x in __r]
 
 	@property
 	def blal_out(self) -> BlalOutVariableType:
 		'''Value of variable $BLAL_OUT'''
-		return BlalOutVariableType(self._instance.BlalOut)
+		__r = self._instance.BlalOut
+		return None if __r is None else BlalOutVariableType(__r)
 
 	@property
 	def bwd_abort(self) -> bool:
@@ -589,7 +606,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def cfcfg(self) -> CfcfgVariableType:
 		'''Value of variable $CFCFG'''
-		return CfcfgVariableType(self._instance.Cfcfg)
+		__r = self._instance.Cfcfg
+		return None if __r is None else CfcfgVariableType(__r)
 
 	@property
 	def checkconfig(self) -> bool:
@@ -599,27 +617,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def chg_pri(self) -> typing.List[ChgPriVariableType]:
 		'''Value of variable $CHG_PRI'''
-		return [ChgPriVariableType(x) for x in self._instance.ChgPri]
+		__r = self._instance.ChgPri
+		return None if __r is None else [None if x is None else ChgPriVariableType(x) for x in __r]
 
 	@property
 	def chkpauspos(self) -> typing.List[ChkposVariableType]:
 		'''Value of variable $CHKPAUSPOS'''
-		return [ChkposVariableType(x) for x in self._instance.Chkpauspos]
+		__r = self._instance.Chkpauspos
+		return None if __r is None else [None if x is None else ChkposVariableType(x) for x in __r]
 
 	@property
 	def cmd_info(self) -> typing.List[CmdInfoVariableType]:
 		'''Value of variable $CMD_INFO'''
-		return [CmdInfoVariableType(x) for x in self._instance.CmdInfo]
+		__r = self._instance.CmdInfo
+		return None if __r is None else [None if x is None else CmdInfoVariableType(x) for x in __r]
 
 	@property
 	def cocfg(self) -> CocfgVariableType:
 		'''Value of variable $COCFG'''
-		return CocfgVariableType(self._instance.Cocfg)
+		__r = self._instance.Cocfg
+		return None if __r is None else CocfgVariableType(__r)
 
 	@property
 	def collect_cfg(self) -> CollectVariableType:
 		'''Value of variable $COLLECT_CFG'''
-		return CollectVariableType(self._instance.CollectCfg)
+		__r = self._instance.CollectCfg
+		return None if __r is None else CollectVariableType(__r)
 
 	@property
 	def collect_enb(self) -> int:
@@ -629,72 +652,86 @@ class SystemFile(GenericVariableFile):
 	@property
 	def condet_cfg(self) -> CondetCfgVariableType:
 		'''Value of variable $CONDET_CFG'''
-		return CondetCfgVariableType(self._instance.CondetCfg)
+		__r = self._instance.CondetCfg
+		return None if __r is None else CondetCfgVariableType(__r)
 
 	@property
 	def condet_grp(self) -> typing.List[CondetGrpVariableType]:
 		'''Value of variable $CONDET_GRP'''
-		return [CondetGrpVariableType(x) for x in self._instance.CondetGrp]
+		__r = self._instance.CondetGrp
+		return None if __r is None else [None if x is None else CondetGrpVariableType(x) for x in __r]
 
 	@property
 	def condet_io(self) -> CondetIoVariableType:
 		'''Value of variable $CONDET_IO'''
-		return CondetIoVariableType(self._instance.CondetIo)
+		__r = self._instance.CondetIo
+		return None if __r is None else CondetIoVariableType(__r)
 
 	@property
 	def condet_trgp(self) -> typing.List[CondetTrgpVariableType]:
 		'''Value of variable $CONDET_TRGP'''
-		return [CondetTrgpVariableType(x) for x in self._instance.CondetTrgp]
+		__r = self._instance.CondetTrgp
+		return None if __r is None else [None if x is None else CondetTrgpVariableType(x) for x in __r]
 
 	@property
 	def condet_trig(self) -> CondetTrigVariableType:
 		'''Value of variable $CONDET_TRIG'''
-		return CondetTrigVariableType(self._instance.CondetTrig)
+		__r = self._instance.CondetTrig
+		return None if __r is None else CondetTrigVariableType(__r)
 
 	@property
 	def co_morgrp(self) -> typing.List[CoMorgrpVariableType]:
 		'''Value of variable $CO_MORGRP'''
-		return [CoMorgrpVariableType(x) for x in self._instance.CoMorgrp]
+		__r = self._instance.CoMorgrp
+		return None if __r is None else [None if x is None else CoMorgrpVariableType(x) for x in __r]
 
 	@property
 	def co_paramgrp(self) -> typing.List[CoParamgpVariableType]:
 		'''Value of variable $CO_PARAMGRP'''
-		return [CoParamgpVariableType(x) for x in self._instance.CoParamgrp]
+		__r = self._instance.CoParamgrp
+		return None if __r is None else [None if x is None else CoParamgpVariableType(x) for x in __r]
 
 	@property
 	def cpcfg(self) -> CpcfgVariableType:
 		'''Value of variable $CPCFG'''
-		return CpcfgVariableType(self._instance.Cpcfg)
+		__r = self._instance.Cpcfg
+		return None if __r is None else CpcfgVariableType(__r)
 
 	@property
 	def cpdbg(self) -> CpdbgVariableType:
 		'''Value of variable $CPDBG'''
-		return CpdbgVariableType(self._instance.Cpdbg)
+		__r = self._instance.Cpdbg
+		return None if __r is None else CpdbgVariableType(__r)
 
 	@property
 	def cp_mcrgrp(self) -> typing.List[CpMcrgrpVariableType]:
 		'''Value of variable $CP_MCRGRP'''
-		return [CpMcrgrpVariableType(x) for x in self._instance.CpMcrgrp]
+		__r = self._instance.CpMcrgrp
+		return None if __r is None else [None if x is None else CpMcrgrpVariableType(x) for x in __r]
 
 	@property
 	def cp_morgrp(self) -> typing.List[CpMorgrpVariableType]:
 		'''Value of variable $CP_MORGRP'''
-		return [CpMorgrpVariableType(x) for x in self._instance.CpMorgrp]
+		__r = self._instance.CpMorgrp
+		return None if __r is None else [None if x is None else CpMorgrpVariableType(x) for x in __r]
 
 	@property
 	def cp_paramgrp(self) -> typing.List[CpParamgpVariableType]:
 		'''Value of variable $CP_PARAMGRP'''
-		return [CpParamgpVariableType(x) for x in self._instance.CpParamgrp]
+		__r = self._instance.CpParamgrp
+		return None if __r is None else [None if x is None else CpParamgpVariableType(x) for x in __r]
 
 	@property
 	def cp_t1_grp(self) -> typing.List[CpT1GrpVariableType]:
 		'''Value of variable $CP_T1_GRP'''
-		return [CpT1GrpVariableType(x) for x in self._instance.CpT1Grp]
+		__r = self._instance.CpT1Grp
+		return None if __r is None else [None if x is None else CpT1GrpVariableType(x) for x in __r]
 
 	@property
 	def cp_t1_mode(self) -> CpT1ModeVariableType:
 		'''Value of variable $CP_T1_MODE'''
-		return CpT1ModeVariableType(self._instance.CpT1Mode)
+		__r = self._instance.CpT1Mode
+		return None if __r is None else CpT1ModeVariableType(__r)
 
 	@property
 	def crt_defprog(self) -> str:
@@ -759,7 +796,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def custommenu(self) -> typing.List[CustommenuVariableType]:
 		'''Value of variable $CUSTOMMENU'''
-		return [CustommenuVariableType(x) for x in self._instance.Custommenu]
+		__r = self._instance.Custommenu
+		return None if __r is None else [None if x is None else CustommenuVariableType(x) for x in __r]
 
 	@property
 	def cust_manual(self) -> bool:
@@ -774,7 +812,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def dbg_errlog(self) -> DbgErrlogVariableType:
 		'''Value of variable $DBG_ERRLOG'''
-		return DbgErrlogVariableType(self._instance.DbgErrlog)
+		__r = self._instance.DbgErrlog
+		return None if __r is None else DbgErrlogVariableType(__r)
 
 	@property
 	def dbnumlim(self) -> int:
@@ -784,12 +823,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def dbpxwork(self) -> typing.List[DbpxworkVariableType]:
 		'''Value of variable $DBPXWORK'''
-		return [DbpxworkVariableType(x) for x in self._instance.Dbpxwork]
+		__r = self._instance.Dbpxwork
+		return None if __r is None else [None if x is None else DbpxworkVariableType(x) for x in __r]
 
 	@property
 	def dbtb_ctrl(self) -> DbtbCtrlVariableType:
 		'''Value of variable $DBTB_CTRL'''
-		return DbtbCtrlVariableType(self._instance.DbtbCtrl)
+		__r = self._instance.DbtbCtrl
+		return None if __r is None else DbtbCtrlVariableType(__r)
 
 	@property
 	def db_awaytrig(self) -> float:
@@ -809,7 +850,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def db_dbg(self) -> typing.List[DbDbgVariableType]:
 		'''Value of variable $DB_DBG'''
-		return [DbDbgVariableType(x) for x in self._instance.DbDbg]
+		__r = self._instance.DbDbg
+		return None if __r is None else [None if x is None else DbDbgVariableType(x) for x in __r]
 
 	@property
 	def db_mindist(self) -> float:
@@ -834,7 +876,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def db_record(self) -> typing.List[DbRecordVariableType]:
 		'''Value of variable $DB_RECORD'''
-		return [DbRecordVariableType(x) for x in self._instance.DbRecord]
+		__r = self._instance.DbRecord
+		return None if __r is None else [None if x is None else DbRecordVariableType(x) for x in __r]
 
 	@property
 	def db_tolerenc(self) -> float:
@@ -844,52 +887,62 @@ class SystemFile(GenericVariableFile):
 	@property
 	def dcss_cnstcy(self) -> typing.List[DcssCnstcyVariableType]:
 		'''Value of variable $DCSS_CNSTCY'''
-		return [DcssCnstcyVariableType(x) for x in self._instance.DcssCnstcy]
+		__r = self._instance.DcssCnstcy
+		return None if __r is None else [None if x is None else DcssCnstcyVariableType(x) for x in __r]
 
 	@property
 	def dcss_device(self) -> typing.List[DcssDeviceVariableType]:
 		'''Value of variable $DCSS_DEVICE'''
-		return [DcssDeviceVariableType(x) for x in self._instance.DcssDevice]
+		__r = self._instance.DcssDevice
+		return None if __r is None else [None if x is None else DcssDeviceVariableType(x) for x in __r]
 
 	@property
 	def dcss_hndgd(self) -> DcssHndgdVariableType:
 		'''Value of variable $DCSS_HNDGD'''
-		return DcssHndgdVariableType(self._instance.DcssHndgd)
+		__r = self._instance.DcssHndgd
+		return None if __r is None else DcssHndgdVariableType(__r)
 
 	@property
 	def dcss_ls(self) -> typing.List[DcssLsVariableType]:
 		'''Value of variable $DCSS_LS'''
-		return [DcssLsVariableType(x) for x in self._instance.DcssLs]
+		__r = self._instance.DcssLs
+		return None if __r is None else [None if x is None else DcssLsVariableType(x) for x in __r]
 
 	@property
 	def dcss_param(self) -> DcssParamVariableType:
 		'''Value of variable $DCSS_PARAM'''
-		return DcssParamVariableType(self._instance.DcssParam)
+		__r = self._instance.DcssParam
+		return None if __r is None else DcssParamVariableType(__r)
 
 	@property
 	def dcss_slave(self) -> DcssSlaveVariableType:
 		'''Value of variable $DCSS_SLAVE'''
-		return DcssSlaveVariableType(self._instance.DcssSlave)
+		__r = self._instance.DcssSlave
+		return None if __r is None else DcssSlaveVariableType(__r)
 
 	@property
 	def dcs_cfg(self) -> DcsCfgVariableType:
 		'''Value of variable $DCS_CFG'''
-		return DcsCfgVariableType(self._instance.DcsCfg)
+		__r = self._instance.DcsCfg
+		return None if __r is None else DcsCfgVariableType(__r)
 
 	@property
 	def dcs_crc_out(self) -> DcsCrcOutVariableType:
 		'''Value of variable $DCS_CRC_OUT'''
-		return DcsCrcOutVariableType(self._instance.DcsCrcOut)
+		__r = self._instance.DcsCrcOut
+		return None if __r is None else DcsCrcOutVariableType(__r)
 
 	@property
 	def dcs_nocode(self) -> DcsNocodeVariableType:
 		'''Value of variable $DCS_NOCODE'''
-		return DcsNocodeVariableType(self._instance.DcsNocode)
+		__r = self._instance.DcsNocode
+		return None if __r is None else DcsNocodeVariableType(__r)
 
 	@property
 	def dcs_sgn(self) -> DcsSgnVariableType:
 		'''Value of variable $DCS_SGN'''
-		return DcsSgnVariableType(self._instance.DcsSgn)
+		__r = self._instance.DcsSgn
+		return None if __r is None else DcsSgnVariableType(__r)
 
 	@property
 	def dcs_version(self) -> str:
@@ -899,7 +952,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def deflogic(self) -> typing.List[DeflogicVariableType]:
 		'''Value of variable $DEFLOGIC'''
-		return [DeflogicVariableType(x) for x in self._instance.Deflogic]
+		__r = self._instance.Deflogic
+		return None if __r is None else [None if x is None else DeflogicVariableType(x) for x in __r]
 
 	@property
 	def defprog_enb(self) -> bool:
@@ -924,7 +978,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def demo_init(self) -> DemoInitVariableType:
 		'''Value of variable $DEMO_INIT'''
-		return DemoInitVariableType(self._instance.DemoInit)
+		__r = self._instance.DemoInit
+		return None if __r is None else DemoInitVariableType(__r)
 
 	@property
 	def dev_index(self) -> int:
@@ -944,12 +999,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def diag_grp(self) -> typing.List[DiagGrpVariableType]:
 		'''Value of variable $DIAG_GRP'''
-		return [DiagGrpVariableType(x) for x in self._instance.DiagGrp]
+		__r = self._instance.DiagGrp
+		return None if __r is None else [None if x is None else DiagGrpVariableType(x) for x in __r]
 
 	@property
 	def dict_config(self) -> DictCfgVariableType:
 		'''Value of variable $DICT_CONFIG'''
-		return DictCfgVariableType(self._instance.DictConfig)
+		__r = self._instance.DictConfig
+		return None if __r is None else DictCfgVariableType(__r)
 
 	@property
 	def distbf_tts(self) -> int:
@@ -969,22 +1026,26 @@ class SystemFile(GenericVariableFile):
 	@property
 	def dmsw_cfg(self) -> DmswCfgVariableType:
 		'''Value of variable $DMSW_CFG'''
-		return DmswCfgVariableType(self._instance.DmswCfg)
+		__r = self._instance.DmswCfg
+		return None if __r is None else DmswCfgVariableType(__r)
 
 	@property
 	def docviewer(self) -> DocviewerVariableType:
 		'''Value of variable $DOCVIEWER'''
-		return DocviewerVariableType(self._instance.Docviewer)
+		__r = self._instance.Docviewer
+		return None if __r is None else DocviewerVariableType(__r)
 
 	@property
 	def drc_cfg(self) -> DrcCfgVariableType:
 		'''Value of variable $DRC_CFG'''
-		return DrcCfgVariableType(self._instance.DrcCfg)
+		__r = self._instance.DrcCfg
+		return None if __r is None else DrcCfgVariableType(__r)
 
 	@property
 	def dsbl_fault(self) -> DsblFaultVariableType:
 		'''Value of variable $DSBL_FAULT'''
-		return DsblFaultVariableType(self._instance.DsblFault)
+		__r = self._instance.DsblFault
+		return None if __r is None else DsblFaultVariableType(__r)
 
 	@property
 	def dsbl_gpmsk(self) -> int:
@@ -994,12 +1055,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def dtdiag(self) -> DtrecVariableType:
 		'''Value of variable $DTDIAG'''
-		return DtrecVariableType(self._instance.Dtdiag)
+		__r = self._instance.Dtdiag
+		return None if __r is None else DtrecVariableType(__r)
 
 	@property
 	def dtrecp(self) -> DtrecVariableType:
 		'''Value of variable $DTRECP'''
-		return DtrecVariableType(self._instance.Dtrecp)
+		__r = self._instance.Dtrecp
+		return None if __r is None else DtrecVariableType(__r)
 
 	@property
 	def dump_option(self) -> int:
@@ -1029,7 +1092,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def dyn_brk(self) -> DynBrkVariableType:
 		'''Value of variable $DYN_BRK'''
-		return DynBrkVariableType(self._instance.DynBrk)
+		__r = self._instance.DynBrk
+		return None if __r is None else DynBrkVariableType(__r)
 
 	@property
 	def editor_optn(self) -> int:
@@ -1039,7 +1103,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def edit_recent(self) -> typing.List[EdtRecentVariableType]:
 		'''Value of variable $EDIT_RECENT'''
-		return [EdtRecentVariableType(x) for x in self._instance.EditRecent]
+		__r = self._instance.EditRecent
+		return None if __r is None else [None if x is None else EdtRecentVariableType(x) for x in __r]
 
 	@property
 	def emgdi_stat(self) -> int:
@@ -1049,27 +1114,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def enc_info(self) -> typing.List[EncInfoVariableType]:
 		'''Value of variable $ENC_INFO'''
-		return [EncInfoVariableType(x) for x in self._instance.EncInfo]
+		__r = self._instance.EncInfo
+		return None if __r is None else [None if x is None else EncInfoVariableType(x) for x in __r]
 
 	@property
 	def enetmode(self) -> typing.List[EnetmodeVariableType]:
 		'''Value of variable $ENETMODE'''
-		return [EnetmodeVariableType(x) for x in self._instance.Enetmode]
+		__r = self._instance.Enetmode
+		return None if __r is None else [None if x is None else EnetmodeVariableType(x) for x in __r]
 
 	@property
 	def eoatcfg(self) -> EoatcfgVariableType:
 		'''Value of variable $EOATCFG'''
-		return EoatcfgVariableType(self._instance.Eoatcfg)
+		__r = self._instance.Eoatcfg
+		return None if __r is None else EoatcfgVariableType(__r)
 
 	@property
 	def eoatdata(self) -> typing.List[EoatdataVariableType]:
 		'''Value of variable $EOATDATA'''
-		return [EoatdataVariableType(x) for x in self._instance.Eoatdata]
+		__r = self._instance.Eoatdata
+		return None if __r is None else [None if x is None else EoatdataVariableType(x) for x in __r]
 
 	@property
 	def erpost_log(self) -> ErpostLogVariableType:
 		'''Value of variable $ERPOST_LOG'''
-		return ErpostLogVariableType(self._instance.ErpostLog)
+		__r = self._instance.ErpostLog
+		return None if __r is None else ErpostLogVariableType(__r)
 
 	@property
 	def error_prog(self) -> str:
@@ -1094,7 +1164,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def er_noauto(self) -> ErNoautoVariableType:
 		'''Value of variable $ER_NOAUTO'''
-		return ErNoautoVariableType(self._instance.ErNoauto)
+		__r = self._instance.ErNoauto
+		return None if __r is None else ErNoautoVariableType(__r)
 
 	@property
 	def er_nofltr(self) -> bool:
@@ -1109,7 +1180,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def er_no_alm(self) -> typing.List[ErNoalmVariableType]:
 		'''Value of variable $ER_NO_ALM'''
-		return [ErNoalmVariableType(x) for x in self._instance.ErNoAlm]
+		__r = self._instance.ErNoAlm
+		return None if __r is None else [None if x is None else ErNoalmVariableType(x) for x in __r]
 
 	@property
 	def er_sev_noau(self) -> typing.List[bool]:
@@ -1149,12 +1221,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ext_di_bwd(self) -> ExtSetVariableType:
 		'''Value of variable $EXT_DI_BWD'''
-		return ExtSetVariableType(self._instance.ExtDiBwd)
+		__r = self._instance.ExtDiBwd
+		return None if __r is None else ExtSetVariableType(__r)
 
 	@property
 	def ext_di_step(self) -> ExtSetVariableType:
 		'''Value of variable $EXT_DI_STEP'''
-		return ExtSetVariableType(self._instance.ExtDiStep)
+		__r = self._instance.ExtDiStep
+		return None if __r is None else ExtSetVariableType(__r)
 
 	@property
 	def e_stop_do(self) -> int:
@@ -1169,12 +1243,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def fdr_grp(self) -> typing.List[FdrGrpVariableType]:
 		'''Value of variable $FDR_GRP'''
-		return [FdrGrpVariableType(x) for x in self._instance.FdrGrp]
+		__r = self._instance.FdrGrp
+		return None if __r is None else [None if x is None else FdrGrpVariableType(x) for x in __r]
 
 	@property
 	def feature(self) -> FeatureVariableType:
 		'''Value of variable $FEATURE'''
-		return FeatureVariableType(self._instance.Feature)
+		__r = self._instance.Feature
+		return None if __r is None else FeatureVariableType(__r)
 
 	@property
 	def feat_add(self) -> typing.List[str]:
@@ -1184,7 +1260,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def feat_demo(self) -> FeatureVariableType:
 		'''Value of variable $FEAT_DEMO'''
-		return FeatureVariableType(self._instance.FeatDemo)
+		__r = self._instance.FeatDemo
+		return None if __r is None else FeatureVariableType(__r)
 
 	@property
 	def feat_demoin(self) -> int:
@@ -1199,27 +1276,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def filecomp(self) -> FilecompVariableType:
 		'''Value of variable $FILECOMP'''
-		return FilecompVariableType(self._instance.Filecomp)
+		__r = self._instance.Filecomp
+		return None if __r is None else FilecompVariableType(__r)
 
 	@property
 	def filesetup2(self) -> FileSetup2VariableType:
 		'''Value of variable $FILESETUP2'''
-		return FileSetup2VariableType(self._instance.Filesetup2)
+		__r = self._instance.Filesetup2
+		return None if __r is None else FileSetup2VariableType(__r)
 
 	@property
 	def file_ap2bck(self) -> typing.List[FileBackVariableType]:
 		'''Value of variable $FILE_AP2BCK'''
-		return [FileBackVariableType(x) for x in self._instance.FileAp2bck]
+		__r = self._instance.FileAp2bck
+		return None if __r is None else [None if x is None else FileBackVariableType(x) for x in __r]
 
 	@property
 	def file_appbck(self) -> typing.List[FileBackVariableType]:
 		'''Value of variable $FILE_APPBCK'''
-		return [FileBackVariableType(x) for x in self._instance.FileAppbck]
+		__r = self._instance.FileAppbck
+		return None if __r is None else [None if x is None else FileBackVariableType(x) for x in __r]
 
 	@property
 	def file_dgbck(self) -> typing.List[FileBackVariableType]:
 		'''Value of variable $FILE_DGBCK'''
-		return [FileBackVariableType(x) for x in self._instance.FileDgbck]
+		__r = self._instance.FileDgbck
+		return None if __r is None else [None if x is None else FileBackVariableType(x) for x in __r]
 
 	@property
 	def file_frsprt(self) -> bool:
@@ -1229,27 +1311,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def file_visbck(self) -> typing.List[FileBackVariableType]:
 		'''Value of variable $FILE_VISBCK'''
-		return [FileBackVariableType(x) for x in self._instance.FileVisbck]
+		__r = self._instance.FileVisbck
+		return None if __r is None else [None if x is None else FileBackVariableType(x) for x in __r]
 
 	@property
 	def flui_config(self) -> FluiCfgVariableType:
 		'''Value of variable $FLUI_CONFIG'''
-		return FluiCfgVariableType(self._instance.FluiConfig)
+		__r = self._instance.FluiConfig
+		return None if __r is None else FluiCfgVariableType(__r)
 
 	@property
 	def flui_data(self) -> FluiDataVariableType:
 		'''Value of variable $FLUI_DATA'''
-		return FluiDataVariableType(self._instance.FluiData)
+		__r = self._instance.FluiData
+		return None if __r is None else FluiDataVariableType(__r)
 
 	@property
 	def flui_result(self) -> typing.List[FluiResVariableType]:
 		'''Value of variable $FLUI_RESULT'''
-		return [FluiResVariableType(x) for x in self._instance.FluiResult]
+		__r = self._instance.FluiResult
+		return None if __r is None else [None if x is None else FluiResVariableType(x) for x in __r]
 
 	@property
 	def fmr_cfg(self) -> FmrCfgVariableType:
 		'''Value of variable $FMR_CFG'''
-		return FmrCfgVariableType(self._instance.FmrCfg)
+		__r = self._instance.FmrCfg
+		return None if __r is None else FmrCfgVariableType(__r)
 
 	@property
 	def fno(self) -> str:
@@ -1269,7 +1356,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def fssb_cfg(self) -> FssbCfgVariableType:
 		'''Value of variable $FSSB_CFG'''
-		return FssbCfgVariableType(self._instance.FssbCfg)
+		__r = self._instance.FssbCfg
+		return None if __r is None else FssbCfgVariableType(__r)
 
 	@property
 	def ftp_def_ow(self) -> bool:
@@ -1289,22 +1377,26 @@ class SystemFile(GenericVariableFile):
 	@property
 	def gravc_grp(self) -> typing.List[GravcGrpVariableType]:
 		'''Value of variable $GRAVC_GRP'''
-		return [GravcGrpVariableType(x) for x in self._instance.GravcGrp]
+		__r = self._instance.GravcGrp
+		return None if __r is None else [None if x is None else GravcGrpVariableType(x) for x in __r]
 
 	@property
 	def grsmt_grp(self) -> typing.List[GrsmtGrpVariableType]:
 		'''Value of variable $GRSMT_GRP'''
-		return [GrsmtGrpVariableType(x) for x in self._instance.GrsmtGrp]
+		__r = self._instance.GrsmtGrp
+		return None if __r is None else [None if x is None else GrsmtGrpVariableType(x) for x in __r]
 
 	@property
 	def hostc_cfg(self) -> typing.List[HostCfgVariableType]:
 		'''Value of variable $HOSTC_CFG'''
-		return [HostCfgVariableType(x) for x in self._instance.HostcCfg]
+		__r = self._instance.HostcCfg
+		return None if __r is None else [None if x is None else HostCfgVariableType(x) for x in __r]
 
 	@property
 	def hostent(self) -> typing.List[HostentVariableType]:
 		'''Value of variable $HOSTENT'''
-		return [HostentVariableType(x) for x in self._instance.Hostent]
+		__r = self._instance.Hostent
+		return None if __r is None else [None if x is None else HostentVariableType(x) for x in __r]
 
 	@property
 	def hostname(self) -> str:
@@ -1314,12 +1406,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def hosts_cfg(self) -> typing.List[HostCfgVariableType]:
 		'''Value of variable $HOSTS_CFG'''
-		return [HostCfgVariableType(x) for x in self._instance.HostsCfg]
+		__r = self._instance.HostsCfg
+		return None if __r is None else [None if x is None else HostCfgVariableType(x) for x in __r]
 
 	@property
 	def host_err(self) -> ErrMaskVariableType:
 		'''Value of variable $HOST_ERR'''
-		return ErrMaskVariableType(self._instance.HostErr)
+		__r = self._instance.HostErr
+		return None if __r is None else ErrMaskVariableType(__r)
 
 	@property
 	def host_pdusiz(self) -> int:
@@ -1329,7 +1423,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def hscdmngrp(self) -> typing.List[HscdMngVariableType]:
 		'''Value of variable $HSCDMNGRP'''
-		return [HscdMngVariableType(x) for x in self._instance.Hscdmngrp]
+		__r = self._instance.Hscdmngrp
+		return None if __r is None else [None if x is None else HscdMngVariableType(x) for x in __r]
 
 	@property
 	def hscd_qupd(self) -> bool:
@@ -1344,17 +1439,20 @@ class SystemFile(GenericVariableFile):
 	@property
 	def http_auth(self) -> typing.List[HttpAuthVariableType]:
 		'''Value of variable $HTTP_AUTH'''
-		return [HttpAuthVariableType(x) for x in self._instance.HttpAuth]
+		__r = self._instance.HttpAuth
+		return None if __r is None else [None if x is None else HttpAuthVariableType(x) for x in __r]
 
 	@property
 	def http_ctrl(self) -> HttpVariableType:
 		'''Value of variable $HTTP_CTRL'''
-		return HttpVariableType(self._instance.HttpCtrl)
+		__r = self._instance.HttpCtrl
+		return None if __r is None else HttpVariableType(__r)
 
 	@property
 	def hwr_config(self) -> HwrConfigVariableType:
 		'''Value of variable $HWR_CONFIG'''
-		return HwrConfigVariableType(self._instance.HwrConfig)
+		__r = self._instance.HwrConfig
+		return None if __r is None else HwrConfigVariableType(__r)
 
 	@property
 	def idl_cpu_pct(self) -> float:
@@ -1399,7 +1497,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def iolnk(self) -> typing.List[IolnkVariableType]:
 		'''Value of variable $IOLNK'''
-		return [IolnkVariableType(x) for x in self._instance.Iolnk]
+		__r = self._instance.Iolnk
+		return None if __r is None else [None if x is None else IolnkVariableType(x) for x in __r]
 
 	@property
 	def iomaster(self) -> bool:
@@ -1409,7 +1508,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ioslave(self) -> IoslaveVariableType:
 		'''Value of variable $IOSLAVE'''
-		return IoslaveVariableType(self._instance.Ioslave)
+		__r = self._instance.Ioslave
+		return None if __r is None else IoslaveVariableType(__r)
 
 	@property
 	def iosramcache(self) -> bool:
@@ -1439,7 +1539,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def io_def_asg(self) -> typing.List[IoDefAsgVariableType]:
 		'''Value of variable $IO_DEF_ASG'''
-		return [IoDefAsgVariableType(x) for x in self._instance.IoDefAsg]
+		__r = self._instance.IoDefAsg
+		return None if __r is None else [None if x is None else IoDefAsgVariableType(x) for x in __r]
 
 	@property
 	def io_def_num(self) -> int:
@@ -1464,57 +1565,68 @@ class SystemFile(GenericVariableFile):
 	@property
 	def io_uop_cfg(self) -> IoUopCfgVariableType:
 		'''Value of variable $IO_UOP_CFG'''
-		return IoUopCfgVariableType(self._instance.IoUopCfg)
+		__r = self._instance.IoUopCfg
+		return None if __r is None else IoUopCfgVariableType(__r)
 
 	@property
 	def irca_acc(self) -> typing.List[ItemAccVariableType]:
 		'''Value of variable $IRCA_ACC'''
-		return [ItemAccVariableType(x) for x in self._instance.IrcaAcc]
+		__r = self._instance.IrcaAcc
+		return None if __r is None else [None if x is None else ItemAccVariableType(x) for x in __r]
 
 	@property
 	def irca_buf001(self) -> typing.List[ItemBuffElVariableType]:
 		'''Value of variable $IRCA_BUF001'''
-		return [ItemBuffElVariableType(x) for x in self._instance.IrcaBuf001]
+		__r = self._instance.IrcaBuf001
+		return None if __r is None else [None if x is None else ItemBuffElVariableType(x) for x in __r]
 
 	@property
 	def irca_buf002(self) -> typing.List[ItemBuffElVariableType]:
 		'''Value of variable $IRCA_BUF002'''
-		return [ItemBuffElVariableType(x) for x in self._instance.IrcaBuf002]
+		__r = self._instance.IrcaBuf002
+		return None if __r is None else [None if x is None else ItemBuffElVariableType(x) for x in __r]
 
 	@property
 	def irca_buf003(self) -> typing.List[ItemBuffElVariableType]:
 		'''Value of variable $IRCA_BUF003'''
-		return [ItemBuffElVariableType(x) for x in self._instance.IrcaBuf003]
+		__r = self._instance.IrcaBuf003
+		return None if __r is None else [None if x is None else ItemBuffElVariableType(x) for x in __r]
 
 	@property
 	def irca_cfg(self) -> typing.List[IrcaCnfVariableType]:
 		'''Value of variable $IRCA_CFG'''
-		return [IrcaCnfVariableType(x) for x in self._instance.IrcaCfg]
+		__r = self._instance.IrcaCfg
+		return None if __r is None else [None if x is None else IrcaCnfVariableType(x) for x in __r]
 
 	@property
 	def irca_his001(self) -> typing.List[HistDayVariableType]:
 		'''Value of variable $IRCA_HIS001'''
-		return [HistDayVariableType(x) for x in self._instance.IrcaHis001]
+		__r = self._instance.IrcaHis001
+		return None if __r is None else [None if x is None else HistDayVariableType(x) for x in __r]
 
 	@property
 	def irca_his002(self) -> typing.List[HistDayVariableType]:
 		'''Value of variable $IRCA_HIS002'''
-		return [HistDayVariableType(x) for x in self._instance.IrcaHis002]
+		__r = self._instance.IrcaHis002
+		return None if __r is None else [None if x is None else HistDayVariableType(x) for x in __r]
 
 	@property
 	def irca_his003(self) -> typing.List[HistDayVariableType]:
 		'''Value of variable $IRCA_HIS003'''
-		return [HistDayVariableType(x) for x in self._instance.IrcaHis003]
+		__r = self._instance.IrcaHis003
+		return None if __r is None else [None if x is None else HistDayVariableType(x) for x in __r]
 
 	@property
 	def irca_i_cfg(self) -> typing.List[ItemNameVariableType]:
 		'''Value of variable $IRCA_I_CFG'''
-		return [ItemNameVariableType(x) for x in self._instance.IrcaICfg]
+		__r = self._instance.IrcaICfg
+		return None if __r is None else [None if x is None else ItemNameVariableType(x) for x in __r]
 
 	@property
 	def irprog_cfg(self) -> IrprogCfgVariableType:
 		'''Value of variable $IRPROG_CFG'''
-		return IrprogCfgVariableType(self._instance.IrprogCfg)
+		__r = self._instance.IrprogCfg
+		return None if __r is None else IrprogCfgVariableType(__r)
 
 	@property
 	def isdt_isolc(self) -> typing.List[int]:
@@ -1529,7 +1641,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def jinc(self) -> JincVariableType:
 		'''Value of variable $JINC'''
-		return JincVariableType(self._instance.Jinc)
+		__r = self._instance.Jinc
+		return None if __r is None else JincVariableType(__r)
 
 	@property
 	def jobproc_enb(self) -> int:
@@ -1554,12 +1667,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def karelmon(self) -> KarelmonVariableType:
 		'''Value of variable $KARELMON'''
-		return KarelmonVariableType(self._instance.Karelmon)
+		__r = self._instance.Karelmon
+		return None if __r is None else KarelmonVariableType(__r)
 
 	@property
 	def karel_cfg(self) -> KarelCfgVariableType:
 		'''Value of variable $KAREL_CFG'''
-		return KarelCfgVariableType(self._instance.KarelCfg)
+		__r = self._instance.KarelCfg
+		return None if __r is None else KarelCfgVariableType(__r)
 
 	@property
 	def karel_enb(self) -> int:
@@ -1584,12 +1699,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def lgcfg(self) -> LgcfgVariableType:
 		'''Value of variable $LGCFG'''
-		return LgcfgVariableType(self._instance.Lgcfg)
+		__r = self._instance.Lgcfg
+		return None if __r is None else LgcfgVariableType(__r)
 
 	@property
 	def ln_disp(self) -> LnDispVariableType:
 		'''Value of variable $LN_DISP'''
-		return LnDispVariableType(self._instance.LnDisp)
+		__r = self._instance.LnDisp
+		return None if __r is None else LnDispVariableType(__r)
 
 	@property
 	def loctol(self) -> float:
@@ -1599,22 +1716,26 @@ class SystemFile(GenericVariableFile):
 	@property
 	def logbook(self) -> LogbookVariableType:
 		'''Value of variable $LOGBOOK'''
-		return LogbookVariableType(self._instance.Logbook)
+		__r = self._instance.Logbook
+		return None if __r is None else LogbookVariableType(__r)
 
 	@property
 	def log_buff(self) -> typing.List[LogBuffVariableType]:
 		'''Value of variable $LOG_BUFF'''
-		return [LogBuffVariableType(x) for x in self._instance.LogBuff]
+		__r = self._instance.LogBuff
+		return None if __r is None else [None if x is None else LogBuffVariableType(x) for x in __r]
 
 	@property
 	def log_dcs(self) -> LogDcsVariableType:
 		'''Value of variable $LOG_DCS'''
-		return LogDcsVariableType(self._instance.LogDcs)
+		__r = self._instance.LogDcs
+		return None if __r is None else LogDcsVariableType(__r)
 
 	@property
 	def log_dio(self) -> typing.List[LogDioVariableType]:
 		'''Value of variable $LOG_DIO'''
-		return [LogDioVariableType(x) for x in self._instance.LogDio]
+		__r = self._instance.LogDio
+		return None if __r is None else [None if x is None else LogDioVariableType(x) for x in __r]
 
 	@property
 	def log_er_itm(self) -> typing.List[int]:
@@ -1639,7 +1760,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def log_scrn_fl(self) -> typing.List[LogScrnFlVariableType]:
 		'''Value of variable $LOG_SCRN_FL'''
-		return [LogScrnFlVariableType(x) for x in self._instance.LogScrnFl]
+		__r = self._instance.LogScrnFl
+		return None if __r is None else [None if x is None else LogScrnFlVariableType(x) for x in __r]
 
 	@property
 	def log_tpkey(self) -> typing.List[int]:
@@ -1674,12 +1796,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mcsp(self) -> McspVariableType:
 		'''Value of variable $MCSP'''
-		return McspVariableType(self._instance.Mcsp)
+		__r = self._instance.Mcsp
+		return None if __r is None else McspVariableType(__r)
 
 	@property
 	def mcsp_grp(self) -> typing.List[McspGrpVariableType]:
 		'''Value of variable $MCSP_GRP'''
-		return [McspGrpVariableType(x) for x in self._instance.McspGrp]
+		__r = self._instance.McspGrp
+		return None if __r is None else [None if x is None else McspGrpVariableType(x) for x in __r]
 
 	@property
 	def md_ldxdisab(self) -> int:
@@ -1694,32 +1818,38 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mfrq_cfg(self) -> MfrqCfgVariableType:
 		'''Value of variable $MFRQ_CFG'''
-		return MfrqCfgVariableType(self._instance.MfrqCfg)
+		__r = self._instance.MfrqCfg
+		return None if __r is None else MfrqCfgVariableType(__r)
 
 	@property
 	def mfrq_grp(self) -> typing.List[MfrqGrpVariableType]:
 		'''Value of variable $MFRQ_GRP'''
-		return [MfrqGrpVariableType(x) for x in self._instance.MfrqGrp]
+		__r = self._instance.MfrqGrp
+		return None if __r is None else [None if x is None else MfrqGrpVariableType(x) for x in __r]
 
 	@property
 	def misc_mstr(self) -> MiscMstrVariableType:
 		'''Value of variable $MISC_MSTR'''
-		return MiscMstrVariableType(self._instance.MiscMstr)
+		__r = self._instance.MiscMstr
+		return None if __r is None else MiscMstrVariableType(__r)
 
 	@property
 	def misc_scd(self) -> typing.List[MiscScdVariableType]:
 		'''Value of variable $MISC_SCD'''
-		return [MiscScdVariableType(x) for x in self._instance.MiscScd]
+		__r = self._instance.MiscScd
+		return None if __r is None else [None if x is None else MiscScdVariableType(x) for x in __r]
 
 	@property
 	def mkcfg(self) -> MkcfgVariableType:
 		'''Value of variable $MKCFG'''
-		return MkcfgVariableType(self._instance.Mkcfg)
+		__r = self._instance.Mkcfg
+		return None if __r is None else MkcfgVariableType(__r)
 
 	@property
 	def mltarm_cfg(self) -> MltarmCfgVariableType:
 		'''Value of variable $MLTARM_CFG'''
-		return MltarmCfgVariableType(self._instance.MltarmCfg)
+		__r = self._instance.MltarmCfg
+		return None if __r is None else MltarmCfgVariableType(__r)
 
 	@property
 	def mmetpu(self) -> int:
@@ -1749,7 +1879,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mndsp_mst(self) -> MndspMstVariableType:
 		'''Value of variable $MNDSP_MST'''
-		return MndspMstVariableType(self._instance.MndspMst)
+		__r = self._instance.MndspMst
+		return None if __r is None else MndspMstVariableType(__r)
 
 	@property
 	def mndsp_poscf(self) -> int:
@@ -1764,7 +1895,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mndsp_pstol(self) -> typing.List[MndsppstlVariableType]:
 		'''Value of variable $MNDSP_PSTOL'''
-		return [MndsppstlVariableType(x) for x in self._instance.MndspPstol]
+		__r = self._instance.MndspPstol
+		return None if __r is None else [None if x is None else MndsppstlVariableType(x) for x in __r]
 
 	@property
 	def mnsing_chk(self) -> bool:
@@ -1774,7 +1906,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def modaq_cfg(self) -> ModaqCfgVariableType:
 		'''Value of variable $MODAQ_CFG'''
-		return ModaqCfgVariableType(self._instance.ModaqCfg)
+		__r = self._instance.ModaqCfg
+		return None if __r is None else ModaqCfgVariableType(__r)
 
 	@property
 	def modaq_dev(self) -> str:
@@ -1794,7 +1927,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def modaq_trig(self) -> typing.List[FxTriggerVariableType]:
 		'''Value of variable $MODAQ_TRIG'''
-		return [FxTriggerVariableType(x) for x in self._instance.ModaqTrig]
+		__r = self._instance.ModaqTrig
+		return None if __r is None else [None if x is None else FxTriggerVariableType(x) for x in __r]
 
 	@property
 	def modaq_type(self) -> int:
@@ -1804,7 +1938,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def modem_inf(self) -> typing.List[ModemInfVariableType]:
 		'''Value of variable $MODEM_INF'''
-		return [ModemInfVariableType(x) for x in self._instance.ModemInf]
+		__r = self._instance.ModemInf
+		return None if __r is None else [None if x is None else ModemInfVariableType(x) for x in __r]
 
 	@property
 	def monitor_msg(self) -> typing.List[str]:
@@ -1814,12 +1949,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mor_grp_sv(self) -> typing.List[MorGrpSvVariableType]:
 		'''Value of variable $MOR_GRP_SV'''
-		return [MorGrpSvVariableType(x) for x in self._instance.MorGrpSv]
+		__r = self._instance.MorGrpSv
+		return None if __r is None else [None if x is None else MorGrpSvVariableType(x) for x in __r]
 
 	@property
 	def motion_dbg(self) -> MotionDbgVariableType:
 		'''Value of variable $MOTION_DBG'''
-		return MotionDbgVariableType(self._instance.MotionDbg)
+		__r = self._instance.MotionDbg
+		return None if __r is None else MotionDbgVariableType(__r)
 
 	@property
 	def mpl_name(self) -> str:
@@ -1829,7 +1966,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mr_hist(self) -> typing.List[MrHistVariableType]:
 		'''Value of variable $MR_HIST'''
-		return [MrHistVariableType(x) for x in self._instance.MrHist]
+		__r = self._instance.MrHist
+		return None if __r is None else [None if x is None else MrHistVariableType(x) for x in __r]
 
 	@property
 	def mskcfmap(self) -> typing.List[int]:
@@ -1889,7 +2027,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def msk_ce_grp(self) -> typing.List[MskCeGrpVariableType]:
 		'''Value of variable $MSK_CE_GRP'''
-		return [MskCeGrpVariableType(x) for x in self._instance.MskCeGrp]
+		__r = self._instance.MskCeGrp
+		return None if __r is None else [None if x is None else MskCeGrpVariableType(x) for x in __r]
 
 	@property
 	def msqz_edit(self) -> int:
@@ -1899,7 +2038,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def mtcom_cfg(self) -> typing.List[MtcomCfgVariableType]:
 		'''Value of variable $MTCOM_CFG'''
-		return [MtcomCfgVariableType(x) for x in self._instance.MtcomCfg]
+		__r = self._instance.MtcomCfg
+		return None if __r is None else [None if x is None else MtcomCfgVariableType(x) for x in __r]
 
 	@property
 	def mt_arc_enb(self) -> bool:
@@ -1974,7 +2114,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def opwork(self) -> OpworkVariableType:
 		'''Value of variable $OPWORK'''
-		return OpworkVariableType(self._instance.Opwork)
+		__r = self._instance.Opwork
+		return None if __r is None else OpworkVariableType(__r)
 
 	@property
 	def org_dsbl(self) -> typing.List[int]:
@@ -1994,7 +2135,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ovrdslct(self) -> OvrdslctVariableType:
 		'''Value of variable $OVRDSLCT'''
-		return OvrdslctVariableType(self._instance.Ovrdslct)
+		__r = self._instance.Ovrdslct
+		return None if __r is None else OvrdslctVariableType(__r)
 
 	@property
 	def ovrd_pexe(self) -> bool:
@@ -2009,12 +2151,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ovrd_setup(self) -> OvrdSetupVariableType:
 		'''Value of variable $OVRD_SETUP'''
-		return OvrdSetupVariableType(self._instance.OvrdSetup)
+		__r = self._instance.OvrdSetup
+		return None if __r is None else OvrdSetupVariableType(__r)
 
 	@property
 	def palcfg(self) -> PlcfgVariableType:
 		'''Value of variable $PALCFG'''
-		return PlcfgVariableType(self._instance.Palcfg)
+		__r = self._instance.Palcfg
+		return None if __r is None else PlcfgVariableType(__r)
 
 	@property
 	def pal_pos_chk(self) -> bool:
@@ -2099,12 +2243,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pgtracectl(self) -> typing.List[TracectlVariableType]:
 		'''Value of variable $PGTRACECTL'''
-		return [TracectlVariableType(x) for x in self._instance.Pgtracectl]
+		__r = self._instance.Pgtracectl
+		return None if __r is None else [None if x is None else TracectlVariableType(x) for x in __r]
 
 	@property
 	def pgtracedt(self) -> typing.List[TracedtVariableType]:
 		'''Value of variable $PGTRACEDT'''
-		return [TracedtVariableType(x) for x in self._instance.Pgtracedt]
+		__r = self._instance.Pgtracedt
+		return None if __r is None else [None if x is None else TracedtVariableType(x) for x in __r]
 
 	@property
 	def pgtracelen(self) -> int:
@@ -2114,37 +2260,44 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pgtrace_up(self) -> TraceupVariableType:
 		'''Value of variable $PGTRACE_UP'''
-		return TraceupVariableType(self._instance.PgtraceUp)
+		__r = self._instance.PgtraceUp
+		return None if __r is None else TraceupVariableType(__r)
 
 	@property
 	def pg_cfg(self) -> PgCfgVariableType:
 		'''Value of variable $PG_CFG'''
-		return PgCfgVariableType(self._instance.PgCfg)
+		__r = self._instance.PgCfg
+		return None if __r is None else PgCfgVariableType(__r)
 
 	@property
 	def pg_defspd(self) -> PgDefspdVariableType:
 		'''Value of variable $PG_DEFSPD'''
-		return PgDefspdVariableType(self._instance.PgDefspd)
+		__r = self._instance.PgDefspd
+		return None if __r is None else PgDefspdVariableType(__r)
 
 	@property
 	def ping_ctrl(self) -> PingVariableType:
 		'''Value of variable $PING_CTRL'''
-		return PingVariableType(self._instance.PingCtrl)
+		__r = self._instance.PingCtrl
+		return None if __r is None else PingVariableType(__r)
 
 	@property
 	def pipe_config(self) -> PipeCfgVariableType:
 		'''Value of variable $PIPE_CONFIG'''
-		return PipeCfgVariableType(self._instance.PipeConfig)
+		__r = self._instance.PipeConfig
+		return None if __r is None else PipeCfgVariableType(__r)
 
 	@property
 	def plid_cfg(self) -> PlidCfgVariableType:
 		'''Value of variable $PLID_CFG'''
-		return PlidCfgVariableType(self._instance.PlidCfg)
+		__r = self._instance.PlidCfg
+		return None if __r is None else PlidCfgVariableType(__r)
 
 	@property
 	def plid_cllb(self) -> typing.List[PlidCllbVariableType]:
 		'''Value of variable $PLID_CLLB'''
-		return [PlidCllbVariableType(x) for x in self._instance.PlidCllb]
+		__r = self._instance.PlidCllb
+		return None if __r is None else [None if x is None else PlidCllbVariableType(x) for x in __r]
 
 	@property
 	def plid_know_m(self) -> bool:
@@ -2154,12 +2307,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def plim_grp(self) -> typing.List[PlimGrpVariableType]:
 		'''Value of variable $PLIM_GRP'''
-		return [PlimGrpVariableType(x) for x in self._instance.PlimGrp]
+		__r = self._instance.PlimGrp
+		return None if __r is None else [None if x is None else PlimGrpVariableType(x) for x in __r]
 
 	@property
 	def plmr_grp(self) -> typing.List[PlmrGrpVariableType]:
 		'''Value of variable $PLMR_GRP'''
-		return [PlmrGrpVariableType(x) for x in self._instance.PlmrGrp]
+		__r = self._instance.PlmrGrp
+		return None if __r is None else [None if x is None else PlmrGrpVariableType(x) for x in __r]
 
 	@property
 	def ploadbanfwd(self) -> bool:
@@ -2169,17 +2324,20 @@ class SystemFile(GenericVariableFile):
 	@property
 	def plst_grp6(self) -> typing.List[PlstGrpVariableType]:
 		'''Value of variable $PLST_GRP6'''
-		return [PlstGrpVariableType(x) for x in self._instance.PlstGrp6]
+		__r = self._instance.PlstGrp6
+		return None if __r is None else [None if x is None else PlstGrpVariableType(x) for x in __r]
 
 	@property
 	def plst_grp7(self) -> typing.List[PlstGrpVariableType]:
 		'''Value of variable $PLST_GRP7'''
-		return [PlstGrpVariableType(x) for x in self._instance.PlstGrp7]
+		__r = self._instance.PlstGrp7
+		return None if __r is None else [None if x is None else PlstGrpVariableType(x) for x in __r]
 
 	@property
 	def plst_grp8(self) -> typing.List[PlstGrpVariableType]:
 		'''Value of variable $PLST_GRP8'''
-		return [PlstGrpVariableType(x) for x in self._instance.PlstGrp8]
+		__r = self._instance.PlstGrp8
+		return None if __r is None else [None if x is None else PlstGrpVariableType(x) for x in __r]
 
 	@property
 	def plst_ovld(self) -> typing.List[bool]:
@@ -2219,42 +2377,50 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pl_res_g1(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G1'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG1]
+		__r = self._instance.PlResG1
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g2(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G2'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG2]
+		__r = self._instance.PlResG2
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g3(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G3'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG3]
+		__r = self._instance.PlResG3
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g4(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G4'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG4]
+		__r = self._instance.PlResG4
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g5(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G5'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG5]
+		__r = self._instance.PlResG5
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g6(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G6'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG6]
+		__r = self._instance.PlResG6
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g7(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G7'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG7]
+		__r = self._instance.PlResG7
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_res_g8(self) -> typing.List[PlResGVariableType]:
 		'''Value of variable $PL_RES_G8'''
-		return [PlResGVariableType(x) for x in self._instance.PlResG8]
+		__r = self._instance.PlResG8
+		return None if __r is None else [None if x is None else PlResGVariableType(x) for x in __r]
 
 	@property
 	def pl_thr_inrt(self) -> int:
@@ -2274,7 +2440,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pmon_queue(self) -> PmonQueVariableType:
 		'''Value of variable $PMON_QUEUE'''
-		return PmonQueVariableType(self._instance.PmonQueue)
+		__r = self._instance.PmonQueue
+		return None if __r is None else PmonQueVariableType(__r)
 
 	@property
 	def pns_cur_lin(self) -> int:
@@ -2314,32 +2481,38 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pocfg(self) -> PocfgVariableType:
 		'''Value of variable $POCFG'''
-		return PocfgVariableType(self._instance.Pocfg)
+		__r = self._instance.Pocfg
+		return None if __r is None else PocfgVariableType(__r)
 
 	@property
 	def pos_edit(self) -> PosEditVariableType:
 		'''Value of variable $POS_EDIT'''
-		return PosEditVariableType(self._instance.PosEdit)
+		__r = self._instance.PosEdit
+		return None if __r is None else PosEditVariableType(__r)
 
 	@property
 	def prgadj(self) -> PrgadjVariableType:
 		'''Value of variable $PRGADJ'''
-		return PrgadjVariableType(self._instance.Prgadj)
+		__r = self._instance.Prgadj
+		return None if __r is None else PrgadjVariableType(__r)
 
 	@property
 	def prgns_cfg(self) -> PrgnsCfgVariableType:
 		'''Value of variable $PRGNS_CFG'''
-		return PrgnsCfgVariableType(self._instance.PrgnsCfg)
+		__r = self._instance.PrgnsCfg
+		return None if __r is None else PrgnsCfgVariableType(__r)
 
 	@property
 	def prgns_grp(self) -> typing.List[PrgnsGrpVariableType]:
 		'''Value of variable $PRGNS_GRP'''
-		return [PrgnsGrpVariableType(x) for x in self._instance.PrgnsGrp]
+		__r = self._instance.PrgnsGrp
+		return None if __r is None else [None if x is None else PrgnsGrpVariableType(x) for x in __r]
 
 	@property
 	def prgns_pref(self) -> PrgnsPrefVariableType:
 		'''Value of variable $PRGNS_PREF'''
-		return PrgnsPrefVariableType(self._instance.PrgnsPref)
+		__r = self._instance.PrgnsPref
+		return None if __r is None else PrgnsPrefVariableType(__r)
 
 	@property
 	def priority(self) -> int:
@@ -2364,27 +2537,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def protoent(self) -> typing.List[ProtoentVariableType]:
 		'''Value of variable $PROTOENT'''
-		return [ProtoentVariableType(x) for x in self._instance.Protoent]
+		__r = self._instance.Protoent
+		return None if __r is None else [None if x is None else ProtoentVariableType(x) for x in __r]
 
 	@property
 	def proxy_cfg(self) -> ProxyCfgVariableType:
 		'''Value of variable $PROXY_CFG'''
-		return ProxyCfgVariableType(self._instance.ProxyCfg)
+		__r = self._instance.ProxyCfg
+		return None if __r is None else ProxyCfgVariableType(__r)
 
 	@property
 	def pro_cfg(self) -> PfCfgVariableType:
 		'''Value of variable $PRO_CFG'''
-		return PfCfgVariableType(self._instance.ProCfg)
+		__r = self._instance.ProCfg
+		return None if __r is None else PfCfgVariableType(__r)
 
 	@property
 	def pro_enhance(self) -> PfEnhanceVariableType:
 		'''Value of variable $PRO_ENHANCE'''
-		return PfEnhanceVariableType(self._instance.ProEnhance)
+		__r = self._instance.ProEnhance
+		return None if __r is None else PfEnhanceVariableType(__r)
 
 	@property
 	def pro_pref(self) -> PfPrefVariableType:
 		'''Value of variable $PRO_PREF'''
-		return PfPrefVariableType(self._instance.ProPref)
+		__r = self._instance.ProPref
+		return None if __r is None else PfPrefVariableType(__r)
 
 	@property
 	def prport_num(self) -> int:
@@ -2404,12 +2582,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pslgset(self) -> PslgsetVariableType:
 		'''Value of variable $PSLGSET'''
-		return PslgsetVariableType(self._instance.Pslgset)
+		__r = self._instance.Pslgset
+		return None if __r is None else PslgsetVariableType(__r)
 
 	@property
 	def pslgtemp(self) -> PslgtempVariableType:
 		'''Value of variable $PSLGTEMP'''
-		return PslgtempVariableType(self._instance.Pslgtemp)
+		__r = self._instance.Pslgtemp
+		return None if __r is None else PslgtempVariableType(__r)
 
 	@property
 	def pslgversion(self) -> str:
@@ -2419,7 +2599,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pssave(self) -> PssaveVariableType:
 		'''Value of variable $PSSAVE'''
-		return PssaveVariableType(self._instance.Pssave)
+		__r = self._instance.Pssave
+		return None if __r is None else PssaveVariableType(__r)
 
 	@property
 	def purge_enbl(self) -> bool:
@@ -2434,7 +2615,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def pwrup_delay(self) -> PwrupDlyVariableType:
 		'''Value of variable $PWRUP_DELAY'''
-		return PwrupDlyVariableType(self._instance.PwrupDelay)
+		__r = self._instance.PwrupDelay
+		return None if __r is None else PwrupDlyVariableType(__r)
 
 	@property
 	def pwr_normal(self) -> str:
@@ -2449,7 +2631,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def qskip_grp(self) -> typing.List[QskipGrpVariableType]:
 		'''Value of variable $QSKIP_GRP'''
-		return [QskipGrpVariableType(x) for x in self._instance.QskipGrp]
+		__r = self._instance.QskipGrp
+		return None if __r is None else [None if x is None else QskipGrpVariableType(x) for x in __r]
 
 	@property
 	def rbtif(self) -> int:
@@ -2464,7 +2647,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def rdcr_grp(self) -> typing.List[RdcrGrpVariableType]:
 		'''Value of variable $RDCR_GRP'''
-		return [RdcrGrpVariableType(x) for x in self._instance.RdcrGrp]
+		__r = self._instance.RdcrGrp
+		return None if __r is None else [None if x is None else RdcrGrpVariableType(x) for x in __r]
 
 	@property
 	def rdio_type(self) -> typing.List[int]:
@@ -2474,57 +2658,68 @@ class SystemFile(GenericVariableFile):
 	@property
 	def redprot_cfg(self) -> RedprotCfgVariableType:
 		'''Value of variable $REDPROT_CFG'''
-		return RedprotCfgVariableType(self._instance.RedprotCfg)
+		__r = self._instance.RedprotCfg
+		return None if __r is None else RedprotCfgVariableType(__r)
 
 	@property
 	def redprot_grp(self) -> typing.List[RedprotGrpVariableType]:
 		'''Value of variable $REDPROT_GRP'''
-		return [RedprotGrpVariableType(x) for x in self._instance.RedprotGrp]
+		__r = self._instance.RedprotGrp
+		return None if __r is None else [None if x is None else RedprotGrpVariableType(x) for x in __r]
 
 	@property
 	def refpos1(self) -> typing.List[Refpos11VariableType]:
 		'''Value of variable $REFPOS1'''
-		return [Refpos11VariableType(x) for x in self._instance.Refpos1]
+		__r = self._instance.Refpos1
+		return None if __r is None else [None if x is None else Refpos11VariableType(x) for x in __r]
 
 	@property
 	def refpos2(self) -> typing.List[Refpos21VariableType]:
 		'''Value of variable $REFPOS2'''
-		return [Refpos21VariableType(x) for x in self._instance.Refpos2]
+		__r = self._instance.Refpos2
+		return None if __r is None else [None if x is None else Refpos21VariableType(x) for x in __r]
 
 	@property
 	def refpos3(self) -> typing.List[Refpos31VariableType]:
 		'''Value of variable $REFPOS3'''
-		return [Refpos31VariableType(x) for x in self._instance.Refpos3]
+		__r = self._instance.Refpos3
+		return None if __r is None else [None if x is None else Refpos31VariableType(x) for x in __r]
 
 	@property
 	def refpos4(self) -> typing.List[Refpos41VariableType]:
 		'''Value of variable $REFPOS4'''
-		return [Refpos41VariableType(x) for x in self._instance.Refpos4]
+		__r = self._instance.Refpos4
+		return None if __r is None else [None if x is None else Refpos41VariableType(x) for x in __r]
 
 	@property
 	def refpos5(self) -> typing.List[Refpos51VariableType]:
 		'''Value of variable $REFPOS5'''
-		return [Refpos51VariableType(x) for x in self._instance.Refpos5]
+		__r = self._instance.Refpos5
+		return None if __r is None else [None if x is None else Refpos51VariableType(x) for x in __r]
 
 	@property
 	def refpos6(self) -> typing.List[Refpos61VariableType]:
 		'''Value of variable $REFPOS6'''
-		return [Refpos61VariableType(x) for x in self._instance.Refpos6]
+		__r = self._instance.Refpos6
+		return None if __r is None else [None if x is None else Refpos61VariableType(x) for x in __r]
 
 	@property
 	def refpos7(self) -> typing.List[Refpos71VariableType]:
 		'''Value of variable $REFPOS7'''
-		return [Refpos71VariableType(x) for x in self._instance.Refpos7]
+		__r = self._instance.Refpos7
+		return None if __r is None else [None if x is None else Refpos71VariableType(x) for x in __r]
 
 	@property
 	def refpos8(self) -> typing.List[Refpos81VariableType]:
 		'''Value of variable $REFPOS8'''
-		return [Refpos81VariableType(x) for x in self._instance.Refpos8]
+		__r = self._instance.Refpos8
+		return None if __r is None else [None if x is None else Refpos81VariableType(x) for x in __r]
 
 	@property
 	def refposmask(self) -> typing.List[RefpsmskVariableType]:
 		'''Value of variable $REFPOSMASK'''
-		return [RefpsmskVariableType(x) for x in self._instance.Refposmask]
+		__r = self._instance.Refposmask
+		return None if __r is None else [None if x is None else RefpsmskVariableType(x) for x in __r]
 
 	@property
 	def refposmaxno(self) -> typing.List[int]:
@@ -2539,7 +2734,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def remote_cfg(self) -> RemoteCfgVariableType:
 		'''Value of variable $REMOTE_CFG'''
-		return RemoteCfgVariableType(self._instance.RemoteCfg)
+		__r = self._instance.RemoteCfg
+		return None if __r is None else RemoteCfgVariableType(__r)
 
 	@property
 	def repl_range(self) -> int:
@@ -2549,7 +2745,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def repower(self) -> RepowerVariableType:
 		'''Value of variable $REPOWER'''
-		return RepowerVariableType(self._instance.Repower)
+		__r = self._instance.Repower
+		return None if __r is None else RepowerVariableType(__r)
 
 	@property
 	def resm_dryprg(self) -> str:
@@ -2559,7 +2756,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def restart(self) -> RestartVariableType:
 		'''Value of variable $RESTART'''
-		return RestartVariableType(self._instance.Restart)
+		__r = self._instance.Restart
+		return None if __r is None else RestartVariableType(__r)
 
 	@property
 	def resume_prog(self) -> str:
@@ -2624,7 +2822,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def rs232_cfg(self) -> typing.List[Rs232CfgVariableType]:
 		'''Value of variable $RS232_CFG'''
-		return [Rs232CfgVariableType(x) for x in self._instance.Rs232Cfg]
+		__r = self._instance.Rs232Cfg
+		return None if __r is None else [None if x is None else Rs232CfgVariableType(x) for x in __r]
 
 	@property
 	def rs232_nport(self) -> int:
@@ -2634,7 +2833,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def rsch_log(self) -> RschVariableType:
 		'''Value of variable $RSCH_LOG'''
-		return RschVariableType(self._instance.RschLog)
+		__r = self._instance.RschLog
+		return None if __r is None else RschVariableType(__r)
 
 	@property
 	def rsmavailnum(self) -> int:
@@ -2644,47 +2844,56 @@ class SystemFile(GenericVariableFile):
 	@property
 	def rspace1(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE1'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace1]
+		__r = self._instance.Rspace1
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace2(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE2'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace2]
+		__r = self._instance.Rspace2
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace3(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE3'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace3]
+		__r = self._instance.Rspace3
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace4(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE4'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace4]
+		__r = self._instance.Rspace4
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace5(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE5'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace5]
+		__r = self._instance.Rspace5
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace6(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE6'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace6]
+		__r = self._instance.Rspace6
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace7(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE7'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace7]
+		__r = self._instance.Rspace7
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspace8(self) -> typing.List[RspaceVariableType]:
 		'''Value of variable $RSPACE8'''
-		return [RspaceVariableType(x) for x in self._instance.Rspace8]
+		__r = self._instance.Rspace8
+		return None if __r is None else [None if x is None else RspaceVariableType(x) for x in __r]
 
 	@property
 	def rspaceg(self) -> RspacegVariableType:
 		'''Value of variable $RSPACEG'''
-		return RspacegVariableType(self._instance.Rspaceg)
+		__r = self._instance.Rspaceg
+		return None if __r is None else RspacegVariableType(__r)
 
 	@property
 	def rspace_mode(self) -> int:
@@ -2694,7 +2903,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def rspace_s(self) -> RspacesrVariableType:
 		'''Value of variable $RSPACE_S'''
-		return RspacesrVariableType(self._instance.RspaceS)
+		__r = self._instance.RspaceS
+		return None if __r is None else RspacesrVariableType(__r)
 
 	@property
 	def rspcwork_ad(self) -> int:
@@ -2749,7 +2959,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def servent(self) -> typing.List[ServentVariableType]:
 		'''Value of variable $SERVENT'''
-		return [ServentVariableType(x) for x in self._instance.Servent]
+		__r = self._instance.Servent
+		return None if __r is None else [None if x is None else ServentVariableType(x) for x in __r]
 
 	@property
 	def service_kl(self) -> typing.List[str]:
@@ -2789,27 +3000,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def sfzn_cfg(self) -> SfznCfgVariableType:
 		'''Value of variable $SFZN_CFG'''
-		return SfznCfgVariableType(self._instance.SfznCfg)
+		__r = self._instance.SfznCfg
+		return None if __r is None else SfznCfgVariableType(__r)
 
 	@property
 	def sfzn_grp(self) -> typing.List[SfznGrpVariableType]:
 		'''Value of variable $SFZN_GRP'''
-		return [SfznGrpVariableType(x) for x in self._instance.SfznGrp]
+		__r = self._instance.SfznGrp
+		return None if __r is None else [None if x is None else SfznGrpVariableType(x) for x in __r]
 
 	@property
 	def shell_cfg(self) -> ShellCfgVariableType:
 		'''Value of variable $SHELL_CFG'''
-		return ShellCfgVariableType(self._instance.ShellCfg)
+		__r = self._instance.ShellCfg
+		return None if __r is None else ShellCfgVariableType(__r)
 
 	@property
 	def shell_chk(self) -> typing.List[ShellChkVariableType]:
 		'''Value of variable $SHELL_CHK'''
-		return [ShellChkVariableType(x) for x in self._instance.ShellChk]
+		__r = self._instance.ShellChk
+		return None if __r is None else [None if x is None else ShellChkVariableType(x) for x in __r]
 
 	@property
 	def shell_comm(self) -> ShellCommVariableType:
 		'''Value of variable $SHELL_COMM'''
-		return ShellCommVariableType(self._instance.ShellComm)
+		__r = self._instance.ShellComm
+		return None if __r is None else ShellCommVariableType(__r)
 
 	@property
 	def shftov_enb(self) -> int:
@@ -2824,7 +3040,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def simiofwdlm(self) -> SimiofwdlmVariableType:
 		'''Value of variable $SIMIOFWDLM'''
-		return SimiofwdlmVariableType(self._instance.Simiofwdlm)
+		__r = self._instance.Simiofwdlm
+		return None if __r is None else SimiofwdlmVariableType(__r)
 
 	@property
 	def si_unit_enb(self) -> bool:
@@ -2854,12 +3071,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def snpx_asg(self) -> typing.List[SnpxAsgVariableType]:
 		'''Value of variable $SNPX_ASG'''
-		return [SnpxAsgVariableType(x) for x in self._instance.SnpxAsg]
+		__r = self._instance.SnpxAsg
+		return None if __r is None else [None if x is None else SnpxAsgVariableType(x) for x in __r]
 
 	@property
 	def snpx_param(self) -> SnpxParamVariableType:
 		'''Value of variable $SNPX_PARAM'''
-		return SnpxParamVariableType(self._instance.SnpxParam)
+		__r = self._instance.SnpxParam
+		return None if __r is None else SnpxParamVariableType(__r)
 
 	@property
 	def soft_kb_cfg(self) -> int:
@@ -2884,7 +3103,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ssr(self) -> SsrVariableType:
 		'''Value of variable $SSR'''
-		return SsrVariableType(self._instance.Ssr)
+		__r = self._instance.Ssr
+		return None if __r is None else SsrVariableType(__r)
 
 	@property
 	def stop_on_err(self) -> bool:
@@ -2904,7 +3124,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def svdt_grp(self) -> typing.List[SvdtGrpVariableType]:
 		'''Value of variable $SVDT_GRP'''
-		return [SvdtGrpVariableType(x) for x in self._instance.SvdtGrp]
+		__r = self._instance.SvdtGrp
+		return None if __r is None else [None if x is None else SvdtGrpVariableType(x) for x in __r]
 
 	@property
 	def svprg_count(self) -> int:
@@ -2924,12 +3145,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def svprm_upd(self) -> typing.List[SvprmUpdVariableType]:
 		'''Value of variable $SVPRM_UPD'''
-		return [SvprmUpdVariableType(x) for x in self._instance.SvprmUpd]
+		__r = self._instance.SvprmUpd
+		return None if __r is None else [None if x is None else SvprmUpdVariableType(x) for x in __r]
 
 	@property
 	def sv_info(self) -> typing.List[SvInfoVariableType]:
 		'''Value of variable $SV_INFO'''
-		return [SvInfoVariableType(x) for x in self._instance.SvInfo]
+		__r = self._instance.SvInfo
+		return None if __r is None else [None if x is None else SvInfoVariableType(x) for x in __r]
 
 	@property
 	def sysdebug(self) -> int:
@@ -2944,22 +3167,26 @@ class SystemFile(GenericVariableFile):
 	@property
 	def syslog(self) -> SyslogVariableType:
 		'''Value of variable $SYSLOG'''
-		return SyslogVariableType(self._instance.Syslog)
+		__r = self._instance.Syslog
+		return None if __r is None else SyslogVariableType(__r)
 
 	@property
 	def syslog_mpc(self) -> SyslogVariableType:
 		'''Value of variable $SYSLOG_MPC'''
-		return SyslogVariableType(self._instance.SyslogMpc)
+		__r = self._instance.SyslogMpc
+		return None if __r is None else SyslogVariableType(__r)
 
 	@property
 	def syslog_sav(self) -> SyslogSavVariableType:
 		'''Value of variable $SYSLOG_SAV'''
-		return SyslogSavVariableType(self._instance.SyslogSav)
+		__r = self._instance.SyslogSav
+		return None if __r is None else SyslogSavVariableType(__r)
 
 	@property
 	def system_time(self) -> typing.List[SystemTimerVariableType]:
 		'''Value of variable $SYSTEM_TIME'''
-		return [SystemTimerVariableType(x) for x in self._instance.SystemTime]
+		__r = self._instance.SystemTime
+		return None if __r is None else [None if x is None else SystemTimerVariableType(x) for x in __r]
 
 	@property
 	def systskmem(self) -> typing.List[int]:
@@ -2974,12 +3201,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def t2mode_lim(self) -> T2modeLimVariableType:
 		'''Value of variable $T2MODE_LIM'''
-		return T2modeLimVariableType(self._instance.T2modeLim)
+		__r = self._instance.T2modeLim
+		return None if __r is None else T2modeLimVariableType(__r)
 
 	@property
 	def t2spdlim(self) -> T2spdlimVariableType:
 		'''Value of variable $T2SPDLIM'''
-		return T2spdlimVariableType(self._instance.T2spdlim)
+		__r = self._instance.T2spdlim
+		return None if __r is None else T2spdlimVariableType(__r)
 
 	@property
 	def ta_disp_enb(self) -> bool:
@@ -2989,47 +3218,56 @@ class SystemFile(GenericVariableFile):
 	@property
 	def tbc2_grp(self) -> typing.List[Tbc2GrpVariableType]:
 		'''Value of variable $TBC2_GRP'''
-		return [Tbc2GrpVariableType(x) for x in self._instance.Tbc2Grp]
+		__r = self._instance.Tbc2Grp
+		return None if __r is None else [None if x is None else Tbc2GrpVariableType(x) for x in __r]
 
 	@property
 	def tbcsg_grp(self) -> typing.List[TbcsgGrpVariableType]:
 		'''Value of variable $TBCSG_GRP'''
-		return [TbcsgGrpVariableType(x) for x in self._instance.TbcsgGrp]
+		__r = self._instance.TbcsgGrp
+		return None if __r is None else [None if x is None else TbcsgGrpVariableType(x) for x in __r]
 
 	@property
 	def tbj2_grp(self) -> typing.List[Tbj2GrpVariableType]:
 		'''Value of variable $TBJ2_GRP'''
-		return [Tbj2GrpVariableType(x) for x in self._instance.Tbj2Grp]
+		__r = self._instance.Tbj2Grp
+		return None if __r is None else [None if x is None else Tbj2GrpVariableType(x) for x in __r]
 
 	@property
 	def tbjop_grp(self) -> typing.List[TbjopGrpVariableType]:
 		'''Value of variable $TBJOP_GRP'''
-		return [TbjopGrpVariableType(x) for x in self._instance.TbjopGrp]
+		__r = self._instance.TbjopGrp
+		return None if __r is None else [None if x is None else TbjopGrpVariableType(x) for x in __r]
 
 	@property
 	def threstable(self) -> typing.List[TpThrTableVariableType]:
 		'''Value of variable $THRESTABLE'''
-		return [TpThrTableVariableType(x) for x in self._instance.Threstable]
+		__r = self._instance.Threstable
+		return None if __r is None else [None if x is None else TpThrTableVariableType(x) for x in __r]
 
 	@property
 	def thrrditable(self) -> typing.List[TpThrTableVariableType]:
 		'''Value of variable $THRRDITABLE'''
-		return [TpThrTableVariableType(x) for x in self._instance.Thrrditable]
+		__r = self._instance.Thrrditable
+		return None if __r is None else [None if x is None else TpThrTableVariableType(x) for x in __r]
 
 	@property
 	def thrrdotable(self) -> typing.List[TpThrTableVariableType]:
 		'''Value of variable $THRRDOTABLE'''
-		return [TpThrTableVariableType(x) for x in self._instance.Thrrdotable]
+		__r = self._instance.Thrrdotable
+		return None if __r is None else [None if x is None else TpThrTableVariableType(x) for x in __r]
 
 	@property
 	def thrsditable(self) -> typing.List[TpThrTableVariableType]:
 		'''Value of variable $THRSDITABLE'''
-		return [TpThrTableVariableType(x) for x in self._instance.Thrsditable]
+		__r = self._instance.Thrsditable
+		return None if __r is None else [None if x is None else TpThrTableVariableType(x) for x in __r]
 
 	@property
 	def thrsitable(self) -> typing.List[TpThrTableVariableType]:
 		'''Value of variable $THRSITABLE'''
-		return [TpThrTableVariableType(x) for x in self._instance.Thrsitable]
+		__r = self._instance.Thrsitable
+		return None if __r is None else [None if x is None else TpThrTableVariableType(x) for x in __r]
 
 	@property
 	def thrtablenum(self) -> typing.List[int]:
@@ -3039,7 +3277,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def thr_cfg(self) -> ThrCfgVariableType:
 		'''Value of variable $THR_CFG'''
-		return ThrCfgVariableType(self._instance.ThrCfg)
+		__r = self._instance.ThrCfg
+		return None if __r is None else ThrCfgVariableType(__r)
 
 	@property
 	def timebf_tts(self) -> int:
@@ -3054,7 +3293,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def timer(self) -> typing.List[TimerVariableType]:
 		'''Value of variable $TIMER'''
-		return [TimerVariableType(x) for x in self._instance.Timer]
+		__r = self._instance.Timer
+		return None if __r is None else [None if x is None else TimerVariableType(x) for x in __r]
 
 	@property
 	def timer_num(self) -> int:
@@ -3099,12 +3339,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def tpgl_config(self) -> TpglConfVariableType:
 		'''Value of variable $TPGL_CONFIG'''
-		return TpglConfVariableType(self._instance.TpglConfig)
+		__r = self._instance.TpglConfig
+		return None if __r is None else TpglConfVariableType(__r)
 
 	@property
 	def tpgl_output(self) -> TpglOutVariableType:
 		'''Value of variable $TPGL_OUTPUT'''
-		return TpglOutVariableType(self._instance.TpglOutput)
+		__r = self._instance.TpglOutput
+		return None if __r is None else TpglOutVariableType(__r)
 
 	@property
 	def tpoff_lim(self) -> int:
@@ -3119,12 +3361,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def tpp_mon(self) -> TppMonVariableType:
 		'''Value of variable $TPP_MON'''
-		return TppMonVariableType(self._instance.TppMon)
+		__r = self._instance.TppMon
+		return None if __r is None else TppMonVariableType(__r)
 
 	@property
 	def tpstrtchk(self) -> TpstrtchkVariableType:
 		'''Value of variable $TPSTRTCHK'''
-		return TpstrtchkVariableType(self._instance.Tpstrtchk)
+		__r = self._instance.Tpstrtchk
+		return None if __r is None else TpstrtchkVariableType(__r)
 
 	@property
 	def tpvtcompat(self) -> bool:
@@ -3134,7 +3378,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def tpvwvar(self) -> TpvwvarVariableType:
 		'''Value of variable $TPVWVAR'''
-		return TpvwvarVariableType(self._instance.Tpvwvar)
+		__r = self._instance.Tpvwvar
+		return None if __r is None else TpvwvarVariableType(__r)
 
 	@property
 	def tp_defprog(self) -> str:
@@ -3184,47 +3429,56 @@ class SystemFile(GenericVariableFile):
 	@property
 	def trace_cfg(self) -> TraceCfgVariableType:
 		'''Value of variable $TRACE_CFG'''
-		return TraceCfgVariableType(self._instance.TraceCfg)
+		__r = self._instance.TraceCfg
+		return None if __r is None else TraceCfgVariableType(__r)
 
 	@property
 	def trace_chnl(self) -> typing.List[TraceChnlVariableType]:
 		'''Value of variable $TRACE_CHNL'''
-		return [TraceChnlVariableType(x) for x in self._instance.TraceChnl]
+		__r = self._instance.TraceChnl
+		return None if __r is None else [None if x is None else TraceChnlVariableType(x) for x in __r]
 
 	@property
 	def trace_item(self) -> typing.List[TraceItemVariableType]:
 		'''Value of variable $TRACE_ITEM'''
-		return [TraceItemVariableType(x) for x in self._instance.TraceItem]
+		__r = self._instance.TraceItem
+		return None if __r is None else [None if x is None else TraceItemVariableType(x) for x in __r]
 
 	@property
 	def tscfg(self) -> TscfgVariableType:
 		'''Value of variable $TSCFG'''
-		return TscfgVariableType(self._instance.Tscfg)
+		__r = self._instance.Tscfg
+		return None if __r is None else TscfgVariableType(__r)
 
 	@property
 	def tsscb(self) -> typing.List[TsscbVariableType]:
 		'''Value of variable $TSSCB'''
-		return [TsscbVariableType(x) for x in self._instance.Tsscb]
+		__r = self._instance.Tsscb
+		return None if __r is None else [None if x is None else TsscbVariableType(x) for x in __r]
 
 	@property
 	def tutorial(self) -> TutorialVariableType:
 		'''Value of variable $TUTORIAL'''
-		return TutorialVariableType(self._instance.Tutorial)
+		__r = self._instance.Tutorial
+		return None if __r is None else TutorialVariableType(__r)
 
 	@property
 	def tv_config(self) -> TvConfigVariableType:
 		'''Value of variable $TV_CONFIG'''
-		return TvConfigVariableType(self._instance.TvConfig)
+		__r = self._instance.TvConfig
+		return None if __r is None else TvConfigVariableType(__r)
 
 	@property
 	def tv_output(self) -> TvOutputVariableType:
 		'''Value of variable $TV_OUTPUT'''
-		return TvOutputVariableType(self._instance.TvOutput)
+		__r = self._instance.TvOutput
+		return None if __r is None else TvOutputVariableType(__r)
 
 	@property
 	def tx_screen(self) -> typing.List[TxscreenVariableType]:
 		'''Value of variable $TX_SCREEN'''
-		return [TxscreenVariableType(x) for x in self._instance.TxScreen]
+		__r = self._instance.TxScreen
+		return None if __r is None else [None if x is None else TxscreenVariableType(x) for x in __r]
 
 	@property
 	def ualrm_msg(self) -> typing.List[str]:
@@ -3239,17 +3493,20 @@ class SystemFile(GenericVariableFile):
 	@property
 	def uecfg(self) -> UecfgVariableType:
 		'''Value of variable $UECFG'''
-		return UecfgVariableType(self._instance.Uecfg)
+		__r = self._instance.Uecfg
+		return None if __r is None else UecfgVariableType(__r)
 
 	@property
 	def uegrp(self) -> typing.List[UegrpVariableType]:
 		'''Value of variable $UEGRP'''
-		return [UegrpVariableType(x) for x in self._instance.Uegrp]
+		__r = self._instance.Uegrp
+		return None if __r is None else [None if x is None else UegrpVariableType(x) for x in __r]
 
 	@property
 	def ui_bbl_note(self) -> BblNtWndVariableType:
 		'''Value of variable $UI_BBL_NOTE'''
-		return BblNtWndVariableType(self._instance.UiBblNote)
+		__r = self._instance.UiBblNote
+		return None if __r is None else BblNtWndVariableType(__r)
 
 	@property
 	def ui_defprog(self) -> typing.List[str]:
@@ -3259,7 +3516,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ui_fkeydata(self) -> typing.List[UiFkeydatVariableType]:
 		'''Value of variable $UI_FKEYDATA'''
-		return [UiFkeydatVariableType(x) for x in self._instance.UiFkeydata]
+		__r = self._instance.UiFkeydata
+		return None if __r is None else [None if x is None else UiFkeydatVariableType(x) for x in __r]
 
 	@property
 	def ui_inuser(self) -> typing.List[bool]:
@@ -3269,12 +3527,14 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ui_menhist(self) -> typing.List[UiMenhisVariableType]:
 		'''Value of variable $UI_MENHIST'''
-		return [UiMenhisVariableType(x) for x in self._instance.UiMenhist]
+		__r = self._instance.UiMenhist
+		return None if __r is None else [None if x is None else UiMenhisVariableType(x) for x in __r]
 
 	@property
 	def ui_panedata(self) -> typing.List[UiPanedatVariableType]:
 		'''Value of variable $UI_PANEDATA'''
-		return [UiPanedatVariableType(x) for x in self._instance.UiPanedata]
+		__r = self._instance.UiPanedata
+		return None if __r is None else [None if x is None else UiPanedatVariableType(x) for x in __r]
 
 	@property
 	def ui_postype(self) -> typing.List[int]:
@@ -3289,7 +3549,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def ui_restore(self) -> typing.List[UiUsrviewVariableType]:
 		'''Value of variable $UI_RESTORE'''
-		return [UiUsrviewVariableType(x) for x in self._instance.UiRestore]
+		__r = self._instance.UiRestore
+		return None if __r is None else [None if x is None else UiUsrviewVariableType(x) for x in __r]
 
 	@property
 	def ui_screen(self) -> typing.List[str]:
@@ -3309,7 +3570,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def undo_cfg(self) -> UndoCfgVariableType:
 		'''Value of variable $UNDO_CFG'''
-		return UndoCfgVariableType(self._instance.UndoCfg)
+		__r = self._instance.UndoCfg
+		return None if __r is None else UndoCfgVariableType(__r)
 
 	@property
 	def uop_crm5(self) -> bool:
@@ -3324,17 +3586,20 @@ class SystemFile(GenericVariableFile):
 	@property
 	def user_info(self) -> typing.List[UserInfoVariableType]:
 		'''Value of variable $USER_INFO'''
-		return [UserInfoVariableType(x) for x in self._instance.UserInfo]
+		__r = self._instance.UserInfo
+		return None if __r is None else [None if x is None else UserInfoVariableType(x) for x in __r]
 
 	@property
 	def user_offset(self) -> UserOffstVariableType:
 		'''Value of variable $USER_OFFSET'''
-		return UserOffstVariableType(self._instance.UserOffset)
+		__r = self._instance.UserOffset
+		return None if __r is None else UserOffstVariableType(__r)
 
 	@property
 	def user_work(self) -> UserWorkVariableType:
 		'''Value of variable $USER_WORK'''
-		return UserWorkVariableType(self._instance.UserWork)
+		__r = self._instance.UserWork
+		return None if __r is None else UserWorkVariableType(__r)
 
 	@property
 	def useuframe(self) -> bool:
@@ -3354,7 +3619,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def usrtol_grp(self) -> typing.List[UsrtolGrpVariableType]:
 		'''Value of variable $USRTOL_GRP'''
-		return [UsrtolGrpVariableType(x) for x in self._instance.UsrtolGrp]
+		__r = self._instance.UsrtolGrp
+		return None if __r is None else [None if x is None else UsrtolGrpVariableType(x) for x in __r]
 
 	@property
 	def usrtol_msk(self) -> int:
@@ -3374,27 +3640,32 @@ class SystemFile(GenericVariableFile):
 	@property
 	def usr_ev_cfg(self) -> typing.List[UsrEvCfgVariableType]:
 		'''Value of variable $USR_EV_CFG'''
-		return [UsrEvCfgVariableType(x) for x in self._instance.UsrEvCfg]
+		__r = self._instance.UsrEvCfg
+		return None if __r is None else [None if x is None else UsrEvCfgVariableType(x) for x in __r]
 
 	@property
 	def usr_ev_wrk(self) -> typing.List[UsrEvWrkVariableType]:
 		'''Value of variable $USR_EV_WRK'''
-		return [UsrEvWrkVariableType(x) for x in self._instance.UsrEvWrk]
+		__r = self._instance.UsrEvWrk
+		return None if __r is None else [None if x is None else UsrEvWrkVariableType(x) for x in __r]
 
 	@property
 	def vars_config(self) -> VarsConfigVariableType:
 		'''Value of variable $VARS_CONFIG'''
-		return VarsConfigVariableType(self._instance.VarsConfig)
+		__r = self._instance.VarsConfig
+		return None if __r is None else VarsConfigVariableType(__r)
 
 	@property
 	def vcmr_grp(self) -> typing.List[VcmrGrpVariableType]:
 		'''Value of variable $VCMR_GRP'''
-		return [VcmrGrpVariableType(x) for x in self._instance.VcmrGrp]
+		__r = self._instance.VcmrGrp
+		return None if __r is None else [None if x is None else VcmrGrpVariableType(x) for x in __r]
 
 	@property
 	def via_work(self) -> ViaWorkVariableType:
 		'''Value of variable $VIA_WORK'''
-		return ViaWorkVariableType(self._instance.ViaWork)
+		__r = self._instance.ViaWork
+		return None if __r is None else ViaWorkVariableType(__r)
 
 	@property
 	def visiontmout(self) -> int:
@@ -3404,52 +3675,62 @@ class SystemFile(GenericVariableFile):
 	@property
 	def vision_cfg(self) -> VisionCfgVariableType:
 		'''Value of variable $VISION_CFG'''
-		return VisionCfgVariableType(self._instance.VisionCfg)
+		__r = self._instance.VisionCfg
+		return None if __r is None else VisionCfgVariableType(__r)
 
 	@property
 	def vision_grp(self) -> typing.List[VisionGrpVariableType]:
 		'''Value of variable $VISION_GRP'''
-		return [VisionGrpVariableType(x) for x in self._instance.VisionGrp]
+		__r = self._instance.VisionGrp
+		return None if __r is None else [None if x is None else VisionGrpVariableType(x) for x in __r]
 
 	@property
 	def vis_ge_cfg(self) -> VisGeCfgVariableType:
 		'''Value of variable $VIS_GE_CFG'''
-		return VisGeCfgVariableType(self._instance.VisGeCfg)
+		__r = self._instance.VisGeCfg
+		return None if __r is None else VisGeCfgVariableType(__r)
 
 	@property
 	def vis_logreg(self) -> VisLogregVariableType:
 		'''Value of variable $VIS_LOGREG'''
-		return VisLogregVariableType(self._instance.VisLogreg)
+		__r = self._instance.VisLogreg
+		return None if __r is None else VisLogregVariableType(__r)
 
 	@property
 	def vlexe_cfg(self) -> VlexeCfgVariableType:
 		'''Value of variable $VLEXE_CFG'''
-		return VlexeCfgVariableType(self._instance.VlexeCfg)
+		__r = self._instance.VlexeCfg
+		return None if __r is None else VlexeCfgVariableType(__r)
 
 	@property
 	def vrtd_filter(self) -> typing.List[VrtdFiltVariableType]:
 		'''Value of variable $VRTD_FILTER'''
-		return [VrtdFiltVariableType(x) for x in self._instance.VrtdFilter]
+		__r = self._instance.VrtdFilter
+		return None if __r is None else [None if x is None else VrtdFiltVariableType(x) for x in __r]
 
 	@property
 	def vshiftmenu(self) -> typing.List[CustommenuVariableType]:
 		'''Value of variable $VSHIFTMENU'''
-		return [CustommenuVariableType(x) for x in self._instance.Vshiftmenu]
+		__r = self._instance.Vshiftmenu
+		return None if __r is None else [None if x is None else CustommenuVariableType(x) for x in __r]
 
 	@property
 	def vshift_cfg(self) -> VsftCfgVariableType:
 		'''Value of variable $VSHIFT_CFG'''
-		return VsftCfgVariableType(self._instance.VshiftCfg)
+		__r = self._instance.VshiftCfg
+		return None if __r is None else VsftCfgVariableType(__r)
 
 	@property
 	def vsmo_cfg(self) -> VsmoCfgVariableType:
 		'''Value of variable $VSMO_CFG'''
-		return VsmoCfgVariableType(self._instance.VsmoCfg)
+		__r = self._instance.VsmoCfg
+		return None if __r is None else VsmoCfgVariableType(__r)
 
 	@property
 	def vzdt_cfg(self) -> VzdtCfgVariableType:
 		'''Value of variable $VZDT_CFG'''
-		return VzdtCfgVariableType(self._instance.VzdtCfg)
+		__r = self._instance.VzdtCfg
+		return None if __r is None else VzdtCfgVariableType(__r)
 
 	@property
 	def waitrelease(self) -> bool:
@@ -3469,7 +3750,8 @@ class SystemFile(GenericVariableFile):
 	@property
 	def wait_data(self) -> WaitDataVariableType:
 		'''Value of variable $WAIT_DATA'''
-		return WaitDataVariableType(self._instance.WaitData)
+		__r = self._instance.WaitData
+		return None if __r is None else WaitDataVariableType(__r)
 
 	@property
 	def wait_rdisp(self) -> bool:
@@ -3479,57 +3761,68 @@ class SystemFile(GenericVariableFile):
 	@property
 	def xvrcfg(self) -> XvrcfgVariableType:
 		'''Value of variable $XVRCFG'''
-		return XvrcfgVariableType(self._instance.Xvrcfg)
+		__r = self._instance.Xvrcfg
+		return None if __r is None else XvrcfgVariableType(__r)
 
 	@property
 	def zabc_grp(self) -> typing.List[ZabcGrpVariableType]:
 		'''Value of variable $ZABC_GRP'''
-		return [ZabcGrpVariableType(x) for x in self._instance.ZabcGrp]
+		__r = self._instance.ZabcGrp
+		return None if __r is None else [None if x is None else ZabcGrpVariableType(x) for x in __r]
 
 	@property
 	def zdt_actvspt(self) -> ZdtActvsptVariableType:
 		'''Value of variable $ZDT_ACTVSPT'''
-		return ZdtActvsptVariableType(self._instance.ZdtActvspt)
+		__r = self._instance.ZdtActvspt
+		return None if __r is None else ZdtActvsptVariableType(__r)
 
 	@property
 	def zdt_dcschg(self) -> ZdtDcschgVariableType:
 		'''Value of variable $ZDT_DCSCHG'''
-		return ZdtDcschgVariableType(self._instance.ZdtDcschg)
+		__r = self._instance.ZdtDcschg
+		return None if __r is None else ZdtDcschgVariableType(__r)
 
 	@property
 	def zip_cfg(self) -> ZipCfgVariableType:
 		'''Value of variable $ZIP_CFG'''
-		return ZipCfgVariableType(self._instance.ZipCfg)
+		__r = self._instance.ZipCfg
+		return None if __r is None else ZipCfgVariableType(__r)
 
 	@property
 	def zmpcf_g(self) -> typing.List[ZmpcfGrpVariableType]:
 		'''Value of variable $ZMPCF_G'''
-		return [ZmpcfGrpVariableType(x) for x in self._instance.ZmpcfG]
+		__r = self._instance.ZmpcfG
+		return None if __r is None else [None if x is None else ZmpcfGrpVariableType(x) for x in __r]
 
 	@property
 	def zmp_grp(self) -> typing.List[ZmposGrpVariableType]:
 		'''Value of variable $ZMP_GRP'''
-		return [ZmposGrpVariableType(x) for x in self._instance.ZmpGrp]
+		__r = self._instance.ZmpGrp
+		return None if __r is None else [None if x is None else ZmposGrpVariableType(x) for x in __r]
 
 	@property
 	def zpcfg(self) -> ZpCfgVariableType:
 		'''Value of variable $ZPCFG'''
-		return ZpCfgVariableType(self._instance.Zpcfg)
+		__r = self._instance.Zpcfg
+		return None if __r is None else ZpCfgVariableType(__r)
 
 	@property
 	def zp_cylinder(self) -> typing.List[ZpCylinderVariableType]:
 		'''Value of variable $ZP_CYLINDER'''
-		return [ZpCylinderVariableType(x) for x in self._instance.ZpCylinder]
+		__r = self._instance.ZpCylinder
+		return None if __r is None else [None if x is None else ZpCylinderVariableType(x) for x in __r]
 
 	@property
 	def zp_grp(self) -> typing.List[ZpGrpVariableType]:
 		'''Value of variable $ZP_GRP'''
-		return [ZpGrpVariableType(x) for x in self._instance.ZpGrp]
+		__r = self._instance.ZpGrp
+		return None if __r is None else [None if x is None else ZpGrpVariableType(x) for x in __r]
 
 	@property
 	def zp_sphere(self) -> typing.List[ZpSphereVariableType]:
 		'''Value of variable $ZP_SPHERE'''
-		return [ZpSphereVariableType(x) for x in self._instance.ZpSphere]
+		__r = self._instance.ZpSphere
+		return None if __r is None else [None if x is None else ZpSphereVariableType(x) for x in __r]
 
 	@property
 	def zzz(self) -> int:

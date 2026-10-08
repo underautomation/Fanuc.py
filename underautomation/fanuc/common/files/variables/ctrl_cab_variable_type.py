@@ -35,7 +35,8 @@ class CtrlCabVariableType(GenericVariableType):
 	@property
 	def sv_amp(self) -> typing.List[AmpCoefVariableType]:
 		'''Value of variable $SV_AMP'''
-		return [AmpCoefVariableType(x) for x in self._instance.SvAmp]
+		__r = self._instance.SvAmp
+		return None if __r is None else [None if x is None else AmpCoefVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

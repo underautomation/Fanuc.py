@@ -18,7 +18,8 @@ class TpglOutVariableType(GenericVariableType):
 	@property
 	def views(self) -> typing.List[TpglViewVariableType]:
 		'''Value of variable $VIEWS'''
-		return [TpglViewVariableType(x) for x in self._instance.Views]
+		__r = self._instance.Views
+		return None if __r is None else [None if x is None else TpglViewVariableType(x) for x in __r]
 
 	@property
 	def selected(self) -> typing.List[str]:
@@ -28,7 +29,8 @@ class TpglOutVariableType(GenericVariableType):
 	@property
 	def selpos(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable $SELPOS'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.Selpos]
+		__r = self._instance.Selpos
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def pip_xml(self) -> str:
@@ -43,12 +45,14 @@ class TpglOutVariableType(GenericVariableType):
 	@property
 	def machines(self) -> typing.List[TpglmachVariableType]:
 		'''Value of variable $MACHINES'''
-		return [TpglmachVariableType(x) for x in self._instance.Machines]
+		__r = self._instance.Machines
+		return None if __r is None else [None if x is None else TpglmachVariableType(x) for x in __r]
 
 	@property
 	def recordedloc(self) -> typing.List[ReclocVariableType]:
 		'''Value of variable $RECORDEDLOC'''
-		return [ReclocVariableType(x) for x in self._instance.Recordedloc]
+		__r = self._instance.Recordedloc
+		return None if __r is None else [None if x is None else ReclocVariableType(x) for x in __r]
 
 	@property
 	def nextpipe(self) -> str:

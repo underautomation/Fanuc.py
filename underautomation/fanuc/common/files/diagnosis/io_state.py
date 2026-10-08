@@ -15,7 +15,8 @@ class IOState(IFanucContent):
 	@property
 	def states(self) -> typing.List[IOStatus]:
 		'''Status of all controller inputs and outputs'''
-		return [IOStatus(x) for x in self._instance.States]
+		__r = self._instance.States
+		return None if __r is None else [None if x is None else IOStatus(x) for x in __r]
 
 	@property
 	def name(self) -> str:

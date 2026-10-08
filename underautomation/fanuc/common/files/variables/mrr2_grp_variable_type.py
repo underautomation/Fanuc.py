@@ -151,22 +151,26 @@ class Mrr2GrpVariableType(GenericVariableType):
 	@property
 	def armload(self) -> typing.List[ArmloadVariableType]:
 		'''Value of variable $ARMLOAD'''
-		return [ArmloadVariableType(x) for x in self._instance.Armload]
+		__r = self._instance.Armload
+		return None if __r is None else [None if x is None else ArmloadVariableType(x) for x in __r]
 
 	@property
 	def armload_x(self) -> typing.List[ArmloadPVariableType]:
 		'''Value of variable $ARMLOAD_X'''
-		return [ArmloadPVariableType(x) for x in self._instance.ArmloadX]
+		__r = self._instance.ArmloadX
+		return None if __r is None else [None if x is None else ArmloadPVariableType(x) for x in __r]
 
 	@property
 	def armload_y(self) -> typing.List[ArmloadPVariableType]:
 		'''Value of variable $ARMLOAD_Y'''
-		return [ArmloadPVariableType(x) for x in self._instance.ArmloadY]
+		__r = self._instance.ArmloadY
+		return None if __r is None else [None if x is None else ArmloadPVariableType(x) for x in __r]
 
 	@property
 	def armload_z(self) -> typing.List[ArmloadPVariableType]:
 		'''Value of variable $ARMLOAD_Z'''
-		return [ArmloadPVariableType(x) for x in self._instance.ArmloadZ]
+		__r = self._instance.ArmloadZ
+		return None if __r is None else [None if x is None else ArmloadPVariableType(x) for x in __r]
 
 	@property
 	def smgrsttim(self) -> typing.List[int]:

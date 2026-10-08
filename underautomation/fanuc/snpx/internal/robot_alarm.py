@@ -26,7 +26,8 @@ class RobotAlarm:
 		:param start: The starting offset in the byte array.
 		:returns: A RobotAlarm parsed from the byte data, or null if bytes is null.
 		'''
-		return RobotAlarm(robot_alarm.FromBytes(bytes, languages(int(language)), start))
+		__r = robot_alarm.FromBytes(bytes, languages(int(language)), start)
+		return None if __r is None else RobotAlarm(__r)
 
 	@property
 	def id(self) -> AlarmId:

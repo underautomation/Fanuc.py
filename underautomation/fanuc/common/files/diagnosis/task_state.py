@@ -43,7 +43,8 @@ class TaskState:
 	@property
 	def history(self) -> typing.List[TaskHistoryData]:
 		'''Call stack history frames for the task.'''
-		return [TaskHistoryData(x) for x in self._instance.History]
+		__r = self._instance.History
+		return None if __r is None else [None if x is None else TaskHistoryData(x) for x in __r]
 
 	@history.setter
 	def history(self, value: typing.List[TaskHistoryData]):

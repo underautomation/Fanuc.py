@@ -50,7 +50,8 @@ class TbjcfgVariableType(GenericVariableType):
 	@property
 	def tj(self) -> typing.List[TbjAccVariableType]:
 		'''Value of variable $TJ'''
-		return [TbjAccVariableType(x) for x in self._instance.Tj]
+		__r = self._instance.Tj
+		return None if __r is None else [None if x is None else TbjAccVariableType(x) for x in __r]
 
 	@property
 	def jerk_ctrl(self) -> int:

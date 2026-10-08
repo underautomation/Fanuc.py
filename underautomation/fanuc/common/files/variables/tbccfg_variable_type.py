@@ -40,7 +40,8 @@ class TbccfgVariableType(GenericVariableType):
 	@property
 	def tc(self) -> typing.List[TbcAccVariableType]:
 		'''Value of variable $TC'''
-		return [TbcAccVariableType(x) for x in self._instance.Tc]
+		__r = self._instance.Tc
+		return None if __r is None else [None if x is None else TbcAccVariableType(x) for x in __r]
 
 	@property
 	def tbc_debug(self) -> int:

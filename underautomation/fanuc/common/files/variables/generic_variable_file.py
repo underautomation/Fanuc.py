@@ -15,7 +15,8 @@ class GenericVariableFile(IGenericVariableType, IFanucContent):
 
 	def get_field(self, name: str) -> GenericVariable:
 		'''Gets a variable by name (case-insensitive)'''
-		return GenericVariable(self._instance.GetField(name))
+		__r = self._instance.GetField(name)
+		return None if __r is None else GenericVariable(__r)
 
 	def generate_va(self, pathToVa: str) -> None:
 		'''Generates a .va file and writes it to the specified path'''
@@ -28,7 +29,8 @@ class GenericVariableFile(IGenericVariableType, IFanucContent):
 	@property
 	def variables(self) -> typing.List[GenericVariable]:
 		'''Variables declared in this file'''
-		return [GenericVariable(x) for x in self._instance.Variables]
+		__r = self._instance.Variables
+		return None if __r is None else [None if x is None else GenericVariable(x) for x in __r]
 
 	@property
 	def name(self) -> str:
@@ -38,7 +40,8 @@ class GenericVariableFile(IGenericVariableType, IFanucContent):
 	@property
 	def parent(self) -> IGenericVariableType:
 		'''Parent container'''
-		return IGenericVariableType(self._instance.Parent)
+		__r = self._instance.Parent
+		return None if __r is None else IGenericVariableType(__r)
 
 	@parent.setter
 	def parent(self, value: IGenericVariableType):

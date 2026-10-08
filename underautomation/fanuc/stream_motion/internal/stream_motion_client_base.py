@@ -99,7 +99,8 @@ class StreamMotionClientBase:
 
 		:returns: Limits of the robot. They are also stored in limits, and the reference limits in joint_limits.
 		'''
-		return StreamMotionLimits(self._instance.ReadLimits())
+		__r = self._instance.ReadLimits()
+		return None if __r is None else StreamMotionLimits(__r)
 
 	def enqueue(self, trajectory: Trajectory) -> int:
 		'''Adds a trajectory at the end of the queue. The session starts automatically when the robot accepts positions, and the trajectories are sent one after the other, without any change between them.
@@ -255,7 +256,8 @@ class StreamMotionClientBase:
 	@property
 	def last_status(self) -> StreamMotionStatus:
 		'''Last status received from the robot, or null if no status was received'''
-		return StreamMotionStatus(self._instance.LastStatus)
+		__r = self._instance.LastStatus
+		return None if __r is None else StreamMotionStatus(__r)
 
 	@property
 	def cycle_time(self) -> float:
@@ -275,17 +277,20 @@ class StreamMotionClientBase:
 	@property
 	def statistics(self) -> StreamMotionStatistics:
 		'''Communication statistics since the status output was started'''
-		return StreamMotionStatistics(self._instance.Statistics)
+		__r = self._instance.Statistics
+		return None if __r is None else StreamMotionStatistics(__r)
 
 	@property
 	def limits(self) -> StreamMotionLimits:
 		'''Limits read from the robot by read_limits() or when the status output starts. Null if they were not read.'''
-		return StreamMotionLimits(self._instance.Limits)
+		__r = self._instance.Limits
+		return None if __r is None else StreamMotionLimits(__r)
 
 	@property
 	def joint_limits(self) -> JointLimits:
 		'''Joint limits used to stop the robot smoothly when the positions stop in joint format. It is set to the reference limits of the robot when the limits are read.'''
-		return JointLimits(None, None, None, self._instance.JointLimits)
+		__r = self._instance.JointLimits
+		return None if __r is None else JointLimits(None, None, None, __r)
 
 	@joint_limits.setter
 	def joint_limits(self, value: JointLimits):
@@ -294,7 +299,8 @@ class StreamMotionClientBase:
 	@property
 	def cartesian_limits(self) -> CartesianLimits:
 		'''Cartesian limits used to stop the robot smoothly when the positions stop in Cartesian format. When it is null, conservative values are used.'''
-		return CartesianLimits(None, None, None, None, None, None, self._instance.CartesianLimits)
+		__r = self._instance.CartesianLimits
+		return None if __r is None else CartesianLimits(None, None, None, None, None, None, __r)
 
 	@cartesian_limits.setter
 	def cartesian_limits(self, value: CartesianLimits):
@@ -321,12 +327,14 @@ class StreamMotionClientBase:
 	@property
 	def queue_end_joint_position(self) -> JointsPosition:
 		'''Position where the next queued joint trajectory must start: end of the queue, or current position when the queue is empty. Null if no status was received.'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.QueueEndJointPosition)
+		__r = self._instance.QueueEndJointPosition
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@property
 	def queue_end_cartesian_position(self) -> ExtendedCartesianPosition:
 		'''Position where the next queued Cartesian trajectory must start: end of the queue, or last position sent when the queue is empty. Before any Cartesian position was sent, it is the Cartesian position of the status (flange center in the world frame by default). Some controllers expect Cartesian positions of the active tool frame: the start of the first trajectory is then not checked. Null if no status was received.'''
-		return ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, self._instance.QueueEndCartesianPosition)
+		__r = self._instance.QueueEndCartesianPosition
+		return None if __r is None else ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@property
 	def queued_motion_count(self) -> int:
@@ -370,7 +378,8 @@ class StreamMotionClientBase:
 	@property
 	def io_values(self) -> typing.List[IOValue]:
 		'''Last values of the ranges of I/O added with add_io_monitor()'''
-		return [IOValue(x) for x in self._instance.IOValues]
+		__r = self._instance.IOValues
+		return None if __r is None else [None if x is None else IOValue(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

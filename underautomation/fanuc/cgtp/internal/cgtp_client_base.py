@@ -144,7 +144,8 @@ class CgtpClientBase:
 
 	def set_program_position_to_current_cartesian_position(self, progName: str, positionIndex: int, groupNumber: int=1) -> CartesianPosition:
 		'''Set position at index positionIndex to the current Cartesian position in program progName and return the updated position.'''
-		return CartesianPosition(None, None, None, None, None, None, None, self._instance.SetProgramPositionToCurrentCartesianPosition(progName, positionIndex, groupNumber))
+		__r = self._instance.SetProgramPositionToCurrentCartesianPosition(progName, positionIndex, groupNumber)
+		return None if __r is None else CartesianPosition(None, None, None, None, None, None, None, __r)
 
 	def set_program_position(self, progName: str, positionIndex: int, position: Position) -> None:
 		'''Set position at index positionIndex in program progName to the given position. Supports both joint and Cartesian representations. Only the first motion group is supported via CGTP. From firmware 9.10
@@ -178,7 +179,8 @@ class CgtpClientBase:
 		:param progName: Program name, or null for system variables.
 		:returns: The variable value with its data type.
 		'''
-		return CgtpVariableValue(self._instance.ReadVariable(varName, progName))
+		__r = self._instance.ReadVariable(varName, progName)
+		return None if __r is None else CgtpVariableValue(__r)
 
 	def write_variable(self, varName: str, value: float | int | str, progName: str=None) -> None:
 		'''Write a real (double) value to variable varName in program progName. From firmware 8.30
@@ -233,21 +235,24 @@ class CgtpClientBase:
 
 		:returns: Array where index 0 corresponds to R[1], index 1 to R[2], etc.
 		'''
-		return [NumericRegisterWithComment(None, None, x) for x in self._instance.ReadNumericRegistersWithComment()]
+		__r = self._instance.ReadNumericRegistersWithComment()
+		return None if __r is None else [None if x is None else NumericRegisterWithComment(None, None, x) for x in __r]
 
 	def read_string_registers_with_comment(self) -> typing.List[StringRegisterWithComment]:
 		'''Read all string registers (SR[]) with their comments and values.
 
 		:returns: Array where index 0 corresponds to SR[1], index 1 to SR[2], etc.
 		'''
-		return [StringRegisterWithComment(x) for x in self._instance.ReadStringRegistersWithComment()]
+		__r = self._instance.ReadStringRegistersWithComment()
+		return None if __r is None else [None if x is None else StringRegisterWithComment(x) for x in __r]
 
 	def read_user_alarms(self) -> typing.List[UserAlarmDefinition]:
 		'''Read all user alarm definitions with their comments and severity.
 
 		:returns: Array where index 0 corresponds to User Alarm[1], index 1 to User Alarm[2], etc.
 		'''
-		return [UserAlarmDefinition(x) for x in self._instance.ReadUserAlarms()]
+		__r = self._instance.ReadUserAlarms()
+		return None if __r is None else [None if x is None else UserAlarmDefinition(x) for x in __r]
 
 	def get_io_comments(self, type: CgtpCommentIoType) -> IOComments:
 		'''Read all I/O comments for the specified I/O type.
@@ -255,7 +260,8 @@ class CgtpClientBase:
 		:param type: The type of I/O pair to read comments for.
 		:returns: An IOComments containing input and output comment arrays.
 		'''
-		return IOComments(self._instance.GetIoComments(cgtp_comment_io_type(int(type))))
+		__r = self._instance.GetIoComments(cgtp_comment_io_type(int(type)))
+		return None if __r is None else IOComments(__r)
 
 	def get_comments(self, type: CgtpCommentType) -> typing.List[str]:
 		'''Read all comments for the specified element type. For I/O types (RI, RO, DI, DO, GI, GO, AI, AO), returns the input or output comments accordingly.
@@ -267,11 +273,13 @@ class CgtpClientBase:
 
 	def read_numeric_register_with_comment(self, index: int) -> NumericRegisterWithComment:
 		'''Read the numeric register (R[]) at index. From firmware 9.10'''
-		return NumericRegisterWithComment(None, None, self._instance.ReadNumericRegisterWithComment(index))
+		__r = self._instance.ReadNumericRegisterWithComment(index)
+		return None if __r is None else NumericRegisterWithComment(None, None, __r)
 
 	def read_position_register_with_comment(self, index: int, groupNum: int=1) -> PositionRegisterWithComment:
 		'''Read the position register (PR[]) at index for motion group groupNum. From firmware 9.10'''
-		return PositionRegisterWithComment(self._instance.ReadPositionRegisterWithComment(index, groupNum))
+		__r = self._instance.ReadPositionRegisterWithComment(index, groupNum)
+		return None if __r is None else PositionRegisterWithComment(__r)
 
 	def read_batch_variables(self, variables: CgtpBatchVariables) -> CgtpBatchReadResult:
 		'''Read multiple variables from the controller in a single batch operation. Each variable in variables will be updated with the value read from the controller.
@@ -279,7 +287,8 @@ class CgtpClientBase:
 		:param variables: Collection of variables to read. Each variable will have its value, Exists, IsUninitialized and IsReadOnly properties set after the call.
 		:returns: A result object containing the controller firmware version.
 		'''
-		return CgtpBatchReadResult(self._instance.ReadBatchVariables(variables._instance if variables else None))
+		__r = self._instance.ReadBatchVariables(variables._instance if variables else None)
+		return None if __r is None else CgtpBatchReadResult(__r)
 
 	def write_position_register_as_cartesian(self, index: int, value: CartesianPosition, groupNum: int=1) -> None:
 		'''Write a cartesian position value to a position register (PR[])
@@ -305,7 +314,8 @@ class CgtpClientBase:
 		:param variables: Collection of variables to write. Each variable must have its value set before calling this method.
 		:returns: A result object.
 		'''
-		return CgtpBatchWriteResult(self._instance.WriteBatchVariables(variables._instance if variables else None))
+		__r = self._instance.WriteBatchVariables(variables._instance if variables else None)
+		return None if __r is None else CgtpBatchWriteResult(__r)
 
 	def read_io(self, portType: CgtpIoPortType, index: int) -> int:
 		'''Read the value of I/O port at index of type portType. From firmware 8.30'''
@@ -329,11 +339,13 @@ class CgtpClientBase:
 
 	def read_cartesian_position(self, groupNum: int=1) -> CartesianPosition:
 		'''Read the current Cartesian position of motion group groupNum. From firmware 9.10'''
-		return CartesianPosition(None, None, None, None, None, None, None, self._instance.ReadCartesianPosition(groupNum))
+		__r = self._instance.ReadCartesianPosition(groupNum)
+		return None if __r is None else CartesianPosition(None, None, None, None, None, None, None, __r)
 
 	def read_joint_position(self, groupNum: int=1) -> JointsPosition:
 		'''Read the current joint angles of motion group groupNum. From firmware 9.10'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.ReadJointPosition(groupNum))
+		__r = self._instance.ReadJointPosition(groupNum)
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	def invert_kinematics(self, group: int, cartesianPosition: CartesianPosition, userTool: int=-1, userFrame: int=-1) -> JointsPosition:
 		'''Compute the inverse kinematics on the controller: convert a Cartesian position to joint angles.
@@ -344,7 +356,8 @@ class CgtpClientBase:
 		:param userFrame: Optional user frame number to use for kinematics calculation, or -1 for world.
 		:returns: The corresponding joint position.
 		'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.InvertKinematics(group, cartesianPosition._instance if cartesianPosition else None, userTool, userFrame))
+		__r = self._instance.InvertKinematics(group, cartesianPosition._instance if cartesianPosition else None, userTool, userFrame)
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	def forward_kinematics(self, group: int, jointPosition: JointsPosition, userTool: int=-1, userFrame: int=-1) -> CartesianPosition:
 		'''Compute the forward kinematics on the controller: convert joint angles to a Cartesian position.
@@ -355,7 +368,8 @@ class CgtpClientBase:
 		:param userFrame: Optional user frame number to use for kinematics calculation, or -1 for world.
 		:returns: The corresponding Cartesian position.
 		'''
-		return CartesianPosition(None, None, None, None, None, None, None, self._instance.ForwardKinematics(group, jointPosition._instance if jointPosition else None, userTool, userFrame))
+		__r = self._instance.ForwardKinematics(group, jointPosition._instance if jointPosition else None, userTool, userFrame)
+		return None if __r is None else CartesianPosition(None, None, None, None, None, None, None, __r)
 
 	def list_files(self, pathName: str="MD:") -> typing.List[str]:
 		'''List files at the specified path on the controller. From firmware 9.40'''
@@ -371,13 +385,15 @@ class CgtpClientBase:
 
 	@property
 	def kcl(self) -> CgtpKclClient:
-		'''KCL client for executing KCL commands over CGTP. Use it instead of the Telnet KCL client, which is a legacy protocol. Some commands are sent in Unsafe mode: the controller returns no status, so the result cannot tell if the command was executed. To start a program, prefer RunProgram().'''
-		return CgtpKclClient(self._instance.Kcl)
+		'''KCL client for executing KCL commands over CGTP.'''
+		__r = self._instance.Kcl
+		return None if __r is None else CgtpKclClient(__r)
 
 	@property
 	def http(self) -> CgtpHttpClient:
 		'''Provides methods to download and decode files from the controller via HTTP.'''
-		return CgtpHttpClient(self._instance.Http)
+		__r = self._instance.Http
+		return None if __r is None else CgtpHttpClient(__r)
 
 	@property
 	def language(self) -> Languages:

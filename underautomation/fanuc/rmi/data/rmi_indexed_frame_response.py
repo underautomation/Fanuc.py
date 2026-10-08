@@ -24,7 +24,8 @@ class RmiIndexedFrameResponse(RmiResponseBase):
 	@property
 	def frame(self) -> XYZWPRPosition:
 		'''Frame data.'''
-		return XYZWPRPosition(None, None, None, None, None, None, self._instance.Frame)
+		__r = self._instance.Frame
+		return None if __r is None else XYZWPRPosition(None, None, None, None, None, None, __r)
 
 	@frame.setter
 	def frame(self, value: XYZWPRPosition):

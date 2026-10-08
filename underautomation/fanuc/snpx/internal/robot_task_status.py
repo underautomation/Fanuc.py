@@ -23,7 +23,8 @@ class RobotTaskStatus:
 		:param start: The starting offset in the byte array.
 		:returns: A RobotTaskStatus parsed from the byte data, or null if bytes is null.
 		'''
-		return RobotTaskStatus(robot_task_status.FromBytes(bytes, languages(int(language)), start))
+		__r = robot_task_status.FromBytes(bytes, languages(int(language)), start)
+		return None if __r is None else RobotTaskStatus(__r)
 
 	@property
 	def program_name(self) -> str:

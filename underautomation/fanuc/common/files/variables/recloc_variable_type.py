@@ -15,7 +15,8 @@ class ReclocVariableType(GenericVariableType):
 	@property
 	def slots(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable $SLOTS'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.Slots]
+		__r = self._instance.Slots
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

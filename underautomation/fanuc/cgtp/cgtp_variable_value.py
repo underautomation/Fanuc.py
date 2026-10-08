@@ -34,12 +34,14 @@ class CgtpVariableValue:
 	@property
 	def cartesian_position_value(self) -> CartesianPositionVariable:
 		'''Value interpreted as a Cartesian position.'''
-		return CartesianPositionVariable(None, None, self._instance.CartesianPositionValue)
+		__r = self._instance.CartesianPositionValue
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def joint_position_value(self) -> JointPositionVariable:
 		'''Value interpreted as a joint position.'''
-		return JointPositionVariable(None, None, self._instance.JointPositionValue)
+		__r = self._instance.JointPositionValue
+		return None if __r is None else JointPositionVariable(None, None, __r)
 
 	@property
 	def integer_value(self) -> int:
@@ -59,12 +61,14 @@ class CgtpVariableValue:
 	@property
 	def vector_value(self) -> VectorVariable:
 		'''Value interpreted as a 3D vector.'''
-		return VectorVariable(self._instance.VectorValue)
+		__r = self._instance.VectorValue
+		return None if __r is None else VectorVariable(__r)
 
 	@property
 	def configuration_value(self) -> Configuration:
 		'''Value interpreted as a robot configuration.'''
-		return Configuration(None, None, None, None, None, None, None, self._instance.ConfigurationValue)
+		__r = self._instance.ConfigurationValue
+		return None if __r is None else Configuration(None, None, None, None, None, None, None, __r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

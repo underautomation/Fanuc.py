@@ -25,7 +25,8 @@ class IOEvent:
 	@property
 	def signal(self) -> DigitalSignal:
 		'''Signal to write'''
-		return DigitalSignal(None, None, self._instance.Signal)
+		__r = self._instance.Signal
+		return None if __r is None else DigitalSignal(None, None, __r)
 
 	@property
 	def value(self) -> bool:

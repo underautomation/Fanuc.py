@@ -14,12 +14,14 @@ class GenericVariableTypeHelpers:
 	@staticmethod
 	def get_ancestors(element: IGenericVariableType) -> typing.List[IGenericVariableType]:
 		'''Recursively get parents in an array. The first element is the root element and the last one is the direct parent of the element.'''
-		return [IGenericVariableType(x) for x in generic_variable_type_helpers.GetAncestors(element._instance if element else None)]
+		__r = generic_variable_type_helpers.GetAncestors(element._instance if element else None)
+		return None if __r is None else [None if x is None else IGenericVariableType(x) for x in __r]
 
 	@staticmethod
 	def get_field(element: IGenericVariableType, name: str) -> IGenericVariableType:
 		'''Get a field by its name (case insensitive)'''
-		return IGenericVariableType(generic_variable_type_helpers.GetField(element._instance if element else None, name))
+		__r = generic_variable_type_helpers.GetField(element._instance if element else None, name)
+		return None if __r is None else IGenericVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

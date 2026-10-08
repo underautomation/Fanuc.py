@@ -60,7 +60,8 @@ class CondetCfgVariableType(GenericVariableType):
 	@property
 	def ext_data(self) -> typing.List[CondetDataVariableType]:
 		'''Value of variable $EXT_DATA'''
-		return [CondetDataVariableType(x) for x in self._instance.ExtData]
+		__r = self._instance.ExtData
+		return None if __r is None else [None if x is None else CondetDataVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

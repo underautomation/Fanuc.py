@@ -110,7 +110,8 @@ class RspaceVariableType(GenericVariableType):
 	@property
 	def ufinv_post(self) -> CartesianPositionVariable:
 		'''Value of variable $UFINV_POST'''
-		return CartesianPositionVariable(None, None, self._instance.UfinvPost)
+		__r = self._instance.UfinvPost
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def margin(self) -> float:

@@ -20,7 +20,8 @@ class HtcolrecFile(GenericVariableFile):
 	@property
 	def col_recov(self) -> AutoColRecVariableType:
 		'''Value of variable COL_RECOV'''
-		return AutoColRecVariableType(self._instance.ColRecov)
+		__r = self._instance.ColRecov
+		return None if __r is None else AutoColRecVariableType(__r)
 
 	@property
 	def col_dbg(self) -> bool:

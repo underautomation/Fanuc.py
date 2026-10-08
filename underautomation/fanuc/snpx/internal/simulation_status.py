@@ -21,7 +21,8 @@ class SimulationStatus(SnpxWritableAssignableElements3[bool, SimulationData, Sim
 		:param indexes: The indices to include in the batch.
 		:returns: A batch assignment for the specified indices.
 		'''
-		return SimulationStatusBatchAssignment(self._instance.CreateBatchAssignment([x._instance if x else None for x in indexes]))
+		__r = self._instance.CreateBatchAssignment([x._instance if x else None for x in indexes])
+		return None if __r is None else SimulationStatusBatchAssignment(__r)
 
 	def read(self, type: SimulationType, index: int) -> bool:
 		'''Reads the simulation status for the specified I/O type and index.

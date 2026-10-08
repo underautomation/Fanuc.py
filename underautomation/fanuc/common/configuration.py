@@ -22,7 +22,8 @@ class Configuration:
 	@staticmethod
 	def parse(value: str) -> 'Configuration':
 		'''Parse a Fanuc configuration from its string representation, like : "N U T, 0, 0, 0" or "R, 0, 0, 0"'''
-		return Configuration(None, None, None, None, None, None, None, configuration.Parse(value))
+		__r = configuration.Parse(value)
+		return None if __r is None else Configuration(None, None, None, None, None, None, None, __r)
 
 	def from_string(self, value: str) -> None:
 		'''Parse a Fanuc configuration string representation, like : "N U T, 0, 0, 0" or "R, 0, 0, 0"'''

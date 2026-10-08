@@ -19,7 +19,8 @@ class Flags(SnpxWritableAssignableIndexableElements2[bool, FlagBatchAssignment])
 		:param count: The number of consecutive flags.
 		:returns: A batch assignment for the specified range.
 		'''
-		return FlagBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+		__r = self._instance.CreateBatchAssignment(startIndex, count)
+		return None if __r is None else FlagBatchAssignment(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

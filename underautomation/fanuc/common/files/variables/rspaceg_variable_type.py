@@ -16,12 +16,14 @@ class RspacegVariableType(GenericVariableType):
 	@property
 	def com_space(self) -> typing.List[ComSpaceVariableType]:
 		'''Value of variable $COM_SPACE'''
-		return [ComSpaceVariableType(x) for x in self._instance.ComSpace]
+		__r = self._instance.ComSpace
+		return None if __r is None else [None if x is None else ComSpaceVariableType(x) for x in __r]
 
 	@property
 	def gp_hold(self) -> typing.List[GpHoldVariableType]:
 		'''Value of variable $GP_HOLD'''
-		return [GpHoldVariableType(x) for x in self._instance.GpHold]
+		__r = self._instance.GpHold
+		return None if __r is None else [None if x is None else GpHoldVariableType(x) for x in __r]
 
 	@property
 	def spare_int(self) -> typing.List[int]:

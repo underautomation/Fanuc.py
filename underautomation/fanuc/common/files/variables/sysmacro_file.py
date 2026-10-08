@@ -27,7 +27,8 @@ class SysmacroFile(GenericVariableFile):
 	@property
 	def macrotable(self) -> typing.List[MnMcrTableVariableType]:
 		'''Value of variable $MACROTABLE'''
-		return [MnMcrTableVariableType(x) for x in self._instance.Macrotable]
+		__r = self._instance.Macrotable
+		return None if __r is None else [None if x is None else MnMcrTableVariableType(x) for x in __r]
 
 	@property
 	def macro_maxnu(self) -> int:
@@ -37,7 +38,8 @@ class SysmacroFile(GenericVariableFile):
 	@property
 	def macrsopenbl(self) -> MnMcrSopVariableType:
 		'''Value of variable $MACRSOPENBL'''
-		return MnMcrSopVariableType(self._instance.Macrsopenbl)
+		__r = self._instance.Macrsopenbl
+		return None if __r is None else MnMcrSopVariableType(__r)
 
 	@property
 	def macrspdimsk(self) -> int:
@@ -57,7 +59,8 @@ class SysmacroFile(GenericVariableFile):
 	@property
 	def macruopenbl(self) -> MnMcrUopVariableType:
 		'''Value of variable $MACRUOPENBL'''
-		return MnMcrUopVariableType(self._instance.Macruopenbl)
+		__r = self._instance.Macruopenbl
+		return None if __r is None else MnMcrUopVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

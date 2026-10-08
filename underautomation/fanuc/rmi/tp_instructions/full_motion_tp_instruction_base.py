@@ -63,7 +63,8 @@ class FullMotionTpInstructionBase(MotionTpInstructionBase):
 	@property
 	def port_type(self) -> RmiPortType | None:
 		'''Digital output port type to trigger at the end of this motion. null disables output.'''
-		return RmiPortType(int(self._instance.PortType))
+		__r = self._instance.PortType
+		return None if __r is None else RmiPortType(int(__r))
 
 	@port_type.setter
 	def port_type(self, value: RmiPortType | None):
@@ -81,7 +82,8 @@ class FullMotionTpInstructionBase(MotionTpInstructionBase):
 	@property
 	def port_value(self) -> RmiOnOff | None:
 		'''Digital output port value. Required when port_type is set.'''
-		return RmiOnOff(int(self._instance.PortValue))
+		__r = self._instance.PortValue
+		return None if __r is None else RmiOnOff(int(__r))
 
 	@port_value.setter
 	def port_value(self, value: RmiOnOff | None):

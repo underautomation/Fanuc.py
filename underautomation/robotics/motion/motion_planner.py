@@ -26,19 +26,22 @@ class MotionPlanner:
 
 		:param start: Start position, for example the current position of the robot (up to MaxJointCount axes)
 		'''
-		return JointPathBuilder(self._instance.CreateJointPath(start._instance if start else None))
+		__r = self._instance.CreateJointPath(start._instance if start else None)
+		return None if __r is None else JointPathBuilder(__r)
 
 	def create_cartesian_path(self, start: CartesianPose) -> CartesianPathBuilder:
 		'''Starts a Cartesian path
 
 		:param start: Start pose of the flange in the world frame, for example the current pose of the robot. It is converted with tool_frame and user_frame.
 		'''
-		return CartesianPathBuilder(self._instance.CreateCartesianPath(start._instance if start else None))
+		__r = self._instance.CreateCartesianPath(start._instance if start else None)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	@property
 	def joint_limits(self) -> JointLimits:
 		'''Limits for joint motions. 100% speed uses the velocity limits of this object. The limits of axes 7 to 9 are also used for the external axes of Cartesian motions.'''
-		return JointLimits(None, None, None, self._instance.JointLimits)
+		__r = self._instance.JointLimits
+		return None if __r is None else JointLimits(None, None, None, __r)
 
 	@joint_limits.setter
 	def joint_limits(self, value: JointLimits):
@@ -47,7 +50,8 @@ class MotionPlanner:
 	@property
 	def cartesian_limits(self) -> CartesianLimits:
 		'''Limits for Cartesian motions'''
-		return CartesianLimits(None, None, None, None, None, None, self._instance.CartesianLimits)
+		__r = self._instance.CartesianLimits
+		return None if __r is None else CartesianLimits(None, None, None, None, None, None, __r)
 
 	@cartesian_limits.setter
 	def cartesian_limits(self, value: CartesianLimits):
@@ -56,7 +60,8 @@ class MotionPlanner:
 	@property
 	def tool_frame(self) -> CartesianPose:
 		'''Tool frame, relative to the flange. When it is set, the targets of Cartesian motions are poses of this tool, and the trajectory gives the flange poses. Null when the targets are flange poses.'''
-		return CartesianPose(None, None, None, None, self._instance.ToolFrame)
+		__r = self._instance.ToolFrame
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	@tool_frame.setter
 	def tool_frame(self, value: CartesianPose):
@@ -65,7 +70,8 @@ class MotionPlanner:
 	@property
 	def user_frame(self) -> CartesianPose:
 		'''User frame, relative to the world frame. When it is set, the targets of Cartesian motions are expressed in this frame, and the trajectory gives poses in the world frame. Null when the targets are in the world frame.'''
-		return CartesianPose(None, None, None, None, self._instance.UserFrame)
+		__r = self._instance.UserFrame
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	@user_frame.setter
 	def user_frame(self, value: CartesianPose):

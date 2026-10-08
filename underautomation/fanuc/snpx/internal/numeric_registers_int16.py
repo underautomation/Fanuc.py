@@ -19,7 +19,8 @@ class NumericRegistersInt16(NumericRegistersBase2[int, NumericRegistersInt16Batc
 		:param count: The number of consecutive registers.
 		:returns: A batch assignment for the specified range.
 		'''
-		return NumericRegistersInt16BatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+		__r = self._instance.CreateBatchAssignment(startIndex, count)
+		return None if __r is None else NumericRegistersInt16BatchAssignment(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

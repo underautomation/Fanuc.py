@@ -19,7 +19,8 @@ class JointPositionVariable(JointsPosition):
 	@staticmethod
 	def parse(value: str) -> 'JointPositionVariable':
 		'''Parses a joint position from its string representation'''
-		return JointPositionVariable(None, None, joint_position_variable.Parse(value))
+		__r = joint_position_variable.Parse(value)
+		return None if __r is None else JointPositionVariable(None, None, __r)
 
 	@property
 	def group(self) -> int:

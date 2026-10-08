@@ -40,7 +40,8 @@ class IrcStlabelFile(GenericVariableFile):
 	@property
 	def irc_gnrc(self) -> IrcGnrcVariableType:
 		'''Value of variable IRC_GNRC'''
-		return IrcGnrcVariableType(self._instance.IrcGnrc)
+		__r = self._instance.IrcGnrc
+		return None if __r is None else IrcGnrcVariableType(__r)
 
 	@property
 	def pkrcxmlfile(self) -> str:

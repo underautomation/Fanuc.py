@@ -22,7 +22,8 @@ class Orientation:
 		:param qy: Y component of the vector part
 		:param qz: Z component of the vector part
 		'''
-		return Orientation(orientation.FromQuaternion(qw, qx, qy, qz))
+		__r = orientation.FromQuaternion(qw, qx, qy, qz)
+		return None if __r is None else Orientation(__r)
 
 	@staticmethod
 	def from_euler(a: float, b: float, c: float, convention: EulerConvention) -> 'Orientation':
@@ -33,7 +34,8 @@ class Orientation:
 		:param c: Third angle in degrees
 		:param convention: Convention of the angles
 		'''
-		return Orientation(orientation.FromEuler(a, b, c, euler_convention(int(convention))))
+		__r = orientation.FromEuler(a, b, c, euler_convention(int(convention)))
+		return None if __r is None else Orientation(__r)
 
 	def to_euler(self, convention: EulerConvention) -> typing.List[float]:
 		'''Returns the three Euler angles [a, b, c] of this orientation, in degrees. For MobileZYZ, b is between 0 and 180. For the other conventions, b is between -90 and 90. When the orientation is singular (b = 0 or 180 for ZYZ, b = -90 or 90 for the others), only a combination of a and c is defined: a is set to 0 for FixedXYZ, and c is set to 0 for the other conventions.
@@ -51,7 +53,8 @@ class Orientation:
 		:param z: Z component of the axis
 		:param angle: Rotation angle in degrees
 		'''
-		return Orientation(orientation.FromAxisAngle(x, y, z, angle))
+		__r = orientation.FromAxisAngle(x, y, z, angle)
+		return None if __r is None else Orientation(__r)
 
 	def to_axis_angle(self) -> typing.List[float]:
 		'''Returns the rotation axis and angle: [x, y, z, angle in degrees]. The axis is a unit vector and the angle is between 0 and 180.'''
@@ -65,7 +68,8 @@ class Orientation:
 		:param y: Y component
 		:param z: Z component
 		'''
-		return Orientation(orientation.FromRotationVector(x, y, z))
+		__r = orientation.FromRotationVector(x, y, z)
+		return None if __r is None else Orientation(__r)
 
 	def to_rotation_vector(self) -> typing.List[float]:
 		'''Returns the rotation vector [x, y, z] of this orientation: its direction is the rotation axis and its norm is the angle in degrees (0 to 180)'''
@@ -73,7 +77,12 @@ class Orientation:
 
 	@staticmethod
 	def from_rotation_matrix(matrix: typing.List[float]) -> 'Orientation':
-		return Orientation(orientation.FromRotationMatrix(matrix))
+		'''Creates an orientation from a rotation matrix (3x3, or 4x4 homogeneous matrix)
+
+		:param matrix: Rotation matrix
+		'''
+		__r = orientation.FromRotationMatrix(matrix)
+		return None if __r is None else Orientation(__r)
 
 	def to_rotation_matrix(self) -> typing.List[float]:
 		'''Returns the 3x3 rotation matrix of this orientation'''
@@ -84,11 +93,13 @@ class Orientation:
 
 		:param other: Right operand
 		'''
-		return Orientation(self._instance.Multiply(other._instance if other else None))
+		__r = self._instance.Multiply(other._instance if other else None)
+		return None if __r is None else Orientation(__r)
 
 	def inverse(self) -> 'Orientation':
 		'''Returns the inverse rotation'''
-		return Orientation(self._instance.Inverse())
+		__r = self._instance.Inverse()
+		return None if __r is None else Orientation(__r)
 
 	def angle_to(self, other: 'Orientation') -> float:
 		'''Angle of the rotation between the two orientations, in degrees (0 to 180)
@@ -105,7 +116,8 @@ class Orientation:
 		:param end: Orientation for t = 1
 		:param t: Interpolation parameter, usually between 0 and 1
 		'''
-		return Orientation(orientation.Slerp(start._instance if start else None, end._instance if end else None, t))
+		__r = orientation.Slerp(start._instance if start else None, end._instance if end else None, t)
+		return None if __r is None else Orientation(__r)
 
 	@property
 	def qw(self) -> float:

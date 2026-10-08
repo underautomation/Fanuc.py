@@ -1,7 +1,7 @@
 from enum import IntEnum
 
 class SegmentName(IntEnum):
-	'''Identifies a family of I/O signals.'''
+	'''Identifies the type of I/O segment.'''
 	SDI = 0 # Safety Digital Input.
 	SDO = 1 # Safety Digital Output.
 	RDI = 2 # Remote Digital Input.

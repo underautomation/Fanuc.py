@@ -21,7 +21,8 @@ class CrxKinematicsUtils:
 		:param parameters: DH Parameters
 		:param includeDuals: Whether to add dual solutions per Eq. (23).
 		'''
-		return [JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in crx_kinematics_utils.InverseKinematics(pose._instance if pose else None, parameters._instance if parameters else None, includeDuals)]
+		__r = crx_kinematics_utils.InverseKinematics(pose._instance if pose else None, parameters._instance if parameters else None, includeDuals)
+		return None if __r is None else [None if x is None else JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

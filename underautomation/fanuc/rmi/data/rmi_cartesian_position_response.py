@@ -15,7 +15,8 @@ class RmiCartesianPositionResponse(RmiTimedResponse):
 	@property
 	def position(self) -> CartesianPositionWithUserFrame:
 		'''Current TCP position including configuration and active frame/tool numbers.'''
-		return CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, self._instance.Position)
+		__r = self._instance.Position
+		return None if __r is None else CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, __r)
 
 	@position.setter
 	def position(self, value: CartesianPositionWithUserFrame):

@@ -13,7 +13,8 @@ class IGenericVariableType:
 	@property
 	def fields(self) -> typing.List['IGenericVariableType']:
 		'''Fields inside this structure'''
-		return [IGenericVariableType(x) for x in self._instance.Fields]
+		__r = self._instance.Fields
+		return None if __r is None else [None if x is None else IGenericVariableType(x) for x in __r]
 
 	@property
 	def name(self) -> str:
@@ -23,7 +24,8 @@ class IGenericVariableType:
 	@property
 	def parent(self) -> 'IGenericVariableType':
 		'''Parent of this structure'''
-		return IGenericVariableType(self._instance.Parent)
+		__r = self._instance.Parent
+		return None if __r is None else IGenericVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

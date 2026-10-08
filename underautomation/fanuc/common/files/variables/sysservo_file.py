@@ -16,12 +16,14 @@ class SysservoFile(GenericVariableFile):
 	@property
 	def sbr(self) -> typing.List[SbrVariableType]:
 		'''Value of variable $SBR'''
-		return [SbrVariableType(x) for x in self._instance.Sbr]
+		__r = self._instance.Sbr
+		return None if __r is None else [None if x is None else SbrVariableType(x) for x in __r]
 
 	@property
 	def sbr2(self) -> typing.List[Sbr2VariableType]:
 		'''Value of variable $SBR2'''
-		return [Sbr2VariableType(x) for x in self._instance.Sbr2]
+		__r = self._instance.Sbr2
+		return None if __r is None else [None if x is None else Sbr2VariableType(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

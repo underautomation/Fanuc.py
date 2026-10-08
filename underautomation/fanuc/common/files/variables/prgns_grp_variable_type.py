@@ -15,7 +15,8 @@ class PrgnsGrpVariableType(GenericVariableType):
 	@property
 	def elem(self) -> typing.List[PrgnsElemVariableType]:
 		'''Value of variable $ELEM'''
-		return [PrgnsElemVariableType(x) for x in self._instance.Elem]
+		__r = self._instance.Elem
+		return None if __r is None else [None if x is None else PrgnsElemVariableType(x) for x in __r]
 
 	@property
 	def min_ang(self) -> typing.List[float]:

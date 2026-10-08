@@ -30,7 +30,8 @@ class HistDayVariableType(GenericVariableType):
 	@property
 	def hist_data(self) -> typing.List[HistEleVariableType]:
 		'''Value of variable $HIST_DATA'''
-		return [HistEleVariableType(x) for x in self._instance.HistData]
+		__r = self._instance.HistData
+		return None if __r is None else [None if x is None else HistEleVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

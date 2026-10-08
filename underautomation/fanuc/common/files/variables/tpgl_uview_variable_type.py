@@ -25,7 +25,8 @@ class TpglUviewVariableType(GenericVariableType):
 	@property
 	def view(self) -> ViewVariableType:
 		'''Value of variable $VIEW'''
-		return ViewVariableType(self._instance.View)
+		__r = self._instance.View
+		return None if __r is None else ViewVariableType(__r)
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

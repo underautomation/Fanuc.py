@@ -12,7 +12,7 @@ class FtpConnectParametersBase:
 
 	@property
 	def ftp_user(self) -> str:
-		'''FTP user. The rights depend on the user and on the password settings of the controller: for example, without a user the controller logs in at the OPERATOR level and can refuse the upload of a program.'''
+		'''FTP user'''
 		return self._instance.FtpUser
 
 	@ftp_user.setter

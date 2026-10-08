@@ -25,12 +25,14 @@ class SycldintFile(GenericVariableFile):
 	@property
 	def jcr(self) -> JcrVariableType:
 		'''Value of variable $JCR'''
-		return JcrVariableType(self._instance.Jcr)
+		__r = self._instance.Jcr
+		return None if __r is None else JcrVariableType(__r)
 
 	@property
 	def jcr_grp(self) -> typing.List[JcrGrpVariableType]:
 		'''Value of variable $JCR_GRP'''
-		return [JcrGrpVariableType(x) for x in self._instance.JcrGrp]
+		__r = self._instance.JcrGrp
+		return None if __r is None else [None if x is None else JcrGrpVariableType(x) for x in __r]
 
 	@property
 	def load_device(self) -> str:
@@ -40,22 +42,26 @@ class SycldintFile(GenericVariableFile):
 	@property
 	def mcr(self) -> McrVariableType:
 		'''Value of variable $MCR'''
-		return McrVariableType(self._instance.Mcr)
+		__r = self._instance.Mcr
+		return None if __r is None else McrVariableType(__r)
 
 	@property
 	def mcr_grp(self) -> typing.List[McrGrpVariableType]:
 		'''Value of variable $MCR_GRP'''
-		return [McrGrpVariableType(x) for x in self._instance.McrGrp]
+		__r = self._instance.McrGrp
+		return None if __r is None else [None if x is None else McrGrpVariableType(x) for x in __r]
 
 	@property
 	def mor(self) -> MorVariableType:
 		'''Value of variable $MOR'''
-		return MorVariableType(self._instance.Mor)
+		__r = self._instance.Mor
+		return None if __r is None else MorVariableType(__r)
 
 	@property
 	def mor_grp(self) -> typing.List[MorGrpVariableType]:
 		'''Value of variable $MOR_GRP'''
-		return [MorGrpVariableType(x) for x in self._instance.MorGrp]
+		__r = self._instance.MorGrp
+		return None if __r is None else [None if x is None else MorGrpVariableType(x) for x in __r]
 
 	@property
 	def pwr_up_rtn(self) -> typing.List[str]:

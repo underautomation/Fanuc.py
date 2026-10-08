@@ -24,7 +24,8 @@ class RmiPositionRegisterDataResponse(RmiResponseBase):
 	@property
 	def cartesian_position(self) -> CartesianPositionWithUserFrame:
 		'''Position register value.'''
-		return CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, self._instance.CartesianPosition)
+		__r = self._instance.CartesianPosition
+		return None if __r is None else CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, __r)
 
 	@cartesian_position.setter
 	def cartesian_position(self, value: CartesianPositionWithUserFrame):

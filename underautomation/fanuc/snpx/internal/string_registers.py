@@ -34,7 +34,8 @@ class StringRegisters(SnpxWritableAssignableIndexableElements2[str, StringRegist
 		:param count: The number of consecutive registers.
 		:returns: A batch assignment for the specified range.
 		'''
-		return StringRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+		__r = self._instance.CreateBatchAssignment(startIndex, count)
+		return None if __r is None else StringRegistersBatchAssignment(__r)
 
 	@staticmethod
 	def _get_string_length() -> int:

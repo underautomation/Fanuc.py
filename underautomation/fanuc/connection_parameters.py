@@ -48,8 +48,9 @@ class ConnectionParameters:
 
 	@property
 	def telnet(self) -> TelnetConnectParameters:
-		'''Parameters of the Telnet KCL client, which sends commands to the robot for remote control. Telnet KCL is a legacy protocol: it is not secured (password and commands are sent in clear text), and its behavior changes with the firmware version and on ROBOGUIDE. The same KCL commands are available on the web server of the controller with robot.Cgtp.Kcl (firmware V8.30 and later): prefer it for new developments.'''
-		return TelnetConnectParameters(self._instance.Telnet)
+		'''Sends commands to the robot for remote control'''
+		__r = self._instance.Telnet
+		return None if __r is None else TelnetConnectParameters(__r)
 
 	@telnet.setter
 	def telnet(self, value: TelnetConnectParameters):
@@ -58,7 +59,8 @@ class ConnectionParameters:
 	@property
 	def ftp(self) -> FtpConnectParameters:
 		'''Access controller internal memory to read variables, IO, positions, diagnosis, ...'''
-		return FtpConnectParameters(self._instance.Ftp)
+		__r = self._instance.Ftp
+		return None if __r is None else FtpConnectParameters(__r)
 
 	@ftp.setter
 	def ftp(self, value: FtpConnectParameters):
@@ -67,7 +69,8 @@ class ConnectionParameters:
 	@property
 	def snpx(self) -> SnpxConnectParameters:
 		'''Read and write IOs, read and clear alarms, read current program tasks'''
-		return SnpxConnectParameters(self._instance.Snpx)
+		__r = self._instance.Snpx
+		return None if __r is None else SnpxConnectParameters(__r)
 
 	@snpx.setter
 	def snpx(self, value: SnpxConnectParameters):
@@ -76,7 +79,8 @@ class ConnectionParameters:
 	@property
 	def rmi(self) -> RmiConnectParameters:
 		'''Parameters for RMI (Remote Motion Interface)'''
-		return RmiConnectParameters(self._instance.Rmi)
+		__r = self._instance.Rmi
+		return None if __r is None else RmiConnectParameters(__r)
 
 	@rmi.setter
 	def rmi(self, value: RmiConnectParameters):
@@ -85,7 +89,8 @@ class ConnectionParameters:
 	@property
 	def stream_motion(self) -> StreamMotionConnectParameters:
 		'''Parameters for Stream Motion (J519 option) - real-time streaming motion control over UDP'''
-		return StreamMotionConnectParameters(self._instance.StreamMotion)
+		__r = self._instance.StreamMotion
+		return None if __r is None else StreamMotionConnectParameters(__r)
 
 	@stream_motion.setter
 	def stream_motion(self, value: StreamMotionConnectParameters):
@@ -93,8 +98,9 @@ class ConnectionParameters:
 
 	@property
 	def cgtp(self) -> CgtpConnectParameters:
-		'''Parameters of the CGTP client, which uses the web server of the controller (HTTP)'''
-		return CgtpConnectParameters(self._instance.Cgtp)
+		'''Parameters for CGTP Web Server (HTTP-based COMET RPC interface)'''
+		__r = self._instance.Cgtp
+		return None if __r is None else CgtpConnectParameters(__r)
 
 	@cgtp.setter
 	def cgtp(self, value: CgtpConnectParameters):

@@ -14,7 +14,8 @@ class GetVariableResult(Result):
 
 	def parse_result(self) -> GenericVariable:
 		'''Returns a structured object which represents the variable (not supported with Telnet)'''
-		return GenericVariable(self._instance.ParseResult())
+		__r = self._instance.ParseResult()
+		return None if __r is None else GenericVariable(__r)
 
 	@property
 	def raw_value(self) -> str:

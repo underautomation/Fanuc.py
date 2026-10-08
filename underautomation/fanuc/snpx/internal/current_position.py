@@ -14,7 +14,8 @@ class CurrentPosition(SnpxAssignableElements2[Position, CurrentPositionRequest])
 			self._instance = _internal
 
 	def read(self, index: CurrentPositionRequest) -> Position:
-		return Position(None, None, None, None, self._instance.Read(index._instance if index else None))
+		__r = self._instance.Read(index._instance if index else None)
+		return None if __r is None else Position(None, None, None, None, __r)
 
 	@typing.overload
 	def read_world_position(self, group: int) -> Position: ...
@@ -34,10 +35,12 @@ class CurrentPosition(SnpxAssignableElements2[Position, CurrentPositionRequest])
 		__a = _bind_overload(args, kwargs, ['group'], {})
 		if __a is not None:
 			group, = __a
-			return Position(None, None, None, None, self._instance.ReadWorldPosition(group))
+			__r = self._instance.ReadWorldPosition(group)
+			return None if __r is None else Position(None, None, None, None, __r)
 		__a = _bind_overload(args, kwargs, [], {})
 		if __a is not None:
-			return Position(None, None, None, None, self._instance.ReadWorldPosition())
+			__r = self._instance.ReadWorldPosition()
+			return None if __r is None else Position(None, None, None, None, __r)
 		raise TypeError("read_world_position(): no overload takes these arguments")
 
 	@typing.overload
@@ -59,11 +62,13 @@ class CurrentPosition(SnpxAssignableElements2[Position, CurrentPositionRequest])
 		__a = _bind_overload(args, kwargs, ['userFrame', 'group'], {})
 		if __a is not None:
 			userFrame, group = __a
-			return Position(None, None, None, None, self._instance.ReadUserFramePosition(userFrame, group))
+			__r = self._instance.ReadUserFramePosition(userFrame, group)
+			return None if __r is None else Position(None, None, None, None, __r)
 		__a = _bind_overload(args, kwargs, ['userFrame'], {})
 		if __a is not None:
 			userFrame, = __a
-			return Position(None, None, None, None, self._instance.ReadUserFramePosition(userFrame))
+			__r = self._instance.ReadUserFramePosition(userFrame)
+			return None if __r is None else Position(None, None, None, None, __r)
 		raise TypeError("read_user_frame_position(): no overload takes these arguments")
 
 	def __str__(self):

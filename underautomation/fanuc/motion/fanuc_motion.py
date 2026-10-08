@@ -43,7 +43,8 @@ class FanucMotion:
 
 		:param position: Position X, Y, Z, W, P, R
 		'''
-		return CartesianPose(None, None, None, None, fanuc_motion.ToCartesianPose(position._instance if position else None))
+		__r = fanuc_motion.ToCartesianPose(position._instance if position else None)
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	@staticmethod
 	def to_extended_cartesian_position(pose: CartesianPose, reference: XYZWPRPosition) -> ExtendedCartesianPosition:
@@ -52,7 +53,8 @@ class FanucMotion:
 		:param pose: Pose to convert
 		:param reference: Position used to choose the W, P, R angles: the angles closest to the ones of this position are returned, so that a sequence of positions stays continuous. When it is null, W and R are between -180 and 180 degrees, and P between -90 and 90 degrees.
 		'''
-		return ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, fanuc_motion.ToExtendedCartesianPosition(pose._instance if pose else None, reference._instance if reference else None))
+		__r = fanuc_motion.ToExtendedCartesianPosition(pose._instance if pose else None, reference._instance if reference else None)
+		return None if __r is None else ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@staticmethod
 	def to_joint_values(position: JointsPosition) -> JointValues:
@@ -60,7 +62,8 @@ class FanucMotion:
 
 		:param position: Joint position
 		'''
-		return JointValues(None, fanuc_motion.ToJointValues(position._instance if position else None))
+		__r = fanuc_motion.ToJointValues(position._instance if position else None)
+		return None if __r is None else JointValues(None, __r)
 
 	@staticmethod
 	def to_joints_position(values: JointValues) -> JointsPosition:
@@ -68,12 +71,14 @@ class FanucMotion:
 
 		:param values: Joint values (up to 9 axes)
 		'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, fanuc_motion.ToJointsPosition(values._instance if values else None))
+		__r = fanuc_motion.ToJointsPosition(values._instance if values else None)
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@staticmethod
 	def fine() -> Termination:
 		'''FINE termination: the robot stops at the target position'''
-		return Termination(fanuc_motion.Fine())
+		__r = fanuc_motion.Fine()
+		return None if __r is None else Termination(__r)
 
 	@staticmethod
 	def cnt(value: int) -> Termination:
@@ -81,7 +86,8 @@ class FanucMotion:
 
 		:param value: From 0 to 100: part of the deceleration during which both motions are combined. 100 gives the smoothest motion.
 		'''
-		return Termination(fanuc_motion.Cnt(value))
+		__r = fanuc_motion.Cnt(value)
+		return None if __r is None else Termination(__r)
 
 	@staticmethod
 	def cr(distance: float) -> Termination:
@@ -89,7 +95,8 @@ class FanucMotion:
 
 		:param distance: Distance from the target position where the curve starts and ends, in mm. It is limited to half of the length of each motion.
 		'''
-		return Termination(fanuc_motion.Cr(distance))
+		__r = fanuc_motion.Cr(distance)
+		return None if __r is None else Termination(__r)
 
 	@staticmethod
 	def signal(type: IOType, index: int) -> DigitalSignal:
@@ -98,7 +105,8 @@ class FanucMotion:
 		:param type: I/O type
 		:param index: I/O index (starts at 1)
 		'''
-		return DigitalSignal(None, None, fanuc_motion.Signal(io_type(int(type)), index))
+		__r = fanuc_motion.Signal(io_type(int(type)), index)
+		return None if __r is None else DigitalSignal(None, None, __r)
 
 	@staticmethod
 	def from_cartesian_samples(samples: typing.List[XYZWPRPosition], cycleTime: float) -> Trajectory:
@@ -107,7 +115,8 @@ class FanucMotion:
 		:param samples: Positions (flange center in the world frame for Stream Motion), one per period
 		:param cycleTime: Period between two positions, in seconds
 		'''
-		return Trajectory(fanuc_motion.FromCartesianSamples([x._instance if x else None for x in samples], cycleTime))
+		__r = fanuc_motion.FromCartesianSamples([x._instance if x else None for x in samples], cycleTime)
+		return None if __r is None else Trajectory(__r)
 
 	@staticmethod
 	def sample_cartesian(trajectory: Trajectory, cycleTime: float) -> typing.List[ExtendedCartesianPosition]:
@@ -117,7 +126,8 @@ class FanucMotion:
 		:param cycleTime: Period between two samples, in seconds
 		:returns: Positions from time 0 to the end of the trajectory
 		'''
-		return [ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, x) for x in fanuc_motion.SampleCartesian(trajectory._instance if trajectory else None, cycleTime)]
+		__r = fanuc_motion.SampleCartesian(trajectory._instance if trajectory else None, cycleTime)
+		return None if __r is None else [None if x is None else ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, x) for x in __r]
 
 	@staticmethod
 	def _get_wpr_convention() -> EulerConvention:

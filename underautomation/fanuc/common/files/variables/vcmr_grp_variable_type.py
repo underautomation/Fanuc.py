@@ -39,17 +39,20 @@ class VcmrGrpVariableType(GenericVariableType):
 	@property
 	def camera(self) -> CameraVariableType:
 		'''Value of variable $CAMERA'''
-		return CameraVariableType(self._instance.Camera)
+		__r = self._instance.Camera
+		return None if __r is None else CameraVariableType(__r)
 
 	@property
 	def target_id(self) -> typing.List[VcmrTrgtVariableType]:
 		'''Value of variable $TARGET_ID'''
-		return [VcmrTrgtVariableType(x) for x in self._instance.TargetId]
+		__r = self._instance.TargetId
+		return None if __r is None else [None if x is None else VcmrTrgtVariableType(x) for x in __r]
 
 	@property
 	def create_prg(self) -> CreatePrgVariableType:
 		'''Value of variable $CREATE_PRG'''
-		return CreatePrgVariableType(self._instance.CreatePrg)
+		__r = self._instance.CreatePrg
+		return None if __r is None else CreatePrgVariableType(__r)
 
 	@property
 	def data_id(self) -> int:
@@ -59,12 +62,14 @@ class VcmrGrpVariableType(GenericVariableType):
 	@property
 	def chk_result(self) -> ChkResultVariableType:
 		'''Value of variable $CHK_RESULT'''
-		return ChkResultVariableType(self._instance.ChkResult)
+		__r = self._instance.ChkResult
+		return None if __r is None else ChkResultVariableType(__r)
 
 	@property
 	def recovery(self) -> RecoveryVariableType:
 		'''Value of variable $RECOVERY'''
-		return RecoveryVariableType(self._instance.Recovery)
+		__r = self._instance.Recovery
+		return None if __r is None else RecoveryVariableType(__r)
 
 	@property
 	def ext_int1(self) -> int:

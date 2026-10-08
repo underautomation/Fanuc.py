@@ -34,14 +34,16 @@ class Trajectory:
 
 		:param time: Time from the start of the trajectory, in seconds. It is limited to the range [0, duration].
 		'''
-		return JointValues(None, self._instance.GetJoints(time))
+		__r = self._instance.GetJoints(time)
+		return None if __r is None else JointValues(None, __r)
 
 	def get_cartesian(self, time: float) -> CartesianPose:
 		'''Returns the Cartesian pose at the given time. The trajectory must be in Cartesian format.
 
 		:param time: Time from the start of the trajectory, in seconds. It is limited to the range [0, duration].
 		'''
-		return CartesianPose(None, None, None, None, self._instance.GetCartesian(time))
+		__r = self._instance.GetCartesian(time)
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	def sample_joints(self, cycleTime: float) -> typing.List[JointValues]:
 		'''Samples the trajectory at a fixed period. The trajectory must be in joint format.
@@ -49,7 +51,8 @@ class Trajectory:
 		:param cycleTime: Period between two samples, in seconds
 		:returns: Positions from time 0 to the end of the trajectory
 		'''
-		return [JointValues(None, x) for x in self._instance.SampleJoints(cycleTime)]
+		__r = self._instance.SampleJoints(cycleTime)
+		return None if __r is None else [None if x is None else JointValues(None, x) for x in __r]
 
 	def sample_cartesian(self, cycleTime: float) -> typing.List[CartesianPose]:
 		'''Samples the trajectory at a fixed period. The trajectory must be in Cartesian format.
@@ -57,7 +60,8 @@ class Trajectory:
 		:param cycleTime: Period between two samples, in seconds
 		:returns: Poses from time 0 to the end of the trajectory
 		'''
-		return [CartesianPose(None, None, None, None, x) for x in self._instance.SampleCartesian(cycleTime)]
+		__r = self._instance.SampleCartesian(cycleTime)
+		return None if __r is None else [None if x is None else CartesianPose(None, None, None, None, x) for x in __r]
 
 	@staticmethod
 	def from_joint_samples(samples: typing.List[JointValues], cycleTime: float) -> 'Trajectory':
@@ -66,7 +70,8 @@ class Trajectory:
 		:param samples: Joint positions, one per period (up to MaxJointCount axes)
 		:param cycleTime: Period between two positions, in seconds
 		'''
-		return Trajectory(trajectory.FromJointSamples([x._instance if x else None for x in samples], cycleTime))
+		__r = trajectory.FromJointSamples([x._instance if x else None for x in samples], cycleTime)
+		return None if __r is None else Trajectory(__r)
 
 	@staticmethod
 	def from_cartesian_samples(samples: typing.List[CartesianPose], cycleTime: float) -> 'Trajectory':
@@ -75,7 +80,8 @@ class Trajectory:
 		:param samples: Cartesian poses, one per period (up to MaxExternalAxisCount external axes)
 		:param cycleTime: Period between two poses, in seconds
 		'''
-		return Trajectory(trajectory.FromCartesianSamples([x._instance if x else None for x in samples], cycleTime))
+		__r = trajectory.FromCartesianSamples([x._instance if x else None for x in samples], cycleTime)
+		return None if __r is None else Trajectory(__r)
 
 	@staticmethod
 	def from_timed_joints(points: typing.List[JointValues], times: typing.List[float]) -> 'Trajectory':
@@ -84,7 +90,8 @@ class Trajectory:
 		:param points: Joint positions (at least 2)
 		:param times: Time of each position in seconds, strictly increasing. The trajectory starts at the first time.
 		'''
-		return Trajectory(trajectory.FromTimedJoints([x._instance if x else None for x in points], times))
+		__r = trajectory.FromTimedJoints([x._instance if x else None for x in points], times)
+		return None if __r is None else Trajectory(__r)
 
 	@staticmethod
 	def from_timed_cartesian(points: typing.List[CartesianPose], times: typing.List[float]) -> 'Trajectory':
@@ -93,7 +100,8 @@ class Trajectory:
 		:param points: Cartesian poses, at least 2
 		:param times: Time of each pose in seconds, strictly increasing. The trajectory starts at the first time.
 		'''
-		return Trajectory(trajectory.FromTimedCartesian([x._instance if x else None for x in points], times))
+		__r = trajectory.FromTimedCartesian([x._instance if x else None for x in points], times)
+		return None if __r is None else Trajectory(__r)
 
 	def check(self, limits: JointLimits, cycleTime: float, singlePrecision: bool) -> TrajectoryReport:
 		'''Checks the velocity, acceleration and jerk of each axis as a robot computes them from a stream of positions: positions sampled at the communication cycle, differences between consecutive positions divided by the cycle time, and positions before the first one equal to the first one. The trajectory must be in joint format.
@@ -102,7 +110,8 @@ class Trajectory:
 		:param cycleTime: Communication cycle of the robot in seconds
 		:param singlePrecision: True to round the positions to single precision first, when the robot receives them in single precision
 		'''
-		return TrajectoryReport(self._instance.Check(limits._instance if limits else None, cycleTime, singlePrecision))
+		__r = self._instance.Check(limits._instance if limits else None, cycleTime, singlePrecision)
+		return None if __r is None else TrajectoryReport(__r)
 
 	def check_cartesian(self, limits: CartesianLimits, cycleTime: float) -> CartesianTrajectoryReport:
 		'''Checks the linear and angular velocity, acceleration and jerk, computed from positions sampled at the communication cycle. The trajectory must be in Cartesian format. The joint limits of the robot cannot be checked from Cartesian positions.
@@ -110,7 +119,8 @@ class Trajectory:
 		:param limits: Cartesian limits. Values of 0 are not checked.
 		:param cycleTime: Communication cycle of the robot in seconds
 		'''
-		return CartesianTrajectoryReport(self._instance.CheckCartesian(limits._instance if limits else None, cycleTime))
+		__r = self._instance.CheckCartesian(limits._instance if limits else None, cycleTime)
+		return None if __r is None else CartesianTrajectoryReport(__r)
 
 	def retime(self, limits: JointLimits, cycleTime: float, singlePrecision: bool=False) -> 'Trajectory':
 		'''Returns the same path played slower so that the joint limits are respected (see check()). The positions are the same, only the time is stretched. Returns this trajectory when it is already valid.
@@ -119,7 +129,8 @@ class Trajectory:
 		:param cycleTime: Communication cycle of the robot in seconds
 		:param singlePrecision: True to check the positions rounded to single precision, when the robot receives them in single precision
 		'''
-		return Trajectory(self._instance.Retime(limits._instance if limits else None, cycleTime, singlePrecision))
+		__r = self._instance.Retime(limits._instance if limits else None, cycleTime, singlePrecision)
+		return None if __r is None else Trajectory(__r)
 
 	def retime_cartesian(self, limits: CartesianLimits, cycleTime: float) -> 'Trajectory':
 		'''Returns the same path played slower so that the Cartesian limits are respected (see check_cartesian()). The positions are the same, only the time is stretched. Returns this trajectory when it is already valid.
@@ -127,7 +138,8 @@ class Trajectory:
 		:param limits: Cartesian limits
 		:param cycleTime: Communication cycle of the robot in seconds
 		'''
-		return Trajectory(self._instance.RetimeCartesian(limits._instance if limits else None, cycleTime))
+		__r = self._instance.RetimeCartesian(limits._instance if limits else None, cycleTime)
+		return None if __r is None else Trajectory(__r)
 
 	@property
 	def format(self) -> PositionFormat:
@@ -157,7 +169,8 @@ class Trajectory:
 	@property
 	def io_events(self) -> typing.List[IOEvent]:
 		'''I/O events of this trajectory, sorted by time'''
-		return [IOEvent(None, None, None, x) for x in self._instance.IOEvents]
+		__r = self._instance.IOEvents
+		return None if __r is None else [None if x is None else IOEvent(None, None, None, x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

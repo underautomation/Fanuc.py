@@ -31,7 +31,8 @@ class AavmmainFile(GenericVariableFile):
 	@property
 	def prm(self) -> AavmGrpVariableType:
 		'''Value of variable PRM'''
-		return AavmGrpVariableType(self._instance.Prm)
+		__r = self._instance.Prm
+		return None if __r is None else AavmGrpVariableType(__r)
 
 	@property
 	def ps_rob_grp(self) -> int:
@@ -196,22 +197,26 @@ class AavmmainFile(GenericVariableFile):
 	@property
 	def vtcp(self) -> CartesianPositionVariable:
 		'''Value of variable VTCP'''
-		return CartesianPositionVariable(None, None, self._instance.Vtcp)
+		__r = self._instance.Vtcp
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def vtcp0(self) -> CartesianPositionVariable:
 		'''Value of variable VTCP0'''
-		return CartesianPositionVariable(None, None, self._instance.Vtcp0)
+		__r = self._instance.Vtcp0
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def target(self) -> CartesianPositionVariable:
 		'''Value of variable TARGET'''
-		return CartesianPositionVariable(None, None, self._instance.Target)
+		__r = self._instance.Target
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def target0(self) -> CartesianPositionVariable:
 		'''Value of variable TARGET0'''
-		return CartesianPositionVariable(None, None, self._instance.Target0)
+		__r = self._instance.Target0
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def cmp_jpos(self) -> typing.List[float]:
@@ -296,7 +301,8 @@ class AavmmainFile(GenericVariableFile):
 	@property
 	def meas_pose(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable MEAS_POSE'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.MeasPose]
+		__r = self._instance.MeasPose
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def dual_num(self) -> int:

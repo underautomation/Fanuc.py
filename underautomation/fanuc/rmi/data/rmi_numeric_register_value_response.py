@@ -24,7 +24,8 @@ class RmiNumericRegisterValueResponse(RmiResponseBase):
 	@property
 	def value(self) -> NumericRegister:
 		'''Register value.'''
-		return NumericRegister(None, self._instance.Value)
+		__r = self._instance.Value
+		return None if __r is None else NumericRegister(None, __r)
 
 	@value.setter
 	def value(self, value: NumericRegister):

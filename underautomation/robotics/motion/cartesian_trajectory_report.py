@@ -64,7 +64,8 @@ class CartesianTrajectoryReport:
 	@property
 	def violations(self) -> typing.List[TrajectoryViolation]:
 		'''First violations (at most 100). Axis 1 is the position, axis 2 the orientation.'''
-		return [TrajectoryViolation(x) for x in self._instance.Violations]
+		__r = self._instance.Violations
+		return None if __r is None else [None if x is None else TrajectoryViolation(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

@@ -20,12 +20,14 @@ class MixlogicFile(GenericVariableFile):
 	@property
 	def dryrun(self) -> DryrunVariableType:
 		'''Value of variable $DRYRUN'''
-		return DryrunVariableType(self._instance.Dryrun)
+		__r = self._instance.Dryrun
+		return None if __r is None else DryrunVariableType(__r)
 
 	@property
 	def dryrun_port(self) -> typing.List[DryrunPortVariableType]:
 		'''Value of variable $DRYRUN_PORT'''
-		return [DryrunPortVariableType(x) for x in self._instance.DryrunPort]
+		__r = self._instance.DryrunPort
+		return None if __r is None else [None if x is None else DryrunPortVariableType(x) for x in __r]
 
 	@property
 	def dryrun_sub(self) -> typing.List[str]:
@@ -35,22 +37,26 @@ class MixlogicFile(GenericVariableFile):
 	@property
 	def mix_bg(self) -> typing.List[MixBgVariableType]:
 		'''Value of variable $MIX_BG'''
-		return [MixBgVariableType(x) for x in self._instance.MixBg]
+		__r = self._instance.MixBg
+		return None if __r is None else [None if x is None else MixBgVariableType(x) for x in __r]
 
 	@property
 	def mix_logic(self) -> MixLogicVariableType:
 		'''Value of variable $MIX_LOGIC'''
-		return MixLogicVariableType(self._instance.MixLogic)
+		__r = self._instance.MixLogic
+		return None if __r is None else MixLogicVariableType(__r)
 
 	@property
 	def mix_mkr(self) -> typing.List[MixMkrVariableType]:
 		'''Value of variable $MIX_MKR'''
-		return [MixMkrVariableType(x) for x in self._instance.MixMkr]
+		__r = self._instance.MixMkr
+		return None if __r is None else [None if x is None else MixMkrVariableType(x) for x in __r]
 
 	@property
 	def on_path(self) -> OnPathVariableType:
 		'''Value of variable $ON_PATH'''
-		return OnPathVariableType(self._instance.OnPath)
+		__r = self._instance.OnPath
+		return None if __r is None else OnPathVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

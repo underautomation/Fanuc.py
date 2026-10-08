@@ -55,7 +55,8 @@ class CpcfgVariableType(GenericVariableType):
 	@property
 	def resume_ofst(self) -> ResumeOfstVariableType:
 		'''Value of variable $RESUME_OFST'''
-		return ResumeOfstVariableType(self._instance.ResumeOfst)
+		__r = self._instance.ResumeOfst
+		return None if __r is None else ResumeOfstVariableType(__r)
 
 	@property
 	def cp_hstart(self) -> float:

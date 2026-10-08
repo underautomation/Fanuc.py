@@ -16,12 +16,14 @@ class CellGrpVariableType(GenericVariableType):
 	@property
 	def cell_frame(self) -> CartesianPositionVariable:
 		'''Value of variable $CELL_FRAME'''
-		return CartesianPositionVariable(None, None, self._instance.CellFrame)
+		__r = self._instance.CellFrame
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def mount_loc(self) -> CartesianPositionVariable:
 		'''Value of variable $MOUNT_LOC'''
-		return CartesianPositionVariable(None, None, self._instance.MountLoc)
+		__r = self._instance.MountLoc
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def cf_method(self) -> int:
@@ -36,22 +38,26 @@ class CellGrpVariableType(GenericVariableType):
 	@property
 	def platfrm_ofs(self) -> CartesianPositionVariable:
 		'''Value of variable $PLATFRM_OFS'''
-		return CartesianPositionVariable(None, None, self._instance.PlatfrmOfs)
+		__r = self._instance.PlatfrmOfs
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def platfrm_dim(self) -> VectorVariable:
 		'''Value of variable $PLATFRM_DIM'''
-		return VectorVariable(self._instance.PlatfrmDim)
+		__r = self._instance.PlatfrmDim
+		return None if __r is None else VectorVariable(__r)
 
 	@property
 	def base_offset(self) -> CartesianPositionVariable:
 		'''Value of variable $BASE_OFFSET'''
-		return CartesianPositionVariable(None, None, self._instance.BaseOffset)
+		__r = self._instance.BaseOffset
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def base_dim(self) -> VectorVariable:
 		'''Value of variable $BASE_DIM'''
-		return VectorVariable(self._instance.BaseDim)
+		__r = self._instance.BaseDim
+		return None if __r is None else VectorVariable(__r)
 
 	@property
 	def aux_order(self) -> typing.List[int]:

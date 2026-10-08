@@ -43,7 +43,8 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def aavm_grp(self) -> typing.List[AavmGrpVariableType]:
 		'''Value of variable $AAVM_GRP'''
-		return [AavmGrpVariableType(x) for x in self._instance.AavmGrp]
+		__r = self._instance.AavmGrp
+		return None if __r is None else [None if x is None else AavmGrpVariableType(x) for x in __r]
 
 	@property
 	def aimage_back(self) -> int:
@@ -68,7 +69,8 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def dbwork(self) -> typing.List[DbworkVariableType]:
 		'''Value of variable $DBWORK'''
-		return [DbworkVariableType(x) for x in self._instance.Dbwork]
+		__r = self._instance.Dbwork
+		return None if __r is None else [None if x is None else DbworkVariableType(x) for x in __r]
 
 	@property
 	def device(self) -> str:
@@ -83,7 +85,8 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def dhcp_int(self) -> typing.List[DhcpIntVariableType]:
 		'''Value of variable $DHCP_INT'''
-		return [DhcpIntVariableType(x) for x in self._instance.DhcpInt]
+		__r = self._instance.DhcpInt
+		return None if __r is None else [None if x is None else DhcpIntVariableType(x) for x in __r]
 
 	@property
 	def distbf_data(self) -> int:
@@ -98,12 +101,14 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def fileconfig(self) -> FileconfigVariableType:
 		'''Value of variable $FILECONFIG'''
-		return FileconfigVariableType(self._instance.Fileconfig)
+		__r = self._instance.Fileconfig
+		return None if __r is None else FileconfigVariableType(__r)
 
 	@property
 	def filesetup(self) -> FileSetupVariableType:
 		'''Value of variable $FILESETUP'''
-		return FileSetupVariableType(self._instance.Filesetup)
+		__r = self._instance.Filesetup
+		return None if __r is None else FileSetupVariableType(__r)
 
 	@property
 	def file_basept(self) -> int:
@@ -113,7 +118,8 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def file_errbck(self) -> typing.List[FileBackVariableType]:
 		'''Value of variable $FILE_ERRBCK'''
-		return [FileBackVariableType(x) for x in self._instance.FileErrbck]
+		__r = self._instance.FileErrbck
+		return None if __r is None else [None if x is None else FileBackVariableType(x) for x in __r]
 
 	@property
 	def file_maxsec(self) -> int:
@@ -123,17 +129,20 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def file_sysbck(self) -> typing.List[FileBackVariableType]:
 		'''Value of variable $FILE_SYSBCK'''
-		return [FileBackVariableType(x) for x in self._instance.FileSysbck]
+		__r = self._instance.FileSysbck
+		return None if __r is None else [None if x is None else FileBackVariableType(x) for x in __r]
 
 	@property
 	def glofatt(self) -> typing.List[GlofattVariableType]:
 		'''Value of variable $GLOFATT'''
-		return [GlofattVariableType(x) for x in self._instance.Glofatt]
+		__r = self._instance.Glofatt
+		return None if __r is None else [None if x is None else GlofattVariableType(x) for x in __r]
 
 	@property
 	def glofset(self) -> GlofsetVariableType:
 		'''Value of variable $GLOFSET'''
-		return GlofsetVariableType(self._instance.Glofset)
+		__r = self._instance.Glofset
+		return None if __r is None else GlofsetVariableType(__r)
 
 	@property
 	def imsave_done(self) -> bool:
@@ -148,7 +157,8 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def lastpauspos(self) -> typing.List[JointPositionVariable]:
 		'''Value of variable $LASTPAUSPOS'''
-		return [JointPositionVariable(None, None, x) for x in self._instance.Lastpauspos]
+		__r = self._instance.Lastpauspos
+		return None if __r is None else [None if x is None else JointPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def master_enb(self) -> int:
@@ -158,12 +168,14 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def memo(self) -> MemoMemoVariableType:
 		'''Value of variable $MEMO'''
-		return MemoMemoVariableType(self._instance.Memo)
+		__r = self._instance.Memo
+		return None if __r is None else MemoMemoVariableType(__r)
 
 	@property
 	def moptimiz(self) -> MoptimizVariableType:
 		'''Value of variable $MOPTIMIZ'''
-		return MoptimizVariableType(self._instance.Moptimiz)
+		__r = self._instance.Moptimiz
+		return None if __r is None else MoptimizVariableType(__r)
 
 	@property
 	def null_cycle(self) -> int:
@@ -173,7 +185,8 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def opt_state(self) -> OptstateVariableType:
 		'''Value of variable $OPT_STATE'''
-		return OptstateVariableType(self._instance.OptState)
+		__r = self._instance.OptState
+		return None if __r is None else OptstateVariableType(__r)
 
 	@property
 	def padj_schnum(self) -> int:
@@ -183,22 +196,26 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def pg_max_sped(self) -> typing.List[PgmaxspdVariableType]:
 		'''Value of variable $PG_MAX_SPED'''
-		return [PgmaxspdVariableType(x) for x in self._instance.PgMaxSped]
+		__r = self._instance.PgMaxSped
+		return None if __r is None else [None if x is None else PgmaxspdVariableType(x) for x in __r]
 
 	@property
 	def prgadj_sch(self) -> typing.List[PrgadjSchVariableType]:
 		'''Value of variable $PRGADJ_SCH'''
-		return [PrgadjSchVariableType(x) for x in self._instance.PrgadjSch]
+		__r = self._instance.PrgadjSch
+		return None if __r is None else [None if x is None else PrgadjSchVariableType(x) for x in __r]
 
 	@property
 	def shell_wrk(self) -> ShellWrkVariableType:
 		'''Value of variable $SHELL_WRK'''
-		return ShellWrkVariableType(self._instance.ShellWrk)
+		__r = self._instance.ShellWrk
+		return None if __r is None else ShellWrkVariableType(__r)
 
 	@property
 	def smh_made(self) -> SmhMadeVariableType:
 		'''Value of variable $SMH_MADE'''
-		return SmhMadeVariableType(self._instance.SmhMade)
+		__r = self._instance.SmhMade
+		return None if __r is None else SmhMadeVariableType(__r)
 
 	@property
 	def startup_dbg(self) -> int:
@@ -208,12 +225,14 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def sys_config(self) -> SscbkVariableType:
 		'''Value of variable $SYS_CONFIG'''
-		return SscbkVariableType(self._instance.SysConfig)
+		__r = self._instance.SysConfig
+		return None if __r is None else SscbkVariableType(__r)
 
 	@property
 	def sys_time(self) -> SysTimeVariableType:
 		'''Value of variable $SYS_TIME'''
-		return SysTimeVariableType(self._instance.SysTime)
+		__r = self._instance.SysTime
+		return None if __r is None else SysTimeVariableType(__r)
 
 	@property
 	def tick_rate(self) -> int:
@@ -223,52 +242,62 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def tp_curscrn(self) -> typing.List[TpCurscrnVariableType]:
 		'''Value of variable $TP_CURSCRN'''
-		return [TpCurscrnVariableType(x) for x in self._instance.TpCurscrn]
+		__r = self._instance.TpCurscrn
+		return None if __r is None else [None if x is None else TpCurscrnVariableType(x) for x in __r]
 
 	@property
 	def tx(self) -> TxVariableType:
 		'''Value of variable $TX'''
-		return TxVariableType(self._instance.Tx)
+		__r = self._instance.Tx
+		return None if __r is None else TxVariableType(__r)
 
 	@property
 	def txram(self) -> TxramVariableType:
 		'''Value of variable $TXRAM'''
-		return TxramVariableType(self._instance.Txram)
+		__r = self._instance.Txram
+		return None if __r is None else TxramVariableType(__r)
 
 	@property
 	def ui_curscrn(self) -> typing.List[TpCurscrnVariableType]:
 		'''Value of variable $UI_CURSCRN'''
-		return [TpCurscrnVariableType(x) for x in self._instance.UiCurscrn]
+		__r = self._instance.UiCurscrn
+		return None if __r is None else [None if x is None else TpCurscrnVariableType(x) for x in __r]
 
 	@property
 	def ui_fctnfav(self) -> typing.List[UiFctnfavVariableType]:
 		'''Value of variable $UI_FCTNFAV'''
-		return [UiFctnfavVariableType(x) for x in self._instance.UiFctnfav]
+		__r = self._instance.UiFctnfav
+		return None if __r is None else [None if x is None else UiFctnfavVariableType(x) for x in __r]
 
 	@property
 	def ui_panelink(self) -> typing.List[UiPanelnkVariableType]:
 		'''Value of variable $UI_PANELINK'''
-		return [UiPanelnkVariableType(x) for x in self._instance.UiPanelink]
+		__r = self._instance.UiPanelink
+		return None if __r is None else [None if x is None else UiPanelnkVariableType(x) for x in __r]
 
 	@property
 	def umr(self) -> UmrVariableType:
 		'''Value of variable $UMR'''
-		return UmrVariableType(self._instance.Umr)
+		__r = self._instance.Umr
+		return None if __r is None else UmrVariableType(__r)
 
 	@property
 	def vcrsm_cfg(self) -> VcrsmCfgVariableType:
 		'''Value of variable $VCRSM_CFG'''
-		return VcrsmCfgVariableType(self._instance.VcrsmCfg)
+		__r = self._instance.VcrsmCfg
+		return None if __r is None else VcrsmCfgVariableType(__r)
 
 	@property
 	def vcwm_cfg(self) -> VcwmCfgVariableType:
 		'''Value of variable $VCWM_CFG'''
-		return VcwmCfgVariableType(self._instance.VcwmCfg)
+		__r = self._instance.VcwmCfg
+		return None if __r is None else VcwmCfgVariableType(__r)
 
 	@property
 	def vcwm_grp(self) -> typing.List[VcwmGrpVariableType]:
 		'''Value of variable $VCWM_GRP'''
-		return [VcwmGrpVariableType(x) for x in self._instance.VcwmGrp]
+		__r = self._instance.VcwmGrp
+		return None if __r is None else [None if x is None else VcwmGrpVariableType(x) for x in __r]
 
 	@property
 	def vdate(self) -> str:
@@ -283,12 +312,14 @@ class SynosaveFile(GenericVariableFile):
 	@property
 	def vsmo_tmp(self) -> VsmoTmpVariableType:
 		'''Value of variable $VSMO_TMP'''
-		return VsmoTmpVariableType(self._instance.VsmoTmp)
+		__r = self._instance.VsmoTmp
+		return None if __r is None else VsmoTmpVariableType(__r)
 
 	@property
 	def vsmo_val(self) -> VsmoValVariableType:
 		'''Value of variable $VSMO_VAL'''
-		return VsmoValVariableType(self._instance.VsmoVal)
+		__r = self._instance.VsmoVal
+		return None if __r is None else VsmoValVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

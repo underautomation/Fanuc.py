@@ -95,7 +95,8 @@ class FmsGrpVariableType(GenericVariableType):
 	@property
 	def clhist(self) -> typing.List[ClhistVariableType]:
 		'''Value of variable $CLHIST'''
-		return [ClhistVariableType(x) for x in self._instance.Clhist]
+		__r = self._instance.Clhist
+		return None if __r is None else [None if x is None else ClhistVariableType(x) for x in __r]
 
 	@property
 	def t_life_ms(self) -> typing.List[int]:

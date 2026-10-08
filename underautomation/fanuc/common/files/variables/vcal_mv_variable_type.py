@@ -20,7 +20,8 @@ class VcalMvVariableType(GenericVariableType):
 	@property
 	def command_pos(self) -> CartesianPositionVariable:
 		'''Value of variable COMMAND_POS'''
-		return CartesianPositionVariable(None, None, self._instance.CommandPos)
+		__r = self._instance.CommandPos
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def vs_speed(self) -> float:

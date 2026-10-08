@@ -16,12 +16,14 @@ class UserOffstVariableType(GenericVariableType):
 	@property
 	def tool_ofst(self) -> typing.List[UserToolVariableType]:
 		'''Value of variable $TOOL_OFST'''
-		return [UserToolVariableType(x) for x in self._instance.ToolOfst]
+		__r = self._instance.ToolOfst
+		return None if __r is None else [None if x is None else UserToolVariableType(x) for x in __r]
 
 	@property
 	def uframe_ofst(self) -> typing.List[UserUframVariableType]:
 		'''Value of variable $UFRAME_OFST'''
-		return [UserUframVariableType(x) for x in self._instance.UframeOfst]
+		__r = self._instance.UframeOfst
+		return None if __r is None else [None if x is None else UserUframVariableType(x) for x in __r]
 
 	@property
 	def gun_tip_ofs(self) -> typing.List[float]:

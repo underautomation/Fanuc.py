@@ -18,7 +18,8 @@ class KinematicsUtils:
 		'''Compute FK for given joint angles (rad) and DH parameters
 		Compute FK for given joint angles (deg) and DH parameters
 		'''
-		return CartesianPosition(None, None, None, None, None, None, None, kinematics_utils.ForwardKinematics(getattr(jointAnglesDeg_or_jointAnglesRad, '_instance', jointAnglesDeg_or_jointAnglesRad), dhParameters_or_parameters._instance if dhParameters_or_parameters else None))
+		__r = kinematics_utils.ForwardKinematics(getattr(jointAnglesDeg_or_jointAnglesRad, '_instance', jointAnglesDeg_or_jointAnglesRad), dhParameters_or_parameters._instance if dhParameters_or_parameters else None)
+		return None if __r is None else CartesianPosition(None, None, None, None, None, None, None, __r)
 
 	@staticmethod
 	def inverse_kinematics(position: CartesianPosition, parameters: DhParameters) -> typing.List[JointsPosition]:
@@ -28,10 +29,17 @@ class KinematicsUtils:
 		:param parameters: DH parameters of the robot.
 		:returns: An array of joint angle solutions.
 		'''
-		return [JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in kinematics_utils.InverseKinematics(position._instance if position else None, parameters._instance if parameters else None)]
+		__r = kinematics_utils.InverseKinematics(position._instance if position else None, parameters._instance if parameters else None)
+		return None if __r is None else [None if x is None else JointsPosition(None, None, None, None, None, None, None, None, None, x) for x in __r]
 
 	@staticmethod
 	def mul(A: typing.List[float], B: typing.List[float]) -> typing.List[float]:
+		'''Multiply two 4x4 homogeneous transformation matrices.
+
+		:param A: Left matrix.
+		:param B: Right matrix.
+		:returns: The product matrix A * B.
+		'''
 		return kinematics_utils.Mul(A, B)
 
 	def __str__(self):

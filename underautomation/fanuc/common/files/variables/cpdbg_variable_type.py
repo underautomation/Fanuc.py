@@ -20,32 +20,38 @@ class CpdbgVariableType(GenericVariableType):
 	@property
 	def cpidebug(self) -> CpidebugVariableType:
 		'''Value of variable $CPIDEBUG'''
-		return CpidebugVariableType(self._instance.Cpidebug)
+		__r = self._instance.Cpidebug
+		return None if __r is None else CpidebugVariableType(__r)
 
 	@property
 	def cppdebug(self) -> CpidebugVariableType:
 		'''Value of variable $CPPDEBUG'''
-		return CpidebugVariableType(self._instance.Cppdebug)
+		__r = self._instance.Cppdebug
+		return None if __r is None else CpidebugVariableType(__r)
 
 	@property
 	def midebug(self) -> CpidebugVariableType:
 		'''Value of variable $MIDEBUG'''
-		return CpidebugVariableType(self._instance.Midebug)
+		__r = self._instance.Midebug
+		return None if __r is None else CpidebugVariableType(__r)
 
 	@property
 	def mpdebug(self) -> CpidebugVariableType:
 		'''Value of variable $MPDEBUG'''
-		return CpidebugVariableType(self._instance.Mpdebug)
+		__r = self._instance.Mpdebug
+		return None if __r is None else CpidebugVariableType(__r)
 
 	@property
 	def mgdebug(self) -> CpidebugVariableType:
 		'''Value of variable $MGDEBUG'''
-		return CpidebugVariableType(self._instance.Mgdebug)
+		__r = self._instance.Mgdebug
+		return None if __r is None else CpidebugVariableType(__r)
 
 	@property
 	def mfdebug(self) -> CpidebugVariableType:
 		'''Value of variable $MFDEBUG'''
-		return CpidebugVariableType(self._instance.Mfdebug)
+		__r = self._instance.Mfdebug
+		return None if __r is None else CpidebugVariableType(__r)
 
 	@property
 	def simqstop(self) -> bool:

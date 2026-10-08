@@ -57,12 +57,14 @@ class StreamMotionStatus:
 	@property
 	def joint_position(self) -> JointsPosition:
 		'''Current joint position of the robot (servo position), in degrees (mm for linear axes)'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.JointPosition)
+		__r = self._instance.JointPosition
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@property
 	def cartesian_position(self) -> ExtendedCartesianPosition:
 		'''Current Cartesian position of the robot (servo position) in the world frame, with extended axes. It is the flange center, or the tool center point when the system variable $STMO.$STAT_US_TCP is TRUE.'''
-		return ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, self._instance.CartesianPosition)
+		__r = self._instance.CartesianPosition
+		return None if __r is None else ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@property
 	def motor_currents(self) -> typing.List[float]:

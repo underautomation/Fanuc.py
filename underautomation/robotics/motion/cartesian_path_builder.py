@@ -22,7 +22,8 @@ class CartesianPathBuilder:
 		:param termination: Termination: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.MoveLinear(target._instance if target else None, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.MoveLinear(target._instance if target else None, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def move_linear_time(self, target: CartesianPose, duration: float, termination: Termination) -> 'CartesianPathBuilder':
 		'''Adds a linear motion that lasts a given time. The motion takes more time when the limits do not allow this duration.
@@ -31,7 +32,8 @@ class CartesianPathBuilder:
 		:param duration: Duration in seconds
 		:param termination: Termination: stop or overlap
 		'''
-		return CartesianPathBuilder(self._instance.MoveLinearTime(target._instance if target else None, duration, termination._instance if termination else None))
+		__r = self._instance.MoveLinearTime(target._instance if target else None, duration, termination._instance if termination else None)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def move_circular(self, via: CartesianPose, target: CartesianPose, speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a circular motion: the tool moves on the circle arc that passes through the via point and ends at the target. The orientation turns from the current orientation to the orientation of the target (the orientation of the via point is not used).
@@ -42,7 +44,8 @@ class CartesianPathBuilder:
 		:param termination: Termination: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.MoveCircular(via._instance if via else None, target._instance if target else None, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.MoveCircular(via._instance if via else None, target._instance if target else None, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def move_spline(self, points: typing.List[CartesianPose], speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a smooth motion that passes through a list of positions (cubic spline) and ends at the last one. The orientation passes through the orientation of each position. The speed is constant along the path, except where the curvature, the change of orientation or the external axes need a lower speed. The points must describe a smooth path: close or noisy points give high curvatures and a slow motion.
@@ -52,7 +55,8 @@ class CartesianPathBuilder:
 		:param termination: Termination at the last position: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.MoveSpline([x._instance if x else None for x in points], speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.MoveSpline([x._instance if x else None for x in points], speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def add_circle(self, plane: CartesianPose, radius: float, speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a full circle in the XY plane of a frame, counterclockwise around its Z axis. The circle starts and ends at the point (radius, 0, 0) of the frame. A linear motion to this point is added first when the tool is not there. The orientation of the tool does not change.
@@ -63,7 +67,8 @@ class CartesianPathBuilder:
 		:param termination: Termination at the end of the circle: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.AddCircle(plane._instance if plane else None, radius, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.AddCircle(plane._instance if plane else None, radius, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def add_helix(self, plane: CartesianPose, radius: float, pitch: float, turns: float, speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a helix around the Z axis of a frame, counterclockwise. It starts at the point (radius, 0, 0) of the frame and rises by the pitch along Z at each turn. A linear motion to the start point is added first when the tool is not there. The orientation of the tool does not change.
@@ -76,7 +81,8 @@ class CartesianPathBuilder:
 		:param termination: Termination at the end of the helix: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.AddHelix(plane._instance if plane else None, radius, pitch, turns, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.AddHelix(plane._instance if plane else None, radius, pitch, turns, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def add_spiral(self, plane: CartesianPose, startRadius: float, endRadius: float, turns: float, speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a spiral in the XY plane of a frame, counterclockwise around its Z axis. The distance to the center changes regularly from the start radius to the end radius (Archimedean spiral). It starts at the point (startRadius, 0, 0) of the frame. A linear motion to the start point is added first when the tool is not there. The orientation of the tool does not change.
@@ -89,7 +95,8 @@ class CartesianPathBuilder:
 		:param termination: Termination at the end of the spiral: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.AddSpiral(plane._instance if plane else None, startRadius, endRadius, turns, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.AddSpiral(plane._instance if plane else None, startRadius, endRadius, turns, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def add_rectangle(self, plane: CartesianPose, width: float, height: float, cornerRadius: float, speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a rectangle centered on the origin of a frame, in its XY plane: the width is along X and the height along Y. It starts and ends at the middle of the side at +X, the point (width / 2, 0, 0) of the frame, and turns counterclockwise around Z. With a corner radius, the corners are circle arcs of this radius, and the curvature changes progressively at their ends. Without corner radius, the robot stops at each corner. A linear motion to the start point is added first when the tool is not there. The orientation of the tool does not change.
@@ -102,7 +109,8 @@ class CartesianPathBuilder:
 		:param termination: Termination at the end of the rectangle: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.AddRectangle(plane._instance if plane else None, width, height, cornerRadius, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.AddRectangle(plane._instance if plane else None, width, height, cornerRadius, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def add_polygon(self, plane: CartesianPose, sideCount: int, radius: float, cornerRadius: float, speed: float, termination: Termination, accelerationPercent: float=100) -> 'CartesianPathBuilder':
 		'''Adds a regular polygon centered on the origin of a frame, in its XY plane. One side is perpendicular to X: the polygon starts and ends at the middle of this side, and turns counterclockwise around Z. With a corner radius, the corners are circle arcs of this radius, and the curvature changes progressively at their ends. Without corner radius, the robot stops at each corner. A linear motion to the start point is added first when the tool is not there. The orientation of the tool does not change.
@@ -115,14 +123,16 @@ class CartesianPathBuilder:
 		:param termination: Termination at the end of the polygon: stop, overlap or corner
 		:param accelerationPercent: Acceleration and jerk in percent of the limits (greater than 0, up to 100)
 		'''
-		return CartesianPathBuilder(self._instance.AddPolygon(plane._instance if plane else None, sideCount, radius, cornerRadius, speed, termination._instance if termination else None, accelerationPercent))
+		__r = self._instance.AddPolygon(plane._instance if plane else None, sideCount, radius, cornerRadius, speed, termination._instance if termination else None, accelerationPercent)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def wait(self, duration: float) -> 'CartesianPathBuilder':
 		'''Keeps the current position during a given time
 
 		:param duration: Duration in seconds
 		'''
-		return CartesianPathBuilder(self._instance.Wait(duration))
+		__r = self._instance.Wait(duration)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def set_io(self, signal: DigitalSignal, value: bool) -> 'CartesianPathBuilder':
 		'''Writes a digital signal when the previous motion ends
@@ -130,16 +140,19 @@ class CartesianPathBuilder:
 		:param signal: Signal to write
 		:param value: Value to write
 		'''
-		return CartesianPathBuilder(self._instance.SetIO(signal._instance if signal else None, value))
+		__r = self._instance.SetIO(signal._instance if signal else None, value)
+		return None if __r is None else CartesianPathBuilder(__r)
 
 	def build(self) -> Trajectory:
 		'''Creates the trajectory. Its poses are flange poses in the world frame when the tool and user frames of the planner are set.'''
-		return Trajectory(self._instance.Build())
+		__r = self._instance.Build()
+		return None if __r is None else Trajectory(__r)
 
 	@property
 	def end_position(self) -> CartesianPose:
 		'''Pose at the end of the motions added so far, as a pose of the tool in the user frame of the planner'''
-		return CartesianPose(None, None, None, None, self._instance.EndPosition)
+		__r = self._instance.EndPosition
+		return None if __r is None else CartesianPose(None, None, None, None, __r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

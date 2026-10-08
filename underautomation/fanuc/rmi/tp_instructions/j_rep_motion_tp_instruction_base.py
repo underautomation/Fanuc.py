@@ -15,7 +15,8 @@ class JRepMotionTpInstructionBase(FullMotionTpInstructionBase):
 	@property
 	def joints(self) -> JointsPosition:
 		'''Target joint angles in degrees.'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.Joints)
+		__r = self._instance.Joints
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@joints.setter
 	def joints(self, value: JointsPosition):

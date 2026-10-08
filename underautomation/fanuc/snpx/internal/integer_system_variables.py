@@ -18,7 +18,8 @@ class IntegerSystemVariables(SnpxWritableAssignableElements3[int, str, IntegerSy
 		:param indexes: The indices to include in the batch.
 		:returns: A batch assignment for the specified indices.
 		'''
-		return IntegerSystemVariablesBatchAssignment(self._instance.CreateBatchAssignment(indexes))
+		__r = self._instance.CreateBatchAssignment(indexes)
+		return None if __r is None else IntegerSystemVariablesBatchAssignment(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

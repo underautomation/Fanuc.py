@@ -15,7 +15,8 @@ class CartesianMotionTpInstructionBase(FullMotionTpInstructionBase):
 	@property
 	def target(self) -> CartesianPositionWithUserFrame:
 		'''Target Cartesian position, configuration, and active frame/tool numbers.'''
-		return CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, self._instance.Target)
+		__r = self._instance.Target
+		return None if __r is None else CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, __r)
 
 	@target.setter
 	def target(self, value: CartesianPositionWithUserFrame):

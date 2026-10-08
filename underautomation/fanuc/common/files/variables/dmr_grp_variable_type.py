@@ -165,7 +165,8 @@ class DmrGrpVariableType(GenericVariableType):
 	@property
 	def rel_shf_err(self) -> typing.List[DmrShferrVariableType]:
 		'''Value of variable $REL_SHF_ERR'''
-		return [DmrShferrVariableType(x) for x in self._instance.RelShfErr]
+		__r = self._instance.RelShfErr
+		return None if __r is None else [None if x is None else DmrShferrVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

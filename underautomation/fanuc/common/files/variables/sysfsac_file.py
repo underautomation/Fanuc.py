@@ -25,7 +25,8 @@ class SysfsacFile(GenericVariableFile):
 	@property
 	def fsac_list(self) -> typing.List[FsacLstVariableType]:
 		'''Value of variable $FSAC_LIST'''
-		return [FsacLstVariableType(x) for x in self._instance.FsacList]
+		__r = self._instance.FsacList
+		return None if __r is None else [None if x is None else FsacLstVariableType(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

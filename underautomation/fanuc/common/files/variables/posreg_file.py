@@ -15,7 +15,8 @@ class PosregFile(GenericVariableFile):
 	@property
 	def posreg(self) -> typing.List[PositionRegister]:
 		'''Value of variable $POSREG'''
-		return [PositionRegister(None, None, x) for x in self._instance.Posreg]
+		__r = self._instance.Posreg
+		return None if __r is None else [None if x is None else PositionRegister(None, None, x) for x in __r]
 
 	@property
 	def maxpregnum(self) -> int:

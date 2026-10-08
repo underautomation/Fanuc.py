@@ -18,22 +18,26 @@ class VcmrinitFile(GenericVariableFile):
 	@property
 	def vdetect_var(self) -> VcalVdVariableType:
 		'''Value of variable VDETECT_VAR'''
-		return VcalVdVariableType(self._instance.VdetectVar)
+		__r = self._instance.VdetectVar
+		return None if __r is None else VcalVdVariableType(__r)
 
 	@property
 	def vfb_var(self) -> VcalVfVariableType:
 		'''Value of variable VFB_VAR'''
-		return VcalVfVariableType(self._instance.VfbVar)
+		__r = self._instance.VfbVar
+		return None if __r is None else VcalVfVariableType(__r)
 
 	@property
 	def move_var(self) -> VcalMvVariableType:
 		'''Value of variable MOVE_VAR'''
-		return VcalMvVariableType(self._instance.MoveVar)
+		__r = self._instance.MoveVar
+		return None if __r is None else VcalMvVariableType(__r)
 
 	@property
 	def vtcp_var(self) -> VtcpsetVariableType:
 		'''Value of variable VTCP_VAR'''
-		return VtcpsetVariableType(self._instance.VtcpVar)
+		__r = self._instance.VtcpVar
+		return None if __r is None else VtcpsetVariableType(__r)
 
 	@property
 	def select_grp(self) -> int:

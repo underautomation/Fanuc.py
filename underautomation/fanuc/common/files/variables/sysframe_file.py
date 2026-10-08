@@ -16,17 +16,20 @@ class SysframeFile(GenericVariableFile):
 	@property
 	def cell_floor(self) -> CartesianPositionVariable:
 		'''Value of variable $CELL_FLOOR'''
-		return CartesianPositionVariable(None, None, self._instance.CellFloor)
+		__r = self._instance.CellFloor
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def cell_grp(self) -> typing.List[CellGrpVariableType]:
 		'''Value of variable $CELL_GRP'''
-		return [CellGrpVariableType(x) for x in self._instance.CellGrp]
+		__r = self._instance.CellGrp
+		return None if __r is None else [None if x is None else CellGrpVariableType(x) for x in __r]
 
 	@property
 	def mnuframe(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable $MNUFRAME'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.Mnuframe]
+		__r = self._instance.Mnuframe
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def mnuframenum(self) -> typing.List[int]:
@@ -36,7 +39,8 @@ class SysframeFile(GenericVariableFile):
 	@property
 	def mnutool(self) -> typing.List[CartesianPositionVariable]:
 		'''Value of variable $MNUTOOL'''
-		return [CartesianPositionVariable(None, None, x) for x in self._instance.Mnutool]
+		__r = self._instance.Mnutool
+		return None if __r is None else [None if x is None else CartesianPositionVariable(None, None, x) for x in __r]
 
 	@property
 	def mnutoolnum(self) -> typing.List[int]:

@@ -20,7 +20,8 @@ class GetCurrentPoseResult(Result):
 	@property
 	def position(self) -> CartesianPosition:
 		'''Cartesian position value of the current pose.'''
-		return CartesianPosition(None, None, None, None, None, None, None, self._instance.Position)
+		__r = self._instance.Position
+		return None if __r is None else CartesianPosition(None, None, None, None, None, None, None, __r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

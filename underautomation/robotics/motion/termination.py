@@ -15,7 +15,8 @@ class Termination:
 	@staticmethod
 	def stop() -> 'Termination':
 		'''The robot stops at the target position'''
-		return Termination(termination.Stop())
+		__r = termination.Stop()
+		return None if __r is None else Termination(__r)
 
 	@staticmethod
 	def overlap(percent: float) -> 'Termination':
@@ -23,7 +24,8 @@ class Termination:
 
 		:param percent: From 0 to 100: part of the deceleration during which both motions are combined. 100 gives the smoothest motion.
 		'''
-		return Termination(termination.Overlap(percent))
+		__r = termination.Overlap(percent)
+		return None if __r is None else Termination(__r)
 
 	@staticmethod
 	def corner(distance: float) -> 'Termination':
@@ -31,7 +33,8 @@ class Termination:
 
 		:param distance: Distance from the target position where the curve starts and ends, in mm. It is limited to half of the length of each motion.
 		'''
-		return Termination(termination.Corner(distance))
+		__r = termination.Corner(distance)
+		return None if __r is None else Termination(__r)
 
 	@property
 	def type(self) -> TerminationType:

@@ -23,7 +23,8 @@ class SnpxAssignableElements2(SnpxElements2[TValue, TIndex], typing.Generic[TVal
 		:param index: The index to get or create an assignment for.
 		:returns: The existing or newly created assignment.
 		'''
-		return Assignment1[TIndex](self._instance.GetOrCreateAssignment(index))
+		__r = self._instance.GetOrCreateAssignment(index)
+		return None if __r is None else Assignment1[TIndex](__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

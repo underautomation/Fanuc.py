@@ -51,7 +51,8 @@ class VcalVdVariableType(GenericVariableType):
 	@property
 	def vis_xyz(self) -> CartesianPositionVariable:
 		'''Value of variable VIS_XYZ'''
-		return CartesianPositionVariable(None, None, self._instance.VisXyz)
+		__r = self._instance.VisXyz
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def log_port(self) -> int:
@@ -91,7 +92,8 @@ class VcalVdVariableType(GenericVariableType):
 	@property
 	def fdot_t(self) -> FdotVariableType:
 		'''Value of variable FDOT_T'''
-		return FdotVariableType(self._instance.FdotT)
+		__r = self._instance.FdotT
+		return None if __r is None else FdotVariableType(__r)
 
 	@property
 	def led_type(self) -> int:

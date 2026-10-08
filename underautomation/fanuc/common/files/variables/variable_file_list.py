@@ -24,7 +24,8 @@ class VariableFileList(IGenericVariableType):
 	@property
 	def parent(self) -> IGenericVariableType:
 		'''Parent container'''
-		return IGenericVariableType(self._instance.Parent)
+		__r = self._instance.Parent
+		return None if __r is None else IGenericVariableType(__r)
 
 	@parent.setter
 	def parent(self, value: IGenericVariableType):

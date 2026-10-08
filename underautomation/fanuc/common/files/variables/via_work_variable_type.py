@@ -20,7 +20,8 @@ class ViaWorkVariableType(GenericVariableType):
 	@property
 	def joint_pos(self) -> JointPositionVariable:
 		'''Value of variable $JOINT_POS'''
-		return JointPositionVariable(None, None, self._instance.JointPos)
+		__r = self._instance.JointPos
+		return None if __r is None else JointPositionVariable(None, None, __r)
 
 	@property
 	def z_uplim(self) -> float:

@@ -20,7 +20,8 @@ class StreamMotionLimits:
 		:param axis: Axis number (1 to 9)
 		:param type: Type of limit
 		'''
-		return LimitTable(self._instance.GetTable(axis, limit_type(int(type))))
+		__r = self._instance.GetTable(axis, limit_type(int(type)))
+		return None if __r is None else LimitTable(__r)
 
 	def compute_limits(self, flangeSpeed: float, payload: float, maxPayload: float) -> JointLimits:
 		'''Computes the limits of all axes for a given flange speed and payload, as the robot does when $STMO_GRP[1].$LMT_MODE is 0.
@@ -29,7 +30,8 @@ class StreamMotionLimits:
 		:param payload: Payload mass, in kg
 		:param maxPayload: Maximum payload of the robot, in kg
 		'''
-		return JointLimits(None, None, None, self._instance.ComputeLimits(flangeSpeed, payload, maxPayload))
+		__r = self._instance.ComputeLimits(flangeSpeed, payload, maxPayload)
+		return None if __r is None else JointLimits(None, None, None, __r)
 
 	@property
 	def axis_count(self) -> int:
@@ -49,7 +51,8 @@ class StreamMotionLimits:
 	@property
 	def reference_limits(self) -> JointLimits:
 		'''Reference limits of each axis: values with the maximum payload at the maximum speed. They are equal to the system variables $STMO_GRP[1].$JNT_VEL_LIM, $JNT_ACC_LIM and $JNT_JRK_LIM, and they are always safe.'''
-		return JointLimits(None, None, None, self._instance.ReferenceLimits)
+		__r = self._instance.ReferenceLimits
+		return None if __r is None else JointLimits(None, None, None, __r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

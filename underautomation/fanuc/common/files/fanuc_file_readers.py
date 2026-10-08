@@ -44,12 +44,14 @@ class FanucFileReaders:
 	@staticmethod
 	def read_file(fileName: str, language: Languages) -> IFanucContent:
 		'''Read any file by path on disc, recognize it by name and decode it'''
-		return IFanucContent(fanuc_file_readers.ReadFile(fileName, languages(int(language))))
+		__r = fanuc_file_readers.ReadFile(fileName, languages(int(language)))
+		return None if __r is None else IFanucContent(__r)
 
 	@staticmethod
 	def _get_readers() -> typing.List[IFileReader1]:
 		'''Get the collection of all parsers'''
-		return [IFileReader1(x) for x in fanuc_file_readers.Readers]
+		__r = fanuc_file_readers.Readers
+		return None if __r is None else [None if x is None else IFileReader1(x) for x in __r]
 
 	readers = _StaticProperty(_get_readers)
 	del _get_readers
@@ -69,22 +71,22 @@ class FanucFileReaders:
 		return self._instance.GetHashCode() if self._instance is not None else 0
 
 # Helper to read variable files *.va
-FanucFileReaders.VariableReader = VariableReader(fanuc_file_readers.VariableReader)
+FanucFileReaders.VariableReader = None if fanuc_file_readers.VariableReader is None else VariableReader(fanuc_file_readers.VariableReader)
 
 # Helper to read error files like errall.ls
-FanucFileReaders.ErrorListReader = ErrorListReader(fanuc_file_readers.ErrorListReader)
+FanucFileReaders.ErrorListReader = None if fanuc_file_readers.ErrorListReader is None else ErrorListReader(fanuc_file_readers.ErrorListReader)
 
 # Helper to read summary diagnosis file summary.dg
-FanucFileReaders.SummaryDiagnosticReader = SummaryDiagnosisReader(fanuc_file_readers.SummaryDiagnosticReader)
+FanucFileReaders.SummaryDiagnosticReader = None if fanuc_file_readers.SummaryDiagnosticReader is None else SummaryDiagnosisReader(fanuc_file_readers.SummaryDiagnosticReader)
 
 # Decode current position file curpos.dg
-FanucFileReaders.CurrentPositionReader = DiagnosisReader2[CurrentPosition, CurrentPositionReader](fanuc_file_readers.CurrentPositionReader)
+FanucFileReaders.CurrentPositionReader = None if fanuc_file_readers.CurrentPositionReader is None else DiagnosisReader2[CurrentPosition, CurrentPositionReader](fanuc_file_readers.CurrentPositionReader)
 
 # Decode IO Status file iostate.dg
-FanucFileReaders.IOStateReader = DiagnosisReader2[IOState, IOStateParser](fanuc_file_readers.IOStateReader)
+FanucFileReaders.IOStateReader = None if fanuc_file_readers.IOStateReader is None else DiagnosisReader2[IOState, IOStateParser](fanuc_file_readers.IOStateReader)
 
 # Decode IO Status file iostate.dg
-FanucFileReaders.SafetyStatusReader = DiagnosisReader2[SafetyStatus, SafetyStatusParser](fanuc_file_readers.SafetyStatusReader)
+FanucFileReaders.SafetyStatusReader = None if fanuc_file_readers.SafetyStatusReader is None else DiagnosisReader2[SafetyStatus, SafetyStatusParser](fanuc_file_readers.SafetyStatusReader)
 
 # Decode task and program states prgstate.dg
-FanucFileReaders.ProgramStates = DiagnosisReader2[ProgramStates, ProgramStatesParser](fanuc_file_readers.ProgramStates)
+FanucFileReaders.ProgramStates = None if fanuc_file_readers.ProgramStates is None else DiagnosisReader2[ProgramStates, ProgramStatesParser](fanuc_file_readers.ProgramStates)

@@ -36,27 +36,32 @@ class DbinfoVariableType(GenericVariableType):
 	@property
 	def xf(self) -> XfVariableType:
 		'''Value of variable $XF'''
-		return XfVariableType(self._instance.Xf)
+		__r = self._instance.Xf
+		return None if __r is None else XfVariableType(__r)
 
 	@property
 	def uxf(self) -> XfVariableType:
 		'''Value of variable $UXF'''
-		return XfVariableType(self._instance.Uxf)
+		__r = self._instance.Uxf
+		return None if __r is None else XfVariableType(__r)
 
 	@property
 	def r_xf(self) -> XfVariableType:
 		'''Value of variable $R_XF'''
-		return XfVariableType(self._instance.RXf)
+		__r = self._instance.RXf
+		return None if __r is None else XfVariableType(__r)
 
 	@property
 	def dpos(self) -> XYZPosition:
 		'''Value of variable $DPOS'''
-		return XYZPosition(None, None, None, self._instance.Dpos)
+		__r = self._instance.Dpos
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def loc(self) -> XYZPosition:
 		'''Value of variable $LOC'''
-		return XYZPosition(None, None, None, self._instance.Loc)
+		__r = self._instance.Loc
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def line(self) -> int:
@@ -81,7 +86,8 @@ class DbinfoVariableType(GenericVariableType):
 	@property
 	def offset(self) -> XYZPosition:
 		'''Value of variable $OFFSET'''
-		return XYZPosition(None, None, None, self._instance.Offset)
+		__r = self._instance.Offset
+		return None if __r is None else XYZPosition(None, None, None, __r)
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

@@ -55,7 +55,8 @@ class UecfgVariableType(GenericVariableType):
 	@property
 	def req_data(self) -> typing.List[ReqDataVariableType]:
 		'''Value of variable $REQ_DATA'''
-		return [ReqDataVariableType(x) for x in self._instance.ReqData]
+		__r = self._instance.ReqData
+		return None if __r is None else [None if x is None else ReqDataVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

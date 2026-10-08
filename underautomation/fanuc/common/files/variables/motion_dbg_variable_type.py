@@ -20,27 +20,32 @@ class MotionDbgVariableType(GenericVariableType):
 	@property
 	def mgdebug(self) -> MgdebugVariableType:
 		'''Value of variable $MGDEBUG'''
-		return MgdebugVariableType(self._instance.Mgdebug)
+		__r = self._instance.Mgdebug
+		return None if __r is None else MgdebugVariableType(__r)
 
 	@property
 	def midebug(self) -> MgdebugVariableType:
 		'''Value of variable $MIDEBUG'''
-		return MgdebugVariableType(self._instance.Midebug)
+		__r = self._instance.Midebug
+		return None if __r is None else MgdebugVariableType(__r)
 
 	@property
 	def mpdebug(self) -> MgdebugVariableType:
 		'''Value of variable $MPDEBUG'''
-		return MgdebugVariableType(self._instance.Mpdebug)
+		__r = self._instance.Mpdebug
+		return None if __r is None else MgdebugVariableType(__r)
 
 	@property
 	def midebug_itp(self) -> MgdebugVariableType:
 		'''Value of variable $MIDEBUG_ITP'''
-		return MgdebugVariableType(self._instance.MidebugItp)
+		__r = self._instance.MidebugItp
+		return None if __r is None else MgdebugVariableType(__r)
 
 	@property
 	def pgdebug(self) -> MgdebugVariableType:
 		'''Value of variable $PGDEBUG'''
-		return MgdebugVariableType(self._instance.Pgdebug)
+		__r = self._instance.Pgdebug
+		return None if __r is None else MgdebugVariableType(__r)
 
 	@property
 	def keep(self) -> bool:

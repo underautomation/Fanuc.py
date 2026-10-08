@@ -60,7 +60,8 @@ class RdcrGrpVariableType(GenericVariableType):
 	@property
 	def j2red(self) -> typing.List[J2redVariableType]:
 		'''Value of variable $J2RED'''
-		return [J2redVariableType(x) for x in self._instance.J2red]
+		__r = self._instance.J2red
+		return None if __r is None else [None if x is None else J2redVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

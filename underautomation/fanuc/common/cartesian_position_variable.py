@@ -19,7 +19,8 @@ class CartesianPositionVariable(CartesianPosition):
 	@staticmethod
 	def parse(value: str) -> 'CartesianPositionVariable':
 		'''Parses a Cartesian position from its string representation'''
-		return CartesianPositionVariable(None, None, cartesian_position_variable.Parse(value))
+		__r = cartesian_position_variable.Parse(value)
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def group(self) -> int:

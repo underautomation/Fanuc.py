@@ -30,7 +30,8 @@ class ZmposGrpVariableType(GenericVariableType):
 	@property
 	def p_act(self) -> CartesianPositionVariable:
 		'''Value of variable $P_ACT'''
-		return CartesianPositionVariable(None, None, self._instance.PAct)
+		__r = self._instance.PAct
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def j_act(self) -> typing.List[float]:
@@ -40,7 +41,8 @@ class ZmposGrpVariableType(GenericVariableType):
 	@property
 	def p_des(self) -> CartesianPositionVariable:
 		'''Value of variable $P_DES'''
-		return CartesianPositionVariable(None, None, self._instance.PDes)
+		__r = self._instance.PDes
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def j_des(self) -> typing.List[float]:
@@ -50,7 +52,8 @@ class ZmposGrpVariableType(GenericVariableType):
 	@property
 	def p_des2(self) -> CartesianPositionVariable:
 		'''Value of variable $P_DES2'''
-		return CartesianPositionVariable(None, None, self._instance.PDes2)
+		__r = self._instance.PDes2
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def j_des2(self) -> typing.List[float]:
@@ -100,7 +103,8 @@ class ZmposGrpVariableType(GenericVariableType):
 	@property
 	def p_aftflt(self) -> CartesianPositionVariable:
 		'''Value of variable $P_AFTFLT'''
-		return CartesianPositionVariable(None, None, self._instance.PAftflt)
+		__r = self._instance.PAftflt
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def j_aftflt(self) -> typing.List[float]:

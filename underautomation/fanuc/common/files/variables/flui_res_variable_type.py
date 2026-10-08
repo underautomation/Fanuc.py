@@ -46,7 +46,8 @@ class FluiResVariableType(GenericVariableType):
 	@property
 	def vector(self) -> VectorVariable:
 		'''Value of variable $VECTOR'''
-		return VectorVariable(self._instance.Vector)
+		__r = self._instance.Vector
+		return None if __r is None else VectorVariable(__r)
 
 	@property
 	def number(self) -> int:
@@ -61,7 +62,8 @@ class FluiResVariableType(GenericVariableType):
 	@property
 	def position(self) -> CartesianPositionVariable:
 		'''Value of variable $POSITION'''
-		return CartesianPositionVariable(None, None, self._instance.Position)
+		__r = self._instance.Position
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

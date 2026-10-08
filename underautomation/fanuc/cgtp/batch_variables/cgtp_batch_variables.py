@@ -47,7 +47,8 @@ class CgtpBatchVariables:
 		:param index: 1-based register index (R[index])
 		:returns: The variable added to the collection
 		'''
-		return CgtpNumericRegister(self._instance.AddNumericRegister(index))
+		__r = self._instance.AddNumericRegister(index)
+		return None if __r is None else CgtpNumericRegister(__r)
 
 	def add_numeric_register_as_integer(self, index: int, comment: str, value: int) -> CgtpNumericRegister:
 		'''Add a numeric register with an integer value and comment for writing.
@@ -57,7 +58,8 @@ class CgtpBatchVariables:
 		:param value: Integer value to write
 		:returns: The variable added to the collection
 		'''
-		return CgtpNumericRegister(self._instance.AddNumericRegisterAsInteger(index, comment, value))
+		__r = self._instance.AddNumericRegisterAsInteger(index, comment, value)
+		return None if __r is None else CgtpNumericRegister(__r)
 
 	def add_numeric_register_as_real(self, index: int, comment: str, value: float) -> CgtpNumericRegister:
 		'''Add a numeric register with a real (double) value and comment for writing.
@@ -67,7 +69,8 @@ class CgtpBatchVariables:
 		:param value: Real value to write
 		:returns: The variable added to the collection
 		'''
-		return CgtpNumericRegister(self._instance.AddNumericRegisterAsReal(index, comment, value))
+		__r = self._instance.AddNumericRegisterAsReal(index, comment, value)
+		return None if __r is None else CgtpNumericRegister(__r)
 
 	def add_string_register(self, index: int) -> CgtpStringRegister:
 		'''Add a string register for reading. The value and comment will be populated after a batch read.
@@ -75,7 +78,8 @@ class CgtpBatchVariables:
 		:param index: 1-based register index (SR[index])
 		:returns: The variable added to the collection
 		'''
-		return CgtpStringRegister(self._instance.AddStringRegister(index))
+		__r = self._instance.AddStringRegister(index)
+		return None if __r is None else CgtpStringRegister(__r)
 
 	def add_string_register_with_value(self, index: int, comment: str, value: str) -> CgtpStringRegister:
 		'''Add a string register with a value and comment for writing.
@@ -85,7 +89,8 @@ class CgtpBatchVariables:
 		:param value: String value to write
 		:returns: The variable added to the collection
 		'''
-		return CgtpStringRegister(self._instance.AddStringRegisterWithValue(index, comment, value))
+		__r = self._instance.AddStringRegisterWithValue(index, comment, value)
+		return None if __r is None else CgtpStringRegister(__r)
 
 	def add_position_register(self, index: int, group: int=1) -> CgtpPositionRegister:
 		'''Add a position register for reading. The position data will be populated after a batch read.
@@ -94,7 +99,8 @@ class CgtpBatchVariables:
 		:param group: Motion group number (default 1)
 		:returns: The variable added to the collection
 		'''
-		return CgtpPositionRegister(self._instance.AddPositionRegister(index, group))
+		__r = self._instance.AddPositionRegister(index, group)
+		return None if __r is None else CgtpPositionRegister(__r)
 
 	def add_position_register_as_cartesian(self, index: int, position: CartesianPosition, group: int=1, comment: str=None) -> CgtpPositionRegister:
 		'''Add a position register with a Cartesian position for writing.
@@ -105,7 +111,8 @@ class CgtpBatchVariables:
 		:param comment: Optional comment. Null means no comment is written.
 		:returns: The variable added to the collection
 		'''
-		return CgtpPositionRegister(self._instance.AddPositionRegisterAsCartesian(index, position._instance if position else None, group, comment))
+		__r = self._instance.AddPositionRegisterAsCartesian(index, position._instance if position else None, group, comment)
+		return None if __r is None else CgtpPositionRegister(__r)
 
 	def add_position_register_as_joint(self, index: int, position: JointsPosition, group: int=1, comment: str=None) -> CgtpPositionRegister:
 		'''Add a position register with a joint position for writing.
@@ -116,7 +123,8 @@ class CgtpBatchVariables:
 		:param comment: Optional comment. Null means no comment is written.
 		:returns: The variable added to the collection
 		'''
-		return CgtpPositionRegister(self._instance.AddPositionRegisterAsJoint(index, position._instance if position else None, group, comment))
+		__r = self._instance.AddPositionRegisterAsJoint(index, position._instance if position else None, group, comment)
+		return None if __r is None else CgtpPositionRegister(__r)
 
 	def add_variable(self, name: str, programName: str=None) -> CgtpVariable:
 		'''Add a generic variable for reading or writing. For system variables, leave programName null. Set the desired value on the returned object before performing a batch write.
@@ -125,11 +133,13 @@ class CgtpBatchVariables:
 		:param programName: Program name that owns the variable. Null for system variables.
 		:returns: The variable added to the collection
 		'''
-		return CgtpVariable(self._instance.AddVariable(name, programName))
+		__r = self._instance.AddVariable(name, programName)
+		return None if __r is None else CgtpVariable(__r)
 
 	@property
 	def item(self) -> ICgtpBatchVariable:
-		return ICgtpBatchVariable(self._instance.Item)
+		__r = self._instance.Item
+		return None if __r is None else ICgtpBatchVariable(__r)
 
 	@item.setter
 	def item(self, value: ICgtpBatchVariable):
@@ -160,10 +170,11 @@ class CgtpBatchVariables:
 	def __iter__(self):
 		enumerator = self._instance.GetEnumerator()
 		while enumerator.MoveNext():
-			yield ICgtpBatchVariable(enumerator.Current)
+			yield None if enumerator.Current is None else ICgtpBatchVariable(enumerator.Current)
 
 	def __len__(self) -> int:
 		return self._instance.Count
 
 	def __getitem__(self, index: int) -> ICgtpBatchVariable:
-		return ICgtpBatchVariable(self._instance[index])
+		__r = self._instance[index]
+		return None if __r is None else ICgtpBatchVariable(__r)

@@ -18,22 +18,26 @@ class SysuifFile(GenericVariableFile):
 	@property
 	def ui_config(self) -> UiConfigVariableType:
 		'''Value of variable $UI_CONFIG'''
-		return UiConfigVariableType(self._instance.UiConfig)
+		__r = self._instance.UiConfig
+		return None if __r is None else UiConfigVariableType(__r)
 
 	@property
 	def ui_custom(self) -> typing.List[UiCustomVariableType]:
 		'''Value of variable $UI_CUSTOM'''
-		return [UiCustomVariableType(x) for x in self._instance.UiCustom]
+		__r = self._instance.UiCustom
+		return None if __r is None else [None if x is None else UiCustomVariableType(x) for x in __r]
 
 	@property
 	def ui_topmenu(self) -> typing.List[UiTopmenuVariableType]:
 		'''Value of variable $UI_TOPMENU'''
-		return [UiTopmenuVariableType(x) for x in self._instance.UiTopmenu]
+		__r = self._instance.UiTopmenu
+		return None if __r is None else [None if x is None else UiTopmenuVariableType(x) for x in __r]
 
 	@property
 	def ui_userview(self) -> typing.List[UiUsrviewVariableType]:
 		'''Value of variable $UI_USERVIEW'''
-		return [UiUsrviewVariableType(x) for x in self._instance.UiUserview]
+		__r = self._instance.UiUserview
+		return None if __r is None else [None if x is None else UiUsrviewVariableType(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

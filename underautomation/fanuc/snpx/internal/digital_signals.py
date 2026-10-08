@@ -55,17 +55,17 @@ class DigitalSignals(SnpxElements2[bool, int]):
 
 	@property
 	def segment_selector(self) -> SegmentSelector:
-		'''Gets the data area of the controller that holds this signal group. Used by the SDK.'''
+		'''Gets the segment selector for this signal group.'''
 		return SegmentSelector(int(self._instance.SegmentSelector))
 
 	@property
 	def segment_offset(self) -> SegmentOffset:
-		'''Gets the family of signals of this signal group. Used by the SDK.'''
+		'''Gets the segment offset for this signal group.'''
 		return SegmentOffset(int(self._instance.SegmentOffset))
 
 	@property
 	def segment_name(self) -> SegmentName:
-		'''Gets the name of the family of signals of this signal group.'''
+		'''Gets the segment name identifying this signal group.'''
 		return SegmentName(int(self._instance.SegmentName))
 
 	def __str__(self):

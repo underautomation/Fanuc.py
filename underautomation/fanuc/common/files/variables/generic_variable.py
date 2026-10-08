@@ -4,7 +4,7 @@ from underautomation.fanuc.common.files.variables.i_generic_variable_type import
 from underautomation.fanuc.common.files.variables.generic_field import GenericField
 from UnderAutomation.Fanuc.Common.Files.Variables import GenericVariable as generic_variable
 
-class GenericVariable(GenericField, IGenericVariableType):
+class GenericVariable(GenericField):
 	'''Represents a top-level variable declaration with scope and storage information'''
 	def __init__(self, _internal = 0):
 		if(_internal == 0):
@@ -25,7 +25,8 @@ class GenericVariable(GenericField, IGenericVariableType):
 	@property
 	def parent(self) -> IGenericVariableType:
 		'''Parent container of this variable'''
-		return IGenericVariableType(self._instance.Parent)
+		__r = self._instance.Parent
+		return None if __r is None else IGenericVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

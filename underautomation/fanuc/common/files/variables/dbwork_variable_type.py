@@ -15,7 +15,8 @@ class DbworkVariableType(GenericVariableType):
 	@property
 	def info(self) -> typing.List[DbinfoVariableType]:
 		'''Value of variable $INFO'''
-		return [DbinfoVariableType(x) for x in self._instance.Info]
+		__r = self._instance.Info
+		return None if __r is None else [None if x is None else DbinfoVariableType(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:

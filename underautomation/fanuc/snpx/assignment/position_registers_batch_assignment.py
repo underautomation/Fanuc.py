@@ -18,7 +18,8 @@ class PositionRegistersBatchAssignment(BatchAssignment2[Position, int]):
 
 		:returns: An array of Position values.
 		'''
-		return [Position(None, None, None, None, x) for x in self._instance.Read()]
+		__r = self._instance.Read()
+		return None if __r is None else [None if x is None else Position(None, None, None, None, x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

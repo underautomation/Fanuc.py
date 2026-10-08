@@ -47,7 +47,8 @@ class CgtpVariable(ICgtpBatchVariable):
 	@property
 	def structure_value(self) -> CgtpStructureField:
 		'''Structured value returned for complex variables (with FIELD/ARRAY children). Null for scalar variables. When writing, if this is not null each leaf field is written independently.'''
-		return CgtpStructureField(self._instance.StructureValue)
+		__r = self._instance.StructureValue
+		return None if __r is None else CgtpStructureField(__r)
 
 	@structure_value.setter
 	def structure_value(self, value: CgtpStructureField):
@@ -56,7 +57,8 @@ class CgtpVariable(ICgtpBatchVariable):
 	@property
 	def cartesian_position_value(self) -> CartesianPositionVariable:
 		'''Gets or sets the value as a Cartesian position. Setting this property updates string_value.'''
-		return CartesianPositionVariable(None, None, self._instance.CartesianPositionValue)
+		__r = self._instance.CartesianPositionValue
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@cartesian_position_value.setter
 	def cartesian_position_value(self, value: CartesianPositionVariable):
@@ -65,7 +67,8 @@ class CgtpVariable(ICgtpBatchVariable):
 	@property
 	def joint_position_value(self) -> JointPositionVariable:
 		'''Gets or sets the value as a joint position. Setting this property updates string_value.'''
-		return JointPositionVariable(None, None, self._instance.JointPositionValue)
+		__r = self._instance.JointPositionValue
+		return None if __r is None else JointPositionVariable(None, None, __r)
 
 	@joint_position_value.setter
 	def joint_position_value(self, value: JointPositionVariable):
@@ -101,7 +104,8 @@ class CgtpVariable(ICgtpBatchVariable):
 	@property
 	def vector_value(self) -> VectorVariable:
 		'''Gets or sets the value as a 3D vector. Setting this property updates string_value.'''
-		return VectorVariable(self._instance.VectorValue)
+		__r = self._instance.VectorValue
+		return None if __r is None else VectorVariable(__r)
 
 	@vector_value.setter
 	def vector_value(self, value: VectorVariable):
@@ -110,7 +114,8 @@ class CgtpVariable(ICgtpBatchVariable):
 	@property
 	def configuration_value(self) -> Configuration:
 		'''Gets or sets the value as a robot configuration. Setting this property updates string_value.'''
-		return Configuration(None, None, None, None, None, None, None, self._instance.ConfigurationValue)
+		__r = self._instance.ConfigurationValue
+		return None if __r is None else Configuration(None, None, None, None, None, None, None, __r)
 
 	@configuration_value.setter
 	def configuration_value(self, value: Configuration):

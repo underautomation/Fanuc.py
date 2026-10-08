@@ -57,7 +57,8 @@ class DiagGrpVariableType(GenericVariableType):
 	@property
 	def adj_rtrq(self) -> typing.List[AdjRtrqVariableType]:
 		'''Value of variable $ADJ_RTRQ'''
-		return [AdjRtrqVariableType(x) for x in self._instance.AdjRtrq]
+		__r = self._instance.AdjRtrq
+		return None if __r is None else [None if x is None else AdjRtrqVariableType(x) for x in __r]
 
 	@property
 	def adj_ohtrq(self) -> typing.List[float]:
@@ -102,7 +103,8 @@ class DiagGrpVariableType(GenericVariableType):
 	@property
 	def ctrl_cab(self) -> typing.List[CtrlCabVariableType]:
 		'''Value of variable $CTRL_CAB'''
-		return [CtrlCabVariableType(x) for x in self._instance.CtrlCab]
+		__r = self._instance.CtrlCab
+		return None if __r is None else [None if x is None else CtrlCabVariableType(x) for x in __r]
 
 	@property
 	def trqcns(self) -> typing.List[float]:
@@ -162,7 +164,8 @@ class DiagGrpVariableType(GenericVariableType):
 	@property
 	def cur_tcp(self) -> CartesianPositionVariable:
 		'''Value of variable $CUR_TCP'''
-		return CartesianPositionVariable(None, None, self._instance.CurTcp)
+		__r = self._instance.CurTcp
+		return None if __r is None else CartesianPositionVariable(None, None, __r)
 
 	@property
 	def motn_style(self) -> int:

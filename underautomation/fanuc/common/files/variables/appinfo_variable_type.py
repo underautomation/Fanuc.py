@@ -25,7 +25,8 @@ class AppinfoVariableType(GenericVariableType):
 	@property
 	def equip(self) -> typing.List[AppinfoeqVariableType]:
 		'''Value of variable $EQUIP'''
-		return [AppinfoeqVariableType(x) for x in self._instance.Equip]
+		__r = self._instance.Equip
+		return None if __r is None else [None if x is None else AppinfoeqVariableType(x) for x in __r]
 
 	@property
 	def name(self) -> str:

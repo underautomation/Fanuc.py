@@ -20,8 +20,13 @@ class SafetyStatusParser(SectionParser1[SafetyStatus]):
 	def parse_line(self, line: str) -> None: ...
 
 	def parse_line(self, *args, **kwargs) -> None:
-		'''Arguments: (line, start, setValue)
+		'''Parses a single line, checking if it starts with the specified prefix and extracting a boolean value.
+
+		Arguments: (line, start, setValue)
 		Arguments: (line)
+		:param line: The line to parse.
+		:param start: The expected line prefix.
+		:param setValue: Action to set the parsed boolean value.
 		'''
 		__a = _bind_overload(args, kwargs, ['line', 'start', 'setValue'], {})
 		if __a is not None:

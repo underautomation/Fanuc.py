@@ -23,7 +23,8 @@ class PositionRegisters(SnpxWritableAssignableIndexableElements2[Position, Posit
 		:param count: The number of consecutive registers.
 		:returns: A batch assignment for the specified range.
 		'''
-		return PositionRegistersBatchAssignment(self._instance.CreateBatchAssignment(startIndex, count))
+		__r = self._instance.CreateBatchAssignment(startIndex, count)
+		return None if __r is None else PositionRegistersBatchAssignment(__r)
 
 	def write(self, index: int, cartesianPosition_or_extendedCartesianPosition_or_jointsPosition: CartesianPosition | ExtendedCartesianPosition | JointsPosition) -> None:
 		'''Writes a Cartesian position to the specified position register.
@@ -41,7 +42,8 @@ class PositionRegisters(SnpxWritableAssignableIndexableElements2[Position, Posit
 		:param index: The register index.
 		:returns: The position value.
 		'''
-		return Position(None, None, None, None, self._instance.Read(index))
+		__r = self._instance.Read(index)
+		return None if __r is None else Position(None, None, None, None, __r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

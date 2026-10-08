@@ -21,17 +21,20 @@ class GroupPosition:
 	@property
 	def joints_position(self) -> JointsPosition:
 		'''Joint positions : the position of each robot angles'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.JointsPosition)
+		__r = self._instance.JointsPosition
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@property
 	def user_frame_positions(self) -> typing.List[CartesianPositionWithUserFrame]:
 		'''Position of each tools in each user frames'''
-		return [CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, x) for x in self._instance.UserFramePositions]
+		__r = self._instance.UserFramePositions
+		return None if __r is None else [None if x is None else CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, x) for x in __r]
 
 	@property
 	def world_positions(self) -> typing.List[CartesianPositionWithTool]:
 		'''Position of each tools in world coordinates'''
-		return [CartesianPositionWithTool(None, None, None, None, None, None, None, None, None, None, x) for x in self._instance.WorldPositions]
+		__r = self._instance.WorldPositions
+		return None if __r is None else [None if x is None else CartesianPositionWithTool(None, None, None, None, None, None, None, None, None, None, x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

@@ -1168,7 +1168,8 @@ class MrrGrpVariableType(GenericVariableType):
 	@property
 	def interaction(self) -> typing.List[InteractVariableType]:
 		'''Value of variable $INTERACTION'''
-		return [InteractVariableType(x) for x in self._instance.Interaction]
+		__r = self._instance.Interaction
+		return None if __r is None else [None if x is None else InteractVariableType(x) for x in __r]
 
 	@property
 	def auto_sngstp(self) -> bool:
@@ -1218,12 +1219,14 @@ class MrrGrpVariableType(GenericVariableType):
 	@property
 	def intrac_num(self) -> typing.List[IntracNVariableType]:
 		'''Value of variable $INTRAC_NUM'''
-		return [IntracNVariableType(x) for x in self._instance.IntracNum]
+		__r = self._instance.IntracNum
+		return None if __r is None else [None if x is None else IntracNVariableType(x) for x in __r]
 
 	@property
 	def intrac_div(self) -> typing.List[IntracDVariableType]:
 		'''Value of variable $INTRAC_DIV'''
-		return [IntracDVariableType(x) for x in self._instance.IntracDiv]
+		__r = self._instance.IntracDiv
+		return None if __r is None else [None if x is None else IntracDVariableType(x) for x in __r]
 
 	@property
 	def obs_dist(self) -> float:
@@ -1273,7 +1276,8 @@ class MrrGrpVariableType(GenericVariableType):
 	@property
 	def dh_extra(self) -> typing.List[DhExtraVariableType]:
 		'''Value of variable $DH_EXTRA'''
-		return [DhExtraVariableType(x) for x in self._instance.DhExtra]
+		__r = self._instance.DhExtra
+		return None if __r is None else [None if x is None else DhExtraVariableType(x) for x in __r]
 
 	@property
 	def axs_couple(self) -> typing.List[int]:

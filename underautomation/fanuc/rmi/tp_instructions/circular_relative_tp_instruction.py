@@ -26,7 +26,8 @@ class CircularRelativeTpInstruction(CartesianMotionTpInstructionBase):
 	@property
 	def via(self) -> CartesianPositionWithUserFrame:
 		'''Via-point delta that defines the arc.'''
-		return CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, self._instance.Via)
+		__r = self._instance.Via
+		return None if __r is None else CartesianPositionWithUserFrame(None, None, None, None, None, None, None, None, __r)
 
 	@via.setter
 	def via(self, value: CartesianPositionWithUserFrame):

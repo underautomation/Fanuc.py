@@ -34,7 +34,8 @@ class SetpointRequestEventArgs:
 	@property
 	def status(self) -> StreamMotionStatus:
 		'''Last status received from the robot'''
-		return StreamMotionStatus(self._instance.Status)
+		__r = self._instance.Status
+		return None if __r is None else StreamMotionStatus(__r)
 
 	@property
 	def cycle_index(self) -> int:

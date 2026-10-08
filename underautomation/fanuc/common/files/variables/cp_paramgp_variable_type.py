@@ -215,7 +215,8 @@ class CpParamgpVariableType(GenericVariableType):
 	@property
 	def cp_test(self) -> CpTestVariableType:
 		'''Value of variable $CP_TEST'''
-		return CpTestVariableType(self._instance.CpTest)
+		__r = self._instance.CpTest
+		return None if __r is None else CpTestVariableType(__r)
 
 	@property
 	def t1_vscale(self) -> int:

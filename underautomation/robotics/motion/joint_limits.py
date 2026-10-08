@@ -23,7 +23,8 @@ class JointLimits:
 		:param accelerationFactor: Factor applied to acceleration limits
 		:param jerkFactor: Factor applied to jerk limits
 		'''
-		return JointLimits(None, None, None, self._instance.Scale(velocityFactor, accelerationFactor, jerkFactor))
+		__r = self._instance.Scale(velocityFactor, accelerationFactor, jerkFactor)
+		return None if __r is None else JointLimits(None, None, None, __r)
 
 	@property
 	def velocity(self) -> typing.List[float]:

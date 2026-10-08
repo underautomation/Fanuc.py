@@ -14,12 +14,14 @@ class GenericVariableType(IGenericVariableType):
 
 	def get_field(self, name: str) -> GenericField:
 		'''Gets a field by name (case-insensitive)'''
-		return GenericField(self._instance.GetField(name))
+		__r = self._instance.GetField(name)
+		return None if __r is None else GenericField(__r)
 
 	@property
 	def fields(self) -> typing.List[GenericField]:
 		'''Fields contained in this type'''
-		return [GenericField(x) for x in self._instance.Fields]
+		__r = self._instance.Fields
+		return None if __r is None else [None if x is None else GenericField(x) for x in __r]
 
 	@property
 	def fanuc_internal_type_name(self) -> str:
@@ -29,7 +31,8 @@ class GenericVariableType(IGenericVariableType):
 	@property
 	def parent(self) -> IGenericVariableType:
 		'''Parent container'''
-		return IGenericVariableType(self._instance.Parent)
+		__r = self._instance.Parent
+		return None if __r is None else IGenericVariableType(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

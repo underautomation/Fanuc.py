@@ -20,7 +20,8 @@ class FileSetupVariableType(GenericVariableType):
 	@property
 	def filecomp(self) -> FilecompVariableType:
 		'''Value of variable $FILECOMP'''
-		return FilecompVariableType(self._instance.Filecomp)
+		__r = self._instance.Filecomp
+		return None if __r is None else FilecompVariableType(__r)
 
 	@property
 	def file_mask(self) -> bool:

@@ -24,27 +24,32 @@ class SummaryDiagnosis(IFanucContent):
 	@property
 	def current_position(self) -> CurrentPosition:
 		'''Current position of each robots and groups handled by this controller'''
-		return CurrentPosition(self._instance.CurrentPosition)
+		__r = self._instance.CurrentPosition
+		return None if __r is None else CurrentPosition(__r)
 
 	@property
 	def safety(self) -> SafetyStatus:
 		'''Controller safety information'''
-		return SafetyStatus(self._instance.Safety)
+		__r = self._instance.Safety
+		return None if __r is None else SafetyStatus(__r)
 
 	@property
 	def i_os(self) -> IOState:
 		'''Controller IO status'''
-		return IOState(self._instance.IOs)
+		__r = self._instance.IOs
+		return None if __r is None else IOState(__r)
 
 	@property
 	def features(self) -> Features:
 		'''Controller features status'''
-		return Features(self._instance.Features)
+		__r = self._instance.Features
+		return None if __r is None else Features(__r)
 
 	@property
 	def program_states(self) -> ProgramStates:
 		'''Controller program states'''
-		return ProgramStates(self._instance.ProgramStates)
+		__r = self._instance.ProgramStates
+		return None if __r is None else ProgramStates(__r)
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

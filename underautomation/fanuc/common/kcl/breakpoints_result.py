@@ -15,7 +15,8 @@ class BreakpointsResult(Result):
 	@property
 	def breakpoints(self) -> typing.List[Breakpoint]:
 		'''Gets the breakpoints set on the task.'''
-		return [Breakpoint(x) for x in self._instance.Breakpoints]
+		__r = self._instance.Breakpoints
+		return None if __r is None else [None if x is None else Breakpoint(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

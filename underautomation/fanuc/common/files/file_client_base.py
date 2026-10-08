@@ -23,31 +23,38 @@ class FileClientBase:
 
 	def get_summary_diagnostic(self) -> SummaryDiagnosis:
 		'''Get controller status (position, safety, ios, ...)'''
-		return SummaryDiagnosis(self._instance.GetSummaryDiagnostic())
+		__r = self._instance.GetSummaryDiagnostic()
+		return None if __r is None else SummaryDiagnosis(__r)
 
 	def get_all_errors_list(self) -> ErrorList:
 		'''Get a list of all errors logged by the controller'''
-		return ErrorList(self._instance.GetAllErrorsList())
+		__r = self._instance.GetAllErrorsList()
+		return None if __r is None else ErrorList(__r)
 
 	def get_current_position(self) -> CurrentPosition:
 		'''Get current robot position of each robot handled by this controller'''
-		return CurrentPosition(self._instance.GetCurrentPosition())
+		__r = self._instance.GetCurrentPosition()
+		return None if __r is None else CurrentPosition(__r)
 
 	def get_io_state(self) -> IOState:
 		'''Get controller IO State'''
-		return IOState(self._instance.GetIOState())
+		__r = self._instance.GetIOState()
+		return None if __r is None else IOState(__r)
 
 	def get_safety_status(self) -> SafetyStatus:
 		'''Get controller safety status'''
-		return SafetyStatus(self._instance.GetSafetyStatus())
+		__r = self._instance.GetSafetyStatus()
+		return None if __r is None else SafetyStatus(__r)
 
 	def get_program_states(self) -> ProgramStates:
 		'''Get controller program states'''
-		return ProgramStates(self._instance.GetProgramStates())
+		__r = self._instance.GetProgramStates()
+		return None if __r is None else ProgramStates(__r)
 
 	def get_variables_from_file(self, variableFileName: str) -> GenericVariableFile:
 		'''Get and parse a variable file from its name'''
-		return GenericVariableFile(self._instance.GetVariablesFromFile(variableFileName))
+		__r = self._instance.GetVariablesFromFile(variableFileName)
+		return None if __r is None else GenericVariableFile(__r)
 
 	def enumerate_variable_file_names(self) -> typing.List[str]:
 		'''Get the list of all variable file names available on the controller'''
@@ -55,12 +62,14 @@ class FileClientBase:
 
 	def get_all_variables(self, progress: typing.Callable[[float], None] | OnProgressDelegate=None) -> VariableFileList:
 		'''Get the list of all variables on the controller. All variables files are read and decoded'''
-		return VariableFileList(self._instance.GetAllVariables((progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None))
+		__r = self._instance.GetAllVariables((progress._instance if isinstance(progress, OnProgressDelegate) else on_progress_delegate(lambda _x0: progress(_x0))) if progress else None)
+		return None if __r is None else VariableFileList(__r)
 
 	@property
 	def known_variable_files(self) -> KnownVariableFiles:
 		'''A list of method to read specific files'''
-		return KnownVariableFiles(self._instance.KnownVariableFiles)
+		__r = self._instance.KnownVariableFiles
+		return None if __r is None else KnownVariableFiles(__r)
 
 	@property
 	def ip(self) -> str:

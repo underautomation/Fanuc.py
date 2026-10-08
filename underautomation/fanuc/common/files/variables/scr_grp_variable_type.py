@@ -111,7 +111,8 @@ class ScrGrpVariableType(GenericVariableType):
 	@property
 	def config_mask(self) -> Configuration:
 		'''Value of variable $CONFIG_MASK'''
-		return Configuration(None, None, None, None, None, None, None, self._instance.ConfigMask)
+		__r = self._instance.ConfigMask
+		return None if __r is None else Configuration(None, None, None, None, None, None, None, __r)
 
 	@property
 	def link_length(self) -> typing.List[float]:
@@ -241,7 +242,8 @@ class ScrGrpVariableType(GenericVariableType):
 	@property
 	def ofst(self) -> typing.List[AxOfsVariableType]:
 		'''Value of variable $OFST'''
-		return [AxOfsVariableType(x) for x in self._instance.Ofst]
+		__r = self._instance.Ofst
+		return None if __r is None else [None if x is None else AxOfsVariableType(x) for x in __r]
 
 	@property
 	def kinem_enb(self) -> int:

@@ -17,17 +17,20 @@ class SysmastFile(GenericVariableFile):
 	@property
 	def dmr_grp(self) -> typing.List[DmrGrpVariableType]:
 		'''Value of variable $DMR_GRP'''
-		return [DmrGrpVariableType(x) for x in self._instance.DmrGrp]
+		__r = self._instance.DmrGrp
+		return None if __r is None else [None if x is None else DmrGrpVariableType(x) for x in __r]
 
 	@property
 	def fms_grp(self) -> typing.List[FmsGrpVariableType]:
 		'''Value of variable $FMS_GRP'''
-		return [FmsGrpVariableType(x) for x in self._instance.FmsGrp]
+		__r = self._instance.FmsGrp
+		return None if __r is None else [None if x is None else FmsGrpVariableType(x) for x in __r]
 
 	@property
 	def plcl_grp(self) -> typing.List[PlclGrpVariableType]:
 		'''Value of variable $PLCL_GRP'''
-		return [PlclGrpVariableType(x) for x in self._instance.PlclGrp]
+		__r = self._instance.PlclGrp
+		return None if __r is None else [None if x is None else PlclGrpVariableType(x) for x in __r]
 
 	def __str__(self):
 		return self._instance.ToString() if self._instance is not None else ""

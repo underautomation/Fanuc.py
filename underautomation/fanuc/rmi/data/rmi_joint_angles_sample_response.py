@@ -15,7 +15,8 @@ class RmiJointAnglesSampleResponse(RmiTimedResponse):
 	@property
 	def joint_angle(self) -> JointsPosition:
 		'''Joint angle set in degrees.'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.JointAngle)
+		__r = self._instance.JointAngle
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@joint_angle.setter
 	def joint_angle(self, value: JointsPosition):

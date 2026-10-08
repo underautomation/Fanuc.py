@@ -34,7 +34,8 @@ class Position:
 	@property
 	def joints_position(self) -> JointsPosition:
 		'''Joint values in degrees'''
-		return JointsPosition(None, None, None, None, None, None, None, None, None, self._instance.JointsPosition)
+		__r = self._instance.JointsPosition
+		return None if __r is None else JointsPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@joints_position.setter
 	def joints_position(self, value: JointsPosition):
@@ -43,7 +44,8 @@ class Position:
 	@property
 	def cartesian_position(self) -> ExtendedCartesianPosition:
 		'''Cartesian position with extended axes'''
-		return ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, self._instance.CartesianPosition)
+		__r = self._instance.CartesianPosition
+		return None if __r is None else ExtendedCartesianPosition(None, None, None, None, None, None, None, None, None, __r)
 
 	@cartesian_position.setter
 	def cartesian_position(self, value: ExtendedCartesianPosition):
